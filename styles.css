@@ -1,0 +1,100 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #2d2d2d;
+    color: #f6f6f6;
+}
+
+hr {
+    border-color: rgb(252, 161, 43);
+}
+
+
+.title {
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+    padding: 30px 0px 30px 0px;
+    font-size: 45px;
+    font-weight: 400;
+}
+
+
+.title-input {
+    outline: none;
+    color: white;
+    border: none;
+    background: rgb(75, 75, 75);
+    border-radius: 6px;
+    height: 35px;
+    width: 400px;
+}
+
+::placeholder {
+    color: rgb(192, 192, 192);
+}
+
+input:focus::placeholder {
+    color: transparent;
+}
+
+.title-input:focus {
+    background: rgb(94, 94, 94);
+}
+
+#stop-watch {
+    margin: 0 auto;
+    text-align: center;
+}
+
+#stop-watch .time {
+    margin-top: 30px;
+    margin-bottom: 25px;
+    letter-spacing: -8px;
+    font-size: 90px;
+    font-weight: 400;
+    font-family: Courier, monospace;
+}
+
+.start-stop-btn, .clear-btn, .submit-btn {
+    background: rgb(252, 161, 43);
+    border: 1px solid #2d2d2d;
+    border-radius: 6px;
+    margin: 0 5px;
+    width: 100px;
+    height: 25px;
+    outline: none;
+}
+
+.start-stop-btn:hover, .clear-btn:hover, .submit-btn:hover {
+    background: rgb(247, 172, 75);
+    border: 2px solid rgb(252, 161, 43);
+    cursor: pointer;
+}
+
+
+
+
+
+table, td, th{
+    background: rgb(54, 54, 54);
+    border: 1px solid rgb(252, 161, 43);
+    font-size: 18px;
+}
+
+table {
+    margin: 70px auto;
+    border-collapse: collapse;
+    width: 70%;
+}
+
+th {
+    background: rgb(75, 75, 75);
+    text-align: left;
+    padding: 15px 20px;
+}
+
+td {
+    text-align: left;
+    padding: 10px 20px;
+}
