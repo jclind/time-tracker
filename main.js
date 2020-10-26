@@ -13,14 +13,26 @@ var stopwatchEl = document.querySelector('.time');
 function startStop() {
     var startStopElText = document.getElementById('start-stop-btn').innerText;
     if (startStopElText === 'Start'){
+        // change clear button to be grayed out when the timer is going
         document.getElementById('clear-btn').style.background = 'rgb(58, 58, 58)';
         document.getElementById('clear-btn').style.color = 'gray';
-        
+
+        // change submit button to be grayed out when the timer is going
+        document.getElementById('submit-btn').style.background = 'rgb(58, 58, 58)';
+        document.getElementById('submit-btn').style.color = 'gray';
+
+
         document.getElementById('start-stop-btn').innerText = 'Stop';
         timer = setInterval(run, 10);
     } else {
+        // change clear button back to orange when timer stops
         document.getElementById('clear-btn').style.background = 'rgb(252, 161, 43)';
         document.getElementById('clear-btn').style.color = 'black';
+
+        // change submit button back to orange when timer stops
+        document.getElementById('submit-btn').style.background = 'rgb(252, 161, 43)';
+        document.getElementById('submit-btn').style.color = 'black';
+        
 
         document.getElementById('start-stop-btn').innerText = 'Start';
         clearInterval(timer);
@@ -35,24 +47,26 @@ function clear() {
     }
 }
 
-function submit() {
-    let d = new Date;
-    let month = d.getUTCMonth() + 1;
-    let day = d.getUTCDate();
-    let year = d.getUTCFullYear();
-
-    let timeName = document.getElementById('title-input').value;
-    let timeCur = h + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s) + "." + (ms < 10 ? "0" + ms : ms);
-    let dateCur = month + "/" + day + "/" + year;
-    let totTime = '5:00:00.00'
+function submit() { 
+    if (document.getElementById('start-stop-btn').innerText === 'Start') {
+        let d = new Date;
+        let month = d.getUTCMonth() + 1;
+        let day = d.getUTCDate();
+        let year = d.getUTCFullYear();
     
-    let temp = {name: timeName, time: timeCur, date: dateCur, totalTime: totTime};
-
-    timesInfoList.push(temp);
+        let timeName = document.getElementById('title-input').value;
+        let timeCur = h + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s) + "." + (ms < 10 ? "0" + ms : ms);
+        let dateCur = month + "/" + day + "/" + year;
+        let totTime = '5:00:00.00'
+        
+        let temp = {name: timeName, time: timeCur, date: dateCur, totalTime: totTime};
     
-    document.getElementById('title-input').value = '';
-    updateList();
-    clear();
+        timesInfoList.push(temp);
+        
+        document.getElementById('title-input').value = '';
+        updateList();
+        clear();
+    }
 }
 
 function updateList() {
@@ -95,3 +109,36 @@ document.getElementById('clear-btn').addEventListener('click', clear);
 document.getElementById('submit-btn').addEventListener('click', submit);
 
 updateList();
+
+
+// Disable clear button hover effect. 
+document.getElementById('clear-btn').onmouseover = function() {
+    if (document.getElementById('start-stop-btn').innerText === 'Start') {
+        document.getElementById('clear-btn').style.background = 'rgb(247, 172, 75)';
+        document.getElementById('clear-btn').style.border = '2px solid rgb(252, 161, 43)'
+        document.getElementById('clear-btn').style.cursor = 'pointer';
+    }
+}
+document.getElementById('clear-btn').onmouseleave = function() {
+    if (document.getElementById('start-stop-btn').innerText === 'Start') {
+        document.getElementById('clear-btn').style.background = 'rgb(252, 161, 43)';
+        document.getElementById('clear-btn').style.border = '1px solid #2d2d2d'
+        document.getElementById('clear-btn').style.cursor = 'default';
+    }
+}
+
+// Disable submit button hover effect. 
+document.getElementById('submit-btn').onmouseover = function() {
+    if (document.getElementById('start-stop-btn').innerText === 'Start') {
+        document.getElementById('submit-btn').style.background = 'rgb(247, 172, 75)';
+        document.getElementById('submit-btn').style.border = '2px solid rgb(252, 161, 43)'
+        document.getElementById('submit-btn').style.cursor = 'pointer';
+    }
+}
+document.getElementById('submit-btn').onmouseleave = function() {
+    if (document.getElementById('start-stop-btn').innerText === 'Start') {
+        document.getElementById('submit-btn').style.background = 'rgb(252, 161, 43)';
+        document.getElementById('submit-btn').style.border = '1px solid #2d2d2d'
+        document.getElementById('submit-btn').style.cursor = 'default';
+    }
+}
