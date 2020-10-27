@@ -1,12 +1,9 @@
 var timesInfoList = [];
 var listOfTimesSum = [];
 
-
 var ms = 0, s = 0, m = 0, h = 0;
 var timer;
-
 var stopwatchEl = document.querySelector('.time');
-
 
 
 function startStop() {
@@ -46,42 +43,53 @@ function clear() {
     }
 }
 
+function findTotalTime() {
+    // calc total time
+    let totH = 0, totM = 0, totS = 0, totMs = 0;
+    // go through list of current times and add them together to get the total time. 
+    for (let i = 0; i < listOfTimesSum.length; i++) {
+        totH += listOfTimesSum[i].hours;
+        totM += listOfTimesSum[i].minutes;
+        totS += listOfTimesSum[i].seconds;
+        totMs += listOfTimesSum[i].milliseconds;
+
+        // fix additions of times. i.e. add to minutes if seconds is over or equal to 60 seconds. 
+        if (totMs >= 100) {
+            totMs -= 100;
+            totS++;
+        }
+        if (totS >= 60) {
+            totS -= 60;
+            totM++; 
+        }
+        if (totM >= 60) {
+            totM -= 60; 
+            totH++;
+        }
+    }
+    
+    return {hours: totH, minutes: totM, seconds: totS, milliseconds: totMs};
+}
+
 function submit() { 
-    if (document.getElementById('start-stop-btn').innerText === 'Start') {
+    // only allow submition when the timer is stopped and the time is not 0.
+    if ((document.getElementById('start-stop-btn').innerText === 'Start') && document.getElementById('time').textContent !== '0:00:00.00') {
         let d = new Date;
         let month = d.getUTCMonth() + 1;
         let day = d.getUTCDate();
         let year = d.getUTCFullYear();
-    
+        
         let timeName = document.getElementById('title-input').value;
+        if (timeName === '') {
+            timeName = 'Creative Name';
+        }
 
-        let timeCur = {hours: h, minutes: m, seconds: s, milliseconds: s};
+        let timeCur = {hours: h, minutes: m, seconds: s, milliseconds: ms};
         listOfTimesSum.push(timeCur);
         
         let dateCur = month + "/" + day + "/" + year;
         
-        // calc total time
-        let totH = 0, totM = 0, totS = 0, totMs = 0;
-        for (let i = 0; i < listOfTimesSum.length; i++) {
-            totH += listOfTimesSum[i].hours;
-            totM += listOfTimesSum[i].minutes;
-            totS += listOfTimesSum[i].seconds;
-            totMs += listOfTimesSum[i].milliseconds;
-
-            if (totMs >= 100) {
-                totMs -= 100;
-                totS++;
-            }
-            if (totS >= 60) {
-                totS -= 60;
-                totM++; 
-            }
-            if (totM >= 60) {
-                totM -= 60; 
-                totH++;
-            }
-        }
-        let totTime = {hours: totH, minutes: totM, seconds: totS, milliseconds: totMs}
+        let totTime = findTotalTime();
         
         let temp = {name: timeName, time: timeCur, date: dateCur, totalTime: totTime};
     
@@ -103,11 +111,12 @@ function updateList() {
     </tr>`
     for (let i = 0; i < timesInfoList.length; i++) {
         document.getElementById('time-table').innerHTML += `
-        <tr>
+        <tr id='times-row'> 
             <td>${timesInfoList[i].name}</td>
             <td>${timesInfoList[i].time.hours}:${(timesInfoList[i].time.minutes < 10 ? "0" + timesInfoList[i].time.minutes : timesInfoList[i].time.minutes)}:${(timesInfoList[i].time.seconds < 10 ? "0" + timesInfoList[i].time.seconds : timesInfoList[i].time.seconds)}.${(timesInfoList[i].time.milliseconds < 10 ? "0" + timesInfoList[i].time.milliseconds : timesInfoList[i].time.milliseconds)}</td>
             <td>${timesInfoList[i].date}</td>
             <td>${timesInfoList[i].totalTime.hours}:${(timesInfoList[i].totalTime.minutes < 10 ? "0" + timesInfoList[i].totalTime.minutes : timesInfoList[i].totalTime.minutes)}:${(timesInfoList[i].totalTime.seconds < 10 ? "0" + timesInfoList[i].totalTime.seconds : timesInfoList[i].totalTime.seconds)}.${(timesInfoList[i].totalTime.milliseconds < 10 ? "0" + timesInfoList[i].totalTime.milliseconds : timesInfoList[i].totalTime.milliseconds)}</td>
+            <td><button onclick='deleteItem(this)'>X</button></td>
         </tr>`
     }
 }
@@ -129,10 +138,21 @@ function run() {
     }
 }
 
+function deleteItem(t) {
+    // Get index of clicked row.
+    let rowIndex = $(t).parent().parent().index('tr') - 1;
+
+    // Delete the clicked object at rowIndex
+    timesInfoList.splice(rowIndex, 1);
+
+    findTotalTime();
+    updateList();
+}
+
+
 document.getElementById('clear-btn').addEventListener('click', clear);
 document.getElementById('submit-btn').addEventListener('click', submit);
 
-updateList();
 
 
 // Disable clear button hover effect. 
@@ -166,3 +186,16 @@ document.getElementById('submit-btn').onmouseleave = function() {
         document.getElementById('submit-btn').style.cursor = 'default';
     }
 }
+
+
+// if (document.querySelector('table td + td + td + td + td') && document.querySelector('table td + td + td + td + td').clicked == true) {
+//     document.querySelector('table td + td + td + td + td').click(function(){
+//         var rowIndex = $(this).parent().index('tr');
+    
+//         console.log(rowIndex);
+//     });
+
+// }
+
+
+updateList();

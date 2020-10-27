@@ -76,10 +76,23 @@ input:focus::placeholder {
 
 
 
-table, td, th{
-    background: rgb(54, 54, 54);
+table td, th{
     border: 1px solid rgb(252, 161, 43);
     font-size: 18px;
+}
+
+tr {
+    background: rgb(54, 54, 54);
+}
+
+table td + td + td + td + td {
+    width: 1px;
+    line-height: 20px;
+    background: #2d2d2d;
+    border: none;
+    font-size: 13px;
+    padding: 8px;
+    color: rgba(255, 255, 255, 0.1);
 }
 
 table {
@@ -97,4 +110,26 @@ th {
 td {
     text-align: left;
     padding: 10px 20px;
+}
+
+tr:hover {
+    background: rgb(63, 63, 63);
+}
+tr:hover td + td + td + td + td button{
+    font-size: 16px;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+td button {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.1);
+}
+td button:hover {
+    font-size: 16px;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.3);
 }
