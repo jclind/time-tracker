@@ -154,7 +154,6 @@ document.getElementById('clear-btn').addEventListener('click', clear);
 document.getElementById('submit-btn').addEventListener('click', submit);
 
 
-
 // Disable clear button hover effect. 
 document.getElementById('clear-btn').onmouseover = function() {
     if (document.getElementById('start-stop-btn').innerText === 'Start') {
@@ -186,16 +185,6 @@ document.getElementById('submit-btn').onmouseleave = function() {
         document.getElementById('submit-btn').style.cursor = 'default';
     }
 }
-
-
-// if (document.querySelector('table td + td + td + td + td') && document.querySelector('table td + td + td + td + td').clicked == true) {
-//     document.querySelector('table td + td + td + td + td').click(function(){
-//         var rowIndex = $(this).parent().index('tr');
-    
-//         console.log(rowIndex);
-//     });
-
-// }
 
 
 updateList();
