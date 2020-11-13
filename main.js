@@ -2,6 +2,7 @@ var timesInfoList = [];
 var listOfTimesSum = [];
 
 var ms = 0, s = 0, m = 0, h = 0;
+var prevTime, stopwatchInterval, elapsedTime = 0;   
 var timer;
 var stopwatchEl = document.querySelector('.time');
 
@@ -19,7 +20,24 @@ function startStop() {
 
 
         document.getElementById('start-stop-btn').innerText = 'Stop';
-        timer = setInterval(run, 10);
+        let st = Date.now() - elapsedTime;
+        let intervalIndex = 0;
+        timer = setInterval(() => {
+            let currT = Date.now();
+            elapsedTime = currT - st;
+            tempT = elapsedTime;
+
+            ms = Math.floor((tempT % 1000) / 10);
+            tempT = Math.floor(tempT / 1000);
+            s = tempT % 60;
+            tempT = Math.floor(tempT / 60);
+            m = tempT % 60;
+            tempT = Math.floor(tempT / 60);
+            h = tempT % 60;
+            
+            intervalIndex++;
+            stopwatchEl.textContent = h + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s) + "." + (ms < 10 ? "0" + ms : ms);
+        }, 10);
     } else {
         // change clear button back to orange when timer stops
         document.getElementById('clear-btn').style.background = 'rgb(252, 161, 43)';
@@ -38,6 +56,7 @@ function startStop() {
 
 function clear() {
     if (document.getElementById('start-stop-btn').innerText === 'Start') {
+        elapsedTime = 0;
         ms = 0, s = 0, m = 0, h = 0;
         stopwatchEl.textContent = '0:00:00.00';
     }
