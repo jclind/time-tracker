@@ -118,18 +118,17 @@ tr:hover {
 tr:hover td + td + td + td + td button{
     font-size: 16px;
     cursor: pointer;
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, .4);
 }
 
 td button {
     background: transparent;
     border: none;
     outline: none;
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.1);
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.05);
 }
 td button:hover {
-    font-size: 16px;
     cursor: pointer;
     color: rgba(255, 255, 255, 0.3);
 }

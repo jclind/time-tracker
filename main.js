@@ -37,6 +37,7 @@ function startStop() {
             
             intervalIndex++;
             stopwatchEl.textContent = h + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s) + "." + (ms < 10 ? "0" + ms : ms);
+            document.getElementById('website-title').innerText = h + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
         }, 10);
     } else {
         // change clear button back to orange when timer stops
@@ -59,6 +60,7 @@ function clear() {
         elapsedTime = 0;
         ms = 0, s = 0, m = 0, h = 0;
         stopwatchEl.textContent = '0:00:00.00';
+        document.getElementById('website-title').innerText = 'StopWatch'
     }
 }
 
@@ -120,6 +122,16 @@ function submit() {
     }
 }
 
+
+
+function davinci(i) {    
+    nameId = `nameIndex${i}`
+    // document.getElementById(nameId).contentEditable = 'true'
+    // if($(nameId).is(':focus')) {
+    //     console.log(i);
+    // }
+}
+
 function updateList() {
     document.getElementById('time-table').innerHTML = `
     <tr>
@@ -131,14 +143,20 @@ function updateList() {
     for (let i = 0; i < timesInfoList.length; i++) {
         document.getElementById('time-table').innerHTML += `
         <tr id='times-row'> 
-            <td>${timesInfoList[i].name}</td>
+            <td contenteditable="true" class="name" data-id="${i}">${timesInfoList[i].name}</td>
             <td>${timesInfoList[i].time.hours}:${(timesInfoList[i].time.minutes < 10 ? "0" + timesInfoList[i].time.minutes : timesInfoList[i].time.minutes)}:${(timesInfoList[i].time.seconds < 10 ? "0" + timesInfoList[i].time.seconds : timesInfoList[i].time.seconds)}.${(timesInfoList[i].time.milliseconds < 10 ? "0" + timesInfoList[i].time.milliseconds : timesInfoList[i].time.milliseconds)}</td>
             <td>${timesInfoList[i].date}</td>
             <td>${timesInfoList[i].totalTime.hours}:${(timesInfoList[i].totalTime.minutes < 10 ? "0" + timesInfoList[i].totalTime.minutes : timesInfoList[i].totalTime.minutes)}:${(timesInfoList[i].totalTime.seconds < 10 ? "0" + timesInfoList[i].totalTime.seconds : timesInfoList[i].totalTime.seconds)}.${(timesInfoList[i].totalTime.milliseconds < 10 ? "0" + timesInfoList[i].totalTime.milliseconds : timesInfoList[i].totalTime.milliseconds)}</td>
-            <td><button onclick='deleteItem(this)'>X</button></td>
+            <td><button onclick='deleteItem(${i})'>X</button></td>
         </tr>`
     }
 }
+
+$(document).on('input', '.name', function (e) {
+    const index = $(this).data('id')
+    davinci(index)
+    timesInfoList[index].name = $(this).text()
+})
 
 function run() {
     stopwatchEl.textContent = h + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s) + "." + (ms < 10 ? "0" + ms : ms);
@@ -157,9 +175,9 @@ function run() {
     }
 }
 
-function deleteItem(t) {
+function deleteItem(i) {
     // Get index of clicked row.
-    let rowIndex = $(t).parent().parent().index('tr') - 1;
+    let rowIndex = i;
 
     // Delete the clicked object at rowIndex
     timesInfoList.splice(rowIndex, 1);
@@ -207,3 +225,5 @@ document.getElementById('submit-btn').onmouseleave = function() {
 
 
 updateList();
+
+
