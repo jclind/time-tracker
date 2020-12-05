@@ -1,4 +1,4 @@
-"# time-tracker" 
+# time-tracker
 
 
 tasks to complete:
