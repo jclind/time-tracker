@@ -64,15 +64,16 @@ function clear() {
     }
 }
 
-function findTotalTime() {
-    // calc total time
+// Find total time so far for each element 
+function findElapsedTime(index) {
     let totH = 0, totM = 0, totS = 0, totMs = 0;
-    // go through list of current times and add them together to get the total time. 
-    for (let i = 0; i < listOfTimesSum.length; i++) {
-        totH += listOfTimesSum[i].hours;
-        totM += listOfTimesSum[i].minutes;
-        totS += listOfTimesSum[i].seconds;
-        totMs += listOfTimesSum[i].milliseconds;
+
+    console.log(index)
+    for (let i = 0; i < index + 1; i++) {
+        totH += timesInfoList[i].time.hours;
+        totM += timesInfoList[i].time.minutes;
+        totS += timesInfoList[i].time.seconds;
+        totMs += timesInfoList[i].time.milliseconds
 
         // fix additions of times. i.e. add to minutes if seconds is over or equal to 60 seconds. 
         if (totMs >= 100) {
@@ -90,7 +91,10 @@ function findTotalTime() {
     }
     
     return {hours: totH, minutes: totM, seconds: totS, milliseconds: totMs};
+    // return `${totH}:${(totM < 10 ? "0" + totM : totM)}:${(totS < 10 ? "0" + totS : totS)}.${(totMs < 10 ? "0" + totMs : totMs)}`;
+
 }
+
 
 function submit() { 
     // only allow submition when the timer is stopped and the time is not 0.
@@ -110,7 +114,7 @@ function submit() {
         
         let dateCur = month + "/" + day + "/" + year;
         
-        let totTime = findTotalTime();
+        let totTime = findElapsedTime(timesInfoList.length - 1);
         
         let temp = {name: timeName, time: timeCur, date: dateCur, totalTime: totTime};
     
@@ -124,14 +128,6 @@ function submit() {
 
 
 
-function davinci(i) {    
-    nameId = `nameIndex${i}`
-    // document.getElementById(nameId).contentEditable = 'true'
-    // if($(nameId).is(':focus')) {
-    //     console.log(i);
-    // }
-}
-
 function updateList() {
     document.getElementById('time-table').innerHTML = `
     <tr>
@@ -141,12 +137,13 @@ function updateList() {
         <th>Total Time</th>
     </tr>`
     for (let i = 0; i < timesInfoList.length; i++) {
+        let elapsedTime = findElapsedTime(i); 
         document.getElementById('time-table').innerHTML += `
         <tr id='times-row'> 
             <td contenteditable="true" class="name" data-id="${i}">${timesInfoList[i].name}</td>
             <td>${timesInfoList[i].time.hours}:${(timesInfoList[i].time.minutes < 10 ? "0" + timesInfoList[i].time.minutes : timesInfoList[i].time.minutes)}:${(timesInfoList[i].time.seconds < 10 ? "0" + timesInfoList[i].time.seconds : timesInfoList[i].time.seconds)}.${(timesInfoList[i].time.milliseconds < 10 ? "0" + timesInfoList[i].time.milliseconds : timesInfoList[i].time.milliseconds)}</td>
             <td>${timesInfoList[i].date}</td>
-            <td>${timesInfoList[i].totalTime.hours}:${(timesInfoList[i].totalTime.minutes < 10 ? "0" + timesInfoList[i].totalTime.minutes : timesInfoList[i].totalTime.minutes)}:${(timesInfoList[i].totalTime.seconds < 10 ? "0" + timesInfoList[i].totalTime.seconds : timesInfoList[i].totalTime.seconds)}.${(timesInfoList[i].totalTime.milliseconds < 10 ? "0" + timesInfoList[i].totalTime.milliseconds : timesInfoList[i].totalTime.milliseconds)}</td>
+            <td data-id=${i}>${elapsedTime.hours}:${(elapsedTime.minutes < 10 ? "0" + elapsedTime.minutes : elapsedTime.minutes)}:${(elapsedTime.seconds < 10 ? "0" + elapsedTime.seconds : elapsedTime.seconds)}.${(elapsedTime.milliseconds < 10 ? "0" + elapsedTime.milliseconds : elapsedTime.milliseconds)}</td>
             <td><button onclick='deleteItem(${i})'>X</button></td>
         </tr>`
     }
@@ -154,7 +151,6 @@ function updateList() {
 
 $(document).on('input', '.name', function (e) {
     const index = $(this).data('id')
-    davinci(index)
     timesInfoList[index].name = $(this).text()
 })
 
@@ -182,7 +178,6 @@ function deleteItem(i) {
     // Delete the clicked object at rowIndex
     timesInfoList.splice(rowIndex, 1);
 
-    findTotalTime();
     updateList();
 }
 
@@ -225,5 +220,7 @@ document.getElementById('submit-btn').onmouseleave = function() {
 
 
 updateList();
+
+
 
 
