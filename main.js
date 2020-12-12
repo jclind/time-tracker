@@ -1,14 +1,8 @@
-
-
-
-
+// Array of objets of times and data about times.
 var timesInfoList = [];
-var listOfTimesSum = [];
 
-
-
-var ms = 0, s = 0, m = 0, h = 0;
-var prevTime, stopwatchInterval, elapsedTime = 0;   
+var h = 0, m = 0, s = 0, ms = 0;
+var elapsedTime = 0;   
 var timer;
 var stopwatchEl = document.querySelector('.time');
 
@@ -21,6 +15,7 @@ window.onload = function() {
 // Use local storage to save timesInfoList
 function saveData() {
     if (localStorage.getItem('timesInfoList') != null) {
+        // reset data in localStorage to push new array back in if the localStorage already has objects in it.
         localStorage.clear();
         localStorage.setItem('timesInfoList', JSON.stringify(timesInfoList))
     } else {
@@ -30,6 +25,8 @@ function saveData() {
 
 function startStop() {
     var startStopElText = document.getElementById('start-stop-btn').innerText;
+
+    // If the timer is not runing. 
     if (startStopElText === 'Start'){
         // change clear button to be grayed out when the timer is going
         document.getElementById('clear-btn').style.background = 'rgb(58, 58, 58)';
@@ -39,8 +36,8 @@ function startStop() {
         document.getElementById('submit-btn').style.background = 'rgb(58, 58, 58)';
         document.getElementById('submit-btn').style.color = 'gray';
 
-
         document.getElementById('start-stop-btn').innerText = 'Stop';
+
         let st = Date.now() - elapsedTime;
         let intervalIndex = 0;
         timer = setInterval(() => {
@@ -76,6 +73,7 @@ function startStop() {
     }
 }
 
+// Clears clears current time from the timer screen
 function clear() {
     if (document.getElementById('start-stop-btn').innerText === 'Start') {
         elapsedTime = 0;
@@ -85,11 +83,10 @@ function clear() {
     }
 }
 
-// Find total time so far for each element 
+// Find total time so far for each element, returns object with array of hours, minutes, seconds, and milliseconds
 function findElapsedTime(index) {
     let totH = 0, totM = 0, totS = 0, totMs = 0;
 
-    console.log(index)
     for (let i = 0; i < index + 1; i++) {
         totH += timesInfoList[i].time.hours;
         totM += timesInfoList[i].time.minutes;
@@ -110,45 +107,48 @@ function findElapsedTime(index) {
             totH++;
         }
     }
-    
     return {hours: totH, minutes: totM, seconds: totS, milliseconds: totMs};
-    // return `${totH}:${(totM < 10 ? "0" + totM : totM)}:${(totS < 10 ? "0" + totS : totS)}.${(totMs < 10 ? "0" + totMs : totMs)}`;
 
 }
 
-
+// Submits user's time to timesInfoList array and html list
 function submit() { 
     // only allow submition when the timer is stopped and the time is not 0.
     if ((document.getElementById('start-stop-btn').innerText === 'Start') && document.getElementById('time').textContent !== '0:00:00.00') {
+        // Set time name and clear name input feild 
+        let timeName = document.getElementById('title-input').value;
+        if (timeName === '') {
+            timeName = 'Creative Name';
+        }
+        document.getElementById('title-input').value = '';
+
+        // Set time date
         let d = new Date;
         let month = d.getUTCMonth() + 1;
         let day = d.getUTCDate();
         let year = d.getUTCFullYear();
         
-        let timeName = document.getElementById('title-input').value;
-        if (timeName === '') {
-            timeName = 'Creative Name';
-        }
-
-        let timeCur = {hours: h, minutes: m, seconds: s, milliseconds: ms};
-        listOfTimesSum.push(timeCur);
-        
         let dateCur = month + "/" + day + "/" + year;
+
+        // Set actual time for time object
+        let timeCur = {hours: h, minutes: m, seconds: s, milliseconds: ms};
         
+        // Set time object's total time
         let totTime = findElapsedTime(timesInfoList.length - 1);
         
+        // Push name, time, date, and total time to object and push that to timesInfoList array
         let temp = {name: timeName, time: timeCur, date: dateCur, totalTime: totTime};
-    
         timesInfoList.push(temp);
+
+        // Save timesInfoList to localstroage, update the html list, and clear the timer on submit of time.
         saveData();
-        document.getElementById('title-input').value = '';
         updateList();
         clear();
     }
 }
 
 
-
+// Updates the html list of times based on submittion and deletion of times.
 function updateList() {
     document.getElementById('time-table').innerHTML = `
     <tr>
@@ -157,6 +157,7 @@ function updateList() {
         <th>Date</th>
         <th>Total Time</th>
     </tr>`
+    // loops through timesInfoList and displays each time object
     for (let i = 0; i < timesInfoList.length; i++) {
         let elapsedTime = findElapsedTime(i); 
         document.getElementById('time-table').innerHTML += `
@@ -175,6 +176,7 @@ $(document).on('input', '.name', function (e) {
     timesInfoList[index].name = $(this).text()
 })
 
+// Calculates and runs the timer, sets h, m, s, and ms, with each webpage clock cycle
 function run() {
     stopwatchEl.textContent = h + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s) + "." + (ms < 10 ? "0" + ms : ms);
     ms++;
@@ -192,17 +194,23 @@ function run() {
     }
 }
 
+// Removes desired time object from the array of times and updates the list
 function deleteItem(i) {
     // Get index of clicked row.
     let rowIndex = i;
 
     // Delete the clicked object at rowIndex
     timesInfoList.splice(rowIndex, 1);
+
+    // Updates the list of times and saves the data to the localstorage 
     saveData();
     updateList();
 }
 
 
+
+
+// Event listeners for html buttons
 document.getElementById('clear-btn').addEventListener('click', clear);
 document.getElementById('submit-btn').addEventListener('click', submit);
 
@@ -238,10 +246,3 @@ document.getElementById('submit-btn').onmouseleave = function() {
         document.getElementById('submit-btn').style.cursor = 'default';
     }
 }
-
-
-updateList();
-
-
-
-
