@@ -1,11 +1,32 @@
+
+
+
+
 var timesInfoList = [];
 var listOfTimesSum = [];
+
+
 
 var ms = 0, s = 0, m = 0, h = 0;
 var prevTime, stopwatchInterval, elapsedTime = 0;   
 var timer;
 var stopwatchEl = document.querySelector('.time');
 
+// Set timesInfoList to the localStorage array and update the list on page load. 
+window.onload = function() {
+    timesInfoList = JSON.parse(localStorage.getItem('timesInfoList'));
+    updateList();
+}
+
+// Use local storage to save timesInfoList
+function saveData() {
+    if (localStorage.getItem('timesInfoList') != null) {
+        localStorage.clear();
+        localStorage.setItem('timesInfoList', JSON.stringify(timesInfoList))
+    } else {
+        localStorage.setItem('timesInfoList', JSON.stringify(timesInfoList))
+    }
+}
 
 function startStop() {
     var startStopElText = document.getElementById('start-stop-btn').innerText;
@@ -119,7 +140,7 @@ function submit() {
         let temp = {name: timeName, time: timeCur, date: dateCur, totalTime: totTime};
     
         timesInfoList.push(temp);
-        
+        saveData();
         document.getElementById('title-input').value = '';
         updateList();
         clear();
@@ -177,7 +198,7 @@ function deleteItem(i) {
 
     // Delete the clicked object at rowIndex
     timesInfoList.splice(rowIndex, 1);
-
+    saveData();
     updateList();
 }
 
