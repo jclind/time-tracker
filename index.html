@@ -6,14 +6,24 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
-    <div class="title">Time Tracker</div> <hr>
+    <div class="title">Time Tracker</div><hr>
     
     
     <div id="stop-watch">
-        <div class="title-input-container" style="margin: 0 auto; width: 420px;">
-            <div class="title-input-text" id="title-input-text" style="float:left; padding: 10px 10px">Time Name:</div><br>
-            <input type="text" class="title-input" id="title-input" placeholder="Enter Name">
+        <div class="input-container">
+            <div class="title-input-container" style="margin: 0 auto; width: 420px;">
+                <div class="title-input-text" id="title-input-text">Time Name:</div><br>
+                <input type="text" class="title-input" id="title-input" placeholder="Enter Name">
+            </div>
+            <div class="select-container">
+                <div class="select-title">Select A Tag</div>
+                <select name="tag-input" id="tag-input" value="Select A Tag">
+                    <option value="Hello">Hello</option>
+                </select>
+            </div>
         </div>
+            
+        
         <div class="time" id="time">0:00:00.00</div>
         <button class="start-stop-btn" id="start-stop-btn" onclick='startStop()'>Start</button>
         <button class="clear-btn" id="clear-btn">Clear</button>
@@ -28,6 +38,7 @@
                 <th>Time</th>
                 <th>Date</th>
                 <th>Total Time</th>
+                <th></th>
             </tr>
         </table>
     </div>

@@ -14,11 +14,26 @@ hr {
     margin: 0 auto;
     width: 100%;
     text-align: center;
-    padding: 30px 0px 30px 0px;
     font-size: 45px;
     font-weight: 400;
 }
-
+.title-input-text{
+    float: left; 
+    padding: 10px 0px;
+}
+.input-container {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 30px 0px 30px 0px;
+}
+.title-input-container {
+    padding-right: 5px;
+}
+.select-title {
+    text-align: left;
+    padding: 10px 0px;
+}
 
 .title-input {
     outline: none;
@@ -28,6 +43,21 @@ hr {
     border-radius: 6px;
     height: 35px;
     width: 400px;
+}
+
+.select-container {
+    width: 150px;
+}
+
+#tag-input {
+    /* margin-top: 10px; */
+    width: 150px;
+    height: 35px;
+    border-radius: 5px;;
+}
+
+select option {
+    background: red;
 }
 
 ::placeholder {
@@ -48,8 +78,10 @@ input:focus::placeholder {
 }
 
 #stop-watch .time {
-    margin-top: 30px;
-    margin-bottom: 25px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 50px;
     letter-spacing: -8px;
     font-size: 90px;
     font-weight: 400;
@@ -132,3 +164,6 @@ td button:hover {
     cursor: pointer;
     color: rgba(255, 255, 255, 0.3);
 }
+
+
+

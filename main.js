@@ -1,6 +1,8 @@
 // Array of objets of times and data about times.
 var timesInfoList = [];
 
+var timeTags = ['main', 'monkey', 'the banana', 'steve', 'yessir'];
+
 var h = 0, m = 0, s = 0, ms = 0;
 var elapsedTime = 0;   
 var timer;
@@ -9,7 +11,8 @@ var stopwatchEl = document.querySelector('.time');
 // Set timesInfoList to the localStorage array and update the list on page load. 
 window.onload = function() {
     timesInfoList = JSON.parse(localStorage.getItem('timesInfoList'));
-    updateList();
+    updateTimesList();
+    updateTagsList();
 }
 
 // Use local storage to save timesInfoList
@@ -142,14 +145,13 @@ function submit() {
 
         // Save timesInfoList to localstroage, update the html list, and clear the timer on submit of time.
         saveData();
-        updateList();
+        updateTimesList();
         clear();
     }
 }
 
-
 // Updates the html list of times based on submittion and deletion of times.
-function updateList() {
+function updateTimesList() {
     document.getElementById('time-table').innerHTML = `
     <tr>
         <th>Title</th>
@@ -204,8 +206,20 @@ function deleteItem(i) {
 
     // Updates the list of times and saves the data to the localstorage 
     saveData();
-    updateList();
+    updateTimesList();
 }
+
+
+
+function updateTagsList() {
+    tagList = document.getElementById('tag-input');
+    for (tag in timeTags) {
+        tagList.innerHTML += `
+        <option value='${timeTags[tag]}'>${timeTags[tag]}</option>
+        `
+    }
+}
+
 
 
 

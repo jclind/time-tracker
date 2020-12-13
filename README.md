@@ -4,7 +4,9 @@
 tasks to complete:
     - Add functionality for space bar to stop and start timer
     - Clean up code and simplify
-    - Add time-folders to divide time objects into different sets
+    - Add time tags
+    - Add way to create new time tags
+    - Add sorting by time tags
 
 completed tasks: 
     - Add localStorage for arrays and add any necessary functionality. 
