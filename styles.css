@@ -9,7 +9,6 @@ hr {
     border-color: rgb(252, 161, 43);
 }
 
-
 .title {
     margin: 0 auto;
     width: 100%;
@@ -17,25 +16,26 @@ hr {
     font-size: 45px;
     font-weight: 400;
 }
-.title-input-text{
-    float: left; 
-    padding: 10px 0px;
-}
+
+
 .input-container {
     display: flex;
     justify-content: center;
-    margin: 0 auto;
     padding: 30px 0px 30px 0px;
 }
-.title-input-container {
-    padding-right: 5px;
-}
-.select-title {
+
+.title-input-text, .select-title {
     text-align: left;
-    padding: 10px 0px;
+    margin: 0;
+    padding: 0;
+}
+
+.title-input-container {
+    width: 420px;
 }
 
 .title-input {
+    float: left;
     outline: none;
     color: white;
     border: none;
@@ -43,6 +43,8 @@ hr {
     border-radius: 6px;
     height: 35px;
     width: 400px;
+    padding: 0;
+    margin: 0;
 }
 
 .select-container {
@@ -50,10 +52,9 @@ hr {
 }
 
 #tag-input {
-    /* margin-top: 10px; */
     width: 150px;
     height: 35px;
-    border-radius: 5px;;
+    border-radius: 5px;
 }
 
 select option {
