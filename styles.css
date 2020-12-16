@@ -24,42 +24,37 @@ hr {
     padding: 30px 0px 30px 0px;
 }
 
-.title-input-text, .select-title {
-    text-align: left;
-    margin: 0;
-    padding: 0;
+.title-input-container, .select-container {
+    height: 70px;
+    padding: 0px 10px;
 }
 
-.title-input-container {
-    width: 420px;
+.title-input-text, .select-title {
+    text-align: left;
+}
+
+.title-input, .tag-input {
+    height: 35px;
+    border-radius: 6px;
+    outline: none;
+    border: none;
+    margin-top: 15px;
 }
 
 .title-input {
-    float: left;
-    outline: none;
     color: white;
-    border: none;
     background: rgb(75, 75, 75);
-    border-radius: 6px;
-    height: 35px;
     width: 400px;
-    padding: 0;
-    margin: 0;
 }
 
-.select-container {
+.tag-input {
     width: 150px;
 }
 
-#tag-input {
-    width: 150px;
-    height: 35px;
-    border-radius: 5px;
+select option { 
 }
 
-select option {
-    background: red;
-}
+
 
 ::placeholder {
     color: rgb(192, 192, 192);
