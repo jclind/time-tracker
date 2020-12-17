@@ -24,7 +24,7 @@ hr {
     padding: 30px 0px 30px 0px;
 }
 
-.title-input-container, .select-container {
+.title-input-container, .select-input-container {
     height: 70px;
     padding: 0px 10px;
 }
@@ -34,27 +34,76 @@ hr {
 }
 
 .title-input, .tag-input {
+    float: left;
     height: 35px;
     border-radius: 6px;
     outline: none;
     border: none;
-    margin-top: 15px;
 }
 
 .title-input {
     color: white;
     background: rgb(75, 75, 75);
     width: 400px;
+    margin-top: 15px;
 }
 
 .tag-input {
+    font-size: 14px;
+    background: rgb(231, 231, 231);
     width: 150px;
+    border: 1px solid #2d2d2d;
 }
 
-select option { 
+.tag-input:hover {
+    border: 1px solid rgb(231, 231, 231);
+    cursor: pointer;
 }
 
+.new-tag-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+}
 
+.select-btn-container {
+    height: 35px;
+    margin-top: 15px;
+}
+
+.tag-btn-container {
+    height: 25px;
+    width: 25px;
+    float: left;
+    padding: 5px 3px;
+}
+
+.new-tag-btn {
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+.new-tag-btn:hover {
+    cursor: pointer;
+}
+
+.tag-tooltip-text {
+    opacity: 0;
+    float: left;
+    width: 125px;
+    padding: 4px;
+    color: #f6f6f6;
+    background: rgb(75, 75, 75);
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.new-tag-btn:hover + .tag-tooltip-text {
+    opacity: 1;
+}
 
 ::placeholder {
     color: rgb(192, 192, 192);
