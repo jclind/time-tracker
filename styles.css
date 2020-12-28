@@ -212,3 +212,73 @@ td button:hover {
 
 
 
+.new-tag-modal {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 250px;
+    background: white;
+    border-radius: 8px;
+}
+
+.tag-create-title {
+    font-family: 'Ubuntu', sans-serif;
+    color: black;
+    font-size: 20px;
+    text-align: center;
+    margin: 15px 0px;;
+}
+
+.tag-input-text {
+    display: block;
+    margin : 0 auto;
+    height: 26px;
+    width: 90%;
+    border: 1px solid rgb(219, 219, 219);
+    border-radius: 3px;
+    outline: none;
+}
+
+.tag-input-text:focus {
+    border: 2px solid rgb(219, 219, 219);
+}
+
+.tag-buttons {
+    text-align: center;
+    position: absolute;
+    bottom: 10px;
+    left: 0px;
+    right: 0px;
+}
+
+.cancel-tag-btn, .create-tag-btn {
+    height: 30px;
+    width: 60px;
+    margin: 0 10px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;;
+}
+
+.cancel-tag-btn {
+    background: gray;
+    border-bottom: 2px solid rgb(82, 82, 82);
+}
+
+.cancel-tag-btn:active {
+    border: 1px solid gray;
+    border-bottom: 1px solid rgb(61, 61, 61);
+}
+
+.create-tag-btn {
+    background: rgb(252, 161, 43);
+    border-bottom: 2px solid rgb(209, 118, 0);
+}
+
+.create-tag-btn:active {
+    border: 1px solid rgb(252, 161, 43);
+    border-bottom: 1px solid rgb(209, 118, 0);
+}
