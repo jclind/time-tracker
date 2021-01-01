@@ -1,7 +1,7 @@
 // Array of objets of times and data about times.
 var timesInfoList = [];
 
-var timeTags = ['main', 'monkey', 'the banana', 'steve', 'yessir'];
+var timeTags = [{name: 'main', color: red}]
 
 var h = 0, m = 0, s = 0, ms = 0;
 var elapsedTime = 0;   
@@ -215,10 +215,11 @@ function updateTagsList() {
     tagList = document.getElementById('tag-input');
     for (tag in timeTags) {
         tagList.innerHTML += `
-        <option value='${timeTags[tag]}'>${timeTags[tag]}</option>
+        <option value='${timeTags[tag].name}'>${timeTags[tag].name}</option>
         `
     }
 }
+
 
 
 
@@ -259,4 +260,34 @@ document.getElementById('submit-btn').onmouseleave = function() {
         document.getElementById('submit-btn').style.border = '1px solid #2d2d2d'
         document.getElementById('submit-btn').style.cursor = 'default';
     }
+}
+
+// When blured background is clicked on, close the tag-input background and modal.
+document.getElementById('blur-overlay').addEventListener('click', () => {hideModal()})
+
+// Blurs background and shows new tag input modal on button click
+function showModal() {
+    document.getElementById('blur-overlay').style.display = 'block';
+    document.getElementById('new-tag-modal').style.display = 'block';
+    console.log('Hello there')
+}
+
+function hideModal() {
+    document.getElementById('blur-overlay').style.display = 'none';
+    document.getElementById('new-tag-modal').style.display = 'none';
+    if (selectedTagColor != '') {
+        document.getElementById(`${selectedTagColor}`).classList.remove('active');
+        selectedTagColor = '';
+    }
+}
+
+// Control color selection for tags
+let selectedTagColor = '';
+
+function test(color) {
+    if (selectedTagColor != '') {
+        document.getElementById(`${selectedTagColor}`).classList.remove('active');
+    }
+    selectedTagColor = color;
+    document.getElementById(`${color}`).classList.add('active');
 }

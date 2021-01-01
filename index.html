@@ -7,8 +7,8 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
+    <div class="blur-overlay" id="blur-overlay"></div>
     <div class="title">Time Tracker</div><hr>
-    
     
     <div id="stop-watch">
         <div class="input-container">
@@ -22,7 +22,7 @@
                     <select name="tag-input" id="tag-input" class="tag-input" value="Select A Tag">
                     </select>
                     <div class="tag-btn-container">
-                        <button class="new-tag-btn" id="new-tag-btn" onclick=''>
+                        <button class="new-tag-btn" id="new-tag-btn" onclick='showModal()'>
                             <i class="fa fa-plus-square" style="font-size: 22px; color: rgb(233, 231, 231)"></i>
                         </button>
                         <span class="tag-tooltip-text">Add A New Tag</span>
@@ -51,12 +51,26 @@
         </table>
     </div>
     
-    <div class="new-tag-modal">
+    <div class="new-tag-modal" id="new-tag-modal">
         <div class="tag-create-title">Create Tag</div>
         <input type="text" id='tag-input-text' class='tag-input-text'>
+        <div class="color-select-container">
+            <div id="red" class="color-box" style="background: #fd483f;" onClick='test(this.id)'></div>
+            <div id="pink" class="color-box" style="background: #fd889a;" onClick='test(this.id)'></div>
+            <div id="brown" class="color-box" style="background: #9A6324;" onClick='test(this.id)'></div>
+            <div id="orange" class="color-box" style="background: #fca12b;" onClick='test(this.id)'></div>
+            <div id="yello" class="color-box" style="background: #ffe119;" onClick='test(this.id)'></div>
+            <div id="lime" class="color-box" style="background: #bfef45;" onClick='test(this.id)'></div>
+            <div id="dark-green" class="color-box" style="background: #0a724f;" onClick='test(this.id)'></div>
+            <div id="mint" class="color-box" style="background: #AAF0D1;" onClick='test(this.id)'></div>
+            <div id="blue" class="color-box" style="background: #7cc3db;" onClick='test(this.id)'></div>
+            <div id="navy" class="color-box" style="background: #3D3D90;" onClick='test(this.id)'></div>
+            <div id="lavendar" class="color-box" style="background: #cc99cc;" onClick='test(this.id)'></div>
+            <div id="purple" class="color-box" style="background: #926adb;" onClick='test(this.id)'></div>
+        </div>
         <div class="tag-buttons">
-            <button class="cancel-tag-btn">Cancel</button>
-            <button class="create-tag-btn">Create</button>    
+            <button class="cancel-tag-btn" onclick='hideModal()'>Cancel</button>
+            <button class="create-tag-btn">Create</button>
         </div>
     </div>
 

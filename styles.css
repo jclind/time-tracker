@@ -17,6 +17,16 @@ hr {
     font-weight: 400;
 }
 
+.blur-overlay {
+    display: none;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6)
+}
+
+
+
 
 .input-container {
     display: flex;
@@ -213,12 +223,13 @@ td button:hover {
 
 
 .new-tag-modal {
+    display: block;
     position: absolute;
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 250px;
-    height: 250px;
+    height: 245px;
     background: white;
     border-radius: 8px;
 }
@@ -236,14 +247,51 @@ td button:hover {
     margin : 0 auto;
     height: 26px;
     width: 90%;
-    border: 1px solid rgb(219, 219, 219);
+    border: 1px solid rgb(190, 190, 190);
     border-radius: 3px;
     outline: none;
 }
 
 .tag-input-text:focus {
-    border: 2px solid rgb(219, 219, 219);
+    border: 2px solid rgb(190, 190, 190);
 }
+
+
+.color-select-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 5px;
+    margin: 20 auto;
+    width: 90%;
+    height: 90px;
+}
+
+.color-box {
+    margin: 0 auto;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+}
+
+.color-box:hover {
+    border: 1px solid rgb(148, 148, 148);
+    cursor: pointer;
+}
+
+.color-box:active {
+    border: 2px solid rgb(148, 148, 148);
+}
+
+.color-box.active {
+    border: 2px solid rgb(148, 148, 148);
+}
+
+
+
+
+
+
 
 .tag-buttons {
     text-align: center;
