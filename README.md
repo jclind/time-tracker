@@ -5,6 +5,7 @@ tasks to complete:
     - Add functionality for space bar to stop and start timer
     - Clean up code and simplify
     - Add time tags
+    - Remember time tags with localstorage
     - Add way to create new time tags
     - Add sorting by time tags
 

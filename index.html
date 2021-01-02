@@ -42,35 +42,30 @@
     <div>
         <table id="time-table">
             <tr>
-                <th>Title</th>
-                <th>Time</th>
-                <th>Date</th>
-                <th>Total Time</th>
-                <th></th>
             </tr>
         </table>
     </div>
     
     <div class="new-tag-modal" id="new-tag-modal">
         <div class="tag-create-title">Create Tag</div>
-        <input type="text" id='tag-input-text' class='tag-input-text'>
-        <div class="color-select-container">
-            <div id="red" class="color-box" style="background: #fd483f;" onClick='test(this.id)'></div>
-            <div id="pink" class="color-box" style="background: #fd889a;" onClick='test(this.id)'></div>
-            <div id="brown" class="color-box" style="background: #9A6324;" onClick='test(this.id)'></div>
-            <div id="orange" class="color-box" style="background: #fca12b;" onClick='test(this.id)'></div>
-            <div id="yello" class="color-box" style="background: #ffe119;" onClick='test(this.id)'></div>
-            <div id="lime" class="color-box" style="background: #bfef45;" onClick='test(this.id)'></div>
-            <div id="dark-green" class="color-box" style="background: #0a724f;" onClick='test(this.id)'></div>
-            <div id="mint" class="color-box" style="background: #AAF0D1;" onClick='test(this.id)'></div>
-            <div id="blue" class="color-box" style="background: #7cc3db;" onClick='test(this.id)'></div>
-            <div id="navy" class="color-box" style="background: #3D3D90;" onClick='test(this.id)'></div>
-            <div id="lavendar" class="color-box" style="background: #cc99cc;" onClick='test(this.id)'></div>
-            <div id="purple" class="color-box" style="background: #926adb;" onClick='test(this.id)'></div>
+        <input type="text" id='tag-input-text' class='tag-input-text' placeholder="Tag Name">
+        <div class="color-select-container" id="color-select-container">
+            <div id="red" class="color-box" style="background: #fd483f;" onClick='selectColor(this.id)'></div>
+            <div id="pink" class="color-box" style="background: #fd889a;" onClick='selectColor(this.id)'></div>
+            <div id="brown" class="color-box" style="background: #9A6324;" onClick='selectColor(this.id)'></div>
+            <div id="orange" class="color-box" style="background: #fca12b;" onClick='selectColor(this.id)'></div>
+            <div id="yellow" class="color-box" style="background: #ffe119;" onClick='selectColor(this.id)'></div>
+            <div id="lime" class="color-box" style="background: #bfef45;" onClick='selectColor(this.id)'></div>
+            <div id="dark-green" class="color-box" style="background: #0a724f;" onClick='selectColor(this.id)'></div>
+            <div id="mint" class="color-box" style="background: #AAF0D1;" onClick='selectColor(this.id)'></div>
+            <div id="blue" class="color-box" style="background: #7cc3db;" onClick='selectColor(this.id)'></div>
+            <div id="navy" class="color-box" style="background: #3D3D90;" onClick='selectColor(this.id)'></div>
+            <div id="lavendar" class="color-box" style="background: #cc99cc;" onClick='selectColor(this.id)'></div>
+            <div id="purple" class="color-box" style="background: #926adb;" onClick='selectColor(this.id)'></div>
         </div>
         <div class="tag-buttons">
             <button class="cancel-tag-btn" onclick='hideModal()'>Cancel</button>
-            <button class="create-tag-btn">Create</button>
+            <button class="create-tag-btn" onclick='createTag()'>Create</button>
         </div>
     </div>
 

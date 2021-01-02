@@ -138,9 +138,20 @@ function submit() {
         
         // Set time object's total time
         let totTime = findElapsedTime(timesInfoList.length - 1);
-        
+
+        // Set tag for current time object
+        let tagName = document.getElementById('tag-input').value;
+        let tagColor;
+        // Get color of tagName tag
+        for (let i = 0; i < timeTags.length; i++) {
+            if (timeTags[i].name === tagName) {
+                tagColor = timeTags[i].color;
+            }
+        }
+        let tagCur = {name: tagName, color: tagColor}
+
         // Push name, time, date, and total time to object and push that to timesInfoList array
-        let temp = {name: timeName, time: timeCur, date: dateCur, totalTime: totTime};
+        let temp = {name: timeName, time: timeCur, date: dateCur, totalTime: totTime, timeTag: tagCur};
         timesInfoList.push(temp);
 
         // Save timesInfoList to localstroage, update the html list, and clear the timer on submit of time.
@@ -155,6 +166,7 @@ function updateTimesList() {
     document.getElementById('time-table').innerHTML = `
     <tr>
         <th>Title</th>
+        <th>Tag</th>
         <th>Time</th>
         <th>Date</th>
         <th>Total Time</th>
@@ -165,6 +177,7 @@ function updateTimesList() {
         document.getElementById('time-table').innerHTML += `
         <tr id='times-row'> 
             <td contenteditable="true" class="name" data-id="${i}">${timesInfoList[i].name}</td>
+            <td>${timesInfoList[i].timeTag.name}</td>
             <td>${timesInfoList[i].time.hours}:${(timesInfoList[i].time.minutes < 10 ? "0" + timesInfoList[i].time.minutes : timesInfoList[i].time.minutes)}:${(timesInfoList[i].time.seconds < 10 ? "0" + timesInfoList[i].time.seconds : timesInfoList[i].time.seconds)}.${(timesInfoList[i].time.milliseconds < 10 ? "0" + timesInfoList[i].time.milliseconds : timesInfoList[i].time.milliseconds)}</td>
             <td>${timesInfoList[i].date}</td>
             <td data-id=${i}>${elapsedTime.hours}:${(elapsedTime.minutes < 10 ? "0" + elapsedTime.minutes : elapsedTime.minutes)}:${(elapsedTime.seconds < 10 ? "0" + elapsedTime.seconds : elapsedTime.seconds)}.${(elapsedTime.milliseconds < 10 ? "0" + elapsedTime.milliseconds : elapsedTime.milliseconds)}</td>
@@ -213,15 +226,59 @@ function deleteItem(i) {
 
 function updateTagsList() {
     tagList = document.getElementById('tag-input');
+    tagList.innerHTML = '';
     for (tag in timeTags) {
+        console.log(tag)
         tagList.innerHTML += `
         <option value='${timeTags[tag].name}'>${timeTags[tag].name}</option>
         `
     }
 }
 
+function createTag() {
+    if (document.getElementById('tag-input-text').value === '') {
+        // Add shake animation class
+        $("#tag-input-text").addClass('tag-input-animation')
+        // Reset shake animation class (allows for multiple uses of animation)
+        $("#tag-input-text").bind('oanimationend animationend webkitAnimationEnd', function() {
+            $("#tag-input-text").removeClass('tag-input-animation')
+        });
+        document.getElementById('tag-input-text').style.border = '1px solid red';
+    } else if (selectedTagColor === ''){
+        // Add shake animation class
+        $("#color-select-container").addClass('tag-input-animation')
+        // Reset shake animation class (allows for multiple uses of animation)
+        $("#color-select-container").bind('oanimationend animationend webkitAnimationEnd', function() {
+            $("#color-select-container").removeClass('tag-input-animation')
+        });
+        document.getElementById('color-select-container').style.border = '1px solid red';
+    } else {
+        document.getElementById('tag-input-text').style.border = '1px solid rgb(190, 190, 190)';
+        
+        let tagName = document.getElementById('tag-input-text').value;
+        let tagColor = selectedTagColor
 
+        let tempTagObj = {name: tagName, color: tagColor}
+        timeTags.push(tempTagObj)
+        updateTagsList();
+        hideModal();
+    }
+}
 
+// Remove red border on tag input feild when typing.
+$('#tag-input-text').on('keyup', () => {
+    let tagInputText = document.getElementById('tag-input-text')
+    if (tagInputText.style.border === '1px solid red') {
+        tagInputText.style.border = '1px solid rgb(190, 190, 190)'
+    }
+})
+
+$('#color-select-container').on('click', () => {
+    let colorSelect = document.getElementById('color-select-container')
+    if (colorSelect.style.border === '1px solid red') {
+        colorSelect.style.border = 'none';
+    }
+})
 
 
 
@@ -269,12 +326,14 @@ document.getElementById('blur-overlay').addEventListener('click', () => {hideMod
 function showModal() {
     document.getElementById('blur-overlay').style.display = 'block';
     document.getElementById('new-tag-modal').style.display = 'block';
-    console.log('Hello there')
 }
 
 function hideModal() {
     document.getElementById('blur-overlay').style.display = 'none';
     document.getElementById('new-tag-modal').style.display = 'none';
+    document.getElementById('tag-input-text').style.border = '1px solid rgb(190, 190, 190)';
+    document.getElementById('tag-input-text').value = '';
+    document.getElementById('color-select-container').style.border = 'none';
     if (selectedTagColor != '') {
         document.getElementById(`${selectedTagColor}`).classList.remove('active');
         selectedTagColor = '';
@@ -284,7 +343,7 @@ function hideModal() {
 // Control color selection for tags
 let selectedTagColor = '';
 
-function test(color) {
+function selectColor(color) {
     if (selectedTagColor != '') {
         document.getElementById(`${selectedTagColor}`).classList.remove('active');
     }

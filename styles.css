@@ -172,7 +172,7 @@ tr {
     background: rgb(54, 54, 54);
 }
 
-table td + td + td + td + td {
+table td + td + td + td + td + td {
     width: 1px;
     line-height: 20px;
     background: #2d2d2d;
@@ -202,7 +202,8 @@ td {
 tr:hover {
     background: rgb(63, 63, 63);
 }
-tr:hover td + td + td + td + td button{
+
+tr:hover td + td + td + td + td + td button{
     font-size: 16px;
     cursor: pointer;
     color: rgba(255, 255, 255, .4);
@@ -223,13 +224,13 @@ td button:hover {
 
 
 .new-tag-modal {
-    display: block;
+    display: none;
     position: absolute;
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 250px;
-    height: 245px;
+    height: 240px;
     background: white;
     border-radius: 8px;
 }
@@ -261,10 +262,11 @@ td button:hover {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    grid-gap: 5px;
+    grid-gap: 10px;
+    padding: 5px 5px 0px 5px;
     margin: 20 auto;
     width: 90%;
-    height: 90px;
+    height: 70px;
 }
 
 .color-box {
@@ -329,4 +331,17 @@ td button:hover {
 .create-tag-btn:active {
     border: 1px solid rgb(252, 161, 43);
     border-bottom: 1px solid rgb(209, 118, 0);
+}
+
+
+.tag-input-animation {
+    animation: shake .2s;
+}
+
+@keyframes shake {
+    0% { transform: translate(3px, 0px) }
+    25% { transform: translate(-3px, 0px) }
+    50% { transform: translate(3px, 0px) }
+    75% { transform: translate(-3px, 0px) }
+    100% { transform: translate(0px, 0px) }
 }
