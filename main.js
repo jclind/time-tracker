@@ -1,7 +1,7 @@
 // Array of objets of times and data about times.
 var timesInfoList = [];
 
-var timeTags = [{name: 'main', color: red}]
+var timeTags = [{name: 'main', color: 'red'}]
 
 var h = 0, m = 0, s = 0, ms = 0;
 var elapsedTime = 0;   
@@ -11,18 +11,28 @@ var stopwatchEl = document.querySelector('.time');
 // Set timesInfoList to the localStorage array and update the list on page load. 
 window.onload = function() {
     timesInfoList = JSON.parse(localStorage.getItem('timesInfoList'));
+    timeTags = JSON.parse(localStorage.getItem('timeTags'))
     updateTimesList();
     updateTagsList();
 }
 
 // Use local storage to save timesInfoList
 function saveData() {
+    // Save timesInfoList in localstorage
     if (localStorage.getItem('timesInfoList') != null) {
         // reset data in localStorage to push new array back in if the localStorage already has objects in it.
-        localStorage.clear();
+        localStorage.removeItem('timesInfoList');
         localStorage.setItem('timesInfoList', JSON.stringify(timesInfoList))
     } else {
         localStorage.setItem('timesInfoList', JSON.stringify(timesInfoList))
+    }
+
+    // Save timeTags in localstorage 
+    if (localStorage.getItem('timeTags') != null) {
+        localStorage.removeItem('timeTags');
+        localStorage.setItem('timeTags', JSON.stringify(timeTags));
+    } else {
+        localStorage.setItem('timeTags', JSON.stringify(timeTags));
     }
 }
 
@@ -228,7 +238,6 @@ function updateTagsList() {
     tagList = document.getElementById('tag-input');
     tagList.innerHTML = '';
     for (tag in timeTags) {
-        console.log(tag)
         tagList.innerHTML += `
         <option value='${timeTags[tag].name}'>${timeTags[tag].name}</option>
         `
@@ -260,6 +269,7 @@ function createTag() {
 
         let tempTagObj = {name: tagName, color: tagColor}
         timeTags.push(tempTagObj)
+        saveData();
         updateTagsList();
         hideModal();
     }
