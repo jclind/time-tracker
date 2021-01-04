@@ -149,16 +149,8 @@ function submit() {
         // Set time object's total time
         let totTime = findElapsedTime(timesInfoList.length - 1);
 
-        // Set tag for current time object
-        let tagName = document.getElementById('tag-input').value;
-        let tagColor;
-        // Get color of tagName tag
-        for (let i = 0; i < timeTags.length; i++) {
-            if (timeTags[i].name === tagName) {
-                tagColor = timeTags[i].color;
-            }
-        }
-        let tagCur = {name: tagName, color: tagColor}
+        // Set time's tag to the first element in the timeTags array
+        let tagCur = timeTags[0];
 
         // Push name, time, date, and total time to object and push that to timesInfoList array
         let temp = {name: timeName, time: timeCur, date: dateCur, totalTime: totTime, timeTag: tagCur};
@@ -187,7 +179,7 @@ function updateTimesList() {
         document.getElementById('time-table').innerHTML += `
         <tr id='times-row'> 
             <td contenteditable="true" class="name" data-id="${i}">${timesInfoList[i].name}</td>
-            <td>${timesInfoList[i].timeTag.name}</td>
+            <td class='time-table-tag'><div onclick='showChangeTagModal(${i})'>${timesInfoList[i].timeTag.name}</div></td>
             <td>${timesInfoList[i].time.hours}:${(timesInfoList[i].time.minutes < 10 ? "0" + timesInfoList[i].time.minutes : timesInfoList[i].time.minutes)}:${(timesInfoList[i].time.seconds < 10 ? "0" + timesInfoList[i].time.seconds : timesInfoList[i].time.seconds)}.${(timesInfoList[i].time.milliseconds < 10 ? "0" + timesInfoList[i].time.milliseconds : timesInfoList[i].time.milliseconds)}</td>
             <td>${timesInfoList[i].date}</td>
             <td data-id=${i}>${elapsedTime.hours}:${(elapsedTime.minutes < 10 ? "0" + elapsedTime.minutes : elapsedTime.minutes)}:${(elapsedTime.seconds < 10 ? "0" + elapsedTime.seconds : elapsedTime.seconds)}.${(elapsedTime.milliseconds < 10 ? "0" + elapsedTime.milliseconds : elapsedTime.milliseconds)}</td>
@@ -256,20 +248,26 @@ function selectTag(index) {
     let tempTag = timeTags[index];
     timeTags[index] = timeTags[0];
     timeTags[0] = tempTag;
-    console.log(timeTags);
     updateTagsList();
     saveData();
 }
 
-function deleteTag(index, e) {
+function deleteTag(index, e) {   
+    // Update timesInfoList to change from the deleted tag. 
+    for (time in timesInfoList) {
+        if (timesInfoList[time].timeTag.name == timeTags[index].name) {
+            console.log(timeTags[0]);
+            timesInfoList[time].timeTag = timeTags[0];
+        }
+    }
+    
     // Stop click from outer div from occuring
     e.stopPropagation();
-
-    console.log('bingus deletes', index)
     timeTags.splice(index, 1)
+
+    updateTimesList();
     updateTagsList();
     saveData();
-
 }
 
 
@@ -300,7 +298,7 @@ function createTag() {
         timeTags.push(tempTagObj)
         saveData();
         updateTagsList();
-        hideModal();
+        hideTagCreateModal();
     }
 }
 
@@ -359,16 +357,16 @@ document.getElementById('submit-btn').onmouseleave = function() {
 }
 
 // When blured background is clicked on, close the tag-input background and modal.
-document.getElementById('blur-overlay').addEventListener('click', () => {hideModal()})
+document.getElementById('new-tag-blur-overlay').addEventListener('click', () => {hideTagCreateModal()})
 
 // Blurs background and shows new tag input modal on button click
-function showModal() {
-    document.getElementById('blur-overlay').style.display = 'block';
+function showTagCreateModal() {
+    document.getElementById('new-tag-blur-overlay').style.display = 'block';
     document.getElementById('new-tag-modal').style.display = 'block';
 }
 
-function hideModal() {
-    document.getElementById('blur-overlay').style.display = 'none';
+function hideTagCreateModal() {
+    document.getElementById('new-tag-blur-overlay').style.display = 'none';
     document.getElementById('new-tag-modal').style.display = 'none';
     document.getElementById('tag-input-text').style.border = '1px solid rgb(190, 190, 190)';
     document.getElementById('tag-input-text').value = '';
@@ -388,4 +386,39 @@ function selectColor(color) {
     }
     selectedTagColor = color;
     document.getElementById(`${color}`).classList.add('active');
+}
+
+
+// Control tag selection for changing tags
+
+let selectedTag = '';
+
+// function selectChangingTag(tag) {
+//     if (selectedTag = )
+// }
+
+
+function updateChangeTagModal() {
+    tagModalContainer = document.getElementById('change-tag-modal-tag-container');
+    tagModalContainer = '';
+    for (tag in timeTags) {
+        tagModalContainer += `
+        <div class="change-tag-modal-tag">
+            <div class="change-tag-modal-tag-color" style="background: ${timeTags[tag].color}"></div>
+            <div class="change-tag-modal-tag-title">${timeTags[tag].name}</div>
+        </div>
+        `
+    }
+}
+
+function showChangeTagModal(index) {
+    document.getElementById('change-tag-modal').style.display = 'block';
+    document.getElementById('change-tag-blur-overlay').style.display = 'block';
+}
+
+document.getElementById('change-tag-blur-overlay').addEventListener('click', () => {hideChangeTagModal()})
+
+function hideChangeTagModal() {
+    document.getElementById('change-tag-modal').style.display = 'none';
+    document.getElementById('change-tag-blur-overlay').style.display = 'none';
 }

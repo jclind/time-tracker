@@ -7,7 +7,8 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
-    <div class="blur-overlay" id="blur-overlay"></div>
+    <div class="new-tag-blur-overlay" id="new-tag-blur-overlay"></div>
+    <div class="change-tag-blur-overlay" id="change-tag-blur-overlay"></div>
     <div class="title">Time Tracker</div><hr>
     
     <div id="stop-watch">
@@ -28,7 +29,7 @@
                         </div>
                     </div>
                     <div class="tag-btn-container">
-                        <button class="new-tag-btn" id="new-tag-btn" onclick='showModal()'>
+                        <button class="new-tag-btn" id="new-tag-btn" onclick='showTagCreateModal()'>
                             <i class="fa fa-plus-square" style="font-size: 22px; color: rgb(233, 231, 231)"></i>
                         </button>
                         <div class="tag-tooltip-text">Add A New Tag</div>
@@ -70,9 +71,59 @@
             <div id="purple" class="color-box" style="background: #926adb;" onClick='selectColor(this.id)'></div>
         </div>
         <div class="tag-buttons">
-            <button class="cancel-tag-btn" onclick='hideModal()'>Cancel</button>
+            <button class="cancel-tag-btn" onclick='hideTagCreateModal()'>Cancel</button>
             <button class="create-tag-btn" onclick='createTag()'>Create</button>
         </div>
+    </div>
+    <div class="change-tag-modal change-tag-modal-scrollbar" id="change-tag-modal" style="overflow-y:scroll;">
+        <div class="change-tag-modal-title">Change Modal</div>
+        <div class="change-tag-modal-tag-container">
+            <div class="change-tag-modal-tag">
+                <div class="change-tag-modal-tag-color" style="background: red"></div>
+                <div class="change-tag-modal-tag-title">Banana</div>
+            </div>
+            <div class="change-tag-modal-tag">
+                <div class="change-tag-modal-tag-color" style="background: red"></div>
+                <div class="change-tag-modal-tag-title">Banana</div>
+            </div>
+            <div class="change-tag-modal-tag">
+                <div class="change-tag-modal-tag-color" style="background: red"></div>
+                <div class="change-tag-modal-tag-title">Banana</div>
+            </div>
+            <div class="change-tag-modal-tag">
+                <div class="change-tag-modal-tag-color" style="background: red"></div>
+                <div class="change-tag-modal-tag-title">Banana</div>
+            </div>
+            <div class="change-tag-modal-tag">
+                <div class="change-tag-modal-tag-color" style="background: red"></div>
+                <div class="change-tag-modal-tag-title">Banana</div>
+            </div>
+            <div class="change-tag-modal-tag">
+                <div class="change-tag-modal-tag-color" style="background: red"></div>
+                <div class="change-tag-modal-tag-title">Banana</div>
+            </div>
+            <div class="change-tag-modal-tag">
+                <div class="change-tag-modal-tag-color" style="background: red"></div>
+                <div class="change-tag-modal-tag-title">Banana</div>
+            </div>
+            <div class="change-tag-modal-tag">
+                <div class="change-tag-modal-tag-color" style="background: red"></div>
+                <div class="change-tag-modal-tag-title">Banana</div>
+            </div>
+            <div class="change-tag-modal-tag">
+                <div class="change-tag-modal-tag-color" style="background: red"></div>
+                <div class="change-tag-modal-tag-title">Banana</div>
+            </div>
+            <div class="change-tag-modal-tag">
+                <div class="change-tag-modal-tag-color" style="background: red"></div>
+                <div class="change-tag-modal-tag-title">Banana</div>
+            </div>
+            <div class="change-tag-modal-tag">
+                <div class="change-tag-modal-tag-color" style="background: red"></div>
+                <div class="change-tag-modal-tag-title">Banana</div>
+            </div>
+        </div>
+
     </div>
 
     <script src="main.js"></script>
