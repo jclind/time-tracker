@@ -16,16 +16,38 @@
                 <div class="title-input-text" id="title-input-text">Time Name:</div>
                 <input type="text" class="title-input" id="title-input" placeholder="Enter Name">
             </div>
-            <div class="select-input-container">
-                <div class="select-title">Select A Tag</div>
-                <div class="select-btn-container">
-                    <select name="tag-input" id="tag-input" class="tag-input" value="Select A Tag">
-                    </select>
+            <div class="dropdown-input-container">
+                <div class="dropdown-input-title">Select A Tag</div>
+                <div class="dropdown-container">
+                    <div class="dropdown">
+                        <div class="dropdown-select">
+                            <span class="selected">This Is Selected</span>
+                            <i class="fa fa-caret-down"></i>
+                        </div>
+                        <div class="dropdown-list">
+                            <div class="dropdown-item">
+                                <div class="dropdown-item-name">Cheese</div>
+                                <div class="delete-tag">+</div>
+                            </div>
+                            <div class="dropdown-item">
+                                <div class="dropdown-item-name">Banana</div>
+                                <div class="delete-tag">+</div>
+                            </div>
+                            <div class="dropdown-item">
+                                <div class="dropdown-item-name">Rice</div>
+                                <div class="delete-tag">+</div>
+                            </div>
+                            <div class="dropdown-item">
+                                <div class="dropdown-item-name">Beans</div>
+                                <div class="delete-tag">+</div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="tag-btn-container">
                         <button class="new-tag-btn" id="new-tag-btn" onclick='showModal()'>
                             <i class="fa fa-plus-square" style="font-size: 22px; color: rgb(233, 231, 231)"></i>
                         </button>
-                        <span class="tag-tooltip-text">Add A New Tag</span>
+                        <div class="tag-tooltip-text">Add A New Tag</div>
                     </div>
                 </div>
             </div>
