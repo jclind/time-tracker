@@ -235,14 +235,43 @@ function deleteItem(i) {
 
 
 function updateTagsList() {
-    tagList = document.getElementById('tag-input');
-    tagList.innerHTML = '';
+    selectedTag = document.getElementById('selected-tag');
+    dropdownEls = document.getElementById('dropdown-list');
+    dropdownEls.innerHTML = '';
     for (tag in timeTags) {
-        tagList.innerHTML += `
-        <option value='${timeTags[tag].name}'>${timeTags[tag].name}</option>
-        `
+        if (tag == 0) {
+            selectedTag.innerHTML = timeTags[0].name;
+        } else {
+            dropdownEls.innerHTML += `
+            <div class="dropdown-item" onclick='selectTag(${tag})'>
+                <div class="dropdown-item-name">${timeTags[tag].name}</div>
+                <div class="delete-tag" onclick='deleteTag(${tag}, event)'>+</div>
+            </div>
+            `
+        }
     }
 }
+
+function selectTag(index) {
+    let tempTag = timeTags[index];
+    timeTags[index] = timeTags[0];
+    timeTags[0] = tempTag;
+    console.log(timeTags);
+    updateTagsList();
+    saveData();
+}
+
+function deleteTag(index, e) {
+    // Stop click from outer div from occuring
+    e.stopPropagation();
+
+    console.log('bingus deletes', index)
+    timeTags.splice(index, 1)
+    updateTagsList();
+    saveData();
+
+}
+
 
 function createTag() {
     if (document.getElementById('tag-input-text').value === '') {
