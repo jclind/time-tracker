@@ -363,6 +363,7 @@ document.getElementById('new-tag-blur-overlay').addEventListener('click', () => 
 function showTagCreateModal() {
     document.getElementById('new-tag-blur-overlay').style.display = 'block';
     document.getElementById('new-tag-modal').style.display = 'block';
+    document.getElementById('tag-input-text').focus();
 }
 
 function hideTagCreateModal() {
