@@ -49,7 +49,22 @@
     <div>
         <table id="time-table">
             <tr>
+                <th>Title</th>
+                <th>Tag</th>
+                <th>Time</th>
+                <th>Date</th>
+                <th>Total Time</th>
             </tr>
+            <tr class='time-search-row'>
+                <td class='time-search' id='time-search'><input placeholder='search' class='time-search-input' id='time-search-input' autocomplete="off"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tbody id="time-table-body">
+
+            </tbody>
         </table>
     </div>
     
@@ -57,18 +72,18 @@
         <div class="tag-create-title">Create Tag</div>
         <input type="text" id='tag-input-text' class='tag-input-text' placeholder="Tag Name">
         <div class="color-select-container" id="color-select-container">
-            <div id="red" class="color-box" style="background: #fd483f;" onClick='selectColor(this.id)'></div>
-            <div id="pink" class="color-box" style="background: #fd889a;" onClick='selectColor(this.id)'></div>
-            <div id="brown" class="color-box" style="background: #9A6324;" onClick='selectColor(this.id)'></div>
-            <div id="orange" class="color-box" style="background: #fca12b;" onClick='selectColor(this.id)'></div>
-            <div id="yellow" class="color-box" style="background: #ffe119;" onClick='selectColor(this.id)'></div>
-            <div id="lime" class="color-box" style="background: #bfef45;" onClick='selectColor(this.id)'></div>
-            <div id="dark-green" class="color-box" style="background: #0a724f;" onClick='selectColor(this.id)'></div>
-            <div id="mint" class="color-box" style="background: #AAF0D1;" onClick='selectColor(this.id)'></div>
-            <div id="blue" class="color-box" style="background: #7cc3db;" onClick='selectColor(this.id)'></div>
-            <div id="navy" class="color-box" style="background: #3D3D90;" onClick='selectColor(this.id)'></div>
-            <div id="lavendar" class="color-box" style="background: #cc99cc;" onClick='selectColor(this.id)'></div>
-            <div id="purple" class="color-box" style="background: #926adb;" onClick='selectColor(this.id)'></div>
+            <div id="red" data-tag-color="#fd483f" class="color-box" style="background: #fd483f;" onClick='selectColor(this.id)'></div>
+            <div id="pink" data-tag-color="#fd889a" class="color-box" style="background: #fd889a;" onClick='selectColor(this.id)'></div>
+            <div id="brown" data-tag-color="#9A6324" class="color-box" style="background: #9A6324;" onClick='selectColor(this.id)'></div>
+            <div id="orange" data-tag-color="#fca12b" class="color-box" style="background: #fca12b;" onClick='selectColor(this.id)'></div>
+            <div id="yellow" data-tag-color="#ffe119" class="color-box" style="background: #ffe119;" onClick='selectColor(this.id)'></div>
+            <div id="lime" data-tag-color="#bfef45" class="color-box" style="background: #bfef45;" onClick='selectColor(this.id)'></div>
+            <div id="dark-green" data-tag-color="#0a724f" class="color-box" style="background: #0a724f;" onClick='selectColor(this.id)'></div>
+            <div id="mint" data-tag-color="#AAF0D1" class="color-box" style="background: #AAF0D1;" onClick='selectColor(this.id)'></div>
+            <div id="blue" data-tag-color="#7cc3db" class="color-box" style="background: #7cc3db;" onClick='selectColor(this.id)'></div>
+            <div id="navy" data-tag-color="#3D3D90" class="color-box" style="background: #3D3D90;" onClick='selectColor(this.id)'></div>
+            <div id="lavendar" data-tag-color="#cc99cc" class="color-box" style="background: #cc99cc;" onClick='selectColor(this.id)'></div>
+            <div id="purple" data-tag-color="#926adb" class="color-box" style="background: #926adb;" onClick='selectColor(this.id)'></div>
         </div>
         <div class="tag-buttons">
             <button class="cancel-tag-btn" onclick='hideTagCreateModal()'>Cancel</button>
@@ -77,53 +92,11 @@
     </div>
     <div class="change-tag-modal change-tag-modal-scrollbar" id="change-tag-modal" style="overflow-y:scroll;">
         <div class="change-tag-modal-title">Change Modal</div>
-        <div class="change-tag-modal-tag-container">
-            <div class="change-tag-modal-tag">
-                <div class="change-tag-modal-tag-color" style="background: red"></div>
-                <div class="change-tag-modal-tag-title">Banana</div>
-            </div>
-            <div class="change-tag-modal-tag">
-                <div class="change-tag-modal-tag-color" style="background: red"></div>
-                <div class="change-tag-modal-tag-title">Banana</div>
-            </div>
-            <div class="change-tag-modal-tag">
-                <div class="change-tag-modal-tag-color" style="background: red"></div>
-                <div class="change-tag-modal-tag-title">Banana</div>
-            </div>
-            <div class="change-tag-modal-tag">
-                <div class="change-tag-modal-tag-color" style="background: red"></div>
-                <div class="change-tag-modal-tag-title">Banana</div>
-            </div>
-            <div class="change-tag-modal-tag">
-                <div class="change-tag-modal-tag-color" style="background: red"></div>
-                <div class="change-tag-modal-tag-title">Banana</div>
-            </div>
-            <div class="change-tag-modal-tag">
-                <div class="change-tag-modal-tag-color" style="background: red"></div>
-                <div class="change-tag-modal-tag-title">Banana</div>
-            </div>
-            <div class="change-tag-modal-tag">
-                <div class="change-tag-modal-tag-color" style="background: red"></div>
-                <div class="change-tag-modal-tag-title">Banana</div>
-            </div>
-            <div class="change-tag-modal-tag">
-                <div class="change-tag-modal-tag-color" style="background: red"></div>
-                <div class="change-tag-modal-tag-title">Banana</div>
-            </div>
-            <div class="change-tag-modal-tag">
-                <div class="change-tag-modal-tag-color" style="background: red"></div>
-                <div class="change-tag-modal-tag-title">Banana</div>
-            </div>
-            <div class="change-tag-modal-tag">
-                <div class="change-tag-modal-tag-color" style="background: red"></div>
-                <div class="change-tag-modal-tag-title">Banana</div>
-            </div>
-            <div class="change-tag-modal-tag">
-                <div class="change-tag-modal-tag-color" style="background: red"></div>
-                <div class="change-tag-modal-tag-title">Banana</div>
-            </div>
+        <div class="change-tag-modal-tag-container" id="change-tag-modal-tag-container"></div>
+        <div class="change-tag-modal-buttons">
+            <button class='cancel-change-modal-btn' id='cancel-change-modal-btn' onclick='hideChangeTagModal()'>Cancel</button>
+            <button class='change-tag-modal-btn' id='change-tag-modal-btn' onclick='changeTag()'>Change</button>
         </div>
-
     </div>
 
     <script src="main.js"></script>

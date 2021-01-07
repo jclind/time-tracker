@@ -300,6 +300,34 @@ td button:hover {
     color: rgba(255, 255, 255, 0.3);
 }
 
+.time-search-row {
+    border-bottom: 0;
+}
+#times-row-0 {
+    border-top-style: hidden;
+}
+
+.time-search {
+    padding: 5px 0px;
+    margin: 0;
+    height: 20px;
+}
+
+.time-search-input {
+    color: white;
+    height: 20px;
+    border-radius: 8px;
+    text-align: center;
+    outline: none;
+    border: none;
+    background:rgb(71, 71, 71);
+}
+
+
+
+
+
+
 .time-table-tag div {
     border: 1px solid rgba(54, 54, 54, 0);
 }
@@ -394,7 +422,7 @@ td button:hover {
     outline: none;
     border: none;
     cursor: pointer;
-    border-radius: 5px;;
+    border-radius: 5px;
 }
 
 .cancel-tag-btn {
@@ -503,8 +531,41 @@ td button:hover {
 .change-tag-modal-tag.active {
     background: rgb(238, 238, 238);
 }
- 
 
+.change-tag-modal-buttons {
+    margin: 15px auto 10px auto;
+    text-align: center;
+}
+
+.cancel-change-modal-btn, .change-tag-modal-btn {
+    height: 35px;
+    width: 65px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0px 10px;
+}
+
+.cancel-change-modal-btn {
+    background: gray;
+    border-bottom: 1px solid rgb(82, 82, 82);
+}
+
+.cancel-change-modal-btn:active {
+    /* border: 1px solid gray; */
+    border-bottom: 2px solid rgb(61, 61, 61);
+}
+
+.change-tag-modal-btn {
+    background: rgb(252, 161, 43);
+    border-bottom: 1px solid rgb(182, 104, 1);
+}
+
+.change-tag-modal-btn:active {
+    /* border: 1px solid rgb(252, 161, 43); */
+    border-bottom: 2px solid rgb(122, 69, 0);
+}
 
 
 

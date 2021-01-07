@@ -12,7 +12,7 @@ var stopwatchEl = document.querySelector('.time');
 window.onload = function() {
     timesInfoList = JSON.parse(localStorage.getItem('timesInfoList'));
     timeTags = JSON.parse(localStorage.getItem('timeTags'))
-    updateTimesList();
+    updateTimesList(timesInfoList);
     updateTagsList();
 }
 
@@ -158,35 +158,47 @@ function submit() {
 
         // Save timesInfoList to localstroage, update the html list, and clear the timer on submit of time.
         saveData();
-        updateTimesList();
+        updateTimesList(timesInfoList);
         clear();
     }
 }
 
 // Updates the html list of times based on submittion and deletion of times.
-function updateTimesList() {
-    document.getElementById('time-table').innerHTML = `
-    <tr>
-        <th>Title</th>
-        <th>Tag</th>
-        <th>Time</th>
-        <th>Date</th>
-        <th>Total Time</th>
-    </tr>`
-    // loops through timesInfoList and displays each time object
-    for (let i = 0; i < timesInfoList.length; i++) {
+function updateTimesList(arr) {
+    document.getElementById('time-table-body').innerHTML = ``
+    // loops through arr and displays each time object
+    for (let i = 0; i < arr.length; i++) {
         let elapsedTime = findElapsedTime(i); 
-        document.getElementById('time-table').innerHTML += `
-        <tr id='times-row'> 
-            <td contenteditable="true" class="name" data-id="${i}">${timesInfoList[i].name}</td>
-            <td class='time-table-tag'><div onclick='showChangeTagModal(${i})'>${timesInfoList[i].timeTag.name}</div></td>
-            <td>${timesInfoList[i].time.hours}:${(timesInfoList[i].time.minutes < 10 ? "0" + timesInfoList[i].time.minutes : timesInfoList[i].time.minutes)}:${(timesInfoList[i].time.seconds < 10 ? "0" + timesInfoList[i].time.seconds : timesInfoList[i].time.seconds)}.${(timesInfoList[i].time.milliseconds < 10 ? "0" + timesInfoList[i].time.milliseconds : timesInfoList[i].time.milliseconds)}</td>
-            <td>${timesInfoList[i].date}</td>
+        let currTimesRow = `times-row-${i}`
+        document.getElementById('time-table-body').innerHTML += `
+        <tr id='${currTimesRow}'> 
+            <td contenteditable="true" class="name" data-id="${i}">${arr[i].name}</td>
+            <td class='time-table-tag'><div onclick='showChangeTagModal(${i})'>${arr[i].timeTag.name}</div></td>
+            <td>${arr[i].time.hours}:${(arr[i].time.minutes < 10 ? "0" + arr[i].time.minutes : arr[i].time.minutes)}:${(arr[i].time.seconds < 10 ? "0" + arr[i].time.seconds : arr[i].time.seconds)}.${(arr[i].time.milliseconds < 10 ? "0" + arr[i].time.milliseconds : arr[i].time.milliseconds)}</td>
+            <td>${arr[i].date}</td>
             <td data-id=${i}>${elapsedTime.hours}:${(elapsedTime.minutes < 10 ? "0" + elapsedTime.minutes : elapsedTime.minutes)}:${(elapsedTime.seconds < 10 ? "0" + elapsedTime.seconds : elapsedTime.seconds)}.${(elapsedTime.milliseconds < 10 ? "0" + elapsedTime.milliseconds : elapsedTime.milliseconds)}</td>
             <td><button onclick='deleteItem(${i})'>X</button></td>
         </tr>`
     }
+
 }
+
+$(document).on('keyup', '#time-search-input', function () {
+    let userInput = document.getElementById('time-search-input').value;
+    timesListSearch(userInput)
+})
+
+function timesListSearch(userTimeName) {
+    let modTimesInfoList = [];
+    for (time in timesInfoList) {
+        let currTimesInfoListName = timesInfoList[time].name.toUpperCase();
+        if (currTimesInfoListName.includes(userTimeName.toUpperCase())) {
+            modTimesInfoList.push(timesInfoList[time])
+        }
+    }
+    updateTimesList(modTimesInfoList);
+}
+
 
 $(document).on('input', '.name', function (e) {
     const index = $(this).data('id')
@@ -221,7 +233,7 @@ function deleteItem(i) {
 
     // Updates the list of times and saves the data to the localstorage 
     saveData();
-    updateTimesList();
+    updateTimesList(timesInfoList);
 }
 
 
@@ -265,7 +277,7 @@ function deleteTag(index, e) {
     e.stopPropagation();
     timeTags.splice(index, 1)
 
-    updateTimesList();
+    updateTimesList(timesInfoList);
     updateTagsList();
     saveData();
 }
@@ -390,36 +402,117 @@ function selectColor(color) {
 }
 
 
-// Control tag selection for changing tags
-
-let selectedTag = '';
-
-// function selectChangingTag(tag) {
-//     if (selectedTag = )
-// }
-
 
 function updateChangeTagModal() {
     tagModalContainer = document.getElementById('change-tag-modal-tag-container');
-    tagModalContainer = '';
+    tagModalContainer.innerHTML = '';
     for (tag in timeTags) {
-        tagModalContainer += `
-        <div class="change-tag-modal-tag">
-            <div class="change-tag-modal-tag-color" style="background: ${timeTags[tag].color}"></div>
+        let currTag = `change-tag-modal-tag-${tag}`
+        let currEl = document.getElementById(currTag);
+        let currColor;
+        switch (timeTags[tag].color) {
+            case 'red': 
+                currColor = '#fd483f';
+                break;
+            case 'pink':
+                currColor = '#fd889a';
+                break;
+            case 'brown':
+                currColor = '#9A6324';
+                break;
+            case 'orange':
+                currColor = '#fca12b';
+                break;
+            case 'yellow':
+                currColor = '#ffe119'
+                break;
+            case 'lime':
+                currColor = '#bfef45';
+                break;
+            case 'dark-green':
+                currColor = '#0a724f';
+                break;
+            case 'mint':
+                currColor = '#AAF0D1';
+                break;
+            case 'blue':
+                currColor = '#7cc3db';
+                break;
+            case 'navy':
+                currColor = '#3D3D90';
+                break;
+            case 'lavendar':
+                currColor = '#cc99cc';
+                break;
+            case 'purple':
+                currColor = '#926adb';
+                break;
+            default:
+                console.log('hello red')
+        }
+
+
+        tagModalContainer.innerHTML += `
+        <div class="change-tag-modal-tag" id="${currTag}" onclick='selectChangeTagModalTag(${tag})'>
+            <div class="change-tag-modal-tag-color"  style="background: ${currColor}"></div>
             <div class="change-tag-modal-tag-title">${timeTags[tag].name}</div>
         </div>
         `
     }
 }
 
+// Holds index of clicked tag in the table for access in editing which tag that object will have.
+let currChangeModalIndex;
+
 function showChangeTagModal(index) {
+    currChangeModalIndex = index;
     document.getElementById('change-tag-modal').style.display = 'block';
     document.getElementById('change-tag-blur-overlay').style.display = 'block';
+    updateChangeTagModal();
 }
 
+// Call hideChangeTagModal on click outside of the modal.
 document.getElementById('change-tag-blur-overlay').addEventListener('click', () => {hideChangeTagModal()})
 
 function hideChangeTagModal() {
     document.getElementById('change-tag-modal').style.display = 'none';
     document.getElementById('change-tag-blur-overlay').style.display = 'none';
+    selectedChangeModalTag = '';
+}
+
+let selectedChangeModalTag = '';
+// Holds index of selected tag to be changed in the change tag modal.
+let selectedChangeModalTagIndex;
+// Control tag selection for changing tags
+function selectChangeTagModalTag(index) {
+    selectedChangeModalTag = `change-tag-modal-tag-${index}`
+    selectedChangeModalTagIndex = index;
+    document.getElementById(selectedChangeModalTag).style.background = 'rgb(238, 238, 238)'
+    for (tag in timeTags) {
+        currTag = `change-tag-modal-tag-${tag}`
+        if ((tag != index) && (document.getElementById(currTag).style.background == 'rgb(238, 238, 238)')) {
+            document.getElementById(currTag).style.background = 'white';
+        }
+    }
+}
+
+// Remove red boarder when item is selected in change tag modal.
+document.getElementById('change-tag-modal-tag-container').addEventListener('click', () => {
+    if (document.getElementById('change-tag-modal-tag-container').style.border == '2px solid red') {
+        document.getElementById('change-tag-modal-tag-container').style.border = 'none'
+    }
+})
+
+function changeTag() {
+    // Add red border to change tag modal when the user doesn't select a tag to change to.
+    if (selectedChangeModalTag == '') {
+        document.getElementById('change-tag-modal-tag-container').style.border = '2px solid red'
+    } else {
+        console.log(timeTags[selectedChangeModalTagIndex])
+        timesInfoList[currChangeModalIndex].timeTag = timeTags[selectedChangeModalTagIndex]
+    }
+    updateTimesList(timesInfoList);
+    hideChangeTagModal();
+    saveData();
+    selectedChangeModalTag = '';
 }
