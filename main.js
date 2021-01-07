@@ -92,7 +92,7 @@ function clear() {
         elapsedTime = 0;
         ms = 0, s = 0, m = 0, h = 0;
         stopwatchEl.textContent = '0:00:00.00';
-        document.getElementById('website-title').innerText = 'StopWatch'
+        document.getElementById('website-title').innerText = 'Stopwatch'
     }
 }
 
@@ -409,14 +409,13 @@ function selectColor(color) {
 
 
 
-function updateChangeTagModal() {
+function updateChangeTagModal(arr) {
     tagModalContainer = document.getElementById('change-tag-modal-tag-container');
     tagModalContainer.innerHTML = '';
-    for (tag in timeTags) {
+    for (tag in arr) {
         let currTag = `change-tag-modal-tag-${tag}`
-        let currEl = document.getElementById(currTag);
         let currColor;
-        switch (timeTags[tag].color) {
+        switch (arr[tag].color) {
             case 'red': 
                 currColor = '#fd483f';
                 break;
@@ -454,18 +453,35 @@ function updateChangeTagModal() {
                 currColor = '#926adb';
                 break;
             default:
-                console.log('hello red')
+                console.log('Color Selection Error')
         }
 
 
         tagModalContainer.innerHTML += `
         <div class="change-tag-modal-tag" id="${currTag}" onclick='selectChangeTagModalTag(${tag})'>
             <div class="change-tag-modal-tag-color"  style="background: ${currColor}"></div>
-            <div class="change-tag-modal-tag-title">${timeTags[tag].name}</div>
+            <div class="change-tag-modal-tag-title">${arr[tag].name}</div>
         </div>
         `
     }
 }
+
+$(document).on('keyup', '#change-tag-modal-search-input', function () {
+    let userTagName = document.getElementById('change-tag-modal-search-input').value;
+    searchChangeTags(userTagName);
+})
+
+function searchChangeTags(userTagName) {
+    let modTimeTags = [];
+    for (time in timeTags) {
+        let currTag = timeTags[time].name.toUpperCase();
+        if (currTag.includes(userTagName.toUpperCase())) {
+            modTimeTags.push(timeTags[time])
+        }
+        updateChangeTagModal(modTimeTags)
+    }
+}
+
 
 // Holds index of clicked tag in the table for access in editing which tag that object will have.
 let currChangeModalIndex;
@@ -474,7 +490,7 @@ function showChangeTagModal(index) {
     currChangeModalIndex = index;
     document.getElementById('change-tag-modal').style.display = 'block';
     document.getElementById('change-tag-blur-overlay').style.display = 'block';
-    updateChangeTagModal();
+    updateChangeTagModal(timeTags);
 }
 
 // Call hideChangeTagModal on click outside of the modal.

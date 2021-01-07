@@ -1,5 +1,5 @@
 <head>
-    <title id='website-title'>Time Tracker</title>
+    <title id='website-title'>Stopwatch</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -101,7 +101,9 @@
     </div>
     <div class="change-tag-modal change-tag-modal-scrollbar" id="change-tag-modal" style="overflow-y:scroll;">
         <div class="change-tag-modal-title">Change Modal</div>
-        <input type="text" placeholder="search-tags" id='change-tag-modal-search-input'>
+        <div class="change-tag-modal-search">
+            <input type="text" placeholder="search-tags" id='change-tag-modal-search-input'>
+        </div>
         <div class="change-tag-modal-tag-container" id="change-tag-modal-tag-container"></div>
         <div class="change-tag-modal-buttons">
             <button class='cancel-change-modal-btn' id='cancel-change-modal-btn' onclick='hideChangeTagModal()'>Cancel</button>

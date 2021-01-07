@@ -499,14 +499,26 @@ td button:hover {
     color: black;
     font-size: 20px;
     text-align: center;
-    margin: 15px 0px;
+    margin: 10px 0px;
     padding-bottom: 15px;
     border-bottom: 1px solid gray;
 }
 
-/* .change-tag-modal-search-input {
+.change-tag-modal-search {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+}
 
-} */
+#change-tag-modal-search-input {
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 8px;
+    border: 1px solid rgb(119, 119, 119);
+    padding: 2px;
+    outline: none;
+}
 
 
 
