@@ -167,19 +167,26 @@ function submit() {
 function updateTimesList(arr) {
     document.getElementById('time-table-body').innerHTML = ``
     // loops through arr and displays each time object
+    let currFinalTotalTime;
     for (let i = 0; i < arr.length; i++) {
         let elapsedTime = findElapsedTime(i); 
+        let currTotalTime = `${elapsedTime.hours}:${(elapsedTime.minutes < 10 ? "0" + elapsedTime.minutes : elapsedTime.minutes)}:${(elapsedTime.seconds < 10 ? "0" + elapsedTime.seconds : elapsedTime.seconds)}.${(elapsedTime.milliseconds < 10 ? "0" + elapsedTime.milliseconds : elapsedTime.milliseconds)}`;
+        if (i == arr.length - 1) {
+            currFinalTotalTime = currTotalTime;
+        }
         let currTimesRow = `times-row-${i}`
         document.getElementById('time-table-body').innerHTML += `
         <tr id='${currTimesRow}'> 
-            <td contenteditable="true" class="name" data-id="${i}">${arr[i].name}</td>
+            <td contenteditable="true" class="name" data-id="${i}" spellcheck='false'>${arr[i].name}</td>
             <td class='time-table-tag'><div onclick='showChangeTagModal(${i})'>${arr[i].timeTag.name}</div></td>
             <td>${arr[i].time.hours}:${(arr[i].time.minutes < 10 ? "0" + arr[i].time.minutes : arr[i].time.minutes)}:${(arr[i].time.seconds < 10 ? "0" + arr[i].time.seconds : arr[i].time.seconds)}.${(arr[i].time.milliseconds < 10 ? "0" + arr[i].time.milliseconds : arr[i].time.milliseconds)}</td>
             <td>${arr[i].date}</td>
-            <td data-id=${i}>${elapsedTime.hours}:${(elapsedTime.minutes < 10 ? "0" + elapsedTime.minutes : elapsedTime.minutes)}:${(elapsedTime.seconds < 10 ? "0" + elapsedTime.seconds : elapsedTime.seconds)}.${(elapsedTime.milliseconds < 10 ? "0" + elapsedTime.milliseconds : elapsedTime.milliseconds)}</td>
+            <td data-id=${i}>${currTotalTime}</td>
             <td><button onclick='deleteItem(${i})'>X</button></td>
         </tr>`
     }
+
+    document.getElementById('time-table-total-time-value').innerText = `${currFinalTotalTime}`;
 
 }
 

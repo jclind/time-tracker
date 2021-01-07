@@ -56,15 +56,24 @@
                 <th>Total Time</th>
             </tr>
             <tr class='time-search-row'>
-                <td class='time-search' id='time-search'><input placeholder='search' class='time-search-input' id='time-search-input' autocomplete="off"></td>
+                <td class='time-search' id='time-search'><input placeholder='search times' class='time-search-input' id='time-search-input' autocomplete="off"></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
             </tr>
             <tbody id="time-table-body">
-
             </tbody>
+            <tr class='time-table-total-time-row'>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td id='time-table-total-time'>
+                    <span>Total Time</span>
+                    <div class="time-table-total-time-value" id="time-table-total-time-value">50:20.53</div>
+                </td>
+            </tr>
         </table>
     </div>
     
@@ -92,6 +101,7 @@
     </div>
     <div class="change-tag-modal change-tag-modal-scrollbar" id="change-tag-modal" style="overflow-y:scroll;">
         <div class="change-tag-modal-title">Change Modal</div>
+        <input type="text" placeholder="search-tags" id='change-tag-modal-search-input'>
         <div class="change-tag-modal-tag-container" id="change-tag-modal-tag-container"></div>
         <div class="change-tag-modal-buttons">
             <button class='cancel-change-modal-btn' id='cancel-change-modal-btn' onclick='hideChangeTagModal()'>Cancel</button>

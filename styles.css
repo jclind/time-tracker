@@ -323,6 +323,28 @@ td button:hover {
     background:rgb(71, 71, 71);
 }
 
+.time-table-total-time-row {
+    background: #2d2d2d;
+}
+.time-table-total-time-row td {
+    border-style: hidden;
+    border-top-style: solid;
+}
+
+#time-table-total-time {
+    padding: 5px;
+    margin: 0;
+}
+
+#time-table-total-time span {
+    color: rgb(156, 156, 156);
+    font-size: 15px;
+}
+
+.time-table-total-time-value {
+    font-size: 20px;
+}
+
 
 
 
@@ -481,6 +503,13 @@ td button:hover {
     padding-bottom: 15px;
     border-bottom: 1px solid gray;
 }
+
+/* .change-tag-modal-search-input {
+
+} */
+
+
+
 
 .change-tag-modal-tag {
     text-align: center;
