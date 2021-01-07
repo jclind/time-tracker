@@ -97,14 +97,13 @@ function clear() {
 }
 
 // Find total time so far for each element, returns object with array of hours, minutes, seconds, and milliseconds
-function findElapsedTime(index) {
+function findElapsedTime(index, arr) {
     let totH = 0, totM = 0, totS = 0, totMs = 0;
-
     for (let i = 0; i < index + 1; i++) {
-        totH += timesInfoList[i].time.hours;
-        totM += timesInfoList[i].time.minutes;
-        totS += timesInfoList[i].time.seconds;
-        totMs += timesInfoList[i].time.milliseconds
+        totH += arr[i].time.hours;
+        totM += arr[i].time.minutes;
+        totS += arr[i].time.seconds;
+        totMs += arr[i].time.milliseconds
 
         // fix additions of times. i.e. add to minutes if seconds is over or equal to 60 seconds. 
         if (totMs >= 100) {
@@ -147,7 +146,7 @@ function submit() {
         let timeCur = {hours: h, minutes: m, seconds: s, milliseconds: ms};
         
         // Set time object's total time
-        let totTime = findElapsedTime(timesInfoList.length - 1);
+        let totTime = findElapsedTime(timesInfoList.length - 1, timesInfoList);
 
         // Set time's tag to the first element in the timeTags array
         let tagCur = timeTags[0];
@@ -169,7 +168,7 @@ function updateTimesList(arr) {
     // loops through arr and displays each time object
     let currFinalTotalTime;
     for (let i = 0; i < arr.length; i++) {
-        let elapsedTime = findElapsedTime(i); 
+        let elapsedTime = findElapsedTime(i, arr); 
         let currTotalTime = `${elapsedTime.hours}:${(elapsedTime.minutes < 10 ? "0" + elapsedTime.minutes : elapsedTime.minutes)}:${(elapsedTime.seconds < 10 ? "0" + elapsedTime.seconds : elapsedTime.seconds)}.${(elapsedTime.milliseconds < 10 ? "0" + elapsedTime.milliseconds : elapsedTime.milliseconds)}`;
         if (i == arr.length - 1) {
             currFinalTotalTime = currTotalTime;
