@@ -158,7 +158,7 @@ function submit() {
 
         // Save timesInfoList to localstroage, update the html list, and clear the timer on submit of time.
         saveData();
-        updateTimesList(timesInfoList);
+        sortTimeTable(currSortedRowName);
         clear();
     }
 }
@@ -376,16 +376,58 @@ function sortTimeTable(sortName) {
     document.getElementById(currSortedRow).querySelector('i').style.display = 'block';
 
     if (sortName == 'Title') {
-        console.log('Title')
+        // Sorts by alphabetical order of time titles
+        let titleSortTimesList = timesInfoList.sort((a, b) => a.name.localeCompare(b.name)).slice();
+        // Check direction of the caret.
+        if (document.getElementById(currSortedRow).querySelector('i').classList.contains('fa-caret-up')) {
+            titleSortTimesList = titleSortTimesList.reverse();
+        }
+        console.log(titleSortTimesList)
+        updateTimesList(titleSortTimesList);
+
     } else if (sortName == 'Tag') {
-        console.log('Tag')
+        // Sorts by alphabetical order of time tags
+        let tagSortTimesList = timesInfoList.sort((a, b) => a.timeTag.name.localeCompare(b.timeTag.name)).slice();
+        
+        if (document.getElementById(currSortedRow).querySelector('i').classList.contains('fa-caret-up')) {
+            tagSortTimesList = tagSortTimesList.reverse();
+        }
+        console.log('hello')
+        updateTimesList(tagSortTimesList);
     } else if (sortName == 'Time') {
-        console.log('Time')
+        // Sorts by amount of time.
+        let timeSortTimesList = timesInfoList.slice();
+        // Bubble sorts timesInfoList array by time value in timeSortTimesList array
+        for (let i = 0; i < timesInfoList.length - 1; i++) {
+            for (let j = 0; j < timesInfoList.length - i - 1; j++) {
+                if (compareTimeObjects(timeSortTimesList[j].time, timeSortTimesList[j + 1].time) == -1) {
+                    tempTime = timeSortTimesList[j]
+                    timeSortTimesList[j] = timeSortTimesList[j + 1]
+                    timeSortTimesList[j + 1] = tempTime
+                }
+            } 
+        }
+
+        if (document.getElementById(currSortedRow).querySelector('i').classList.contains('fa-caret-up')) {
+            timeSortTimesList = timeSortTimesList.reverse();
+        }
+
+        updateTimesList(timeSortTimesList)
+
     } else if (sortName == 'Date') {
-        console.log('Date')
-    } else if (sortName == 'Total Time') {
-        console.log('Total Time')
+        let dateSortTimesList = timesInfoList.sort((a, b) => a.date.localeCompare(b.date)).slice();
+        if (document.getElementById(currSortedRow).querySelector('i').classList.contains('fa-caret-up')) {
+            dateSortTimesList = dateSortTimesList.reverse();
+        }
+        updateTimesList(dateSortTimesList)
     }
+}
+
+// if -1 a < b, if 0 a = b, if 1 a > b
+function compareTimeObjects(a, b) {
+    let aStr = `${a.hours}:${(a.minutes < 10 ? "0" + a.minutes : a.minutes)}:${(a.seconds < 10 ? "0" + a.seconds : a.seconds)}.${(a.milliseconds < 10 ? "0" + a.milliseconds : a.milliseconds)}`
+    let bStr = `${b.hours}:${(b.minutes < 10 ? "0" + b.minutes : b.minutes)}:${(b.seconds < 10 ? "0" + b.seconds : b.seconds)}.${(b.milliseconds < 10 ? "0" + b.milliseconds : b.milliseconds)}`
+    return aStr.localeCompare(bStr);
 }
 
 
