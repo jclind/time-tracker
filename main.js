@@ -12,8 +12,9 @@ var stopwatchEl = document.querySelector('.time');
 window.onload = function() {
     timesInfoList = JSON.parse(localStorage.getItem('timesInfoList'));
     timeTags = JSON.parse(localStorage.getItem('timeTags'))
-    updateTimesList(timesInfoList);
     updateTagsList();
+    console.log(currSortedRowName)
+    console.log(currSortedRow)
     sortTimeTable(currSortedRowName)
 }
 
@@ -275,7 +276,6 @@ function deleteTag(index, e) {
     // Update timesInfoList to change from the deleted tag. 
     for (time in timesInfoList) {
         if (timesInfoList[time].timeTag.name == timeTags[index].name) {
-            console.log(timeTags[0]);
             timesInfoList[time].timeTag = timeTags[0];
         }
     }
@@ -382,7 +382,6 @@ function sortTimeTable(sortName) {
         if (document.getElementById(currSortedRow).querySelector('i').classList.contains('fa-caret-up')) {
             titleSortTimesList = titleSortTimesList.reverse();
         }
-        console.log(titleSortTimesList)
         updateTimesList(titleSortTimesList);
 
     } else if (sortName == 'Tag') {
@@ -392,7 +391,6 @@ function sortTimeTable(sortName) {
         if (document.getElementById(currSortedRow).querySelector('i').classList.contains('fa-caret-up')) {
             tagSortTimesList = tagSortTimesList.reverse();
         }
-        console.log('hello')
         updateTimesList(tagSortTimesList);
     } else if (sortName == 'Time') {
         // Sorts by amount of time.
@@ -624,7 +622,6 @@ function changeTag() {
     if (selectedChangeModalTag == '') {
         document.getElementById('change-tag-modal-tag-container').style.border = '2px solid red'
     } else {
-        console.log(timeTags[selectedChangeModalTagIndex])
         timesInfoList[currChangeModalIndex].timeTag = timeTags[selectedChangeModalTagIndex]
     }
     updateTimesList(timesInfoList);
