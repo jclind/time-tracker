@@ -300,6 +300,24 @@ td button:hover {
     color: rgba(255, 255, 255, 0.3);
 }
 
+.time-table-title-cell {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px;
+    border: 1px solid rgba(0, 0, 0, 0)
+}
+
+.time-table-title-cell:hover {
+    cursor: pointer;
+    border: 1px solid gray;
+}
+
+
+
+
+
+
+
 .time-search-row {
     border-bottom: 0;
 }

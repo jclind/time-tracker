@@ -14,6 +14,7 @@ window.onload = function() {
     timeTags = JSON.parse(localStorage.getItem('timeTags'))
     updateTimesList(timesInfoList);
     updateTagsList();
+    sortTimeTable(currSortedRowName)
 }
 
 // Use local storage to save timesInfoList
@@ -337,10 +338,61 @@ $('#color-select-container').on('click', () => {
 
 
 
+
+
+currSortedRow = 'time-table-header-date'
+currSortedRowName = 'Date'
+$(document).on('click', '.time-table-title-cell', function (e) {
+    let lastSortedRowEl = currSortedRow;
+    
+    // Set tempEvent to the current event when object is clicked
+    let tempEvent = e.currentTarget
+    let tempEl = tempEvent.id;
+    currSortedRow = tempEl;
+    
+    // If clicked object does not have a visible caret, then the caret will be displayed 
+    // and the last clicked object's caret will be removed. If caret is visible in clicked object
+    // it will be oriented upwards or downwards respective to how it is currently oriented on click.
+    if (document.getElementById(currSortedRow).querySelector('i').style.display == 'none') {
+        document.getElementById(lastSortedRowEl).querySelector('i').style.display = 'none';
+        document.getElementById(currSortedRow).querySelector('i').style.display = 'block';
+        currSortedRowName = tempEvent.getAttribute("name")
+    } else if (document.getElementById(currSortedRow).querySelector('i').classList.contains('fa-caret-down')) {
+        document.getElementById(currSortedRow).innerHTML = `
+            <span>${currSortedRowName}</span>
+            <i class="fa fa-caret-up"></i>
+        `;
+    } else {
+        document.getElementById(currSortedRow).innerHTML = `
+            <span>${currSortedRowName}</span>
+            <i class="fa fa-caret-down"></i>
+        `;
+    }
+
+    sortTimeTable(currSortedRowName);
+})
+
+function sortTimeTable(sortName) {
+    document.getElementById(currSortedRow).querySelector('i').style.display = 'block';
+
+    if (sortName == 'Title') {
+        console.log('Title')
+    } else if (sortName == 'Tag') {
+        console.log('Tag')
+    } else if (sortName == 'Time') {
+        console.log('Time')
+    } else if (sortName == 'Date') {
+        console.log('Date')
+    } else if (sortName == 'Total Time') {
+        console.log('Total Time')
+    }
+}
+
+
+
 // Event listeners for html buttons
 document.getElementById('clear-btn').addEventListener('click', clear);
 document.getElementById('submit-btn').addEventListener('click', submit);
-
 
 // Disable clear button hover effect. 
 document.getElementById('clear-btn').onmouseover = function() {

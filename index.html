@@ -48,12 +48,37 @@
      
     <div>
         <table id="time-table">
-            <tr>
-                <th>Title</th>
-                <th>Tag</th>
-                <th>Time</th>
-                <th>Date</th>
-                <th>Total Time</th>
+            <tr id='time-table-header'>
+                <th>
+                    <div class="time-table-title-cell" id="time-table-header-title" name="Title">
+                        <span>Title</span>
+                        <i class="fa fa-caret-down" style='display: none;'></i>
+                    </div>
+                </th>
+                <th>
+                    <div class="time-table-title-cell" id="time-table-header-tag" name="Tag">
+                        <span>Tag</span>
+                        <i class="fa fa-caret-down" style='display: none;'></i>
+                    </div>
+                </th>
+                <th>
+                    <div class="time-table-title-cell" id="time-table-header-time" name="Time">
+                        <span>Time</span>
+                        <i class="fa fa-caret-down" style='display: none;'></i>
+                    </div>
+                </th>
+                <th>
+                    <div class="time-table-title-cell" id="time-table-header-date" name="Date">
+                        <span>Date</span>
+                        <i class="fa fa-caret-down" style='display: none;'></i>
+                    </div>
+                </th>
+                <th>
+                    <div class="time-table-title-cell" id="time-table-header-total-time" name="Total Time">
+                        <span>Total Time</span>
+                        <i class="fa fa-caret-down" style='display: none;'></i>
+                    </div>
+                </th>
             </tr>
             <tr class='time-search-row'>
                 <td class='time-search' id='time-search'><input placeholder='search times' class='time-search-input' id='time-search-input' autocomplete="off"></td>
@@ -71,7 +96,7 @@
                 <td></td>
                 <td id='time-table-total-time'>
                     <span>Total Time</span>
-                    <div class="time-table-total-time-value" id="time-table-total-time-value">50:20.53</div>
+                    <div class="time-table-total-time-value" id="time-table-total-time-value">0:00.00</div>
                 </td>
             </tr>
         </table>
