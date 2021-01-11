@@ -1,39 +1,48 @@
 // Array of objets of times and data about times.
-var timesInfoList = [];
+let timesInfoList;
 
-var timeTags = [{name: 'main', color: 'red'}]
+let timeTags = [{name: 'main', color: 'red'}];
 
-var h = 0, m = 0, s = 0, ms = 0;
-var elapsedTime = 0;   
-var timer;
-var stopwatchEl = document.querySelector('.time');
+let h = 0, m = 0, s = 0, ms = 0;
+let elapsedTime = 0;   
+let timer;
+let stopwatchEl = document.querySelector('.time');
 
 // Set timesInfoList to the localStorage array and update the list on page load. 
 window.onload = function() {
+    saveData();
     timesInfoList = JSON.parse(localStorage.getItem('timesInfoList'));
     timeTags = JSON.parse(localStorage.getItem('timeTags'))
+    console.log(timesInfoList, timeTags)
     updateTagsList();
-    console.log(currSortedRowName)
-    console.log(currSortedRow)
     sortTimeTable(currSortedRowName)
+}
+window.onunload = function() {
+    saveData();
 }
 
 // Use local storage to save timesInfoList
 function saveData() {
+    console.log('saving data', timesInfoList)
     // Save timesInfoList in localstorage
+    console.log(localStorage.getItem('timesInfoList'))
     if (localStorage.getItem('timesInfoList') != null) {
+        console.log('what the?')
         // reset data in localStorage to push new array back in if the localStorage already has objects in it.
         localStorage.removeItem('timesInfoList');
         localStorage.setItem('timesInfoList', JSON.stringify(timesInfoList))
     } else {
+        console.log('helo again')
         localStorage.setItem('timesInfoList', JSON.stringify(timesInfoList))
     }
 
     // Save timeTags in localstorage 
     if (localStorage.getItem('timeTags') != null) {
+        console.log('what?')
         localStorage.removeItem('timeTags');
         localStorage.setItem('timeTags', JSON.stringify(timeTags));
     } else {
+        console.log('helo')
         localStorage.setItem('timeTags', JSON.stringify(timeTags));
     }
 }
@@ -148,7 +157,12 @@ function submit() {
         let timeCur = {hours: h, minutes: m, seconds: s, milliseconds: ms};
         
         // Set time object's total time
-        let totTime = findElapsedTime(timesInfoList.length - 1, timesInfoList);
+        let totTime;
+        if (timesInfoList != null) {
+            totTime = findElapsedTime(timesInfoList.length - 1, timesInfoList);
+        } else {
+            totTime = timeCur;
+        }
 
         // Set time's tag to the first element in the timeTags array
         let tagCur = timeTags[0];
@@ -374,50 +388,51 @@ $(document).on('click', '.time-table-title-cell', function (e) {
 
 function sortTimeTable(sortName) {
     document.getElementById(currSortedRow).querySelector('i').style.display = 'block';
-
-    if (sortName == 'Title') {
-        // Sorts by alphabetical order of time titles
-        let titleSortTimesList = timesInfoList.sort((a, b) => a.name.localeCompare(b.name)).slice();
-        // Check direction of the caret.
-        if (document.getElementById(currSortedRow).querySelector('i').classList.contains('fa-caret-up')) {
-            titleSortTimesList = titleSortTimesList.reverse();
+    if (timesInfoList != null) {
+        if (sortName == 'Title') {
+            // Sorts by alphabetical order of time titles
+            let titleSortTimesList = timesInfoList.sort((a, b) => a.name.localeCompare(b.name)).slice();
+            // Check direction of the caret.
+            if (document.getElementById(currSortedRow).querySelector('i').classList.contains('fa-caret-up')) {
+                titleSortTimesList = titleSortTimesList.reverse();
+            }
+            updateTimesList(titleSortTimesList);
+    
+        } else if (sortName == 'Tag') {
+            // Sorts by alphabetical order of time tags
+            let tagSortTimesList = timesInfoList.sort((a, b) => a.timeTag.name.localeCompare(b.timeTag.name)).slice();
+            
+            if (document.getElementById(currSortedRow).querySelector('i').classList.contains('fa-caret-up')) {
+                tagSortTimesList = tagSortTimesList.reverse();
+            }
+            updateTimesList(tagSortTimesList);
+        } else if (sortName == 'Time') {
+            // Sorts by amount of time.
+            let timeSortTimesList = timesInfoList.slice();
+            // Bubble sorts timesInfoList array by time value in timeSortTimesList array
+            for (let i = 0; i < timesInfoList.length - 1; i++) {
+                for (let j = 0; j < timesInfoList.length - i - 1; j++) {
+                    if (compareTimeObjects(timeSortTimesList[j].time, timeSortTimesList[j + 1].time) == -1) {
+                        tempTime = timeSortTimesList[j]
+                        timeSortTimesList[j] = timeSortTimesList[j + 1]
+                        timeSortTimesList[j + 1] = tempTime
+                    }
+                } 
+            }
+    
+            if (document.getElementById(currSortedRow).querySelector('i').classList.contains('fa-caret-up')) {
+                timeSortTimesList = timeSortTimesList.reverse();
+            }
+    
+            updateTimesList(timeSortTimesList)
+    
+        } else if (sortName == 'Date') {
+            let dateSortTimesList = timesInfoList.sort((a, b) => a.date.localeCompare(b.date)).slice();
+            if (document.getElementById(currSortedRow).querySelector('i').classList.contains('fa-caret-up')) {
+                dateSortTimesList = dateSortTimesList.reverse();
+            }
+            updateTimesList(dateSortTimesList)
         }
-        updateTimesList(titleSortTimesList);
-
-    } else if (sortName == 'Tag') {
-        // Sorts by alphabetical order of time tags
-        let tagSortTimesList = timesInfoList.sort((a, b) => a.timeTag.name.localeCompare(b.timeTag.name)).slice();
-        
-        if (document.getElementById(currSortedRow).querySelector('i').classList.contains('fa-caret-up')) {
-            tagSortTimesList = tagSortTimesList.reverse();
-        }
-        updateTimesList(tagSortTimesList);
-    } else if (sortName == 'Time') {
-        // Sorts by amount of time.
-        let timeSortTimesList = timesInfoList.slice();
-        // Bubble sorts timesInfoList array by time value in timeSortTimesList array
-        for (let i = 0; i < timesInfoList.length - 1; i++) {
-            for (let j = 0; j < timesInfoList.length - i - 1; j++) {
-                if (compareTimeObjects(timeSortTimesList[j].time, timeSortTimesList[j + 1].time) == -1) {
-                    tempTime = timeSortTimesList[j]
-                    timeSortTimesList[j] = timeSortTimesList[j + 1]
-                    timeSortTimesList[j + 1] = tempTime
-                }
-            } 
-        }
-
-        if (document.getElementById(currSortedRow).querySelector('i').classList.contains('fa-caret-up')) {
-            timeSortTimesList = timeSortTimesList.reverse();
-        }
-
-        updateTimesList(timeSortTimesList)
-
-    } else if (sortName == 'Date') {
-        let dateSortTimesList = timesInfoList.sort((a, b) => a.date.localeCompare(b.date)).slice();
-        if (document.getElementById(currSortedRow).querySelector('i').classList.contains('fa-caret-up')) {
-            dateSortTimesList = dateSortTimesList.reverse();
-        }
-        updateTimesList(dateSortTimesList)
     }
 }
 
