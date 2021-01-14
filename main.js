@@ -1,5 +1,5 @@
 // Array of objets of times and data about times.
-let timesInfoList;
+let timesInfoList = [];
 
 let timeTags = [{name: 'main', color: 'red'}];
 
@@ -10,40 +10,39 @@ let stopwatchEl = document.querySelector('.time');
 
 // Set timesInfoList to the localStorage array and update the list on page load. 
 window.onload = function() {
-    saveData();
-    timesInfoList = JSON.parse(localStorage.getItem('timesInfoList'));
-    timeTags = JSON.parse(localStorage.getItem('timeTags'))
-    console.log(timesInfoList, timeTags)
+    console.log(localStorage.getItem('timesInfoList'));
+    console.log(localStorage.getItem('timeTags'))
+    if (localStorage.getItem('timesInfoList') != null) {
+        timesInfoList = JSON.parse(localStorage.getItem('timesInfoList'));
+        console.log('bingussssss')
+    }
+    if (localStorage.getItem('timeTags') != null) {
+        timeTags = JSON.parse(localStorage.getItem('timeTags'))
+        console.log('kingusssss')
+    }
     updateTagsList();
     sortTimeTable(currSortedRowName)
 }
-window.onunload = function() {
-    saveData();
-}
+
 
 // Use local storage to save timesInfoList
 function saveData() {
     console.log('saving data', timesInfoList)
     // Save timesInfoList in localstorage
-    console.log(localStorage.getItem('timesInfoList'))
-    if (localStorage.getItem('timesInfoList') != null) {
-        console.log('what the?')
-        // reset data in localStorage to push new array back in if the localStorage already has objects in it.
-        localStorage.removeItem('timesInfoList');
+    if (localStorage.getItem('timesInfoList') == null) {
+        console.log('this hoe be empty')
         localStorage.setItem('timesInfoList', JSON.stringify(timesInfoList))
     } else {
-        console.log('helo again')
+        console.log('this hoe aint be empty no more')
+        localStorage.removeItem('timesInfoList')
         localStorage.setItem('timesInfoList', JSON.stringify(timesInfoList))
     }
 
-    // Save timeTags in localstorage 
-    if (localStorage.getItem('timeTags') != null) {
-        console.log('what?')
-        localStorage.removeItem('timeTags');
-        localStorage.setItem('timeTags', JSON.stringify(timeTags));
+    if (localStorage.getItem('timeTags') == null) {
+        localStorage.setItem('timeTags', JSON.stringify(timeTags))
     } else {
-        console.log('helo')
-        localStorage.setItem('timeTags', JSON.stringify(timeTags));
+        localStorage.removeItem('timeTags')
+        localStorage.setItem('timeTags', JSON.stringify(timeTags)) 
     }
 }
 
