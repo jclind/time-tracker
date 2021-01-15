@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
@@ -100,7 +101,13 @@
             </tr>
         </table>
     </div>
-    
+    <div class="my-charts" style="height: 350px; width: 350px;">
+        <canvas id="tag-distribution" width="300" height="300"></canvas>
+    </div>
+
+
+
+
     <div class="new-tag-modal" id="new-tag-modal">
         <div class="tag-create-title">Create Tag</div>
         <input type="text" id='tag-input-text' class='tag-input-text' placeholder="Tag Name">

@@ -8,6 +8,9 @@ let elapsedTime = 0;
 let timer;
 let stopwatchEl = document.querySelector('.time');
 
+
+let tagDistributionGraph;
+let ctxTagDis;
 // Set timesInfoList to the localStorage array and update the list on page load. 
 window.onload = function() {
     console.log(localStorage.getItem('timesInfoList'));
@@ -21,13 +24,44 @@ window.onload = function() {
         console.log('kingusssss')
     }
     updateTagsList();
-    sortTimeTable(currSortedRowName)
+    sortTimeTable(currSortedRowName);
+
+
+
+    ctxTagDis = document.getElementById('tag-distribution').getContext('2d');
+    getTagData();
+    console.log(tagLabels, tagData, tagColors)
+    tagDistributionGraph = new Chart(ctxTagDis, {
+        type: 'doughnut',
+        data: {
+            labels: tagLabels,
+            datasets: [{
+                data: tagData,
+                backgroundColor: tagColors
+            }]
+        },
+        options: {
+            title: {
+                text: "Tag Time Distribution",
+                display: true
+            },
+            elements: {
+                center: {
+                    text: 'Yessir',
+                    color: '#FF6384', // Default is #000000
+                    fontStyle: 'Arial', // Default is Arial
+                    sidePadding: 20, // Default is 20 (as a percentage)
+                    minFontSize: 25, // Default is 20 (in px), set to false and text will not wrap.
+                    lineHeight: 25
+                }
+            }
+        }
+    })
 }
 
 
 // Use local storage to save timesInfoList
 function saveData() {
-    console.log('saving data', timesInfoList)
     // Save timesInfoList in localstorage
     if (localStorage.getItem('timesInfoList') == null) {
         console.log('this hoe be empty')
@@ -44,6 +78,8 @@ function saveData() {
         localStorage.removeItem('timeTags')
         localStorage.setItem('timeTags', JSON.stringify(timeTags)) 
     }
+
+    updateTagDistributionGraph()
 }
 
 function startStop() {
@@ -200,7 +236,9 @@ function updateTimesList(arr) {
         </tr>`
     }
 
-    document.getElementById('time-table-total-time-value').innerText = `${currFinalTotalTime}`;
+    if (currFinalTotalTime != undefined) {
+        document.getElementById('time-table-total-time-value').innerText = `${currFinalTotalTime}`;
+    }
 
 }
 
@@ -643,3 +681,55 @@ function changeTag() {
     saveData();
     selectedChangeModalTag = '';
 }
+
+
+let tagLabels = [];
+let tagData = [];
+let tagColors = [];
+// Gets time data for each tag and creates arrays: tagLabels, tagData, and tagColors
+function getTagData() {
+    tagLabels = [];
+    tagData = [];
+    tagColors = [];
+    if (timesInfoList.length != 0) {
+        // Loop through time tags and find sum of all timesInfoList item milliseconds associated with that tag.
+        for (tag in timeTags) {
+            let currTagName = timeTags[tag].name;
+            let tagSum = 0;
+            for (item in timesInfoList) {
+                if ((timesInfoList[item].timeTag.name == currTagName)) {
+                    tagSum += findTimeMS(timesInfoList[item].time)
+                }
+            }
+            if (tagSum != 0) {
+                tagLabels.push(currTagName)
+                tagData.push(tagSum)
+                tagColors.push(timeTags[tag].color)
+            } 
+        }
+    } else {
+        // tagDistributionGraph.options.elements.center.text = 'No Data'
+    }
+}
+
+function findTimeMS(obj) {
+    let hours = obj.hours
+    let minutes = obj.minutes
+    let seconds = obj.seconds
+    let milliseconds = obj.milliseconds
+    
+    let totalMS = (hours * 3600000) + (minutes * 60000) + (seconds * 1000) + (milliseconds * 10)
+    
+    return totalMS;
+}
+
+function updateTagDistributionGraph() {
+    getTagData();
+    console.log(tagLabels, tagData, tagColors)
+    tagDistributionGraph.data.labels = tagLabels;
+    tagDistributionGraph.data.datasets[0].data = tagData;
+    tagDistributionGraph.data.datasets[0].backgroundColor = tagColors;
+    tagDistributionGraph.update();
+}
+
+

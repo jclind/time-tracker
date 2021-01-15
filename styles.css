@@ -262,7 +262,7 @@ table td + td + td + td + td + td {
 }
 
 table {
-    margin: 70px auto;
+    margin: 70px auto 0px auto;
     border-collapse: collapse;
     width: 70%;
 }
@@ -641,4 +641,37 @@ td button:hover {
     50% { transform: translate(3px, 0px) }
     75% { transform: translate(-3px, 0px) }
     100% { transform: translate(0px, 0px) }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.my-charts {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
