@@ -523,12 +523,14 @@ document.getElementById('new-tag-blur-overlay').addEventListener('click', () => 
 
 // Blurs background and shows new tag input modal on button click
 function showTagCreateModal() {
+    document.body.style.overflow = 'hidden';
     document.getElementById('new-tag-blur-overlay').style.display = 'block';
     document.getElementById('new-tag-modal').style.display = 'block';
     document.getElementById('tag-input-text').focus();
 }
 
 function hideTagCreateModal() {
+    document.body.style.overflow = 'visible';
     document.getElementById('new-tag-blur-overlay').style.display = 'none';
     document.getElementById('new-tag-modal').style.display = 'none';
     document.getElementById('tag-input-text').style.border = '1px solid rgb(190, 190, 190)';
@@ -631,6 +633,7 @@ function searchChangeTags(userTagName) {
 let currChangeModalIndex;
 
 function showChangeTagModal(index) {
+    document.body.style.overflow = 'hidden';
     currChangeModalIndex = index;
     document.getElementById('change-tag-modal').style.display = 'block';
     document.getElementById('change-tag-blur-overlay').style.display = 'block';
@@ -641,6 +644,7 @@ function showChangeTagModal(index) {
 document.getElementById('change-tag-blur-overlay').addEventListener('click', () => {hideChangeTagModal()})
 
 function hideChangeTagModal() {
+    document.body.style.overflow = 'visible';
     document.getElementById('change-tag-modal').style.display = 'none';
     document.getElementById('change-tag-blur-overlay').style.display = 'none';
     selectedChangeModalTag = '';
