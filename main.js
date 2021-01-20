@@ -45,14 +45,42 @@ window.onload = function() {
                 text: "Tag Time Distribution",
                 display: true
             },
-            elements: {
-                center: {
-                    text: 'Yessir',
-                    color: '#FF6384', // Default is #000000
-                    fontStyle: 'Arial', // Default is Arial
-                    sidePadding: 20, // Default is 20 (as a percentage)
-                    minFontSize: 25, // Default is 20 (in px), set to false and text will not wrap.
-                    lineHeight: 25
+            tooltips: {
+                callbacks: {
+                    title: function(tooltipItem, data) {
+                        return data['labels'][tooltipItem[0]['index']];
+                    },
+                    label: function(tooltipItem, data) {
+                        return findTimeFormated(data['datasets'][0]['data'][tooltipItem['index']])
+                    }
+                },
+                yAlign: "bottom",
+                titleAlign: 'center',
+                bodyAlign: 'center',
+                titleFontSize: 17,
+                bodyFontSize: 15,
+                bodyFontStyle: 'bold',
+                xPadding: 10,
+                yPadding: 10,
+                displayColors: false,
+                backgroundColor: 'rgba(0, 0, 0, 0.9)'
+            },
+            plugins: {
+                datalabels: {
+                    formatter: (value, ctxTagDis) => {
+                        let sum = 0;
+                        let dataArr = ctxTagDis.chart.data.datasets[0].data;
+                        dataArr.map(data => {
+                            sum += data;
+                        });
+                        let percentage = (value * 100 / sum).toFixed(1) + '%';
+                        return percentage;
+                    },
+                    color: '#292929',
+                    font: {
+                        weight: 'bold',
+                        size: 13,
+                    }
                 }
             }
         }
@@ -708,7 +736,48 @@ function getTagData() {
             if (tagSum != 0) {
                 tagLabels.push(currTagName)
                 tagData.push(tagSum)
-                tagColors.push(timeTags[tag].color)
+                let currColor;
+                switch (timeTags[tag].color) {
+                    case 'red': 
+                        currColor = '#fd483f';
+                        break;
+                    case 'pink':
+                        currColor = '#fd889a';
+                        break;
+                    case 'brown':
+                        currColor = '#9A6324';
+                        break;
+                    case 'orange':
+                        currColor = '#fca12b';
+                        break;
+                    case 'yellow':
+                        currColor = '#ffe119'
+                        break;
+                    case 'lime':
+                        currColor = '#bfef45';
+                        break;
+                    case 'dark-green':
+                        currColor = '#0a724f';
+                        break;
+                    case 'mint':
+                        currColor = '#AAF0D1';
+                        break;
+                    case 'blue':
+                        currColor = '#7cc3db';
+                        break;
+                    case 'navy':
+                        currColor = '#3D3D90';
+                        break;
+                    case 'lavendar':
+                        currColor = '#cc99cc';
+                        break;
+                    case 'purple':
+                        currColor = '#926adb';
+                        break;
+                    default:
+                        console.log('Color Selection Error')
+                }
+                tagColors.push(currColor)
             } 
         }
     } else {
@@ -725,6 +794,26 @@ function findTimeMS(obj) {
     let totalMS = (hours * 3600000) + (minutes * 60000) + (seconds * 1000) + (milliseconds * 10)
     
     return totalMS;
+}
+
+function findTimeFormated(ms) {
+    let hours = 0, minutes = 0, seconds = 0
+    if (ms >= 3600000) {
+        console.log(ms)
+        hours = Math.floor(ms / 3600000)
+        ms = ms % 3600000
+        console.log(hours, ms)
+    }
+    if (ms >= 60000) {
+        minutes = Math.floor(ms / 60000)
+        ms = ms % 60000
+    }
+    if (ms >= 1000) {
+        seconds = Math.floor(ms / 1000)
+        ms = ms % 1000
+    }
+
+    return hours + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds) + "." + (ms < 10 ? "0" + ms : ms)
 }
 
 function updateTagDistributionGraph() {

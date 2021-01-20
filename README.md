@@ -8,6 +8,7 @@ tasks to complete:
     - Remember time tags with localstorage
     - Add way to create new time tags
     - Add sorting by time tags
+    - Optimize colors for tags
 
 completed tasks: 
     - Add localStorage for arrays and add any necessary functionality. 
