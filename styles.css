@@ -13,9 +13,40 @@ hr {
     border-color: rgb(252, 161, 43);
 }
 
+.nav-bar {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.account-options {
+    padding-right: 25px;
+    display: flex;
+    flex-direction: row;
+}
+
+.nav-btn {
+    color: rgb(158, 158, 158);
+    text-align: center;
+    vertical-align: middle;
+    line-height: 52px;
+    font-size: 20px;
+    padding: 0px 25px;
+}
+.nav-btn:hover {
+    color: rgb(219, 219, 219);
+    background:rgb(107, 107, 107);
+    cursor: pointer;
+}
+
 .title {
-    margin: 0 auto;
-    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
     text-align: center;
     font-size: 45px;
     font-weight: 400;
@@ -39,6 +70,10 @@ hr {
 }
 
 
+/* .data-inputs {
+    display:inline-block;
+    margin: 0 auto;
+} */
 
 .input-container {
     display: flex;
@@ -49,6 +84,7 @@ hr {
 .title-input-container{
     height: 70px;
     padding: 0px 10px;
+    margin-left: 120px;
 }
 
 .title-input-text {
@@ -494,12 +530,6 @@ td button:hover {
 .tag-input-animation {
     animation: shake .2s;
 }
-
-
-
-
-
-
 
 
 

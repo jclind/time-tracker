@@ -1,8 +1,8 @@
-// Array of objets of times and data about times.
+// Initialize times array and tags array.
 let timesInfoList = [];
-
 let timeTags = [{name: 'main', color: 'red'}];
 
+// Initialize 
 let h = 0, m = 0, s = 0, ms = 0;
 let elapsedTime = 0;   
 let timer;
@@ -11,8 +11,24 @@ let stopwatchEl = document.querySelector('.time');
 
 let tagDistributionGraph;
 let ctxTagDis;
+
+
+// Set variables for sorting the time table.
+let currSortedRow, currSortedRowName;
+// Create tag data variables
+let tagLables, tagData, tagColors;
+
 // Set timesInfoList to the localStorage array and update the list on page load. 
 window.onload = function() {
+    // Assign variables for sorting the time table.
+    currSortedRow = 'time-table-header-date'
+    currSortedRowName = 'Date'
+    
+    // Assigne arrays for 
+    tagLabels = [];
+    tagData = [];
+    tagColors = [];
+
     console.log(localStorage.getItem('timesInfoList'));
     console.log(localStorage.getItem('timeTags'))
     if (localStorage.getItem('timesInfoList') != null) {
@@ -30,8 +46,8 @@ window.onload = function() {
 
     ctxTagDis = document.getElementById('tag-distribution').getContext('2d');
     getTagData();
-    console.log(tagLabels, tagData, tagColors)
-    tagDistributionGraph = new Chart(ctxTagDis, {
+    console.log(tagLabels, tagData, tagColors);
+    const tagDistributionGraph = new Chart(ctxTagDis, {
         type: 'doughnut',
         data: {
             labels: tagLabels,
@@ -44,6 +60,14 @@ window.onload = function() {
             title: {
                 text: "Tag Time Distribution",
                 display: true
+            },
+            legend: {
+                display: true,
+                position: 'bottom',
+                labels: {
+                    fontColor: '#fff'
+                },
+                fullWidth: true,
             },
             tooltips: {
                 callbacks: {
@@ -419,8 +443,6 @@ $('#color-select-container').on('click', () => {
 
 
 
-currSortedRow = 'time-table-header-date'
-currSortedRowName = 'Date'
 $(document).on('click', '.time-table-title-cell', function (e) {
     let lastSortedRowEl = currSortedRow;
     
@@ -714,10 +736,6 @@ function changeTag() {
     selectedChangeModalTag = '';
 }
 
-
-let tagLabels = [];
-let tagData = [];
-let tagColors = [];
 // Gets time data for each tag and creates arrays: tagLabels, tagData, and tagColors
 function getTagData() {
     tagLabels = [];
