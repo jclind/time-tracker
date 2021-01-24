@@ -9,6 +9,7 @@ tasks to complete:
     - Add way to create new time tags
     - Add sorting by time tags
     - Optimize colors for tags
+    - Optimize modal functions (combine show and hide modal functions)
 
 completed tasks: 
     - Add localStorage for arrays and add any necessary functionality. 

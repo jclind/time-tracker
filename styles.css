@@ -18,7 +18,7 @@ hr {
     padding: 0;
     position: relative;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
 }
 
 .account-options {
@@ -42,10 +42,6 @@ hr {
 }
 
 .title {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     width: 300px;
     text-align: center;
     font-size: 45px;
@@ -69,12 +65,6 @@ hr {
     background: rgba(0, 0, 0, 0.6)
 }
 
-
-/* .data-inputs {
-    display:inline-block;
-    margin: 0 auto;
-} */
-
 .input-container {
     display: flex;
     justify-content: center;
@@ -84,7 +74,7 @@ hr {
 .title-input-container{
     height: 70px;
     padding: 0px 10px;
-    margin-left: 120px;
+    margin-left: 110px;
 }
 
 .title-input-text {
@@ -403,11 +393,6 @@ td button:hover {
     font-size: 20px;
 }
 
-
-
-
-
-
 .time-table-tag div {
     border: 1px solid rgba(54, 54, 54, 0);
 }
@@ -419,11 +404,120 @@ td button:hover {
 
 
 
+/* Account Nav Bar Modals */
+.nav-modal {
+    display: none;
+    position: fixed;
+    z-index: 3;
+    top: 40%;
+    left: 50%;
+    margin: auto;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    height: 325px;
+    background: white;
+    border-radius: 4px;
+    border: 1px solid black;
+    color: black;
+}
+
+.nav-modal-blur {
+    display: none;
+    z-index: 2;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+/* Account Modal */
+#account-modal {
+}
+
+
+/* Logount Modal */
+#logout-modal {
+}
+
+/* Login Modal */
+#login-modal {
+}
+
+.login-title {
+    font-family: 'Ubuntu', sans-serif;
+    color: black;
+    font-size: 25px;
+    text-align: center;
+    margin: 35px 0px;
+}
+.login-input-field {
+    display: block;
+    margin : 20px auto 0px auto;
+    height: 40px;
+    width: 90%;
+    border: 1px solid rgb(190, 190, 190);
+    border-radius: 3px;
+    outline: none;
+}
+.login-button {
+    display: block;
+    margin: 0px auto;
+    margin-top: 30px;
+    height: 40px;
+    width: 70%;
+    border: 0;
+    border-radius: 20px;
+    background-image: linear-gradient(to right, rgb(252, 102, 43) , rgb(252, 161, 43));
+}
+.login-button:hover {
+    cursor: pointer;
+    background-image: linear-gradient(to right, rgb(252, 85, 43) , rgb(252, 154, 43));
+}
+.login-button:focus {
+    outline: none;
+    border: 1px solid rgb(70, 70, 70);
+    background-image: linear-gradient(to right, rgb(252, 85, 43) , rgb(252, 154, 43));
+}
+.login-forgot-password {
+    display: block;
+    margin: 15px auto 0px auto;
+    text-align: center;
+}
+#forgot-password-btn:hover {
+    cursor: pointer;
+}
+
+/* Signup Modal */
+#signup-modal {
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 .new-tag-modal {
     display: none;
     position: fixed;
+    z-index: 3;
     top: 40%;
     left: 50%;
     margin: auto;

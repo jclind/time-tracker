@@ -47,7 +47,7 @@ window.onload = function() {
     ctxTagDis = document.getElementById('tag-distribution').getContext('2d');
     getTagData();
     console.log(tagLabels, tagData, tagColors);
-    const tagDistributionGraph = new Chart(ctxTagDis, {
+    tagDistributionGraph = new Chart(ctxTagDis, {
         type: 'doughnut',
         data: {
             labels: tagLabels,
@@ -568,6 +568,92 @@ document.getElementById('submit-btn').onmouseleave = function() {
     }
 }
 
+// Manipulate account nav bar modals
+
+// Initialize nav bar modal/blur-overlay divs
+const accountModal = document.querySelector('#account-modal');
+const accountModalBlur = document.querySelector('.account-modal-blur');
+const loginModal = document.querySelector('#login-modal');
+const loginModalBlur = document.querySelector('.login-modal-blur');
+const logoutModal = document.querySelector('#logout-modal');
+const logoutModalBlur = document.querySelector('.logout-modal-blur');
+const signupModal = document.querySelector('#signup-modal');
+const signupModalBlur = document.querySelector('.signup-modal-blur');
+
+
+// If account modal is visible, hide modal and backgorund overlay. If it is hidden, show both overlay and modal
+function accountModalBtn() {
+    if (accountModal.style.display == 'none' || accountModal.style.display == '') {
+        accountModal.style.display = 'block';
+        accountModalBlur.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    } else {
+        accountModal.style.display = 'none';
+        accountModalBlur.style.display = 'none';
+        document.body.style.overflow = 'visible';
+    }
+}
+// If login modal is visible, hide modal and backgorund overlay. If it is hidden, show both overlay and modal
+function loginModalBtn() {
+    if (loginModal.style.display == 'none' || loginModal.style.display == '') {
+        loginModal.style.display = 'block';
+        loginModalBlur.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    } else {
+        loginModal.style.display = 'none';
+        loginModalBlur.style.display = 'none';
+        document.body.style.overflow = 'visible';
+    }
+}
+// If logout modal is visible, hide modal and backgorund overlay. If it is hidden, show both overlay and modal
+function logoutModalBtn() {
+    if (logoutModal.style.display == 'none' || logoutModal.style.display == '') {
+        logoutModal.style.display = 'block';
+        logoutModalBlur.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    } else {
+        logoutModal.style.display = 'none';
+        logoutModalBlur.style.display = 'none';
+        document.body.style.overflow = 'visible';
+    }
+}
+// If signup modal is visible, hide modal and backgorund overlay. If it is hidden, show both overlay and modal
+function signupModalBtn() {
+    if (signupModal.style.display == 'none' || signupModal.style.display == '') {
+        signupModal.style.display = 'block';
+        signupModalBlur.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    } else {
+        signupModal.style.display = 'none';
+        signupModalBlur.style.display = 'none';
+        document.body.style.overflow = 'visible';
+    }
+}
+
+// Listeners for modal overlay-blur click to close modals.
+document.querySelector('.account-modal-blur').addEventListener('click', function() {
+     accountModalBtn();
+});
+document.querySelector('.login-modal-blur').addEventListener('click', function() {
+    loginModalBtn();
+});
+document.querySelector('.logout-modal-blur').addEventListener('click', function() {
+    logoutModalBtn();
+});
+document.querySelector('.signup-modal-blur').addEventListener('click', function() {
+    signupModalBtn();
+});
+
+
+
+
+
+
+
+
+
+
+
 // When blured background is clicked on, close the tag-input background and modal.
 document.getElementById('new-tag-blur-overlay').addEventListener('click', () => {hideTagCreateModal()})
 
@@ -842,5 +928,3 @@ function updateTagDistributionGraph() {
     tagDistributionGraph.data.datasets[0].backgroundColor = tagColors;
     tagDistributionGraph.update();
 }
-
-

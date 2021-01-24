@@ -9,18 +9,38 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
-    <div class="new-tag-blur-overlay" id="new-tag-blur-overlay"></div>
-    <div class="change-tag-blur-overlay" id="change-tag-blur-overlay"></div>
+    <!-- Modal overlays -->
+    <div>
+        <!-- Account modal blur overlay -->
+        <div class="nav-modal-blur account-modal-blur"></div>
+        <!-- Login modal blur overlay -->
+        <div class="nav-modal-blur login-modal-blur"></div>
+        <!-- Logout modal blur overlay -->
+        <div class="nav-modal-blur logout-modal-blur"></div>
+        <!-- Sign up modal blur overlay -->
+        <div class="nav-modal-blur signup-modal-blur"></div>
+    </div>
+    <div>
+        <!-- Create new tag overlay -->
+        <div class="nav-modal-blur new-tag-blur-overlay" id="new-tag-blur-overlay"></div>
+        <!-- Change existing tag overlay -->
+        <div class="nav-modal-blur change-tag-blur-overlay" id="change-tag-blur-overlay"></div>
+    </div>
+
+
+
+    <!-- Navagation bar -->
     <div class="nav-bar">
         <div class="title">Time Tracker</div>
         <div class="account-options">
-            <div class="nav-btn login">Account</div>
-            <div class="nav-btn login">Logout</div>
-            <div class="nav-btn logout">Login</div>
-            <div class="nav-btn logout">Sign Up</div>
+            <div class="nav-btn login" onclick="accountModalBtn()">Account</div>
+            <div class="nav-btn logout" onclick="loginModalBtn()">Login</div>
+            <div class="nav-btn login" onclick="logoutModalBtn()">Logout</div>
+            <div class="nav-btn logout" onclick="signupModalBtn()">Sign Up</div>
         </div>
     </div><hr style="padding: 0; margin: 0;">
-    
+
+    <!-- Stopwatch element -->
     <div id="stop-watch">
         <div class="input-container">
             <div class="title-input-container">
@@ -55,7 +75,7 @@
         <button class="submit-btn" id="submit-btn">Submit</button>
     </div>
     
-     
+     <!-- Time table with list of time objects -->
     <div>
         <table id="time-table">
             <tr id='time-table-header'>
@@ -110,13 +130,28 @@
             </tr>
         </table>
     </div>
+
+    <!-- Data doughnut time chart -->
     <div class="my-charts" style="height: 350px; width: 350px;">
         <canvas id="tag-distribution" width="300" height="300"></canvas>
     </div>
 
 
+    <!-- Account nav bar modals -->
+    <div class="nav-modal account-modal" id="account-modal"></div>
+    <div class="nav-modal login-modal" id="login-modal">
+        <div class="login-title">Login To Your Account</div>
+        <form action="">
+            <input type="email" placeholder="Email" class="login-input-field" id="login-email-input" required>
+            <input type="password" placeholder="Password" class="login-input-field" id="login-password-input" required>
+            <input type="submit" class="login-button" id="login-button" placeholder="Login">
+        </form>
+        <div class="login-forgot-password"><span id="forgot-password-btn">Forgot Password?</span></div>
+    </div>
+    <div class="nav-modal logout-modal" id="logout-modal"></div>
+    <div class="nav-modal signup-modal" id="signup-modal"></div>
 
-
+    <!-- Tag create and change modals -->
     <div class="new-tag-modal" id="new-tag-modal">
         <div class="tag-create-title">Create Tag</div>
         <input type="text" id='tag-input-text' class='tag-input-text' placeholder="Tag Name">
