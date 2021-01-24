@@ -430,6 +430,45 @@ td button:hover {
     background: rgba(0, 0, 0, 0.6);
 }
 
+.nav-modal-title {
+    font-family: 'Ubuntu', sans-serif;
+    color: black;
+    font-size: 25px;
+    text-align: center;
+    margin: 35px 0px;
+}
+
+
+.nav-modal-input {
+    display: block;
+    margin : 20px auto 0px auto;
+    height: 40px;
+    width: 90%;
+    border: 1px solid rgb(190, 190, 190);
+    border-radius: 3px;
+    outline: none;
+}
+.nav-modal-button {
+    display: block;
+    margin: 0px auto;
+    margin-top: 30px;
+    height: 40px;
+    width: 70%;
+    font-size: 16px;
+    border: 0;
+    border-radius: 20px;
+    background-image: linear-gradient(to right, rgb(252, 102, 43) , rgb(252, 161, 43));
+}
+.nav-modal-button:hover {
+    cursor: pointer;
+    background-image: linear-gradient(to right, rgb(252, 85, 43) , rgb(252, 154, 43));
+}
+.nav-modal-button:focus {
+    outline: none;
+    border: 1px solid rgb(70, 70, 70);
+    background-image: linear-gradient(to right, rgb(252, 85, 43) , rgb(252, 154, 43));
+}
+
 /* Account Modal */
 #account-modal {
 }
@@ -440,44 +479,6 @@ td button:hover {
 }
 
 /* Login Modal */
-#login-modal {
-}
-
-.login-title {
-    font-family: 'Ubuntu', sans-serif;
-    color: black;
-    font-size: 25px;
-    text-align: center;
-    margin: 35px 0px;
-}
-.login-input-field {
-    display: block;
-    margin : 20px auto 0px auto;
-    height: 40px;
-    width: 90%;
-    border: 1px solid rgb(190, 190, 190);
-    border-radius: 3px;
-    outline: none;
-}
-.login-button {
-    display: block;
-    margin: 0px auto;
-    margin-top: 30px;
-    height: 40px;
-    width: 70%;
-    border: 0;
-    border-radius: 20px;
-    background-image: linear-gradient(to right, rgb(252, 102, 43) , rgb(252, 161, 43));
-}
-.login-button:hover {
-    cursor: pointer;
-    background-image: linear-gradient(to right, rgb(252, 85, 43) , rgb(252, 154, 43));
-}
-.login-button:focus {
-    outline: none;
-    border: 1px solid rgb(70, 70, 70);
-    background-image: linear-gradient(to right, rgb(252, 85, 43) , rgb(252, 154, 43));
-}
 .login-forgot-password {
     display: block;
     margin: 15px auto 0px auto;
@@ -489,8 +490,11 @@ td button:hover {
 
 /* Signup Modal */
 #signup-modal {
+    height: 350px;
 }
-
+.signup-title {
+    margin: 25px 0px;
+}
 
 
 

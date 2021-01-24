@@ -605,18 +605,6 @@ function loginModalBtn() {
         document.body.style.overflow = 'visible';
     }
 }
-// If logout modal is visible, hide modal and backgorund overlay. If it is hidden, show both overlay and modal
-function logoutModalBtn() {
-    if (logoutModal.style.display == 'none' || logoutModal.style.display == '') {
-        logoutModal.style.display = 'block';
-        logoutModalBlur.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-    } else {
-        logoutModal.style.display = 'none';
-        logoutModalBlur.style.display = 'none';
-        document.body.style.overflow = 'visible';
-    }
-}
 // If signup modal is visible, hide modal and backgorund overlay. If it is hidden, show both overlay and modal
 function signupModalBtn() {
     if (signupModal.style.display == 'none' || signupModal.style.display == '') {
@@ -636,9 +624,6 @@ document.querySelector('.account-modal-blur').addEventListener('click', function
 });
 document.querySelector('.login-modal-blur').addEventListener('click', function() {
     loginModalBtn();
-});
-document.querySelector('.logout-modal-blur').addEventListener('click', function() {
-    logoutModalBtn();
 });
 document.querySelector('.signup-modal-blur').addEventListener('click', function() {
     signupModalBtn();

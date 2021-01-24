@@ -14,9 +14,7 @@
         <!-- Account modal blur overlay -->
         <div class="nav-modal-blur account-modal-blur"></div>
         <!-- Login modal blur overlay -->
-        <div class="nav-modal-blur login-modal-blur"></div>
-        <!-- Logout modal blur overlay -->
-        <div class="nav-modal-blur logout-modal-blur"></div>
+        <div class="nav-modal-blur login-modal-blur"></div> 
         <!-- Sign up modal blur overlay -->
         <div class="nav-modal-blur signup-modal-blur"></div>
     </div>
@@ -140,16 +138,23 @@
     <!-- Account nav bar modals -->
     <div class="nav-modal account-modal" id="account-modal"></div>
     <div class="nav-modal login-modal" id="login-modal">
-        <div class="login-title">Login To Your Account</div>
+        <div class="nav-modal-title login-title">Login To Your Account</div>
         <form action="">
-            <input type="email" placeholder="Email" class="login-input-field" id="login-email-input" required>
-            <input type="password" placeholder="Password" class="login-input-field" id="login-password-input" required>
-            <input type="submit" class="login-button" id="login-button" placeholder="Login">
+            <input type="email" placeholder="Email" class="nav-modal-input" id="login-email-input" required>
+            <input type="password" placeholder="Password" class="nav-modal-input" id="login-password-input" required>
+            <input type="submit" class="nav-modal-button login-button" id="login-button" value="Login">
         </form>
         <div class="login-forgot-password"><span id="forgot-password-btn">Forgot Password?</span></div>
     </div>
-    <div class="nav-modal logout-modal" id="logout-modal"></div>
-    <div class="nav-modal signup-modal" id="signup-modal"></div>
+    <div class="nav-modal signup-modal" id="signup-modal"> 
+        <div class="nav-modal-title signup-title">Create Account</div>
+        <form action="">
+            <input type="text" placeholder="Name" class="nav-modal-input" id="signup-name-input" required>
+            <input type="email" placeholder="Email" class="nav-modal-input" id="signup-email-input" required>
+            <input type="password" placeholder="Password" class="nav-modal-input" id="signup-password-input" required>
+            <input type="submit" class="nav-modal-button signup-button" id="signup-button" value="Sign Up">
+        </form>
+    </div>
 
     <!-- Tag create and change modals -->
     <div class="new-tag-modal" id="new-tag-modal">
