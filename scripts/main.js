@@ -38,19 +38,6 @@ const onWindowLoad = () => {
     tagColors = [];
 
 
-    let chartBorder;
-    let displayLabels;
-    let displayLegend;
-    if (timesInfoList.length == 0) {
-        chartBorder = 0;
-        displayLabels = false;
-    } else {
-        chartBorder = 1;
-        displayLabels = true;
-        displayLegend = true;
-    }
-
-
     ctxTagDis = document.getElementById('tag-distribution').getContext('2d');
     getTagData();
     console.log(tagLabels, tagData, tagColors);
@@ -66,7 +53,7 @@ const onWindowLoad = () => {
         options: {
             elements: {
                 arc: {
-                    borderWidth: chartBorder,
+                    borderWidth: 0,
                 }
             },
             title: {
@@ -74,7 +61,7 @@ const onWindowLoad = () => {
                 display: true
             },
             legend: {
-                display: displayLegend,
+                display: false,
                 position: 'bottom',
                 labels: {
                     fontColor: '#fff'
@@ -118,7 +105,7 @@ const onWindowLoad = () => {
                     chart.ctx.fillText(theCenterText, canvasBounds.width/2, canvasBounds.height*0.70 )
                 },
                 datalabels: {
-                    display: displayLabels,
+                    display: false,
                     formatter: (value, ctxTagDis) => {
                         let sum = 0;
                         let dataArr = ctxTagDis.chart.data.datasets[0].data;
@@ -136,7 +123,8 @@ const onWindowLoad = () => {
                 }
             }
         }
-    })
+    });
+    updateTagDistributionGraph();
 }
 
 
@@ -930,11 +918,25 @@ function findTimeFormated(ms) {
 
 function updateTagDistributionGraph() {
     getTagData();
-    if (tagLabels.length != 0) {
-        console.log(tagLabels, tagData, tagColors)
+    // Check to make sure there is data to be displayed in the graph
+    if (tagLabels.length != 0 && timesInfoList.length != 0) {
+        // If there is data
+        // console.log(tagLabels, tagData, tagColors)
+        console.log('no thanks you')
         tagDistributionGraph.data.labels = tagLabels;
         tagDistributionGraph.data.datasets[0].data = tagData;
         tagDistributionGraph.data.datasets[0].backgroundColor = tagColors;
+        
+        tagDistributionGraph.options.elements.arc.borderWidth = 1;
+        tagDistributionGraph.options.legend.display = true;
+        tagDistributionGraph.options.plugins.datalabels.display = true;
+        tagDistributionGraph.update();
+    } else {
+        console.log('thanks you')
+        // If there is no data
+        tagDistributionGraph.options.elements.arc.borderWidth = 0;
+        tagDistributionGraph.options.legend.display = false;
+        tagDistributionGraph.options.plugins.datalabels.display = false;
         tagDistributionGraph.update();
     }
 }

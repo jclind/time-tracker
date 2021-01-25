@@ -96,7 +96,7 @@ loginForm.addEventListener('submit', (e) => {
 
 
 // Save data function
-const saveFirebaseData = () => {
+const saveUserData = () => {
     db.collection('users').doc(currUserId).set({
         times: timesInfoList,
         tags: timeTags
