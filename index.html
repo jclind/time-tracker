@@ -31,10 +31,10 @@
     <div class="nav-bar">
         <div class="title">Time Tracker</div>
         <div class="account-options">
-            <div class="nav-btn login" onclick="accountModalBtn()">Account</div>
-            <div class="nav-btn logout" onclick="loginModalBtn()">Login</div>
-            <div class="nav-btn login" onclick="logoutModalBtn()">Logout</div>
-            <div class="nav-btn logout" onclick="signupModalBtn()">Sign Up</div>
+            <div class="nav-btn logged-out" id="login" onclick="loginModalBtn()">Login</div>
+            <div class="nav-btn logged-out" id="signup" onclick="signupModalBtn()">Sign Up</div>
+            <div class="nav-btn logged-in" id="logout">Logout</div>
+            <div class="nav-btn logged-in" id="account" onclick="accountModalBtn()">Account</div>
         </div>
     </div><hr style="padding: 0; margin: 0;">
 
@@ -139,19 +139,19 @@
     <div class="nav-modal account-modal" id="account-modal"></div>
     <div class="nav-modal login-modal" id="login-modal">
         <div class="nav-modal-title login-title">Login To Your Account</div>
-        <form action="">
-            <input type="email" placeholder="Email" class="nav-modal-input" id="login-email-input" required>
-            <input type="password" placeholder="Password" class="nav-modal-input" id="login-password-input" required>
+        <form action="" id="login-form">
+            <input type="email" placeholder="Email" class="nav-modal-input" id="login-email" required>
+            <input type="password" placeholder="Password" class="nav-modal-input" id="login-password" required>
             <input type="submit" class="nav-modal-button login-button" id="login-button" value="Login">
         </form>
         <div class="login-forgot-password"><span id="forgot-password-btn">Forgot Password?</span></div>
     </div>
     <div class="nav-modal signup-modal" id="signup-modal"> 
         <div class="nav-modal-title signup-title">Create Account</div>
-        <form action="">
-            <input type="text" placeholder="Name" class="nav-modal-input" id="signup-name-input" required>
-            <input type="email" placeholder="Email" class="nav-modal-input" id="signup-email-input" required>
-            <input type="password" placeholder="Password" class="nav-modal-input" id="signup-password-input" required>
+        <form action="" id="signup-form">
+            <input type="text" placeholder="Name" class="nav-modal-input" id="signup-name" required>
+            <input type="email" placeholder="Email" class="nav-modal-input" id="signup-email" required>
+            <input type="password" placeholder="Password" class="nav-modal-input" id="signup-password" required>
             <input type="submit" class="nav-modal-button signup-button" id="signup-button" value="Sign Up">
         </form>
     </div>
@@ -191,5 +191,39 @@
         </div>
     </div>
 
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-firestore.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+        apiKey: "AIzaSyDTUdMxy5joPqkNuI1KQXxT5LB9PdxxtFc",
+        authDomain: "time-tracker-da566.firebaseapp.com",
+        projectId: "time-tracker-da566",
+        appId: "1:598125685448:web:8bd96aa7e4725d5dc8d3fd",
+        measurementId: "G-G0MG6559NQ"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        // Make auth and firestore refernces
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Update firestore settings
+        db.settings({ timestampsInSnapshots: true })
+
+
+    </script>
     <script src="main.js"></script>
+    <script src="auth.js"></script>
+    <script src="db.js"></script>
 </body>

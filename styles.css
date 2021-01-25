@@ -28,6 +28,7 @@ hr {
 }
 
 .nav-btn {
+    display: none;
     color: rgb(158, 158, 158);
     text-align: center;
     vertical-align: middle;
@@ -471,6 +472,20 @@ td button:hover {
 
 /* Account Modal */
 #account-modal {
+    flex-direction: column;
+    text-align: center;
+}
+
+#account-modal-title {
+    font-family: 'Ubuntu', sans-serif;
+    color: black;
+    font-weight: 550;
+    margin: 25px 0px 10px 0px;
+    font-size: 28px;
+}
+
+#account-modal-email {
+    font-size: 16px;
 }
 
 
@@ -802,6 +817,7 @@ td button:hover {
 
 
 .my-charts {
+    position: relative;
     width: 80%;
     margin: 0 auto;
     display: flex;

@@ -14,34 +14,41 @@ let ctxTagDis;
 
 
 // Set variables for sorting the time table.
-let currSortedRow, currSortedRowName;
+let currSortedRow = 'time-table-header-date', currSortedRowName = 'Date';
 // Create tag data variables
 let tagLables, tagData, tagColors;
 
-// Set timesInfoList to the localStorage array and update the list on page load. 
-window.onload = function() {
-    // Assign variables for sorting the time table.
-    currSortedRow = 'time-table-header-date'
-    currSortedRowName = 'Date'
+
+// function onPageLoad(user, userId) {
     
-    // Assigne arrays for 
+// }
+// onPageLoad(currUser, currUserId);
+
+
+
+// Functions to be called on window load from auth.js
+const onWindowLoad = () => {
+
+    updateTagsList();
+    sortTimeTable(currSortedRowName);
+
+
     tagLabels = [];
     tagData = [];
     tagColors = [];
 
-    console.log(localStorage.getItem('timesInfoList'));
-    console.log(localStorage.getItem('timeTags'))
-    if (localStorage.getItem('timesInfoList') != null) {
-        timesInfoList = JSON.parse(localStorage.getItem('timesInfoList'));
-        console.log('bingussssss')
-    }
-    if (localStorage.getItem('timeTags') != null) {
-        timeTags = JSON.parse(localStorage.getItem('timeTags'))
-        console.log('kingusssss')
-    }
-    updateTagsList();
-    sortTimeTable(currSortedRowName);
 
+    let chartBorder;
+    let displayLabels;
+    let displayLegend;
+    if (timesInfoList.length == 0) {
+        chartBorder = 0;
+        displayLabels = false;
+    } else {
+        chartBorder = 1;
+        displayLabels = true;
+        displayLegend = true;
+    }
 
 
     ctxTagDis = document.getElementById('tag-distribution').getContext('2d');
@@ -57,12 +64,17 @@ window.onload = function() {
             }]
         },
         options: {
+            elements: {
+                arc: {
+                    borderWidth: chartBorder,
+                }
+            },
             title: {
                 text: "Tag Time Distribution",
                 display: true
             },
             legend: {
-                display: true,
+                display: displayLegend,
                 position: 'bottom',
                 labels: {
                     fontColor: '#fff'
@@ -75,7 +87,13 @@ window.onload = function() {
                         return data['labels'][tooltipItem[0]['index']];
                     },
                     label: function(tooltipItem, data) {
-                        return findTimeFormated(data['datasets'][0]['data'][tooltipItem['index']])
+                        let label;
+                        if (timesInfoList.length == 0) {
+                            label = "No Data"
+                        } else {
+                            label = findTimeFormated(data['datasets'][0]['data'][tooltipItem['index']])
+                        }
+                        return label;
                     }
                 },
                 yAlign: "bottom",
@@ -90,7 +108,17 @@ window.onload = function() {
                 backgroundColor: 'rgba(0, 0, 0, 0.9)'
             },
             plugins: {
+                afterDraw: function (chart, option) {
+                    let theCenterText = "50%" ;
+                    const canvasBounds = canvas.getBoundingClientRect();
+                    const fontSz = Math.floor( canvasBounds.height * 0.10 ) ;
+                    chart.ctx.textBaseline = 'middle';
+                    chart.ctx.textAlign = 'center';
+                    chart.ctx.font = fontSz+'px Arial';
+                    chart.ctx.fillText(theCenterText, canvasBounds.width/2, canvasBounds.height*0.70 )
+                },
                 datalabels: {
+                    display: displayLabels,
                     formatter: (value, ctxTagDis) => {
                         let sum = 0;
                         let dataArr = ctxTagDis.chart.data.datasets[0].data;
@@ -114,23 +142,6 @@ window.onload = function() {
 
 // Use local storage to save timesInfoList
 function saveData() {
-    // Save timesInfoList in localstorage
-    if (localStorage.getItem('timesInfoList') == null) {
-        console.log('this hoe be empty')
-        localStorage.setItem('timesInfoList', JSON.stringify(timesInfoList))
-    } else {
-        console.log('this hoe aint be empty no more')
-        localStorage.removeItem('timesInfoList')
-        localStorage.setItem('timesInfoList', JSON.stringify(timesInfoList))
-    }
-
-    if (localStorage.getItem('timeTags') == null) {
-        localStorage.setItem('timeTags', JSON.stringify(timeTags))
-    } else {
-        localStorage.removeItem('timeTags')
-        localStorage.setItem('timeTags', JSON.stringify(timeTags)) 
-    }
-
     updateTagDistributionGraph()
 }
 
@@ -274,6 +285,7 @@ function updateTimesList(arr) {
         let elapsedTime = findElapsedTime(i, arr); 
         let currTotalTime = `${elapsedTime.hours}:${(elapsedTime.minutes < 10 ? "0" + elapsedTime.minutes : elapsedTime.minutes)}:${(elapsedTime.seconds < 10 ? "0" + elapsedTime.seconds : elapsedTime.seconds)}.${(elapsedTime.milliseconds < 10 ? "0" + elapsedTime.milliseconds : elapsedTime.milliseconds)}`;
         if (i == arr.length - 1) {
+            console.log('bingo?')
             currFinalTotalTime = currTotalTime;
         }
         let currTimesRow = `times-row-${i}`
@@ -289,7 +301,11 @@ function updateTimesList(arr) {
     }
 
     if (currFinalTotalTime != undefined) {
+        console.log('bingo!')
         document.getElementById('time-table-total-time-value').innerText = `${currFinalTotalTime}`;
+    } else {
+        document.getElementById('time-table-total-time-value').innerText = `0:00.00`;
+
     }
 
 }
@@ -474,8 +490,8 @@ $(document).on('click', '.time-table-title-cell', function (e) {
 })
 
 function sortTimeTable(sortName) {
-    document.getElementById(currSortedRow).querySelector('i').style.display = 'block';
-    if (timesInfoList != null) {
+    if (timesInfoList.length != 0) {
+        document.getElementById(currSortedRow).querySelector('i').style.display = 'block';
         if (sortName == 'Title') {
             // Sorts by alphabetical order of time titles
             let titleSortTimesList = timesInfoList.sort((a, b) => a.name.localeCompare(b.name)).slice();
@@ -603,6 +619,7 @@ function loginModalBtn() {
         loginModal.style.display = 'none';
         loginModalBlur.style.display = 'none';
         document.body.style.overflow = 'visible';
+        loginForm.reset();
     }
 }
 // If signup modal is visible, hide modal and backgorund overlay. If it is hidden, show both overlay and modal
@@ -615,6 +632,8 @@ function signupModalBtn() {
         signupModal.style.display = 'none';
         signupModalBlur.style.display = 'none';
         document.body.style.overflow = 'visible';
+        // Reset form inputs
+        signupForm.reset();
     }
 }
 
@@ -870,7 +889,11 @@ function getTagData() {
             } 
         }
     } else {
-        // tagDistributionGraph.options.elements.center.text = 'No Data'
+        // tagDistributionGraph.options.elements.arc.borderwidth = 0;
+        console.log('hello')
+        tagLabels = [''];
+        tagData = [100];
+        tagColors = ['Gray'];
     }
 }
 
@@ -907,9 +930,11 @@ function findTimeFormated(ms) {
 
 function updateTagDistributionGraph() {
     getTagData();
-    console.log(tagLabels, tagData, tagColors)
-    tagDistributionGraph.data.labels = tagLabels;
-    tagDistributionGraph.data.datasets[0].data = tagData;
-    tagDistributionGraph.data.datasets[0].backgroundColor = tagColors;
-    tagDistributionGraph.update();
+    if (tagLabels.length != 0) {
+        console.log(tagLabels, tagData, tagColors)
+        tagDistributionGraph.data.labels = tagLabels;
+        tagDistributionGraph.data.datasets[0].data = tagData;
+        tagDistributionGraph.data.datasets[0].backgroundColor = tagColors;
+        tagDistributionGraph.update();
+    }
 }
