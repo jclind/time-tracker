@@ -16,31 +16,30 @@ let ctxTagDis;
 // Set variables for sorting the time table.
 let currSortedRow = 'time-table-header-date', currSortedRowName = 'Date';
 // Create tag data variables
-let tagLables, tagData, tagColors;
+let tagLabels, tagData, tagColors;
 
 
-// function onPageLoad(user, userId) {
-    
-// }
-// onPageLoad(currUser, currUserId);
+
 
 
 
 // Functions to be called on window load from auth.js
 const onWindowLoad = () => {
-
-    updateTagsList();
-    sortTimeTable(currSortedRowName);
-
-
     tagLabels = [];
     tagData = [];
     tagColors = [];
-
-
+    updateTagsList();
+    console.log('this should have worked man')
+    sortTimeTable(currSortedRowName);
+    
+    
+    // Draw initial tagDistributionGraph.
     ctxTagDis = document.getElementById('tag-distribution').getContext('2d');
     getTagData();
-    console.log(tagLabels, tagData, tagColors);
+    // If an old chart exists, remove the whole chart.
+    if (tagDistributionGraph) {
+        tagDistributionGraph.destroy();
+    }
     tagDistributionGraph = new Chart(ctxTagDis, {
         type: 'doughnut',
         data: {
@@ -78,7 +77,7 @@ const onWindowLoad = () => {
                         if (timesInfoList.length == 0) {
                             label = "No Data"
                         } else {
-                            label = findTimeFormated(data['datasets'][0]['data'][tooltipItem['index']])
+                            label = msToString(data['datasets'][0]['data'][tooltipItem['index']])
                         }
                         return label;
                     }
@@ -128,10 +127,6 @@ const onWindowLoad = () => {
 }
 
 
-// Use local storage to save timesInfoList
-function saveData() {
-    updateTagDistributionGraph()
-}
 
 function startStop() {
     var startStopElText = document.getElementById('start-stop-btn').innerText;
@@ -193,32 +188,6 @@ function clear() {
     }
 }
 
-// Find total time so far for each element, returns object with array of hours, minutes, seconds, and milliseconds
-function findElapsedTime(index, arr) {
-    let totH = 0, totM = 0, totS = 0, totMs = 0;
-    for (let i = 0; i < index + 1; i++) {
-        totH += arr[i].time.hours;
-        totM += arr[i].time.minutes;
-        totS += arr[i].time.seconds;
-        totMs += arr[i].time.milliseconds
-
-        // fix additions of times. i.e. add to minutes if seconds is over or equal to 60 seconds. 
-        if (totMs >= 100) {
-            totMs -= 100;
-            totS++;
-        }
-        if (totS >= 60) {
-            totS -= 60;
-            totM++; 
-        }
-        if (totM >= 60) {
-            totM -= 60; 
-            totH++;
-        }
-    }
-    return {hours: totH, minutes: totM, seconds: totS, milliseconds: totMs};
-
-}
 
 // Submits user's time to timesInfoList array and html list
 function submit() { 
@@ -258,8 +227,7 @@ function submit() {
         timesInfoList.push(temp);
 
         // Save timesInfoList to localstroage, update the html list, and clear the timer on submit of time.
-        saveData();
-        sortTimeTable(currSortedRowName);
+        saveUserData();
         clear();
     }
 }
@@ -273,7 +241,6 @@ function updateTimesList(arr) {
         let elapsedTime = findElapsedTime(i, arr); 
         let currTotalTime = `${elapsedTime.hours}:${(elapsedTime.minutes < 10 ? "0" + elapsedTime.minutes : elapsedTime.minutes)}:${(elapsedTime.seconds < 10 ? "0" + elapsedTime.seconds : elapsedTime.seconds)}.${(elapsedTime.milliseconds < 10 ? "0" + elapsedTime.milliseconds : elapsedTime.milliseconds)}`;
         if (i == arr.length - 1) {
-            console.log('bingo?')
             currFinalTotalTime = currTotalTime;
         }
         let currTimesRow = `times-row-${i}`
@@ -289,13 +256,11 @@ function updateTimesList(arr) {
     }
 
     if (currFinalTotalTime != undefined) {
-        console.log('bingo!')
         document.getElementById('time-table-total-time-value').innerText = `${currFinalTotalTime}`;
     } else {
         document.getElementById('time-table-total-time-value').innerText = `0:00.00`;
 
     }
-
 }
 
 $(document).on('keyup', '#time-search-input', function () {
@@ -347,8 +312,7 @@ function deleteItem(i) {
     timesInfoList.splice(rowIndex, 1);
 
     // Updates the list of times and saves the data to the localstorage 
-    saveData();
-    updateTimesList(timesInfoList);
+    saveUserData();
 }
 
 
@@ -376,7 +340,6 @@ function selectTag(index) {
     timeTags[index] = timeTags[0];
     timeTags[0] = tempTag;
     updateTagsList();
-    saveData();
 }
 
 function deleteTag(index, e) {   
@@ -391,9 +354,7 @@ function deleteTag(index, e) {
     e.stopPropagation();
     timeTags.splice(index, 1)
 
-    updateTimesList(timesInfoList);
-    updateTagsList();
-    saveData();
+    saveUserData();
 }
 
 
@@ -422,9 +383,9 @@ function createTag() {
 
         let tempTagObj = {name: tagName, color: tagColor}
         timeTags.push(tempTagObj)
-        saveData();
-        updateTagsList();
         hideTagCreateModal();
+
+        saveUserData();
     }
 }
 
@@ -524,14 +485,9 @@ function sortTimeTable(sortName) {
             }
             updateTimesList(dateSortTimesList)
         }
+    } else {
+        updateTimesList(timesInfoList);
     }
-}
-
-// if -1 a < b, if 0 a = b, if 1 a > b
-function compareTimeObjects(a, b) {
-    let aStr = `${a.hours}:${(a.minutes < 10 ? "0" + a.minutes : a.minutes)}:${(a.seconds < 10 ? "0" + a.seconds : a.seconds)}.${(a.milliseconds < 10 ? "0" + a.milliseconds : a.milliseconds)}`
-    let bStr = `${b.hours}:${(b.minutes < 10 ? "0" + b.minutes : b.minutes)}:${(b.seconds < 10 ? "0" + b.seconds : b.seconds)}.${(b.milliseconds < 10 ? "0" + b.milliseconds : b.milliseconds)}`
-    return aStr.localeCompare(bStr);
 }
 
 
@@ -637,15 +593,6 @@ document.querySelector('.signup-modal-blur').addEventListener('click', function(
 });
 
 
-
-
-
-
-
-
-
-
-
 // When blured background is clicked on, close the tag-input background and modal.
 document.getElementById('new-tag-blur-overlay').addEventListener('click', () => {hideTagCreateModal()})
 
@@ -680,7 +627,6 @@ function selectColor(color) {
     selectedTagColor = color;
     document.getElementById(`${color}`).classList.add('active');
 }
-
 
 
 function updateChangeTagModal(arr) {
@@ -808,9 +754,9 @@ function changeTag() {
     } else {
         timesInfoList[currChangeModalIndex].timeTag = timeTags[selectedChangeModalTagIndex]
     }
-    updateTimesList(timesInfoList);
     hideChangeTagModal();
-    saveData();
+
+    saveUserData();
     selectedChangeModalTag = '';
 }
 
@@ -826,7 +772,7 @@ function getTagData() {
             let tagSum = 0;
             for (item in timesInfoList) {
                 if ((timesInfoList[item].timeTag.name == currTagName)) {
-                    tagSum += findTimeMS(timesInfoList[item].time)
+                    tagSum += stringToMS(timesInfoList[item].time)
                 }
             }
             if (tagSum != 0) {
@@ -877,43 +823,10 @@ function getTagData() {
             } 
         }
     } else {
-        // tagDistributionGraph.options.elements.arc.borderwidth = 0;
-        console.log('hello')
         tagLabels = [''];
         tagData = [100];
         tagColors = ['Gray'];
     }
-}
-
-function findTimeMS(obj) {
-    let hours = obj.hours
-    let minutes = obj.minutes
-    let seconds = obj.seconds
-    let milliseconds = obj.milliseconds
-    
-    let totalMS = (hours * 3600000) + (minutes * 60000) + (seconds * 1000) + (milliseconds * 10)
-    
-    return totalMS;
-}
-
-function findTimeFormated(ms) {
-    let hours = 0, minutes = 0, seconds = 0
-    if (ms >= 3600000) {
-        console.log(ms)
-        hours = Math.floor(ms / 3600000)
-        ms = ms % 3600000
-        console.log(hours, ms)
-    }
-    if (ms >= 60000) {
-        minutes = Math.floor(ms / 60000)
-        ms = ms % 60000
-    }
-    if (ms >= 1000) {
-        seconds = Math.floor(ms / 1000)
-        ms = ms % 1000
-    }
-
-    return hours + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds) + "." + (ms < 10 ? "0" + ms : ms)
 }
 
 function updateTagDistributionGraph() {
@@ -921,8 +834,6 @@ function updateTagDistributionGraph() {
     // Check to make sure there is data to be displayed in the graph
     if (tagLabels.length != 0 && timesInfoList.length != 0) {
         // If there is data
-        // console.log(tagLabels, tagData, tagColors)
-        console.log('no thanks you')
         tagDistributionGraph.data.labels = tagLabels;
         tagDistributionGraph.data.datasets[0].data = tagData;
         tagDistributionGraph.data.datasets[0].backgroundColor = tagColors;
@@ -932,7 +843,6 @@ function updateTagDistributionGraph() {
         tagDistributionGraph.options.plugins.datalabels.display = true;
         tagDistributionGraph.update();
     } else {
-        console.log('thanks you')
         // If there is no data
         tagDistributionGraph.options.elements.arc.borderWidth = 0;
         tagDistributionGraph.options.legend.display = false;

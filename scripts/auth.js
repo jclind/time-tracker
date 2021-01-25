@@ -3,6 +3,7 @@ const loggedInLinks = document.querySelectorAll('.logged-in');
 const accountDetails = document.querySelector('#account-modal');
 
 const setupUI = (user) => {
+    console.log('helloasdf there')
     if (user) {
         db.collection('users').doc(user.uid).get().then(doc => {
             // Account info
@@ -16,16 +17,11 @@ const setupUI = (user) => {
         // Toggle UI elements
         loggedInLinks.forEach(item => item.style.display = 'block')
         loggedOutLinks.forEach(item => item.style.display = 'none')
-
-
-        // Toggle user's times list 
-        console.log(timesInfoList)
         
     } else {
         // Toggle UI elements
         loggedInLinks.forEach(item => item.style.display = 'none')
         loggedOutLinks.forEach(item => item.style.display = 'block')
-        updateTimesList(timesInfoList);
     }
     onWindowLoad();
 }
@@ -33,18 +29,28 @@ const setupUI = (user) => {
 // Listen for auth status changes
 auth.onAuthStateChanged(user => {
     if (user) {
-        db.collection('users').doc(user.uid).get().then(doc => {
-            timesInfoList = doc.data().times;
-            timeTags = doc.data().tags;
-            setupUI(user);
+        let count = 0;
+        console.log('ehlasdfjjkkjekwkerkwerwer')
+        db.collection('users').onSnapshot(snapshot => {
+            db.collection('users').doc(user.uid).get().then(doc => {
+                timesInfoList = doc.data().times;
+                timeTags = doc.data().tags;
+                // Only call setupUI on first snapshot
+                if (count == 0) {
+                    console.log('count is 0')
+                    setupUI(user);
+                }
+                console.log(count)
+                count++;
+            })
         })
-    } else {
+    } else { // Signout
         timesInfoList = [];
         timeTags = [{name: 'main', color: 'red'}];
+        console.log('this is also where?')
         setupUI();
     }
 })
-
 
 
 // Signup 
@@ -60,12 +66,16 @@ signupForm.addEventListener('submit', (e) => {
 
     // Sign up user
     auth.createUserWithEmailAndPassword(email, password).then(cred => {
+        let timesArr = [];
+        console.log('test')
+        // Initialize name, times array, and tags array into the current signed up user's db
         return db.collection('users').doc(cred.user.uid).set({
             name: signupForm['signup-name'].value,
-            times: [],
+            times: timesArr,
             tags: [{name: 'main', color: 'red'}]
         });
     }).then(() => {
+        // Close signup modal
         signupModalBtn();
     });
 });
@@ -97,10 +107,31 @@ loginForm.addEventListener('submit', (e) => {
 
 // Save data function
 const saveUserData = () => {
-    db.collection('users').doc(currUserId).set({
-        times: timesInfoList,
-        tags: timeTags
-    }).then(() => {
-        console.log('saved arrays')
+    // Update necessary webpage elements
+    // Update tags list
+    updateTagsList();
+    // Resort the times table elements and updates the time table
+    sortTimeTable(currSortedRowName);
+    // Re-update the times distribution graph
+    updateTagDistributionGraph();
+
+    // Save user's changed array data to firebase backend
+    let currUser = firebase.auth().currentUser;
+    db.collection('users').doc(currUser.uid).get().then(doc => {
+        console.log('hello 1')
+        db.collection('users').doc(currUser.uid).update({
+            times: timesInfoList,
+            tags: timeTags
+        }).then(() => {
+            console.log('saved data')
+        })
     })
+
+
 }
+
+
+
+
+
+
