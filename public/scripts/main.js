@@ -262,7 +262,7 @@ function updateTimesList(arr) {
 
     }
 }
-
+$(document)
 $(document).on('keyup', '#time-search-input', function () {
     let userInput = document.getElementById('time-search-input').value;
     timesListSearch(userInput)

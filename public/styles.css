@@ -470,6 +470,13 @@ td button:hover {
     background-image: linear-gradient(to right, rgb(252, 85, 43) , rgb(252, 154, 43));
 }
 
+.nav-dropdown {
+    display: none;
+}
+.nav-dropdown-modal {
+    display: none;
+}
+
 /* Account Modal */
 #account-modal {
     flex-direction: column;
@@ -486,11 +493,6 @@ td button:hover {
 
 #account-modal-email {
     font-size: 16px;
-}
-
-
-/* Logount Modal */
-#logout-modal {
 }
 
 /* Login Modal */
@@ -801,21 +803,6 @@ td button:hover {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .my-charts {
     position: relative;
     width: 80%;
@@ -823,4 +810,84 @@ td button:hover {
     display: flex;
     justify-content: space-around;
     align-items: center;
+}
+
+
+
+
+@media all and (max-width: 1000px) {
+    .nav-bar {
+        position: relative;
+        justify-content: flex-end;
+    }
+
+    .title {
+        position: absolute;
+        font-size: 40;
+        width: 400px;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: 0px auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .dropdown-icon {
+        font-size: 40px;
+        padding: 0;
+    }
+
+    .account-options {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .nav-dropdown {
+        display: flex;
+        justify-content: center;
+        align-self: middle;
+        text-align: center;
+        vertical-align: center;
+        color: white;
+        padding: 0;
+    }
+
+    .nav-dropdown-modal {
+        position: fixed;
+        top: 0;
+        right: 0px;
+        height: 100%;
+        width: 100%;
+        z-index: 5;
+        background: rgba(0, 0, 0, 0.9);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .nav-dropdown-modal-exit {
+        position: absolute;
+        top: 0;
+        left: 10;
+        color: white;
+        font-size: 70px;
+        transform: rotate(45deg);
+    }
+    .nav-dropdown-modal-exit:hover {
+        cursor: pointer;
+    }
+
+    .dropdown-btn-container {
+        display: inline-block;
+    }
+
+    .dropdown-btn {
+        font-size: 60px;
+        font-weight: bold;
+        padding: 25px 0px;
+    }
+
 }

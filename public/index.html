@@ -1,12 +1,16 @@
 <head>
     <title id='website-title'>Stopwatch</title>
-    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+    <!-- <link rel="stylesheet" type="text/css" href="/styles.css"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"> <!-- DELETE THIS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 </head>
 <body>
     <!-- Modal overlays -->
@@ -31,12 +35,23 @@
     <div class="nav-bar">
         <div class="title">Time Tracker</div>
         <div class="account-options">
+            <div class="nav-dropdown nav-btn" stlye="display: none"><i class="fa fa-bars dropdown-icon"></i></div>
             <div class="nav-btn logged-out" id="login" onclick="loginModalBtn()">Login</div>
             <div class="nav-btn logged-out" id="signup" onclick="signupModalBtn()">Sign Up</div>
             <div class="nav-btn logged-in" id="logout">Logout</div>
             <div class="nav-btn logged-in" id="account" onclick="accountModalBtn()">Account</div>
         </div>
     </div><hr style="padding: 0; margin: 0;">
+
+    <div class="nav-dropdown-modal">
+        <div class="nav-dropdown-modal-exit">+</div>
+        <div class="dropdown-btn-container">
+            <div class="dropdown-btn dropdown-login">Login</div>
+            <div class="dropdown-btn dropdown-signup">Signup</div>
+            <div class="dropdown-btn dropdown-logout">Logout</div>
+            <div class="dropdown-btn dropdown-account">Account</div>
+        </div>
+    </div>
 
     <!-- Stopwatch element -->
     <div id="stop-watch">
