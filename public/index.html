@@ -2,6 +2,8 @@
     <title id='website-title'>Stopwatch</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
     <!-- <link rel="stylesheet" type="text/css" href="/styles.css"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,14 +35,25 @@
 
     <!-- Navagation bar -->
     <div class="nav-bar">
-        <div class="title">Time Tracker</div>
-        <div class="account-options">
+        <div class="title"><h4>Time Tracker</h4></div>
+        <ul class='nav-links'>
+            <li><a href="">Login</a></li>
+            <li><a href="">Signup</a></li>
+            <li><a href="">Logout</a></li>
+            <li><a href="">Account</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+        <!-- <div class="account-options">
             <div class="nav-dropdown nav-btn" stlye="display: none"><i class="fa fa-bars dropdown-icon"></i></div>
             <div class="nav-btn logged-out" id="login" onclick="loginModalBtn()">Login</div>
             <div class="nav-btn logged-out" id="signup" onclick="signupModalBtn()">Sign Up</div>
             <div class="nav-btn logged-in" id="logout">Logout</div>
             <div class="nav-btn logged-in" id="account" onclick="accountModalBtn()">Account</div>
-        </div>
+        </div> -->
     </div><hr style="padding: 0; margin: 0;">
 
     <div class="nav-dropdown-modal">
