@@ -611,7 +611,7 @@ td button:hover {
     right: 0px;
 }
 
-.cancel-tag-btn, .create-tag-btn {
+.cancel-tag-btn, .submit-tag-btn {
     height: 30px;
     width: 60px;
     margin: 0 10px;
@@ -762,7 +762,6 @@ td button:hover {
 }
 
 .cancel-change-modal-btn:active {
-    /* border: 1px solid gray; */
     border-bottom: 2px solid rgb(61, 61, 61);
 }
 
@@ -772,7 +771,6 @@ td button:hover {
 }
 
 .change-tag-modal-btn:active {
-    /* border: 1px solid rgb(252, 161, 43); */
     border-bottom: 2px solid rgb(122, 69, 0);
 }
 

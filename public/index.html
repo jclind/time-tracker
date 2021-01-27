@@ -15,6 +15,7 @@
 
 </head>
 <body>
+    <div class="modal-blur" id="modal-blur"></div>
     <!-- Modal overlays -->
     <div>
         <!-- Account modal blur overlay -->
@@ -37,10 +38,10 @@
     <div class="nav-bar">
         <div class="title"><h4>Time Tracker</h4></div>
         <ul class='nav-links'>
-            <li><a href="">Login</a></li>
-            <li><a href="">Signup</a></li>
-            <li><a href="">Logout</a></li>
-            <li><a href="">Account</a></li>
+            <li class="toggle-modal" id="login"><span>Login</span></li>
+            <li class="toggle-modal" id="signup"><span>Signup</span></li>
+            <li class="toggle-modal" id="logout"><span>Logout</span></li>
+            <li class="toggle-modal" id="account"><span>Account</span></li>
         </ul>
         <div class="burger">
             <div class="line1"></div>
@@ -55,16 +56,6 @@
             <div class="nav-btn logged-in" id="account" onclick="accountModalBtn()">Account</div>
         </div> -->
     </div><hr style="padding: 0; margin: 0;">
-
-    <div class="nav-dropdown-modal">
-        <div class="nav-dropdown-modal-exit">+</div>
-        <div class="dropdown-btn-container">
-            <div class="dropdown-btn dropdown-login">Login</div>
-            <div class="dropdown-btn dropdown-signup">Signup</div>
-            <div class="dropdown-btn dropdown-logout">Logout</div>
-            <div class="dropdown-btn dropdown-account">Account</div>
-        </div>
-    </div>
 
     <!-- Stopwatch element -->
     <div id="stop-watch">
@@ -85,7 +76,7 @@
                         </div>
                     </div>
                     <div class="tag-btn-container">
-                        <button class="new-tag-btn" id="new-tag-btn" onclick='showTagCreateModal()'>
+                        <button class="new-tag-btn toggle-modal" id="new-tag-btn" onclick='showTagCreateModal()'>
                             <i class="fa fa-plus-square" style="font-size: 22px; color: rgb(233, 231, 231)"></i>
                         </button>
                         <div class="tag-tooltip-text">Add A New Tag</div>
@@ -164,9 +155,22 @@
 
 
     <!-- Account nav bar modals -->
-    <div class="nav-modal account-modal" id="account-modal"></div>
-    <div class="nav-modal login-modal" id="login-modal">
-        <div class="nav-modal-title login-title">Login To Your Account</div>
+    <div class="nav-modal account-modal modal" id="account-modal">
+        <div id="modal-title">Account Information</div>
+        <div class="account-info-container">
+            <div class="account-modal-email-container">
+                <h6>Email</h6>
+                <div class="acocunt-modal-email"></div>
+            </div>
+            <div class="account-modal-name-container">
+                <h6>Name</h6>
+                <div class="account-modal-name"></div>
+            </div>
+        </div>
+
+    </div>
+    <div class="nav-modal login-modal modal" id="login-modal">
+        <div class="login-title modal-title">Login To Your Account</div>
         <form action="" id="login-form">
             <input type="email" placeholder="Email" class="nav-modal-input" id="login-email" required>
             <input type="password" placeholder="Password" class="nav-modal-input" id="login-password" required>
@@ -174,8 +178,8 @@
         </form>
         <div class="login-forgot-password"><span id="forgot-password-btn">Forgot Password?</span></div>
     </div>
-    <div class="nav-modal signup-modal" id="signup-modal"> 
-        <div class="nav-modal-title signup-title">Create Account</div>
+    <div class="nav-modal signup-modal modal" id="signup-modal"> 
+        <div class="signup-title modal-title">Create Account</div>
         <form action="" id="signup-form">
             <input type="text" placeholder="Name" class="nav-modal-input" id="signup-name" required>
             <input type="email" placeholder="Email" class="nav-modal-input" id="signup-email" required>
@@ -185,9 +189,9 @@
     </div>
 
     <!-- Tag create and change modals -->
-    <div class="new-tag-modal" id="new-tag-modal">
-        <div class="tag-create-title">Create Tag</div>
-        <input type="text" id='tag-input-text' class='tag-input-text' placeholder="Tag Name">
+    <div class="new-tag-modal modal" id="new-tag-modal">
+        <div class="modal-title">Create Tag</div>
+        <input type="text" id='tag-input-text' class='tag-input-text' autocomplete=off placeholder="Tag Name">
         <div class="color-select-container" id="color-select-container">
             <div id="red" data-tag-color="#fd483f" class="color-box" style="background: #fd483f;" onClick='selectColor(this.id)'></div>
             <div id="pink" data-tag-color="#fd889a" class="color-box" style="background: #fd889a;" onClick='selectColor(this.id)'></div>
@@ -204,18 +208,18 @@
         </div>
         <div class="tag-buttons">
             <button class="cancel-tag-btn" onclick='hideTagCreateModal()'>Cancel</button>
-            <button class="create-tag-btn" onclick='createTag()'>Create</button>
+            <button class="submit-tag-btn" onclick='createTag()'>Create</button>
         </div>
     </div>
-    <div class="change-tag-modal change-tag-modal-scrollbar" id="change-tag-modal" style="overflow-y:scroll;">
-        <div class="change-tag-modal-title">Change Modal</div>
+    <div class="change-tag-modal change-tag-modal-scrollbar modal" id="change-tag-modal" style="overflow-y:scroll;">
+        <div class="modal-title">Change Modal</div>
         <div class="change-tag-modal-search">
             <input type="text" placeholder="search-tags" id='change-tag-modal-search-input'>
         </div>
         <div class="change-tag-modal-tag-container" id="change-tag-modal-tag-container"></div>
-        <div class="change-tag-modal-buttons">
-            <button class='cancel-change-modal-btn' id='cancel-change-modal-btn' onclick='hideChangeTagModal()'>Cancel</button>
-            <button class='change-tag-modal-btn' id='change-tag-modal-btn' onclick='changeTag()'>Change</button>
+        <div class="tag-buttons">
+            <button class='cancel-tag-btn' id='cancel-change-modal-btn' onclick='hideChangeTagModal()'>Cancel</button>
+            <button class='submit-tag-btn' id='change-tag-modal-btn' onclick='changeTag()'>Change</button>
         </div>
     </div>
 

@@ -8,7 +8,7 @@ const setupUI = (user) => {
         db.collection('users').doc(user.uid).get().then(doc => {
             // Account info
             const accountHTML = `
-                <div id="account-modal-title">Hello ${doc.data().name}</div>
+                <div id="modal-title">Hello ${doc.data().name}</div>
                 <div id="account-modal-email">Logged in as ${user.email}</div>
             `;
             accountDetails.innerHTML = accountHTML;

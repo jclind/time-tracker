@@ -247,7 +247,7 @@ function updateTimesList(arr) {
         document.getElementById('time-table-body').innerHTML += `
         <tr id='${currTimesRow}'> 
             <td contenteditable="true" class="name" data-id="${i}" spellcheck='false'>${arr[i].name}</td>
-            <td class='time-table-tag'><div onclick='showChangeTagModal(${i})'>${arr[i].timeTag.name}</div></td>
+            <td class='time-table-tag'><div class="" onclick='showChangeTagModal(${i})'>${arr[i].timeTag.name}</div></td>
             <td>${arr[i].time.hours}:${(arr[i].time.minutes < 10 ? "0" + arr[i].time.minutes : arr[i].time.minutes)}:${(arr[i].time.seconds < 10 ? "0" + arr[i].time.seconds : arr[i].time.seconds)}.${(arr[i].time.milliseconds < 10 ? "0" + arr[i].time.milliseconds : arr[i].time.milliseconds)}</td>
             <td>${arr[i].date}</td>
             <td data-id=${i}>${currTotalTime}</td>
@@ -856,6 +856,24 @@ function updateTagDistributionGraph() {
 
 
 
+const toggleModal = () => {
+    const modalBlur = document.querySelector('#modal-blur');
+    // Find the button with toggle-modal class that was clicked. 
+    let currModalId;
+    $('.toggle-modal').click(function () {
+        currModalId = this.id
+        // Toggle modalBlur to block on modal button click
+        modalBlur.style.display = "block"
+    })
+
+    modalBlur.addEventListener('click', () => {
+        // toggle modalBlur
+        modalBlur.style.display = "none"
+        // document.getElementById(currModalId )
+    })
+
+}
+toggleModal();
 
 
 
@@ -865,15 +883,22 @@ const navSlide = () => {
     const burger = document.querySelector('.burger');
     const nav = document.querySelector('.nav-links');
     const navLinks = document.querySelectorAll('.nav-links li')
-    // Toggle nav
+
     burger.addEventListener('click', () => {
+        // Toggle nav
         nav.classList.toggle('nav-active');
-    })
-    // Animate nav
-    navLinks.forEach((link, index) => {
-        link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7}s`
-        console.log(index / 7)
-    })
+
+        // Animate nav
+        navLinks.forEach((link, index) => {
+            if (link.style.animation) {
+                link.style.animation = '';
+            } else {
+                link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+            }
+        })
+        // Burger animation
+        burger.classList.toggle('toggle');
+    });
 }
 
 navSlide();
