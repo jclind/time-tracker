@@ -255,12 +255,13 @@ function updateTimesList(arr) {
         </tr>`
     }
 
-    if (currFinalTotalTime != undefined) {
-        document.getElementById('time-table-total-time-value').innerText = `${currFinalTotalTime}`;
-    } else {
-        document.getElementById('time-table-total-time-value').innerText = `0:00.00`;
+    // !FIXME
+    // if (currFinalTotalTime != undefined) {
+    //     document.getElementById('time-table-total-time-value').innerText = `${currFinalTotalTime}`;
+    // } else {
+    //     document.getElementById('time-table-total-time-value').innerText = `0:00.00`;
 
-    }
+    // }
 }
 $(document)
 $(document).on('keyup', '#time-search-input', function () {

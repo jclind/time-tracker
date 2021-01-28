@@ -7,6 +7,13 @@ body {
     background: #2d2d2d;
 }
 
+html, body {
+    overflow-x: hidden;
+  }
+body {
+    position: relative
+}
+
 
 
 
@@ -123,7 +130,6 @@ body {
 .toggle .line3 {
     transform: rotate(45deg) translate(-5px, -6px);
 }
-/* #endregion */
 
 
 /* !Modals */
@@ -253,9 +259,30 @@ body {
 
 /* #region  Account */
 .account-modal {
-    display: block;
+    flex-direction: column;
 }
-
+.account-modal .modal-title {
+    text-align: center;
+    font-weight: 550;
+    margin: 15px 0px 10px 0px;
+    font-size: 28px;
+}
+.account-info-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 90%;
+    border: 1px solid gray;
+}
+.account-info-item {
+    width: 100%;
+    border-bottom: 1px solid gray;
+    box-sizing: border-box;
+    padding: 5px;
+}
+.account-info-item:nth-child(even) {
+    background-color: rgb(247, 247, 247);
+}
 
 /* #endregion */
 
@@ -379,3 +406,340 @@ body {
 }
 
 /* #endregion */
+/* #endregion */
+
+
+/* !TIMER ELEMENT */
+/* #region Timer Element */
+#stop-watch {
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+}
+
+/* #region Time Title input */
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    padding: 30px 0px 30px 0px;
+}
+
+.title-input-container{
+    height: 70px;
+    padding: 0px 10px;
+    margin-left: 110px;
+}
+
+.title-input-text {
+    text-align: left;
+}
+
+.title-input {
+    float: left;
+    height: 35px;
+    border-radius: 6px;
+    padding: 5px;
+    outline: none;
+    border: none;
+}
+
+.title-input {
+    color: white;
+    background: rgb(75, 75, 75);
+    width: 400px;
+    margin-top: 15px;
+}
+::placeholder {
+    color: rgb(192, 192, 192);
+}
+
+input:focus::placeholder {
+    color: transparent;
+}
+
+.title-input:focus {
+    background: rgb(94, 94, 94);
+}
+
+/* #endregion */
+
+/* #region Time Tag Dropdown */
+.dropdown-input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.dropdown-input-title {
+    text-align: left;
+    height: 18px;
+}
+.dropdown-container {
+    display: flex;
+    margin-top: 15;
+    justify-content: space-between;
+    align-items: center;
+}
+.tag-btn-container {
+    margin-left: 5px;
+    height: 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.new-tag-btn {
+    background: transparent;
+    border: none;
+    outline: none;
+}
+.new-tag-btn:hover {
+    cursor: pointer;
+}
+.tag-tooltip-text {
+    opacity: 0;
+    padding: 4px 8px;
+    color: #f6f6f6;
+    background: rgb(75, 75, 75);
+    border-radius: 8px;
+    transition: 0.6s;
+}
+.new-tag-btn:hover + .tag-tooltip-text {
+    opacity: 1; 
+}
+.dropdown {
+    height: 35px;
+    position: relative;
+}
+.dropdown-select {
+    color: black;
+    background: rgb(255, 255, 255);
+    border-radius: 6px;
+    width: 150px;
+    height: 35px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.selected {
+    margin-left: 5px;
+}
+.dropdown-select i {
+    margin-right: 5px;
+}
+.dropdown-list {
+    width: 100%;
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s linear, visibility 0.2s linear;
+}
+.dropdown:hover .dropdown-list {
+    opacity: 1;
+    visibility: visible;
+}
+.dropdown-item {
+    color: black;
+    margin-top: 4px;
+    background: white;
+    width: 100%;
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid darkgray;
+    display: flex;
+    justify-content: space-between;
+}
+.dropdown-item-name {
+    padding: 2px 5px 0px 0px;
+}
+.delete-tag {
+    color: gray;
+    font-size: 20px;
+    transform: rotate(45deg);
+}
+.delete-tag:hover {
+    color: black;
+    font-weight: 900;
+}
+.dropdown-item:hover {
+    border: 1px solid black;
+    cursor: pointer;
+}
+/* #endregion */
+
+/* #region Stop-watch element / buttons */
+#stop-watch .time {
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 35px;
+    letter-spacing: -8px;
+    font-size: 90px;
+    font-weight: 400;
+    font-family: Courier, monospace;
+}
+.start-stop-btn, .clear-btn, .submit-btn {
+    background: rgb(252, 161, 43);
+    border: 1px solid #2d2d2d;
+    border-radius: 6px;
+    margin: 0 5px;
+    width: 100px;
+    height: 25px;
+    outline: none;
+}
+
+.start-stop-btn:hover {
+    background: rgb(247, 172, 75);
+    border: 2px solid rgb(252, 161, 43);
+    cursor: pointer;
+}
+/* #endregion */
+
+/* For Mobile/smaller devices */
+@media screen and (max-width: 768px) {
+    .input-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 15px 0px;
+    }
+    .title-input-container, .dropdown-input-container {
+        margin: 10px 0px;
+    }
+    .title-input, .dropdown-container {
+        margin-top: 5px;
+    }
+    .title-input {
+        width: 90vw;
+        height: 50px;
+    }
+    .dropdown-select {
+        width: 200px;
+        height: 40px;
+    }
+    .tag-tooltip-text {
+        display: none;
+    }
+
+
+    #stop-watch .time {
+        font-size: 70px;
+        margin-top: 0px;
+        margin-bottom: 15px;
+    }
+}
+
+/* #endregion */
+
+
+/* !TIME TABLE */
+/* #region Time Table Element*/
+table {
+    text-align: center;
+    border-collapse: collapse;
+    width: 90%;
+    margin: 10px auto;
+    font-size: 18px;
+    color: white;
+    border-radius: 10px;
+    table-layout: fixed
+}
+table th, table td {
+    border: 1px solid rgb(252, 161, 43);
+    padding: 15px 0px;
+    background: rgb(77, 77, 77);
+}
+.table-options-buttons button {
+    cursor: pointer;
+    background: none;
+    outline: none;
+    border: none;
+    font-size: 15px;
+    margin: 0px 10px;
+    font-weight: bold;
+}
+#table-edit-button {
+    color: rgb(252, 161, 43);
+}
+#table-delete-button {
+    color: white;
+}
+
+@media screen and (max-width: 768px) {
+    #time-table {
+        font-size: 18px;
+    }
+    #time-table thead {
+        display: none;
+    }
+    #time-table tr, #time-table td {
+        display: block;
+        border: 0;
+    }
+    #time-table tr {
+        padding: 10px;
+        margin-bottom: .625em;
+    }
+    
+    #time-table td:last-child {
+        border-bottom: 5px solid rgb(252, 161, 43);
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+    #time-table td:first-child {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+    
+    #time-table td {
+        padding: 10px 10px;
+        padding-left: 54%;
+        position: relative;
+        text-align: left;
+        border-bottom: 1px solid rgb(252, 161, 43);
+        border-width: 90%;
+    }
+    #time-table td::before {
+        text-align: left;
+        position: absolute;
+        padding: 10px;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 45%;
+        font-weight: 700;
+        text-transform: capitalize;
+        content: attr(data-col-title)
+    }
+    .table-options {
+        display: flex;
+        justify-content: flex-end;
+    }
+    .table-options-buttons {
+        display: flex;
+        justify-content: flex-end;
+    }
+    
+}
+/* #endregion */
+
+
+
+
+
+
+.my-charts {
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+
+
+
+

@@ -470,13 +470,6 @@ td button:hover {
     background-image: linear-gradient(to right, rgb(252, 85, 43) , rgb(252, 154, 43));
 }
 
-.nav-dropdown {
-    display: none;
-}
-.nav-dropdown-modal {
-    display: none;
-}
-
 /* Account Modal */
 #account-modal {
     flex-direction: column;

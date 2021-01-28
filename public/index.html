@@ -38,23 +38,16 @@
     <div class="nav-bar">
         <div class="title"><h4>Time Tracker</h4></div>
         <ul class='nav-links'>
-            <li class="toggle-modal" id="login"><span>Login</span></li>
-            <li class="toggle-modal" id="signup"><span>Signup</span></li>
-            <li class="toggle-modal" id="logout"><span>Logout</span></li>
-            <li class="toggle-modal" id="account"><span>Account</span></li>
+            <li class="toggle-modal logged-out" id="login"><span>Login</span></li>
+            <li class="toggle-modal logged-out" id="signup"><span>Signup</span></li>
+            <li class="toggle-modal logged-in" id="logout"><span>Logout</span></li>
+            <li class="toggle-modal logged-in" id="account"><span>Account</span></li>
         </ul>
         <div class="burger">
             <div class="line1"></div>
             <div class="line2"></div>
             <div class="line3"></div>
         </div>
-        <!-- <div class="account-options">
-            <div class="nav-dropdown nav-btn" stlye="display: none"><i class="fa fa-bars dropdown-icon"></i></div>
-            <div class="nav-btn logged-out" id="login" onclick="loginModalBtn()">Login</div>
-            <div class="nav-btn logged-out" id="signup" onclick="signupModalBtn()">Sign Up</div>
-            <div class="nav-btn logged-in" id="logout">Logout</div>
-            <div class="nav-btn logged-in" id="account" onclick="accountModalBtn()">Account</div>
-        </div> -->
     </div><hr style="padding: 0; margin: 0;">
 
     <!-- Stopwatch element -->
@@ -95,37 +88,132 @@
      <!-- Time table with list of time objects -->
     <div>
         <table id="time-table">
-            <tr id='time-table-header'>
-                <th>
-                    <div class="time-table-title-cell" id="time-table-header-title" name="Title">
-                        <span>Title</span>
-                        <i class="fa fa-caret-down" style='display: none;'></i>
-                    </div>
-                </th>
-                <th>
-                    <div class="time-table-title-cell" id="time-table-header-tag" name="Tag">
-                        <span>Tag</span>
-                        <i class="fa fa-caret-down" style='display: none;'></i>
-                    </div>
-                </th>
-                <th>
-                    <div class="time-table-title-cell" id="time-table-header-time" name="Time">
-                        <span>Time</span>
-                        <i class="fa fa-caret-down" style='display: none;'></i>
-                    </div>
-                </th>
-                <th>
-                    <div class="time-table-title-cell" id="time-table-header-date" name="Date">
-                        <span>Date</span>
-                        <i class="fa fa-caret-down" style='display: none;'></i>
-                    </div>
-                </th>
-                <th>
-                    <div name="Total Time">
-                        <span>Total Time</span>
-                    </div>
-                </th>
-            </tr>
+            <thead>
+                <tr>
+                    <th>
+                        <div class="time-table-title-cell" id="time-table-header-title" name="Title">
+                            <span>Title</span>
+                            <i class="fa fa-caret-down" style='display: none;'></i>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="time-table-title-cell" id="time-table-header-tag" name="Tag">
+                            <span>Tag</span>
+                            <i class="fa fa-caret-down" style='display: none;'></i>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="time-table-title-cell" id="time-table-header-time" name="Time">
+                            <span>Time</span>
+                            <i class="fa fa-caret-down" style='display: none;'></i>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="time-table-title-cell" id="time-table-header-date" name="Date">
+                            <span>Date</span>
+                            <i class="fa fa-caret-down" style='display: none;'></i>
+                        </div>
+                    </th>
+                    <th>
+                        <div name="Total Time">
+                            <span>Total Time</span>
+                        </div>
+                    </th>
+                    <th>
+                        <div name="Options">
+                            <span>Options</span>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-col-title="title">SEO Consultant</td>
+                    <td data-col-title="tag">John</td>
+                    <td data-col-title="time">Byrne</td>
+                    <td data-col-title="date">43</td>
+                    <td data-col-title="total-time">43</td>
+                    <td class="table-options">
+                        <div class="table-options-buttons">
+                            <button id="table-edit-button">Edit</button>
+                            <button id="table-delete-button">Delete</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td data-col-title="title">SEO Consultant</td>
+                    <td data-col-title="tag">John</td>
+                    <td data-col-title="time">Byrne</td>
+                    <td data-col-title="date">43</td>
+                    <td data-col-title="total-time">43</td>
+                    <td class="table-options">
+                        <div class="table-options-buttons">
+                            <button id="table-edit-button">Edit</button>
+                            <button id="table-delete-button">Delete</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td data-col-title="title">SEO Consultant</td>
+                    <td data-col-title="tag">John</td>
+                    <td data-col-title="time">Byrne</td>
+                    <td data-col-title="date">43</td>
+                    <td data-col-title="total-time">43</td>
+                    <td class="table-options">
+                        <div class="table-options-buttons">
+                            <button id="table-edit-button">Edit</button>
+                            <button id="table-delete-button">Delete</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- <thead>
+                <tr id='time-table-header'>
+                    <th>
+                        <div class="time-table-title-cell" id="time-table-header-title" name="Title">
+
+                            
+                        </div>
+                    </th>
+                    <th>
+                        <div class="time-table-title-cell" id="time-table-header-tag" name="Tag">
+                            <span>Tag</span>
+                            <i class="fa fa-caret-down" style='display: none;'></i>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="time-table-title-cell" id="time-table-header-time" name="Time">
+                            <span>Time</span>
+                            <i class="fa fa-caret-down" style='display: none;'></i>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="time-table-title-cell" id="time-table-header-date" name="Date">
+                            <span>Date</span>
+                            <i class="fa fa-caret-down" style='display: none;'></i>
+                        </div>
+                    </th>
+                    <th>
+                        <div name="Total Time">
+                            <span>Total Time</span>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
             <tr class='time-search-row'>
                 <td class='time-search' id='time-search'><input placeholder='search times' class='time-search-input' id='time-search-input' autocomplete="off"></td>
                 <td></td>
@@ -145,26 +233,26 @@
                     <div class="time-table-total-time-value" id="time-table-total-time-value">0:00.00</div>
                 </td>
             </tr>
-        </table>
+        </table> -->
     </div>
 
+    
     <!-- Data doughnut time chart -->
     <div class="my-charts" style="height: 350px; width: 350px;">
         <canvas id="tag-distribution" width="300" height="300"></canvas>
     </div>
 
-
     <!-- Account nav bar modals -->
     <div class="nav-modal account-modal modal" id="account-modal">
-        <div id="modal-title">Account Information</div>
+        <div class="modal-title">Account Information</div>
         <div class="account-info-container">
-            <div class="account-modal-email-container">
+            <div class="account-modal-email-container account-info-item">
                 <h6>Email</h6>
-                <div class="acocunt-modal-email"></div>
+                <div class="acocunt-modal-email">Jesseclind@gmail.com</div>
             </div>
-            <div class="account-modal-name-container">
+            <div class="account-modal-name-container account-info-item">
                 <h6>Name</h6>
-                <div class="account-modal-name"></div>
+                <div class="account-modal-name">Jesse Lind</div>
             </div>
         </div>
 
