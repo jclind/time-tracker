@@ -24,7 +24,7 @@ let tagLabels, tagData, tagColors;
 
 
 // Functions to be called on window load from auth.js
-const onWindowLoad = () => {
+function onWindowLoad() {
     tagLabels = [];
     tagData = [];
     tagColors = [];
@@ -125,6 +125,7 @@ const onWindowLoad = () => {
     });
     updateTagDistributionGraph();
 }
+
 
 
 
@@ -232,8 +233,11 @@ function submit() {
     }
 }
 
+// Keep the current array that will be displayed in the times table. (helpful for deleting time objects later)
+let currentTimesArray;
 // Updates the html list of times based on submittion and deletion of times.
 function updateTimesList(arr) {
+    currentTimesArray = arr;
     document.getElementById('time-table-body').innerHTML = ``
     // loops through arr and displays each time object
     let currFinalTotalTime;
@@ -251,10 +255,14 @@ function updateTimesList(arr) {
             <td>${arr[i].time.hours}:${(arr[i].time.minutes < 10 ? "0" + arr[i].time.minutes : arr[i].time.minutes)}:${(arr[i].time.seconds < 10 ? "0" + arr[i].time.seconds : arr[i].time.seconds)}.${(arr[i].time.milliseconds < 10 ? "0" + arr[i].time.milliseconds : arr[i].time.milliseconds)}</td>
             <td>${arr[i].date}</td>
             <td data-id=${i}>${currTotalTime}</td>
-            <td><button onclick='deleteItem(${i})'>X</button></td>
+            <td>
+                <div class="table-options-buttons">
+                    <button class="table-edit-button" onclick="toggleEditTagModal(${i})">Edit</button>
+                    <button class="table-delete-button">Delete</button>
+                </div>
+            </td>
         </tr>`
     }
-
     // !FIXME
     // if (currFinalTotalTime != undefined) {
     //     document.getElementById('time-table-total-time-value').innerText = `${currFinalTotalTime}`;
@@ -380,12 +388,12 @@ function createTag() {
         document.getElementById('tag-input-text').style.border = '1px solid rgb(190, 190, 190)';
         
         let tagName = document.getElementById('tag-input-text').value;
-        let tagColor = selectedTagColor
+        let tagColor = selectedTagColor;
+        console.log(selectedTagColor)
 
         let tempTagObj = {name: tagName, color: tagColor}
         timeTags.push(tempTagObj)
-        hideTagCreateModal();
-
+        closeTagModal('new-tag-btn-modal');
         saveUserData();
     }
 }
@@ -532,234 +540,138 @@ document.getElementById('submit-btn').onmouseleave = function() {
 // Manipulate account nav bar modals
 
 // Initialize nav bar modal/blur-overlay divs
-const accountModal = document.querySelector('#account-modal');
-const accountModalBlur = document.querySelector('.account-modal-blur');
-const loginModal = document.querySelector('#login-modal');
-const loginModalBlur = document.querySelector('.login-modal-blur');
-const logoutModal = document.querySelector('#logout-modal');
-const logoutModalBlur = document.querySelector('.logout-modal-blur');
-const signupModal = document.querySelector('#signup-modal');
-const signupModalBlur = document.querySelector('.signup-modal-blur');
+// const accountModal = document.querySelector('#account-modal');
+// const accountModalBlur = document.querySelector('.account-modal-blur');
+// const loginModal = document.querySelector('#login-modal');
+// const loginModalBlur = document.querySelector('.login-modal-blur');
+// const logoutModal = document.querySelector('#logout-modal');
+// const logoutModalBlur = document.querySelector('.logout-modal-blur');
+// const signupModal = document.querySelector('#signup-modal');
+// const signupModalBlur = document.querySelector('.signup-modal-blur');
 
 
 // If account modal is visible, hide modal and backgorund overlay. If it is hidden, show both overlay and modal
-function accountModalBtn() {
-    if (accountModal.style.display == 'none' || accountModal.style.display == '') {
-        accountModal.style.display = 'block';
-        accountModalBlur.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-    } else {
-        accountModal.style.display = 'none';
-        accountModalBlur.style.display = 'none';
-        document.body.style.overflow = 'visible';
-    }
-}
+// function accountModalBtn() {
+//     if (accountModal.style.display == 'none' || accountModal.style.display == '') {
+//         accountModal.style.display = 'block';
+//         accountModalBlur.style.display = 'block';
+//         document.body.style.overflow = 'hidden';
+//     } else {
+//         accountModal.style.display = 'none';
+//         accountModalBlur.style.display = 'none';
+//         document.body.style.overflow = 'visible';
+//     }
+// }
 // If login modal is visible, hide modal and backgorund overlay. If it is hidden, show both overlay and modal
-function loginModalBtn() {
-    if (loginModal.style.display == 'none' || loginModal.style.display == '') {
-        loginModal.style.display = 'block';
-        loginModalBlur.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-    } else {
-        loginModal.style.display = 'none';
-        loginModalBlur.style.display = 'none';
-        document.body.style.overflow = 'visible';
-        loginForm.reset();
-    }
-}
+// function loginModalBtn() {
+//     if (loginModal.style.display == 'none' || loginModal.style.display == '') {
+//         loginModal.style.display = 'block';
+//         loginModalBlur.style.display = 'block';
+//         document.body.style.overflow = 'hidden';
+//     } else {
+//         loginModal.style.display = 'none';
+//         loginModalBlur.style.display = 'none';
+//         document.body.style.overflow = 'visible';
+//         loginForm.reset();
+//     }
+// }
 // If signup modal is visible, hide modal and backgorund overlay. If it is hidden, show both overlay and modal
-function signupModalBtn() {
-    if (signupModal.style.display == 'none' || signupModal.style.display == '') {
-        signupModal.style.display = 'block';
-        signupModalBlur.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-    } else {
-        signupModal.style.display = 'none';
-        signupModalBlur.style.display = 'none';
-        document.body.style.overflow = 'visible';
-        // Reset form inputs
-        signupForm.reset();
-    }
-}
+// function signupModalBtn() {
+//     if (signupModal.style.display == 'none' || signupModal.style.display == '') {
+//         signupModal.style.display = 'block';
+//         signupModalBlur.style.display = 'block';
+//         document.body.style.overflow = 'hidden';
+//     } else {
+//         signupModal.style.display = 'none';
+//         signupModalBlur.style.display = 'none';
+//         document.body.style.overflow = 'visible';
+//         // Reset form inputs
+//         signupForm.reset();
+//     }
+// }
 
 // Listeners for modal overlay-blur click to close modals.
-document.querySelector('.account-modal-blur').addEventListener('click', function() {
-     accountModalBtn();
-});
-document.querySelector('.login-modal-blur').addEventListener('click', function() {
-    loginModalBtn();
-});
-document.querySelector('.signup-modal-blur').addEventListener('click', function() {
-    signupModalBtn();
-});
+// document.querySelector('.account-modal-blur').addEventListener('click', function() {
+//      accountModalBtn();
+// });
+// document.querySelector('.login-modal-blur').addEventListener('click', function() {
+//     loginModalBtn();
+// });
+// document.querySelector('.signup-modal-blur').addEventListener('click', function() {
+//     signupModalBtn();
+// });
 
 
 // When blured background is clicked on, close the tag-input background and modal.
-document.getElementById('new-tag-blur-overlay').addEventListener('click', () => {hideTagCreateModal()})
+// document.getElementById('new-tag-blur-overlay').addEventListener('click', () => {hideTagCreateModal()})
 
 // Blurs background and shows new tag input modal on button click
-function showTagCreateModal() {
-    document.body.style.overflow = 'hidden';
-    document.getElementById('new-tag-blur-overlay').style.display = 'block';
-    document.getElementById('new-tag-modal').style.display = 'block';
-    document.getElementById('tag-input-text').focus();
-}
+// function showTagCreateModal() {
+//     document.body.style.overflow = 'hidden';
+//     document.getElementById('new-tag-blur-overlay').style.display = 'block';
+//     document.getElementById('new-tag-modal').style.display = 'block';
+//     document.getElementById('tag-input-text').focus();
+// }
 
-function hideTagCreateModal() {
-    document.body.style.overflow = 'visible';
-    document.getElementById('new-tag-blur-overlay').style.display = 'none';
-    document.getElementById('new-tag-modal').style.display = 'none';
-    document.getElementById('tag-input-text').style.border = '1px solid rgb(190, 190, 190)';
-    document.getElementById('tag-input-text').value = '';
-    document.getElementById('color-select-container').style.border = 'none';
-    if (selectedTagColor != '') {
-        document.getElementById(`${selectedTagColor}`).classList.remove('active');
-        selectedTagColor = '';
-    }
-}
-
-// Control color selection for tags
-let selectedTagColor = '';
-
-function selectColor(color) {
-    if (selectedTagColor != '') {
-        document.getElementById(`${selectedTagColor}`).classList.remove('active');
-    }
-    selectedTagColor = color;
-    document.getElementById(`${color}`).classList.add('active');
-}
+// function hideTagCreateModal() {
+//     document.body.style.overflow = 'visible';
+//     document.getElementById('new-tag-blur-overlay').style.display = 'none';
+//     document.getElementById('new-tag-modal').style.display = 'none';
+//     document.getElementById('tag-input-text').style.border = '1px solid rgb(190, 190, 190)';
+//     document.getElementById('tag-input-text').value = '';
+//     document.getElementById('color-select-container').style.border = 'none';
+//     if (selectedTagColor != '') {
+//         document.getElementById(`${selectedTagColor}`).classList.remove('active');
+//         selectedTagColor = '';
+//     }
+// }
 
 
-function updateChangeTagModal(arr) {
-    tagModalContainer = document.getElementById('change-tag-modal-tag-container');
-    tagModalContainer.innerHTML = '';
-    for (tag in arr) {
-        let currTag = `change-tag-modal-tag-${tag}`
-        let currColor;
-        switch (arr[tag].color) {
-            case 'red': 
-                currColor = '#fd483f';
-                break;
-            case 'pink':
-                currColor = '#fd889a';
-                break;
-            case 'brown':
-                currColor = '#9A6324';
-                break;
-            case 'orange':
-                currColor = '#fca12b';
-                break;
-            case 'yellow':
-                currColor = '#ffe119'
-                break;
-            case 'lime':
-                currColor = '#bfef45';
-                break;
-            case 'dark-green':
-                currColor = '#0a724f';
-                break;
-            case 'mint':
-                currColor = '#AAF0D1';
-                break;
-            case 'blue':
-                currColor = '#7cc3db';
-                break;
-            case 'navy':
-                currColor = '#3D3D90';
-                break;
-            case 'lavendar':
-                currColor = '#cc99cc';
-                break;
-            case 'purple':
-                currColor = '#926adb';
-                break;
-            default:
-                console.log('Color Selection Error')
-        }
 
 
-        tagModalContainer.innerHTML += `
-        <div class="change-tag-modal-tag" id="${currTag}" onclick='selectChangeTagModalTag(${tag})'>
-            <div class="change-tag-modal-tag-color"  style="background: ${currColor}"></div>
-            <div class="change-tag-modal-tag-title">${arr[tag].name}</div>
-        </div>
-        `
-    }
-}
 
-$(document).on('keyup', '#change-tag-modal-search-input', function () {
-    let userTagName = document.getElementById('change-tag-modal-search-input').value;
-    searchChangeTags(userTagName);
-})
 
-function searchChangeTags(userTagName) {
-    let modTimeTags = [];
-    for (time in timeTags) {
-        let currTag = timeTags[time].name.toUpperCase();
-        if (currTag.includes(userTagName.toUpperCase())) {
-            modTimeTags.push(timeTags[time])
-        }
-        updateChangeTagModal(modTimeTags)
-    }
-}
+// $(document).on('keyup', '#change-tag-modal-search-input', function () {
+//     let userTagName = document.getElementById('change-tag-modal-search-input').value;
+//     searchChangeTags(userTagName);
+// })
+
+// function searchChangeTags(userTagName) {
+//     let modTimeTags = [];
+//     for (time in timeTags) {
+//         let currTag = timeTags[time].name.toUpperCase();
+//         if (currTag.includes(userTagName.toUpperCase())) {
+//             modTimeTags.push(timeTags[time])
+//         }
+//         updateChangeTagModal(modTimeTags)
+//     }
+// }
 
 
 // Holds index of clicked tag in the table for access in editing which tag that object will have.
-let currChangeModalIndex;
+// let currChangeModalIndex;
 
-function showChangeTagModal(index) {
-    document.body.style.overflow = 'hidden';
-    currChangeModalIndex = index;
-    document.getElementById('change-tag-modal').style.display = 'block';
-    document.getElementById('change-tag-blur-overlay').style.display = 'block';
-    updateChangeTagModal(timeTags);
-}
+// function showChangeTagModal(index) {
+//     document.body.style.overflow = 'hidden';
+//     currChangeModalIndex = index;
+//     document.getElementById('change-tag-modal').style.display = 'block';
+//     document.getElementById('change-tag-blur-overlay').style.display = 'block';
+//     updateChangeTagModal(timeTags);
+// }
 
 // Call hideChangeTagModal on click outside of the modal.
-document.getElementById('change-tag-blur-overlay').addEventListener('click', () => {hideChangeTagModal()})
+// document.getElementById('change-tag-blur-overlay').addEventListener('click', () => {hideChangeTagModal()})
 
-function hideChangeTagModal() {
-    document.body.style.overflow = 'visible';
-    document.getElementById('change-tag-modal').style.display = 'none';
-    document.getElementById('change-tag-blur-overlay').style.display = 'none';
-    selectedChangeModalTag = '';
-}
+// function hideChangeTagModal() {
+//     document.body.style.overflow = 'visible';
+//     document.getElementById('change-tag-modal').style.display = 'none';
+//     document.getElementById('change-tag-blur-overlay').style.display = 'none';
+//     selectedChangeModalTag = '';
+// }
 
-let selectedChangeModalTag = '';
-// Holds index of selected tag to be changed in the change tag modal.
-let selectedChangeModalTagIndex;
-// Control tag selection for changing tags
-function selectChangeTagModalTag(index) {
-    selectedChangeModalTag = `change-tag-modal-tag-${index}`
-    selectedChangeModalTagIndex = index;
-    document.getElementById(selectedChangeModalTag).style.background = 'rgb(238, 238, 238)'
-    for (tag in timeTags) {
-        currTag = `change-tag-modal-tag-${tag}`
-        if ((tag != index) && (document.getElementById(currTag).style.background == 'rgb(238, 238, 238)')) {
-            document.getElementById(currTag).style.background = 'white';
-        }
-    }
-}
 
-// Remove red boarder when item is selected in change tag modal.
-document.getElementById('change-tag-modal-tag-container').addEventListener('click', () => {
-    if (document.getElementById('change-tag-modal-tag-container').style.border == '2px solid red') {
-        document.getElementById('change-tag-modal-tag-container').style.border = 'none'
-    }
-})
 
-function changeTag() {
-    // Add red border to change tag modal when the user doesn't select a tag to change to.
-    if (selectedChangeModalTag == '') {
-        document.getElementById('change-tag-modal-tag-container').style.border = '2px solid red'
-    } else {
-        timesInfoList[currChangeModalIndex].timeTag = timeTags[selectedChangeModalTagIndex]
-    }
-    hideChangeTagModal();
 
-    saveUserData();
-    selectedChangeModalTag = '';
-}
 
 // Gets time data for each tag and creates arrays: tagLabels, tagData, and tagColors
 function getTagData() {
@@ -779,47 +691,7 @@ function getTagData() {
             if (tagSum != 0) {
                 tagLabels.push(currTagName)
                 tagData.push(tagSum)
-                let currColor;
-                switch (timeTags[tag].color) {
-                    case 'red': 
-                        currColor = '#fd483f';
-                        break;
-                    case 'pink':
-                        currColor = '#fd889a';
-                        break;
-                    case 'brown':
-                        currColor = '#9A6324';
-                        break;
-                    case 'orange':
-                        currColor = '#fca12b';
-                        break;
-                    case 'yellow':
-                        currColor = '#ffe119'
-                        break;
-                    case 'lime':
-                        currColor = '#bfef45';
-                        break;
-                    case 'dark-green':
-                        currColor = '#0a724f';
-                        break;
-                    case 'mint':
-                        currColor = '#AAF0D1';
-                        break;
-                    case 'blue':
-                        currColor = '#7cc3db';
-                        break;
-                    case 'navy':
-                        currColor = '#3D3D90';
-                        break;
-                    case 'lavendar':
-                        currColor = '#cc99cc';
-                        break;
-                    case 'purple':
-                        currColor = '#926adb';
-                        break;
-                    default:
-                        console.log('Color Selection Error')
-                }
+                let currColor = timeTags[tag].color;
                 tagColors.push(currColor)
             } 
         }
@@ -852,34 +724,7 @@ function updateTagDistributionGraph() {
     }
 }
 
-
-
-
-
-
-const toggleModal = () => {
-    const modalBlur = document.querySelector('#modal-blur');
-    // Find the button with toggle-modal class that was clicked. 
-    let currModalId;
-    $('.toggle-modal').click(function () {
-        currModalId = this.id
-        // Toggle modalBlur to block on modal button click
-        modalBlur.style.display = "block"
-    })
-
-    modalBlur.addEventListener('click', () => {
-        // toggle modalBlur
-        modalBlur.style.display = "none"
-        // document.getElementById(currModalId )
-    })
-
-}
-toggleModal();
-
-
-
-
-
+// Nav functionality and Modals
 const navSlide = () => {
     const burger = document.querySelector('.burger');
     const nav = document.querySelector('.nav-links');
@@ -901,5 +746,166 @@ const navSlide = () => {
         burger.classList.toggle('toggle');
     });
 }
-
 navSlide();
+
+// Control account type modals
+const navModalBlur = document.querySelector('#nav-modal-blur');
+const toggleNavModal = () => {
+    // Find the button with toggle-modal class that was clicked. 
+    let currModalId;
+    // Nav button event listener
+    $('.toggle-nav-modal').click(function () {
+        currModalId = this.id + "-modal"
+        // Toggle navModalBlur to block on modal button click
+        console.log(currModalId)
+        navModalBlur.style.display = "block"
+        document.getElementById(currModalId).style.display = "block"
+    })
+    // Background nav modal blur event listener
+    navModalBlur.addEventListener('click', () => {
+        // toggle navModalBlur
+        closeNavModal(currModalId);
+    })
+
+}
+toggleNavModal();
+
+const closeNavModal = (id) => {
+    const currForm = document.getElementById(id)
+    navModalBlur.style.display = "none"
+    // Close modal
+    document.getElementById(id).style.display = "none"
+}
+
+
+// Tag creation/editing modals
+const tagModalBlur = document.querySelector('#tag-modal-blur')
+const toggleCreateTagModal = () => {
+    const tagModal = document.querySelector('#new-tag-btn-modal')
+    const cancelBtn = document.querySelector('#cancel-create-tag-btn');
+    $('#new-tag-btn').click(() => {
+        tagModalBlur.style.display = 'block'
+        tagModal.style.display = 'block'
+    })
+    tagModalBlur.addEventListener('click', () => {
+        closeTagModal('new-tag-btn-modal');
+    })
+    cancelBtn.addEventListener('click', () => {
+        closeTagModal('new-tag-btn-modal')
+    })
+}
+toggleCreateTagModal();
+
+let currChangeModalIndex;
+function toggleEditTagModal(index) {
+    currChangeModalIndex = index;
+    const editTagModal = document.querySelector('#change-tag-modal')
+    const cancelBtn = document.querySelector('#cancel-change-modal-btn')
+    const nameInput = document.querySelector('#change-tag-modal-name-input-field');
+    // toggle edit time modal.
+    if (editTagModal.style.display == "none" || editTagModal.style.display == "") {
+        editTagModal.style.display = "block";
+        tagModalBlur.style.display = "block";
+        nameInput.value = currentTimesArray[index].name;
+        updateChangeTagModal(timeTags)
+    }
+    tagModalBlur.addEventListener('click', () => {
+        closeTagModal('change-tag-modal');
+    })
+    cancelBtn.addEventListener('click', () => {
+        closeTagModal('change-tag-modal')
+    })
+}
+// Call searchChangeTags function when typing into change tag info modal search bar.
+$(document).on('keyup', '#change-tag-modal-search-input', function () {
+    let userTagName = document.getElementById('change-tag-modal-search-input').value;
+    searchChangeTags(userTagName);
+})
+
+function searchChangeTags(userTagName) {
+    let modTimeTags = [];
+    for (time in timeTags) {
+        let currTag = timeTags[time].name.toUpperCase();
+        if (currTag.includes(userTagName.toUpperCase())) {
+            modTimeTags.push(timeTags[time])
+        }
+        updateChangeTagModal(modTimeTags)
+    }
+}
+// Control color selection for tags
+let selectedTagColor = '';
+function selectColor(color) {
+    if (selectedTagColor != '') {
+        document.getElementById(`${selectedTagColor}`).classList.remove('active');
+    }
+    selectedTagColor = color;
+    document.getElementById(`${color}`).classList.add('active');
+}
+function updateChangeTagModal(arr) {
+    tagModalContainer = document.getElementById('change-tag-modal-tag-container');
+    tagModalContainer.innerHTML = '';
+    for (tag in arr) {
+        let currTag = `change-tag-modal-tag-${tag}`
+        let currColor;
+        tagModalContainer.innerHTML += `
+        <div class="change-tag-modal-tag" id="${currTag}" onclick='selectChangeTagModalTag(${tag})'>
+            <div class="change-tag-modal-tag-color"  style="background: ${arr[tag].color}"></div>
+            <div class="change-tag-modal-tag-title">${arr[tag].name}</div>
+        </div>
+        `
+    }
+}
+let selectedChangeModalTag = '';
+// Holds index of selected tag to be changed in the change tag modal.
+let selectedChangeModalTagIndex;
+// Control tag selection for changing tags
+function selectChangeTagModalTag(index) {
+    selectedChangeModalTag = `change-tag-modal-tag-${index}`
+    selectedChangeModalTagIndex = index;
+    document.getElementById(selectedChangeModalTag).style.background = 'rgb(238, 238, 238)'
+    for (tag in timeTags) {
+        currTag = `change-tag-modal-tag-${tag}`
+        if ((tag != index) && (document.getElementById(currTag).style.background == 'rgb(238, 238, 238)')) {
+            document.getElementById(currTag).style.background = 'white';
+        }
+    }
+}
+// Remove red boarder when item is selected in change tag modal.
+document.getElementById('change-tag-modal-tag-container').addEventListener('click', () => {
+    if (document.getElementById('change-tag-modal-tag-container').style.border == '2px solid red') {
+        document.getElementById('change-tag-modal-tag-container').style.border = 'none'
+    }
+})
+function changeTag() {
+    // Add red border to change tag modal when the user doesn't select a tag to change to.
+    if (selectedChangeModalTag == '') {
+        document.getElementById('change-tag-modal-tag-container').style.border = '2px solid red'
+    } else {
+        let tempTimesArrIndex = null;
+        timesInfoList.forEach((o1, index) => {
+            if (objEqual(o1, currentTimesArray[currChangeModalIndex])) {
+                tempTimesArrIndex = index;
+            }
+        })
+        if (tempTimesArrIndex == null) {
+            console.log("No! This is not how this should be working!!!!!!! :(")
+        } else {
+            let tempName = document.querySelector('#change-tag-modal-name-input-field').value;
+            timesInfoList[tempTimesArrIndex].name = tempName;
+            timesInfoList[tempTimesArrIndex].timeTag = timeTags[selectedChangeModalTagIndex]
+            console.log(tempTimesArrIndex)
+            closeTagModal('change-tag-modal')
+            saveUserData();
+        }
+    }   
+    selectedChangeModalTag = '';
+}
+
+
+const closeTagModal = (id) => {
+    tagModalBlur.style.display = 'none'
+    document.getElementById(id).style.display = 'none';
+    selectedChangeModalTag = '';
+}
+
+

@@ -5,19 +5,13 @@
 }
 body {
     background: #2d2d2d;
+    overflow: visible;
+    height: 100vh;
 }
 
 html, body {
     overflow-x: hidden;
-  }
-body {
-    position: relative
 }
-
-
-
-
-
 
 
 /* !NAVIGATION BAR */
@@ -80,6 +74,7 @@ body {
         overflow-x: hidden;
     }
     .nav-links {
+        z-index: 3;
         position: absolute;
         right: 0px;
         top: 8.5vh;
@@ -130,6 +125,7 @@ body {
 .toggle .line3 {
     transform: rotate(45deg) translate(-5px, -6px);
 }
+/* #endregion */
 
 
 /* !Modals */
@@ -339,18 +335,42 @@ body {
 /* #endregion */
 
 /* #region Edit Tag */
+
 .change-tag-modal {
-    width: 250px;
+    display: block;
+    width: 300px;
     padding: 5px;
-    height: 350px;
+    height: 400px;
 }
 
 .change-tag-modal .modal-title {
     font-size: 22px;
     text-align: center;
     margin: 10px 0px;
-    padding-bottom: 15px;
+    padding-bottom: 5px;
     border-bottom: 1px solid gray;
+}
+.change-tag-name {
+    padding: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid black;
+}
+.change-tag-name-input {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+}
+.change-tag-name-input input {
+    display: block;
+    margin : 0 auto;
+    height: 30px;
+    width: 100%;
+    border: 1px solid rgb(190, 190, 190);
+    border-radius: 3px;
+    outline: none;
+    text-align: center;
 }
 .change-tag-modal-search {
     width: 100%;
@@ -362,7 +382,7 @@ body {
     margin: 0 auto;
     text-align: center;
     border-radius: 8px;
-    border: 1px solid rgb(119, 119, 119);
+    border: 1px solid rgb(190, 190, 190);
     padding: 2px;
     outline: none;
 }
@@ -387,12 +407,30 @@ body {
 .change-tag-modal-scrollbar::-webkit-scrollbar-thumb:hover {
     background: rgb(235, 133, 0);
 }
+.change-tag-modal-tag-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+}
+
+.change-tag-modal-tag-title {
+    margin-left: 10px;
+    text-align: center;
+}
+
+.change-tag-modal-tag:hover {
+    background: rgb(238, 238, 238);
+    cursor: pointer;
+}
+
+.change-tag-modal-tag:active {
+    background: rgb(238, 238, 238);
+}
+
+.change-tag-modal-tag.active {
+    background: rgb(238, 238, 238);
+}
 /* #endregion */
-
-
-
-
-
 
 
 /* Modal Blur */
@@ -405,7 +443,9 @@ body {
     background: rgba(0, 0, 0, 0.6);
 }
 
-/* #endregion */
+
+
+
 /* #endregion */
 
 
@@ -639,7 +679,7 @@ table {
     text-align: center;
     border-collapse: collapse;
     width: 90%;
-    margin: 10px auto;
+    margin: 70px auto;
     font-size: 18px;
     color: white;
     border-radius: 10px;
@@ -650,6 +690,11 @@ table th, table td {
     padding: 15px 0px;
     background: rgb(77, 77, 77);
 }
+.time-table-title-cell {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 25px;
+}
 .table-options-buttons button {
     cursor: pointer;
     background: none;
@@ -659,16 +704,18 @@ table th, table td {
     margin: 0px 10px;
     font-weight: bold;
 }
-#table-edit-button {
+.table-edit-button {
     color: rgb(252, 161, 43);
 }
-#table-delete-button {
+.table-delete-button {
     color: white;
 }
 
 @media screen and (max-width: 768px) {
     #time-table {
         font-size: 18px;
+        margin: 40px auto;
+
     }
     #time-table thead {
         display: none;

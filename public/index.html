@@ -15,22 +15,9 @@
 
 </head>
 <body>
-    <div class="modal-blur" id="modal-blur"></div>
+    <div class="modal-blur" id="nav-modal-blur"></div>
+    <div class="modal-blur" id="tag-modal-blur"></div>
     <!-- Modal overlays -->
-    <div>
-        <!-- Account modal blur overlay -->
-        <div class="nav-modal-blur account-modal-blur"></div>
-        <!-- Login modal blur overlay -->
-        <div class="nav-modal-blur login-modal-blur"></div> 
-        <!-- Sign up modal blur overlay -->
-        <div class="nav-modal-blur signup-modal-blur"></div>
-    </div>
-    <div>
-        <!-- Create new tag overlay -->
-        <div class="nav-modal-blur new-tag-blur-overlay" id="new-tag-blur-overlay"></div>
-        <!-- Change existing tag overlay -->
-        <div class="nav-modal-blur change-tag-blur-overlay" id="change-tag-blur-overlay"></div>
-    </div>
 
 
 
@@ -38,10 +25,10 @@
     <div class="nav-bar">
         <div class="title"><h4>Time Tracker</h4></div>
         <ul class='nav-links'>
-            <li class="toggle-modal logged-out" id="login"><span>Login</span></li>
-            <li class="toggle-modal logged-out" id="signup"><span>Signup</span></li>
-            <li class="toggle-modal logged-in" id="logout"><span>Logout</span></li>
-            <li class="toggle-modal logged-in" id="account"><span>Account</span></li>
+            <li class="toggle-nav-modal logged-out" id="login"><span>Login</span></li>
+            <li class="toggle-nav-modal logged-out" id="signup"><span>Signup</span></li>
+            <li class="logged-in" id="logout"><span>Logout</span></li>
+            <li class="toggle-nav-modal logged-in" id="account"><span>Account</span></li>
         </ul>
         <div class="burger">
             <div class="line1"></div>
@@ -69,7 +56,7 @@
                         </div>
                     </div>
                     <div class="tag-btn-container">
-                        <button class="new-tag-btn toggle-modal" id="new-tag-btn" onclick='showTagCreateModal()'>
+                        <button class="new-tag-btn toggle-create-tag-modal" id="new-tag-btn">
                             <i class="fa fa-plus-square" style="font-size: 22px; color: rgb(233, 231, 231)"></i>
                         </button>
                         <div class="tag-tooltip-text">Add A New Tag</div>
@@ -126,114 +113,48 @@
                     </th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td data-col-title="title">SEO Consultant</td>
-                    <td data-col-title="tag">John</td>
-                    <td data-col-title="time">Byrne</td>
-                    <td data-col-title="date">43</td>
-                    <td data-col-title="total-time">43</td>
-                    <td class="table-options">
-                        <div class="table-options-buttons">
-                            <button id="table-edit-button">Edit</button>
-                            <button id="table-delete-button">Delete</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td data-col-title="title">SEO Consultant</td>
-                    <td data-col-title="tag">John</td>
-                    <td data-col-title="time">Byrne</td>
-                    <td data-col-title="date">43</td>
-                    <td data-col-title="total-time">43</td>
-                    <td class="table-options">
-                        <div class="table-options-buttons">
-                            <button id="table-edit-button">Edit</button>
-                            <button id="table-delete-button">Delete</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td data-col-title="title">SEO Consultant</td>
-                    <td data-col-title="tag">John</td>
-                    <td data-col-title="time">Byrne</td>
-                    <td data-col-title="date">43</td>
-                    <td data-col-title="total-time">43</td>
-                    <td class="table-options">
-                        <div class="table-options-buttons">
-                            <button id="table-edit-button">Edit</button>
-                            <button id="table-delete-button">Delete</button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <!-- <thead>
-                <tr id='time-table-header'>
-                    <th>
-                        <div class="time-table-title-cell" id="time-table-header-title" name="Title">
-
-                            
-                        </div>
-                    </th>
-                    <th>
-                        <div class="time-table-title-cell" id="time-table-header-tag" name="Tag">
-                            <span>Tag</span>
-                            <i class="fa fa-caret-down" style='display: none;'></i>
-                        </div>
-                    </th>
-                    <th>
-                        <div class="time-table-title-cell" id="time-table-header-time" name="Time">
-                            <span>Time</span>
-                            <i class="fa fa-caret-down" style='display: none;'></i>
-                        </div>
-                    </th>
-                    <th>
-                        <div class="time-table-title-cell" id="time-table-header-date" name="Date">
-                            <span>Date</span>
-                            <i class="fa fa-caret-down" style='display: none;'></i>
-                        </div>
-                    </th>
-                    <th>
-                        <div name="Total Time">
-                            <span>Total Time</span>
-                        </div>
-                    </th>
-                </tr>
-            </thead>
-            <tr class='time-search-row'>
-                <td class='time-search' id='time-search'><input placeholder='search times' class='time-search-input' id='time-search-input' autocomplete="off"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
             <tbody id="time-table-body">
+                <tr>
+                    <td data-col-title="title">SEO Consultant</td>
+                    <td data-col-title="tag">John</td>
+                    <td data-col-title="time">Byrne</td>
+                    <td data-col-title="date">43</td>
+                    <td data-col-title="total-time">43</td>
+                    <td class="table-options">
+                        <div class="table-options-buttons">
+                            <button class="table-edit-button">Edit</button>
+                            <button class="table-delete-button">Delete</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td data-col-title="title">SEO Consultant</td>
+                    <td data-col-title="tag">John</td>
+                    <td data-col-title="time">Byrne</td>
+                    <td data-col-title="date">43</td>
+                    <td data-col-title="total-time">43</td>
+                    <td class="table-options">
+                        <div class="table-options-buttons">
+                            <button class="table-edit-button">Edit</button>
+                            <button class="table-delete-button">Delete</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td data-col-title="title">SEO Consultant</td>
+                    <td data-col-title="tag">John</td>
+                    <td data-col-title="time">Byrne</td>
+                    <td data-col-title="date">43</td>
+                    <td data-col-title="total-time">43</td>
+                    <td class="table-options">
+                        <div class="table-options-buttons">
+                            <button class="table-edit-button">Edit</button>
+                            <button class="table-delete-button">Delete</button>
+                        </div>
+                    </td>
+                </tr>
             </tbody>
-            <tr class='time-table-total-time-row'>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td id='time-table-total-time'>
-                    <span>Total Time</span>
-                    <div class="time-table-total-time-value" id="time-table-total-time-value">0:00.00</div>
-                </td>
-            </tr>
-        </table> -->
+        </table>
     </div>
 
     
@@ -244,18 +165,6 @@
 
     <!-- Account nav bar modals -->
     <div class="nav-modal account-modal modal" id="account-modal">
-        <div class="modal-title">Account Information</div>
-        <div class="account-info-container">
-            <div class="account-modal-email-container account-info-item">
-                <h6>Email</h6>
-                <div class="acocunt-modal-email">Jesseclind@gmail.com</div>
-            </div>
-            <div class="account-modal-name-container account-info-item">
-                <h6>Name</h6>
-                <div class="account-modal-name">Jesse Lind</div>
-            </div>
-        </div>
-
     </div>
     <div class="nav-modal login-modal modal" id="login-modal">
         <div class="login-title modal-title">Login To Your Account</div>
@@ -277,36 +186,42 @@
     </div>
 
     <!-- Tag create and change modals -->
-    <div class="new-tag-modal modal" id="new-tag-modal">
+    <div class="new-tag-modal modal" id="new-tag-btn-modal">
         <div class="modal-title">Create Tag</div>
         <input type="text" id='tag-input-text' class='tag-input-text' autocomplete=off placeholder="Tag Name">
         <div class="color-select-container" id="color-select-container">
-            <div id="red" data-tag-color="#fd483f" class="color-box" style="background: #fd483f;" onClick='selectColor(this.id)'></div>
-            <div id="pink" data-tag-color="#fd889a" class="color-box" style="background: #fd889a;" onClick='selectColor(this.id)'></div>
-            <div id="brown" data-tag-color="#9A6324" class="color-box" style="background: #9A6324;" onClick='selectColor(this.id)'></div>
-            <div id="orange" data-tag-color="#fca12b" class="color-box" style="background: #fca12b;" onClick='selectColor(this.id)'></div>
-            <div id="yellow" data-tag-color="#ffe119" class="color-box" style="background: #ffe119;" onClick='selectColor(this.id)'></div>
-            <div id="lime" data-tag-color="#bfef45" class="color-box" style="background: #bfef45;" onClick='selectColor(this.id)'></div>
-            <div id="dark-green" data-tag-color="#0a724f" class="color-box" style="background: #0a724f;" onClick='selectColor(this.id)'></div>
-            <div id="mint" data-tag-color="#AAF0D1" class="color-box" style="background: #AAF0D1;" onClick='selectColor(this.id)'></div>
-            <div id="blue" data-tag-color="#7cc3db" class="color-box" style="background: #7cc3db;" onClick='selectColor(this.id)'></div>
-            <div id="navy" data-tag-color="#3D3D90" class="color-box" style="background: #3D3D90;" onClick='selectColor(this.id)'></div>
-            <div id="lavendar" data-tag-color="#cc99cc" class="color-box" style="background: #cc99cc;" onClick='selectColor(this.id)'></div>
-            <div id="purple" data-tag-color="#926adb" class="color-box" style="background: #926adb;" onClick='selectColor(this.id)'></div>
+            <div id="#fd483f" data-tag-color="#fd483f" class="color-box" style="background: #fd483f;" onClick='selectColor(this.id)'></div>
+            <div id="#fd889a" data-tag-color="#fd889a" class="color-box" style="background: #fd889a;" onClick='selectColor(this.id)'></div>
+            <div id="#9A6324" data-tag-color="#9A6324" class="color-box" style="background: #9A6324;" onClick='selectColor(this.id)'></div>
+            <div id="#fca12b" data-tag-color="#fca12b" class="color-box" style="background: #fca12b;" onClick='selectColor(this.id)'></div>
+            <div id="#ffe119" data-tag-color="#ffe119" class="color-box" style="background: #ffe119;" onClick='selectColor(this.id)'></div>
+            <div id="#bfef45" data-tag-color="#bfef45" class="color-box" style="background: #bfef45;" onClick='selectColor(this.id)'></div>
+            <div id="#0a724f" data-tag-color="#0a724f" class="color-box" style="background: #0a724f;" onClick='selectColor(this.id)'></div>
+            <div id="#AAF0D1" data-tag-color="#AAF0D1" class="color-box" style="background: #AAF0D1;" onClick='selectColor(this.id)'></div>
+            <div id="#7cc3db" data-tag-color="#7cc3db" class="color-box" style="background: #7cc3db;" onClick='selectColor(this.id)'></div>
+            <div id="#3D3D90" data-tag-color="#3D3D90" class="color-box" style="background: #3D3D90;" onClick='selectColor(this.id)'></div>
+            <div id="#cc99cc" data-tag-color="#cc99cc" class="color-box" style="background: #cc99cc;" onClick='selectColor(this.id)'></div>
+            <div id="#926adb" data-tag-color="#926adb" class="color-box" style="background: #926adb;" onClick='selectColor(this.id)'></div>
         </div>
         <div class="tag-buttons">
-            <button class="cancel-tag-btn" onclick='hideTagCreateModal()'>Cancel</button>
-            <button class="submit-tag-btn" onclick='createTag()'>Create</button>
+            <button class="cancel-tag-btn" id="cancel-create-tag-btn">Cancel</button>
+            <button class="submit-tag-btn" id="submit-create-tag-btn" onclick='createTag()'>Create</button>
         </div>
     </div>
     <div class="change-tag-modal change-tag-modal-scrollbar modal" id="change-tag-modal" style="overflow-y:scroll;">
         <div class="modal-title">Change Modal</div>
+        <div class="change-tag-name">
+            <div class="change-tag-name-input">
+                <span>Change Title</span>
+                <input type="text" value="The Monkey" id="change-tag-modal-name-input-field">
+            </div>
+        </div>
         <div class="change-tag-modal-search">
             <input type="text" placeholder="search-tags" id='change-tag-modal-search-input'>
         </div>
         <div class="change-tag-modal-tag-container" id="change-tag-modal-tag-container"></div>
         <div class="tag-buttons">
-            <button class='cancel-tag-btn' id='cancel-change-modal-btn' onclick='hideChangeTagModal()'>Cancel</button>
+            <button class='cancel-tag-btn' id='cancel-change-modal-btn'>Cancel</button>
             <button class='submit-tag-btn' id='change-tag-modal-btn' onclick='changeTag()'>Change</button>
         </div>
     </div>

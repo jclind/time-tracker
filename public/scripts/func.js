@@ -1,7 +1,5 @@
 // Holds userful functions for other js scripts 
 
-const { read } = require("fs");
-
 // Find total time so far for each element, returns object with array of hours, minutes, seconds, and milliseconds
 const findElapsedTime = (index, arr) => {
     let totH = 0, totM = 0, totS = 0, totMs = 0;
@@ -72,6 +70,23 @@ const compareTimeObjects = (a, b) => {
     return aStr.localeCompare(bStr);
 }
 
+
+// Returns true if both inputed objects are equal
+const objEqual = (o1, o2) => {
+    if (o1.name != o2.name) {
+        return false;
+    }
+    if (o1.date != o2.date) {
+        return false;
+    }
+    if (o1.time.hours != o2.time.hours || o1.time.minutes != o2.time.minutes || o1.time.seconds != o2.time.seconds || o1.time.milliseconds != o2.time.milliseconds) {
+        return false;
+    }
+    if (o1.timeTag.name != o2.timeTag.name || o1.timeTag.color != o2.timeTag.color) {
+        return false;
+    }
+    return true;
+}
 
 
 
