@@ -20,9 +20,6 @@ let tagLabels, tagData, tagColors;
 
 
 
-
-
-
 // Functions to be called on window load from auth.js
 function onWindowLoad() {
     tagLabels = [];
@@ -127,8 +124,6 @@ function onWindowLoad() {
 }
 
 
-
-
 function startStop() {
     var startStopElText = document.getElementById('start-stop-btn').innerText;
 
@@ -178,6 +173,23 @@ function startStop() {
         timer = false;
     }
 }
+// Calculates and runs the timer, sets h, m, s, and ms, with each webpage clock cycle
+function run() {
+    stopwatchEl.textContent = h + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s) + "." + (ms < 10 ? "0" + ms : ms);
+    ms++;
+    if (ms == 100) {
+        ms = 0;
+        s++;
+    }
+    if (s == 60) {
+        s = 0;
+        m++;
+    }
+    if (m == 60) {
+        m = 0;
+        h++;
+    }
+}
 
 // Clears clears current time from the timer screen
 function clear() {
@@ -188,7 +200,6 @@ function clear() {
         document.getElementById('website-title').innerText = 'Stopwatch'
     }
 }
-
 
 // Submits user's time to timesInfoList array and html list
 function submit() { 
@@ -250,11 +261,11 @@ function updateTimesList(arr) {
         let currTimesRow = `times-row-${i}`
         document.getElementById('time-table-body').innerHTML += `
         <tr id='${currTimesRow}'> 
-            <td contenteditable="true" class="name" data-id="${i}" spellcheck='false'>${arr[i].name}</td>
-            <td class='time-table-tag'><div class="" onclick='showChangeTagModal(${i})'>${arr[i].timeTag.name}</div></td>
-            <td>${arr[i].time.hours}:${(arr[i].time.minutes < 10 ? "0" + arr[i].time.minutes : arr[i].time.minutes)}:${(arr[i].time.seconds < 10 ? "0" + arr[i].time.seconds : arr[i].time.seconds)}.${(arr[i].time.milliseconds < 10 ? "0" + arr[i].time.milliseconds : arr[i].time.milliseconds)}</td>
-            <td>${arr[i].date}</td>
-            <td data-id=${i}>${currTotalTime}</td>
+            <td contenteditable="true" data-col-title="title" class="name" data-id="${i}" spellcheck='false'>${arr[i].name}</td>
+            <td class='time-table-tag' data-col-title="Tag"><div class="" onclick='showChangeTagModal(${i})'>${arr[i].timeTag.name}</div></td>
+            <td data-col-title="Time">${arr[i].time.hours}:${(arr[i].time.minutes < 10 ? "0" + arr[i].time.minutes : arr[i].time.minutes)}:${(arr[i].time.seconds < 10 ? "0" + arr[i].time.seconds : arr[i].time.seconds)}.${(arr[i].time.milliseconds < 10 ? "0" + arr[i].time.milliseconds : arr[i].time.milliseconds)}</td>
+            <td data-col-title="Date">${arr[i].date}</td>
+            <td data-col-title="Total Time" data-id=${i}>${currTotalTime}</td>
             <td>
                 <div class="table-options-buttons">
                     <button class="table-edit-button" onclick="toggleEditTagModal(${i})">Edit</button>
@@ -262,6 +273,7 @@ function updateTimesList(arr) {
                 </div>
             </td>
         </tr>`
+        
     }
     // !FIXME
     // if (currFinalTotalTime != undefined) {
@@ -271,7 +283,7 @@ function updateTimesList(arr) {
 
     // }
 }
-$(document)
+
 $(document).on('keyup', '#time-search-input', function () {
     let userInput = document.getElementById('time-search-input').value;
     timesListSearch(userInput)
@@ -293,26 +305,6 @@ $(document).on('input', '.name', function (e) {
     const index = $(this).data('id')
     timesInfoList[index].name = $(this).text()
 })
-
-// Calculates and runs the timer, sets h, m, s, and ms, with each webpage clock cycle
-function run() {
-    stopwatchEl.textContent = h + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s) + "." + (ms < 10 ? "0" + ms : ms);
-    ms++;
-    if (ms == 100) {
-        ms = 0;
-        s++;
-    }
-    if (s == 60) {
-        s = 0;
-        m++;
-    }
-    if (m == 60) {
-        m = 0;
-        h++;
-    }
-}
-
-
 
 
 
@@ -482,141 +474,6 @@ const timerButtonControls = () => {
     }
 }
 timerButtonControls()
-// Manipulate account nav bar modals
-
-// Initialize nav bar modal/blur-overlay divs
-// const accountModal = document.querySelector('#account-modal');
-// const accountModalBlur = document.querySelector('.account-modal-blur');
-// const loginModal = document.querySelector('#login-modal');
-// const loginModalBlur = document.querySelector('.login-modal-blur');
-// const logoutModal = document.querySelector('#logout-modal');
-// const logoutModalBlur = document.querySelector('.logout-modal-blur');
-// const signupModal = document.querySelector('#signup-modal');
-// const signupModalBlur = document.querySelector('.signup-modal-blur');
-
-
-// If account modal is visible, hide modal and backgorund overlay. If it is hidden, show both overlay and modal
-// function accountModalBtn() {
-//     if (accountModal.style.display == 'none' || accountModal.style.display == '') {
-//         accountModal.style.display = 'block';
-//         accountModalBlur.style.display = 'block';
-//         document.body.style.overflow = 'hidden';
-//     } else {
-//         accountModal.style.display = 'none';
-//         accountModalBlur.style.display = 'none';
-//         document.body.style.overflow = 'visible';
-//     }
-// }
-// If login modal is visible, hide modal and backgorund overlay. If it is hidden, show both overlay and modal
-// function loginModalBtn() {
-//     if (loginModal.style.display == 'none' || loginModal.style.display == '') {
-//         loginModal.style.display = 'block';
-//         loginModalBlur.style.display = 'block';
-//         document.body.style.overflow = 'hidden';
-//     } else {
-//         loginModal.style.display = 'none';
-//         loginModalBlur.style.display = 'none';
-//         document.body.style.overflow = 'visible';
-//         loginForm.reset();
-//     }
-// }
-// If signup modal is visible, hide modal and backgorund overlay. If it is hidden, show both overlay and modal
-// function signupModalBtn() {
-//     if (signupModal.style.display == 'none' || signupModal.style.display == '') {
-//         signupModal.style.display = 'block';
-//         signupModalBlur.style.display = 'block';
-//         document.body.style.overflow = 'hidden';
-//     } else {
-//         signupModal.style.display = 'none';
-//         signupModalBlur.style.display = 'none';
-//         document.body.style.overflow = 'visible';
-//         // Reset form inputs
-//         signupForm.reset();
-//     }
-// }
-
-// Listeners for modal overlay-blur click to close modals.
-// document.querySelector('.account-modal-blur').addEventListener('click', function() {
-//      accountModalBtn();
-// });
-// document.querySelector('.login-modal-blur').addEventListener('click', function() {
-//     loginModalBtn();
-// });
-// document.querySelector('.signup-modal-blur').addEventListener('click', function() {
-//     signupModalBtn();
-// });
-
-
-// When blured background is clicked on, close the tag-input background and modal.
-// document.getElementById('new-tag-blur-overlay').addEventListener('click', () => {hideTagCreateModal()})
-
-// Blurs background and shows new tag input modal on button click
-// function showTagCreateModal() {
-//     document.body.style.overflow = 'hidden';
-//     document.getElementById('new-tag-blur-overlay').style.display = 'block';
-//     document.getElementById('new-tag-modal').style.display = 'block';
-//     document.getElementById('tag-input-text').focus();
-// }
-
-// function hideTagCreateModal() {
-//     document.body.style.overflow = 'visible';
-//     document.getElementById('new-tag-blur-overlay').style.display = 'none';
-//     document.getElementById('new-tag-modal').style.display = 'none';
-//     document.getElementById('tag-input-text').style.border = '1px solid rgb(190, 190, 190)';
-//     document.getElementById('tag-input-text').value = '';
-//     document.getElementById('color-select-container').style.border = 'none';
-//     if (selectedTagColor != '') {
-//         document.getElementById(`${selectedTagColor}`).classList.remove('active');
-//         selectedTagColor = '';
-//     }
-// }
-
-
-
-
-
-
-// $(document).on('keyup', '#change-tag-modal-search-input', function () {
-//     let userTagName = document.getElementById('change-tag-modal-search-input').value;
-//     searchChangeTags(userTagName);
-// })
-
-// function searchChangeTags(userTagName) {
-//     let modTimeTags = [];
-//     for (time in timeTags) {
-//         let currTag = timeTags[time].name.toUpperCase();
-//         if (currTag.includes(userTagName.toUpperCase())) {
-//             modTimeTags.push(timeTags[time])
-//         }
-//         updateChangeTagModal(modTimeTags)
-//     }
-// }
-
-
-// Holds index of clicked tag in the table for access in editing which tag that object will have.
-// let currChangeModalIndex;
-
-// function showChangeTagModal(index) {
-//     document.body.style.overflow = 'hidden';
-//     currChangeModalIndex = index;
-//     document.getElementById('change-tag-modal').style.display = 'block';
-//     document.getElementById('change-tag-blur-overlay').style.display = 'block';
-//     updateChangeTagModal(timeTags);
-// }
-
-// Call hideChangeTagModal on click outside of the modal.
-// document.getElementById('change-tag-blur-overlay').addEventListener('click', () => {hideChangeTagModal()})
-
-// function hideChangeTagModal() {
-//     document.body.style.overflow = 'visible';
-//     document.getElementById('change-tag-modal').style.display = 'none';
-//     document.getElementById('change-tag-blur-overlay').style.display = 'none';
-//     selectedChangeModalTag = '';
-// }
-
-
-
-
 
 // Gets time data for each tag and creates arrays: tagLabels, tagData, and tagColors
 function getTagData() {
@@ -668,8 +525,6 @@ function updateTagDistributionGraph() {
         tagDistributionGraph.update();
     }
 }
-
-
 
 
 
@@ -923,5 +778,3 @@ const closeTagModal = (id) => {
     document.getElementById(id).style.display = 'none';
     selectedChangeModalTag = '';
 }
-
-
