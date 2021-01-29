@@ -258,7 +258,7 @@ function updateTimesList(arr) {
             <td>
                 <div class="table-options-buttons">
                     <button class="table-edit-button" onclick="toggleEditTagModal(${i})">Edit</button>
-                    <button class="table-delete-button">Delete</button>
+                    <button class="table-delete-button" onclick="deleteItem(${i})">Delete</button>
                 </div>
             </td>
         </tr>`
@@ -312,17 +312,7 @@ function run() {
     }
 }
 
-// Removes desired time object from the array of times and updates the list
-function deleteItem(i) {
-    // Get index of clicked row.
-    let rowIndex = i;
 
-    // Delete the clicked object at rowIndex
-    timesInfoList.splice(rowIndex, 1);
-
-    // Updates the list of times and saves the data to the localstorage 
-    saveUserData();
-}
 
 
 
@@ -365,55 +355,6 @@ function deleteTag(index, e) {
 
     saveUserData();
 }
-
-
-function createTag() {
-    if (document.getElementById('tag-input-text').value === '') {
-        // Add shake animation class
-        $("#tag-input-text").addClass('tag-input-animation')
-        // Reset shake animation class (allows for multiple uses of animation)
-        $("#tag-input-text").bind('oanimationend animationend webkitAnimationEnd', function() {
-            $("#tag-input-text").removeClass('tag-input-animation')
-        });
-        document.getElementById('tag-input-text').style.border = '1px solid red';
-    } else if (selectedTagColor === ''){
-        // Add shake animation class
-        $("#color-select-container").addClass('tag-input-animation')
-        // Reset shake animation class (allows for multiple uses of animation)
-        $("#color-select-container").bind('oanimationend animationend webkitAnimationEnd', function() {
-            $("#color-select-container").removeClass('tag-input-animation')
-        });
-        document.getElementById('color-select-container').style.border = '1px solid red';
-    } else {
-        document.getElementById('tag-input-text').style.border = '1px solid rgb(190, 190, 190)';
-        
-        let tagName = document.getElementById('tag-input-text').value;
-        let tagColor = selectedTagColor;
-        console.log(selectedTagColor)
-
-        let tempTagObj = {name: tagName, color: tagColor}
-        timeTags.push(tempTagObj)
-        closeTagModal('new-tag-btn-modal');
-        saveUserData();
-    }
-}
-
-// Remove red border on tag input feild when typing.
-$('#tag-input-text').on('keyup', () => {
-    let tagInputText = document.getElementById('tag-input-text')
-    if (tagInputText.style.border === '1px solid red') {
-        tagInputText.style.border = '1px solid rgb(190, 190, 190)'
-    }
-})
-
-$('#color-select-container').on('click', () => {
-    let colorSelect = document.getElementById('color-select-container')
-    if (colorSelect.style.border === '1px solid red') {
-        colorSelect.style.border = 'none';
-    }
-})
-
-
 
 
 
@@ -500,43 +441,47 @@ function sortTimeTable(sortName) {
 }
 
 
-
-// Event listeners for html buttons
-document.getElementById('clear-btn').addEventListener('click', clear);
-document.getElementById('submit-btn').addEventListener('click', submit);
-
-// Disable clear button hover effect. 
-document.getElementById('clear-btn').onmouseover = function() {
-    if (document.getElementById('start-stop-btn').innerText === 'Start') {
-        document.getElementById('clear-btn').style.background = 'rgb(247, 172, 75)';
-        document.getElementById('clear-btn').style.border = '2px solid rgb(252, 161, 43)'
-        document.getElementById('clear-btn').style.cursor = 'pointer';
+const timerButtonControls = () => {
+    const startStopBtn = document.getElementById('start-stop-btn');
+    const clearBtn = document.getElementById('clear-btn');
+    const submitBtn = document.getElementById('submit-btn');
+    // Event listeners for html buttons
+    clearBtn.addEventListener('click', clear);
+    submitBtn.addEventListener('click', submit);
+    
+    // Disable clear button hover effect. 
+    clearBtn.onmouseover = function() {
+        if (startStopBtn.innerText === 'Start') {
+            clearBtn.style.background = 'rgb(247, 172, 75)';
+            clearBtn.style.border = '2px solid rgb(252, 161, 43)'
+            clearBtn.style.cursor = 'pointer';
+        }
+    }
+    clearBtn.onmouseleave = function() {
+        if (startStopBtn.innerText === 'Start') {
+            clearBtn.style.background = 'rgb(252, 161, 43)';
+            clearBtn.style.border = '1px solid #2d2d2d'
+            clearBtn.style.cursor = 'default';
+        }
+    }
+    
+    // Disable submit button hover effect. 
+    submitBtn.onmouseover = function() {
+        if (startStopBtn.innerText === 'Start') {
+            submitBtn.style.background = 'rgb(247, 172, 75)';
+            submitBtn.style.border = '2px solid rgb(252, 161, 43)'
+            submitBtn.style.cursor = 'pointer';
+        }
+    }
+    submitBtn.onmouseleave = function() {
+        if (startStopBtn.innerText === 'Start') {
+            submitBtn.style.background = 'rgb(252, 161, 43)';
+            submitBtn.style.border = '1px solid #2d2d2d'
+            submitBtn.style.cursor = 'default';
+        }
     }
 }
-document.getElementById('clear-btn').onmouseleave = function() {
-    if (document.getElementById('start-stop-btn').innerText === 'Start') {
-        document.getElementById('clear-btn').style.background = 'rgb(252, 161, 43)';
-        document.getElementById('clear-btn').style.border = '1px solid #2d2d2d'
-        document.getElementById('clear-btn').style.cursor = 'default';
-    }
-}
-
-// Disable submit button hover effect. 
-document.getElementById('submit-btn').onmouseover = function() {
-    if (document.getElementById('start-stop-btn').innerText === 'Start') {
-        document.getElementById('submit-btn').style.background = 'rgb(247, 172, 75)';
-        document.getElementById('submit-btn').style.border = '2px solid rgb(252, 161, 43)'
-        document.getElementById('submit-btn').style.cursor = 'pointer';
-    }
-}
-document.getElementById('submit-btn').onmouseleave = function() {
-    if (document.getElementById('start-stop-btn').innerText === 'Start') {
-        document.getElementById('submit-btn').style.background = 'rgb(252, 161, 43)';
-        document.getElementById('submit-btn').style.border = '1px solid #2d2d2d'
-        document.getElementById('submit-btn').style.cursor = 'default';
-    }
-}
-
+timerButtonControls()
 // Manipulate account nav bar modals
 
 // Initialize nav bar modal/blur-overlay divs
@@ -724,6 +669,10 @@ function updateTagDistributionGraph() {
     }
 }
 
+
+
+
+
 // Nav functionality and Modals
 const navSlide = () => {
     const burger = document.querySelector('.burger');
@@ -795,7 +744,56 @@ const toggleCreateTagModal = () => {
     })
 }
 toggleCreateTagModal();
+// Create tag in tag modal
+function createTag() {
+    if (document.getElementById('tag-input-text').value === '') {
+        // Add shake animation class
+        $("#tag-input-text").addClass('tag-input-animation')
+        // Reset shake animation class (allows for multiple uses of animation)
+        $("#tag-input-text").bind('oanimationend animationend webkitAnimationEnd', function() {
+            $("#tag-input-text").removeClass('tag-input-animation')
+        });
+        document.getElementById('tag-input-text').style.border = '1px solid red';
+    } else if (selectedTagColor === ''){
+        // Add shake animation class
+        $("#color-select-container").addClass('tag-input-animation')
+        // Reset shake animation class (allows for multiple uses of animation)
+        $("#color-select-container").bind('oanimationend animationend webkitAnimationEnd', function() {
+            $("#color-select-container").removeClass('tag-input-animation')
+        });
+        document.getElementById('color-select-container').style.border = '1px solid red';
+    } else {
+        document.getElementById('tag-input-text').style.border = '1px solid rgb(190, 190, 190)';
+        
+        let tagName = document.getElementById('tag-input-text').value;
+        let tagColor = selectedTagColor;
+        console.log(selectedTagColor)
 
+        let tempTagObj = {name: tagName, color: tagColor}
+        timeTags.push(tempTagObj)
+        closeTagModal('new-tag-btn-modal');
+        saveUserData();
+    }
+}
+// Remove red border on tag input feild when typing.
+$('#tag-input-text').on('keyup', () => {
+    let tagInputText = document.getElementById('tag-input-text')
+    if (tagInputText.style.border === '1px solid red') {
+        tagInputText.style.border = '1px solid rgb(190, 190, 190)'
+    }
+})
+$('#color-select-container').on('click', () => {
+    let colorSelect = document.getElementById('color-select-container')
+    if (colorSelect.style.border === '1px solid red') {
+        colorSelect.style.border = 'none';
+    }
+})
+
+
+
+
+
+// Change Tag Modal Functions
 let currChangeModalIndex;
 function toggleEditTagModal(index) {
     currChangeModalIndex = index;
@@ -899,6 +897,24 @@ function changeTag() {
         }
     }   
     selectedChangeModalTag = '';
+}
+// Removes desired time object from the array of times and updates the list
+function deleteItem(index) {
+    // set tempTimesArrIndex. Will be found in forEach loop.
+    let tempTimesArrIndex
+    // If the current selected object in 'currentTimesArray' that is equal to one of the objects in timesInfoList,
+    // tempTimesArrIndex will hold the index of that equal object in timesInfoList.
+    // Prevents deletion of wrong item based on if there is a different array in updateTimesList than is equal to timesInfoList
+    timesInfoList.forEach((o1, idx) => {
+        if (objEqual(o1, currentTimesArray[index])) {
+            tempTimesArrIndex = idx;
+        }
+    })
+    // Delete the clicked object at rowIndex
+    timesInfoList.splice(tempTimesArrIndex, 1);
+
+    // Updates the list of times and saves the data to the localstorage 
+    saveUserData();
 }
 
 

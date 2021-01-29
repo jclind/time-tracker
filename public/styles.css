@@ -38,6 +38,7 @@ html, body {
     width: 30%;
 }
 .nav-links li {
+    display: none;
     list-style: none;
     cursor: pointer;
 }
@@ -337,7 +338,6 @@ html, body {
 /* #region Edit Tag */
 
 .change-tag-modal {
-    display: block;
     width: 300px;
     padding: 5px;
     height: 400px;
