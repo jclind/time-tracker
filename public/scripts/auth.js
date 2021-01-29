@@ -8,8 +8,17 @@ const setupUI = (user) => {
         db.collection('users').doc(user.uid).get().then(doc => {
             // Account info
             const accountHTML = `
-                <div id="account-modal-title">Hello ${doc.data().name}</div>
-                <div id="account-modal-email">Logged in as ${user.email}</div>
+                <div class="modal-title">Account Information</div>
+                <div class="account-info-container">
+                    <div class="account-modal-email-container account-info-item">
+                        <h6>Email</h6>
+                        <div class="acocunt-modal-email">${user.email}</div>
+                    </div>
+                    <div class="account-modal-name-container account-info-item">
+                        <h6>Name</h6>
+                        <div class="account-modal-name">${doc.data().name}</div>
+                    </div>
+                </div>
             `;
             accountDetails.innerHTML = accountHTML;
         })
@@ -76,7 +85,7 @@ signupForm.addEventListener('submit', (e) => {
         });
     }).then(() => {
         // Close signup modal
-        signupModalBtn();
+        closeNavModal('signup-modal');
     });
 });
 
@@ -99,7 +108,7 @@ loginForm.addEventListener('submit', (e) => {
 
     auth.signInWithEmailAndPassword(email, password).then(cred => {
         // Close the login modal and reset the form
-        loginModalBtn();
+        closeNavModal('login-modal');
     });
 });
 
@@ -129,9 +138,3 @@ const saveUserData = () => {
 
 
 }
-
-
-
-
-
-
