@@ -22,6 +22,7 @@ let tagLabels, tagData, tagColors;
 
 // Functions to be called on window load from auth.js
 function onWindowLoad() {
+    currentTimesArray = timesInfoList
     tagLabels = [];
     tagData = [];
     tagColors = [];
@@ -263,11 +264,11 @@ $(document).on('click', '.time-table-title-cell', function (e) {
 })
 
 function sortTimeTable(sortName) {
-    if (timesInfoList.length != 0) {
+    if (currentTimesArray.length != 0) {
         document.getElementById(currSortedRow).querySelector('i').style.display = 'block';
         if (sortName == 'Title') {
             // Sorts by alphabetical order of time titles
-            let titleSortTimesList = timesInfoList.sort((a, b) => a.name.localeCompare(b.name)).slice();
+            let titleSortTimesList = currentTimesArray.sort((a, b) => a.name.localeCompare(b.name)).slice();
             // Check direction of the caret.
             if (document.getElementById(currSortedRow).querySelector('i').classList.contains('fa-caret-up')) {
                 titleSortTimesList = titleSortTimesList.reverse();
@@ -276,7 +277,7 @@ function sortTimeTable(sortName) {
     
         } else if (sortName == 'Tag') {
             // Sorts by alphabetical order of time tags
-            let tagSortTimesList = timesInfoList.sort((a, b) => a.timeTag.name.localeCompare(b.timeTag.name)).slice();
+            let tagSortTimesList = currentTimesArray.sort((a, b) => a.timeTag.name.localeCompare(b.timeTag.name)).slice();
             
             if (document.getElementById(currSortedRow).querySelector('i').classList.contains('fa-caret-up')) {
                 tagSortTimesList = tagSortTimesList.reverse();
@@ -284,10 +285,10 @@ function sortTimeTable(sortName) {
             updateTimesList(tagSortTimesList);
         } else if (sortName == 'Time') {
             // Sorts by amount of time.
-            let timeSortTimesList = timesInfoList.slice();
-            // Bubble sorts timesInfoList array by time value in timeSortTimesList array
-            for (let i = 0; i < timesInfoList.length - 1; i++) {
-                for (let j = 0; j < timesInfoList.length - i - 1; j++) {
+            let timeSortTimesList = currentTimesArray.slice();
+            // Bubble sorts currentTimesArray array by time value in timeSortTimesList array
+            for (let i = 0; i < currentTimesArray.length - 1; i++) {
+                for (let j = 0; j < currentTimesArray.length - i - 1; j++) {
                     if (compareTimeObjects(timeSortTimesList[j].time, timeSortTimesList[j + 1].time) == -1) {
                         tempTime = timeSortTimesList[j]
                         timeSortTimesList[j] = timeSortTimesList[j + 1]
@@ -303,14 +304,14 @@ function sortTimeTable(sortName) {
             updateTimesList(timeSortTimesList)
     
         } else if (sortName == 'Date') {
-            let dateSortTimesList = timesInfoList.sort((a, b) => a.date.localeCompare(b.date)).slice();
+            let dateSortTimesList = currentTimesArray.sort((a, b) => a.date.localeCompare(b.date)).slice();
             if (document.getElementById(currSortedRow).querySelector('i').classList.contains('fa-caret-up')) {
                 dateSortTimesList = dateSortTimesList.reverse();
             }
             updateTimesList(dateSortTimesList)
         }
     } else {
-        updateTimesList(timesInfoList);
+        updateTimesList(currentTimesArray);
     }
 }
 
@@ -631,44 +632,98 @@ let currSelectedTimespanId = 'today-btn';
 const timespanSelect = () => {
     $('.time-span-select-button').click(function() {
         if (currSelectedTimespanId != this.id) {
-            console.log('hello')
+            // Revert last pushed select button back to original css
             document.getElementById(currSelectedTimespanId).style.color = "white"
             document.getElementById(currSelectedTimespanId).style.cursor = "pointer"
             document.getElementById(currSelectedTimespanId).style.background = "rgb(15, 15, 15)"
             currSelectedTimespanId = this.id;
-            let modTimesArr = [];
-            let d = new Date;
-            if (currSelectedTimespanId == 'today-btn') {
-                let month = d.getUTCMonth() + 1;
-                let day = d.getUTCDate();
-                let year = d.getUTCFullYear();
-                let dateCur = month + "/" + day + "/" + year;
-                timesInfoList.forEach((obj, idx) => {
-                    if (dateCur == timesInfoList[idx].date) {
-                        modTimesArr.push(timesInfoList[idx])
-                    }
-                })
-            } else if (currSelectedTimespanId == 'yesterday-btn') {
-                d.setDate(d.getDate() - 1);
-                let month = d.getUTCMonth() + 1;
-                let day = d.getUTCDate();
-                let year = d.getUTCFullYear();
-                let dateYesterday = month + "/" + day + "/" + year;
-                timesInfoList.forEach((obj, idx) => {
-                    if (dateYesterday == timesInfoList[idx].date) {
-                        modTimesArr.push(timesInfoList[idx])
-                    }
-                })
-
-            }
-            updateTimesList(modTimesArr)
-            document.getElementById(currSelectedTimespanId).style.color = "black"
-            document.getElementById(currSelectedTimespanId).style.cursor = "default"
-            document.getElementById(currSelectedTimespanId).style.background = "white"
-            document.getElementById(currSelectedTimespanId).style.borderRadius = "5px"
+            calcTimespanSelect();
         }
     })
 }
 timespanSelect();
+function calcTimespanSelect() {
+    // Change clicked select button css to show that it was clicked
+    document.getElementById(currSelectedTimespanId).style.color = "black"
+    document.getElementById(currSelectedTimespanId).style.cursor = "default"
+    document.getElementById(currSelectedTimespanId).style.background = "white"
+    document.getElementById(currSelectedTimespanId).style.borderRadius = "5px"
 
+
+
+    let modTimesArr = [];
+    let d = new Date;
+    if (currSelectedTimespanId == 'today-btn') {
+        let month = d.getUTCMonth() + 1;
+        let day = d.getUTCDate();
+        let year = d.getUTCFullYear();
+        let dateCur = month + "/" + day + "/" + year;
+        timesInfoList.forEach((obj, idx) => {
+            if (dateCur == timesInfoList[idx].date) {
+                modTimesArr.push(timesInfoList[idx])
+            }
+        })
+    } else if (currSelectedTimespanId == 'yesterday-btn') {
+        d.setDate(d.getDate() - 1);
+        let month = d.getUTCMonth() + 1;
+        let day = d.getUTCDate();
+        let year = d.getUTCFullYear();
+        let dateYesterday = month + "/" + day + "/" + year;
+        timesInfoList.forEach((obj, idx) => {
+            if (dateYesterday == timesInfoList[idx].date) {
+                modTimesArr.push(timesInfoList[idx])
+            }
+        })
+
+    } else if (currSelectedTimespanId == 'week-btn') {
+        for (let i = 0; i <= d.getDay(); i++) {
+            const tempDate = new Date;
+            tempDate.setDate(tempDate.getDate() - i);
+            let month = tempDate.getUTCMonth() + 1;
+            let day = tempDate.getUTCDate();
+            let year = tempDate.getUTCFullYear();
+            let dateTemp = month + "/" + day + "/" + year;
+            timesInfoList.forEach((obj, idx) => {
+                if (dateTemp == timesInfoList[idx].date) {
+                    modTimesArr.push(timesInfoList[idx])
+                }
+            })
+        }
+    } else if (currSelectedTimespanId == 'month-btn') {
+        for (let i = 1; i <= d.getDate(); i++) {
+            const tempDate = new Date;
+            tempDate.setDate(tempDate.getDate() - i + 1);
+            let month = tempDate.getUTCMonth() + 1;
+            let day = tempDate.getUTCDate();
+            let year = tempDate.getUTCFullYear();
+            let dateTemp = month + "/" + day + "/" + year;
+            timesInfoList.forEach((obj, idx) => {
+                if (dateTemp == timesInfoList[idx].date) {
+                    modTimesArr.push(timesInfoList[idx])
+                }
+            })
+        }
+    } else if (currSelectedTimespanId == 'year-btn') {
+        let today = new Date();
+        let first = new Date(today.getFullYear(), 0, 1);
+        let dayOfYear = Math.round(((today - first) / 1000 / 60 / 60 / 24) + .5, 0);
+        for (let i = 1; i <= dayOfYear; i++) {
+            const tempDate = new Date;
+            tempDate.setDate(tempDate.getDate() - i + 1);
+            let month = tempDate.getUTCMonth() + 1;
+            let day = tempDate.getUTCDate();
+            let year = tempDate.getUTCFullYear();
+            let dateTemp = month + "/" + day + "/" + year;
+            timesInfoList.forEach((obj, idx) => {
+                if (dateTemp == timesInfoList[idx].date) {
+                    modTimesArr.push(timesInfoList[idx])
+                }
+            })
+        }
+    } else {
+        modTimesArr = timesInfoList;
+    }
+    updateTimesList(modTimesArr)
+}
+// calcTimespanSelect()
 
