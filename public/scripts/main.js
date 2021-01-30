@@ -2,7 +2,7 @@
 let timesInfoList = [];
 let timeTags = [{name: 'main', color: 'red'}];
 
-// Initialize 
+// Initialize time elements/variables
 let h = 0, m = 0, s = 0, ms = 0;
 let elapsedTime = 0;   
 let timer;
@@ -124,125 +124,7 @@ function onWindowLoad() {
 }
 
 
-function startStop() {
-    var startStopElText = document.getElementById('start-stop-btn').innerText;
 
-    // If the timer is not runing. 
-    if (startStopElText === 'Start'){
-        // change clear button to be grayed out when the timer is going
-        document.getElementById('clear-btn').style.background = 'rgb(58, 58, 58)';
-        document.getElementById('clear-btn').style.color = 'gray';
-
-        // change submit button to be grayed out when the timer is going
-        document.getElementById('submit-btn').style.background = 'rgb(58, 58, 58)';
-        document.getElementById('submit-btn').style.color = 'gray';
-
-        document.getElementById('start-stop-btn').innerText = 'Stop';
-
-        let st = Date.now() - elapsedTime;
-        let intervalIndex = 0;
-        timer = setInterval(() => {
-            let currT = Date.now();
-            elapsedTime = currT - st;
-            tempT = elapsedTime;
-
-            ms = Math.floor((tempT % 1000) / 10);
-            tempT = Math.floor(tempT / 1000);
-            s = tempT % 60;
-            tempT = Math.floor(tempT / 60);
-            m = tempT % 60;
-            tempT = Math.floor(tempT / 60);
-            h = tempT % 60;
-            
-            intervalIndex++;
-            stopwatchEl.textContent = h + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s) + "." + (ms < 10 ? "0" + ms : ms);
-            document.getElementById('website-title').innerText = h + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
-        }, 10);
-    } else {
-        // change clear button back to orange when timer stops
-        document.getElementById('clear-btn').style.background = 'rgb(252, 161, 43)';
-        document.getElementById('clear-btn').style.color = 'black';
-
-        // change submit button back to orange when timer stops
-        document.getElementById('submit-btn').style.background = 'rgb(252, 161, 43)';
-        document.getElementById('submit-btn').style.color = 'black';
-        
-
-        document.getElementById('start-stop-btn').innerText = 'Start';
-        clearInterval(timer);
-        timer = false;
-    }
-}
-// Calculates and runs the timer, sets h, m, s, and ms, with each webpage clock cycle
-function run() {
-    stopwatchEl.textContent = h + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s) + "." + (ms < 10 ? "0" + ms : ms);
-    ms++;
-    if (ms == 100) {
-        ms = 0;
-        s++;
-    }
-    if (s == 60) {
-        s = 0;
-        m++;
-    }
-    if (m == 60) {
-        m = 0;
-        h++;
-    }
-}
-
-// Clears clears current time from the timer screen
-function clear() {
-    if (document.getElementById('start-stop-btn').innerText === 'Start') {
-        elapsedTime = 0;
-        ms = 0, s = 0, m = 0, h = 0;
-        stopwatchEl.textContent = '0:00:00.00';
-        document.getElementById('website-title').innerText = 'Stopwatch'
-    }
-}
-
-// Submits user's time to timesInfoList array and html list
-function submit() { 
-    // only allow submition when the timer is stopped and the time is not 0.
-    if ((document.getElementById('start-stop-btn').innerText === 'Start') && document.getElementById('time').textContent !== '0:00:00.00') {
-        // Set time name and clear name input feild 
-        let timeName = document.getElementById('title-input').value;
-        if (timeName === '') {
-            timeName = 'Creative Name';
-        }
-        document.getElementById('title-input').value = '';
-
-        // Set time date
-        let d = new Date;
-        let month = d.getUTCMonth() + 1;
-        let day = d.getUTCDate();
-        let year = d.getUTCFullYear();
-        
-        let dateCur = month + "/" + day + "/" + year;
-
-        // Set actual time for time object
-        let timeCur = {hours: h, minutes: m, seconds: s, milliseconds: ms};
-        
-        // Set time object's total time
-        let totTime;
-        if (timesInfoList != null) {
-            totTime = findElapsedTime(timesInfoList.length - 1, timesInfoList);
-        } else {
-            totTime = timeCur;
-        }
-
-        // Set time's tag to the first element in the timeTags array
-        let tagCur = timeTags[0];
-
-        // Push name, time, date, and total time to object and push that to timesInfoList array
-        let temp = {name: timeName, time: timeCur, date: dateCur, totalTime: totTime, timeTag: tagCur};
-        timesInfoList.push(temp);
-
-        // Save timesInfoList to localstroage, update the html list, and clear the timer on submit of time.
-        saveUserData();
-        clear();
-    }
-}
 
 // Keep the current array that will be displayed in the times table. (helpful for deleting time objects later)
 let currentTimesArray;
@@ -433,47 +315,7 @@ function sortTimeTable(sortName) {
 }
 
 
-const timerButtonControls = () => {
-    const startStopBtn = document.getElementById('start-stop-btn');
-    const clearBtn = document.getElementById('clear-btn');
-    const submitBtn = document.getElementById('submit-btn');
-    // Event listeners for html buttons
-    clearBtn.addEventListener('click', clear);
-    submitBtn.addEventListener('click', submit);
-    
-    // Disable clear button hover effect. 
-    clearBtn.onmouseover = function() {
-        if (startStopBtn.innerText === 'Start') {
-            clearBtn.style.background = 'rgb(247, 172, 75)';
-            clearBtn.style.border = '2px solid rgb(252, 161, 43)'
-            clearBtn.style.cursor = 'pointer';
-        }
-    }
-    clearBtn.onmouseleave = function() {
-        if (startStopBtn.innerText === 'Start') {
-            clearBtn.style.background = 'rgb(252, 161, 43)';
-            clearBtn.style.border = '1px solid #2d2d2d'
-            clearBtn.style.cursor = 'default';
-        }
-    }
-    
-    // Disable submit button hover effect. 
-    submitBtn.onmouseover = function() {
-        if (startStopBtn.innerText === 'Start') {
-            submitBtn.style.background = 'rgb(247, 172, 75)';
-            submitBtn.style.border = '2px solid rgb(252, 161, 43)'
-            submitBtn.style.cursor = 'pointer';
-        }
-    }
-    submitBtn.onmouseleave = function() {
-        if (startStopBtn.innerText === 'Start') {
-            submitBtn.style.background = 'rgb(252, 161, 43)';
-            submitBtn.style.border = '1px solid #2d2d2d'
-            submitBtn.style.cursor = 'default';
-        }
-    }
-}
-timerButtonControls()
+
 
 // Gets time data for each tag and creates arrays: tagLabels, tagData, and tagColors
 function getTagData() {
@@ -536,6 +378,7 @@ const navSlide = () => {
 
     burger.addEventListener('click', () => {
         // Toggle nav
+        nav.style.display = "flex";
         nav.classList.toggle('nav-active');
 
         // Animate nav
@@ -778,3 +621,54 @@ const closeTagModal = (id) => {
     document.getElementById(id).style.display = 'none';
     selectedChangeModalTag = '';
 }
+
+
+
+
+
+
+let currSelectedTimespanId = 'today-btn';
+const timespanSelect = () => {
+    $('.time-span-select-button').click(function() {
+        if (currSelectedTimespanId != this.id) {
+            console.log('hello')
+            document.getElementById(currSelectedTimespanId).style.color = "white"
+            document.getElementById(currSelectedTimespanId).style.cursor = "pointer"
+            document.getElementById(currSelectedTimespanId).style.background = "rgb(15, 15, 15)"
+            currSelectedTimespanId = this.id;
+            let modTimesArr = [];
+            let d = new Date;
+            if (currSelectedTimespanId == 'today-btn') {
+                let month = d.getUTCMonth() + 1;
+                let day = d.getUTCDate();
+                let year = d.getUTCFullYear();
+                let dateCur = month + "/" + day + "/" + year;
+                timesInfoList.forEach((obj, idx) => {
+                    if (dateCur == timesInfoList[idx].date) {
+                        modTimesArr.push(timesInfoList[idx])
+                    }
+                })
+            } else if (currSelectedTimespanId == 'yesterday-btn') {
+                d.setDate(d.getDate() - 1);
+                let month = d.getUTCMonth() + 1;
+                let day = d.getUTCDate();
+                let year = d.getUTCFullYear();
+                let dateYesterday = month + "/" + day + "/" + year;
+                timesInfoList.forEach((obj, idx) => {
+                    if (dateYesterday == timesInfoList[idx].date) {
+                        modTimesArr.push(timesInfoList[idx])
+                    }
+                })
+
+            }
+            updateTimesList(modTimesArr)
+            document.getElementById(currSelectedTimespanId).style.color = "black"
+            document.getElementById(currSelectedTimespanId).style.cursor = "default"
+            document.getElementById(currSelectedTimespanId).style.background = "white"
+            document.getElementById(currSelectedTimespanId).style.borderRadius = "5px"
+        }
+    })
+}
+timespanSelect();
+
+

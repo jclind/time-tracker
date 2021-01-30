@@ -7,10 +7,12 @@ body {
     background: #2d2d2d;
     overflow: visible;
     height: 100vh;
+    width: 100vw;
 }
 
-html, body {
+html, body, .body-wrapper {
     overflow-x: hidden;
+    width: 100%;
 }
 
 
@@ -71,16 +73,20 @@ html, body {
 }
 
 @media screen and (max-width: 768px) {
-    body {
+    body, html {
         overflow-x: hidden;
     }
+    .body-wrapper {
+        overflow-x: hidden;
+        position: relative
+    }
     .nav-links {
+        display: flex;
         z-index: 3;
         position: absolute;
         right: 0px;
         top: 8.5vh;
         height: 92vh;
-        display: flex;
         flex-direction: column;
         justify-content: start;
         align-items: center;
@@ -672,6 +678,43 @@ input:focus::placeholder {
 /* #endregion */
 
 
+/* !Timespan Select */
+/* #region Timespan Select */
+.time-span-select {
+    margin: 30px auto 0px auto;
+    display: flex;
+    justify-content: center;
+}
+.time-span-select-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(15, 15, 15);
+    border-radius: 5px;
+}
+.time-span-select-button {
+    color: white;
+    outline: none;
+    border: none;
+    padding: 7px 35px;
+    background: none;
+    cursor: pointer;
+}
+.time-span-select-button-break {
+    height: 20px;
+    border-left: 1px solid white;
+}
+
+.time-span-select-button-active {
+    cursor: default;
+    color: black;
+    background: white;
+    border-radius: 5px;
+}
+
+/* #endregion */
+
+
 /* !TIME TABLE */
 /* #region Time Table Element*/
 table {
@@ -759,12 +802,10 @@ table th, table td {
         content: attr(data-col-title)
     }
     .table-options {
-        display: flex;
-        justify-content: flex-end;
+        display: block;
     }
     .table-options-buttons {
-        display: flex;
-        justify-content: flex-end;
+        display: block;
     }
     
 }

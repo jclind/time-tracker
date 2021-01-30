@@ -103,8 +103,8 @@ const objEqual = (o1, o2) => {
 
 
 
-
-
+// Remove possible second scroll bar
+$('html').css('overflow-x', 'initial');
 
 
 
