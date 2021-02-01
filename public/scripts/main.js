@@ -9,119 +9,23 @@ let timer;
 let stopwatchEl = document.querySelector('.time');
 
 
-let tagDistributionGraph;
-let ctxTagDis;
-
-
 // Set variables for sorting the time table.
 let currSortedRow = 'time-table-header-date', currSortedRowName = 'Date';
 // Create tag data variables
-let tagLabels, tagData, tagColors;
 
 
 
 // Functions to be called on window load from auth.js
 function onWindowLoad() {
     currentTimesArray = timesInfoList
-    tagLabels = [];
-    tagData = [];
-    tagColors = [];
+    
     updateTagsList();
     console.log('this should have worked man')
     sortTimeTable(currSortedRowName);
-    
+    calcTimespanSelect();
     
     // Draw initial tagDistributionGraph.
-    ctxTagDis = document.getElementById('tag-distribution').getContext('2d');
-    getTagData();
-    // If an old chart exists, remove the whole chart.
-    if (tagDistributionGraph) {
-        tagDistributionGraph.destroy();
-    }
-    tagDistributionGraph = new Chart(ctxTagDis, {
-        type: 'doughnut',
-        data: {
-            labels: tagLabels,
-            datasets: [{
-                data: tagData,
-                backgroundColor: tagColors
-            }]
-        },
-        options: {
-            elements: {
-                arc: {
-                    borderWidth: 0,
-                }
-            },
-            title: {
-                text: "Tag Time Distribution",
-                display: true
-            },
-            legend: {
-                display: false,
-                position: 'bottom',
-                labels: {
-                    fontColor: '#fff'
-                },
-                fullWidth: true,
-            },
-            tooltips: {
-                callbacks: {
-                    title: function(tooltipItem, data) {
-                        return data['labels'][tooltipItem[0]['index']];
-                    },
-                    label: function(tooltipItem, data) {
-                        let label;
-                        if (timesInfoList.length == 0) {
-                            label = "No Data"
-                        } else {
-                            label = msToString(data['datasets'][0]['data'][tooltipItem['index']])
-                        }
-                        return label;
-                    }
-                },
-                yAlign: "bottom",
-                titleAlign: 'center',
-                bodyAlign: 'center',
-                titleFontSize: 17,
-                bodyFontSize: 15,
-                bodyFontStyle: 'bold',
-                xPadding: 10,
-                yPadding: 10,
-                displayColors: false,
-                backgroundColor: 'rgba(0, 0, 0, 0.9)'
-            },
-            plugins: {
-                afterDraw: function (chart, option) {
-                    let theCenterText = "50%" ;
-                    const canvasBounds = canvas.getBoundingClientRect();
-                    const fontSz = Math.floor( canvasBounds.height * 0.10 ) ;
-                    chart.ctx.textBaseline = 'middle';
-                    chart.ctx.textAlign = 'center';
-                    chart.ctx.font = fontSz+'px Arial';
-                    chart.ctx.fillText(theCenterText, canvasBounds.width/2, canvasBounds.height*0.70 )
-                },
-                datalabels: {
-                    display: false,
-                    formatter: (value, ctxTagDis) => {
-                        let sum = 0;
-                        let dataArr = ctxTagDis.chart.data.datasets[0].data;
-                        dataArr.map(data => {
-                            sum += data;
-                        });
-                        let percentage = (value * 100 / sum).toFixed(1) + '%';
-                        return percentage;
-                    },
-                    color: '#292929',
-                    font: {
-                        weight: 'bold',
-                        size: 13,
-                    }
-                }
-            }
-        }
-    });
-    updateTagDistributionGraph();
+    drawTagDistributionGraph();
 }
 
 
@@ -156,7 +60,6 @@ function updateTimesList(arr) {
                 </div>
             </td>
         </tr>`
-        
     }
     // !FIXME
     // if (currFinalTotalTime != undefined) {
@@ -312,60 +215,6 @@ function sortTimeTable(sortName) {
         }
     } else {
         updateTimesList(currentTimesArray);
-    }
-}
-
-
-
-
-// Gets time data for each tag and creates arrays: tagLabels, tagData, and tagColors
-function getTagData() {
-    tagLabels = [];
-    tagData = [];
-    tagColors = [];
-    if (timesInfoList.length != 0) {
-        // Loop through time tags and find sum of all timesInfoList item milliseconds associated with that tag.
-        for (tag in timeTags) {
-            let currTagName = timeTags[tag].name;
-            let tagSum = 0;
-            for (item in timesInfoList) {
-                if ((timesInfoList[item].timeTag.name == currTagName)) {
-                    tagSum += stringToMS(timesInfoList[item].time)
-                }
-            }
-            if (tagSum != 0) {
-                tagLabels.push(currTagName)
-                tagData.push(tagSum)
-                let currColor = timeTags[tag].color;
-                tagColors.push(currColor)
-            } 
-        }
-    } else {
-        tagLabels = [''];
-        tagData = [100];
-        tagColors = ['Gray'];
-    }
-}
-
-function updateTagDistributionGraph() {
-    getTagData();
-    // Check to make sure there is data to be displayed in the graph
-    if (tagLabels.length != 0 && timesInfoList.length != 0) {
-        // If there is data
-        tagDistributionGraph.data.labels = tagLabels;
-        tagDistributionGraph.data.datasets[0].data = tagData;
-        tagDistributionGraph.data.datasets[0].backgroundColor = tagColors;
-        
-        tagDistributionGraph.options.elements.arc.borderWidth = 1;
-        tagDistributionGraph.options.legend.display = true;
-        tagDistributionGraph.options.plugins.datalabels.display = true;
-        tagDistributionGraph.update();
-    } else {
-        // If there is no data
-        tagDistributionGraph.options.elements.arc.borderWidth = 0;
-        tagDistributionGraph.options.legend.display = false;
-        tagDistributionGraph.options.plugins.datalabels.display = false;
-        tagDistributionGraph.update();
     }
 }
 
@@ -628,6 +477,14 @@ const closeTagModal = (id) => {
     tagModalBlur.style.display = 'none'
     document.getElementById(id).style.display = 'none';
     selectedChangeModalTag = '';
+    // If the modal being closed is the create new tag modal, clear all inputs inside the modal.
+    if (id == 'new-tag-btn-modal') {
+        document.getElementById('tag-input-text').value = ""
+        if (selectedTagColor != '') {
+            document.getElementById(`${selectedTagColor}`).classList.remove('active');
+        }
+        selectedTagColor = ''
+    }
 }
 
 
@@ -644,7 +501,8 @@ const timespanSelect = () => {
             document.getElementById(currSelectedTimespanId).style.cursor = "pointer"
             document.getElementById(currSelectedTimespanId).style.background = "rgb(15, 15, 15)"
             currSelectedTimespanId = this.id;
-            calcTimespanSelect();
+            calcTimespanSelect()
+            drawTagDistributionGraph()
         }
     })
 }
@@ -732,7 +590,6 @@ function calcTimespanSelect() {
     }
     updateTimesList(modTimesArr)
 }
-// calcTimespanSelect()
 
 // Alert user upon leaving page while timer is running. 
 window.onbeforeunload = function(e) {

@@ -123,7 +123,8 @@ const saveUserData = () => {
     // Resort the times table elements and updates the time table
     sortTimeTable(currSortedRowName);
     // Re-update the times distribution graph
-    updateTagDistributionGraph();
+    updateTagsList();
+    drawTagDistributionGraph();
 
     isPending = true;
     // Save user's changed array data to firebase backend
