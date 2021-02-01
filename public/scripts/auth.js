@@ -86,9 +86,6 @@ signupForm.addEventListener('submit', (e) => {
     }).then(() => {
         // Close signup modal
         closeNavModal('signup-modal');
-        if ($(window).width() <= 768) {
-            toggleNav();
-        }
     });
 });
 
@@ -98,10 +95,6 @@ const logout = document.querySelector('#logout');
 logout.addEventListener('click', (e) => {
     e.preventDefault();
     auth.signOut()
-}).then(() => {
-    if ($(window).width() <= 768) {
-        toggleNav();
-    }
 })
 
 // Login
@@ -116,36 +109,36 @@ loginForm.addEventListener('submit', (e) => {
     auth.signInWithEmailAndPassword(email, password).then(cred => {
         // Close the login modal and reset the form
         closeNavModal('login-modal');
-        console.log('1')
-        if ($(window).width() <= 768) {
-            toggleNav();
-        }
     });
 });
 
 
 
 // Save data function
+let isPending = false;
 const saveUserData = () => {
     // Update necessary webpage elements
     // Update tags list
-    updateTagsList();
+    calcTimespanSelect();
     // Resort the times table elements and updates the time table
     sortTimeTable(currSortedRowName);
     // Re-update the times distribution graph
     updateTagDistributionGraph();
 
+    isPending = true;
     // Save user's changed array data to firebase backend
     let currUser = firebase.auth().currentUser;
-    if (currUser != null) {
-        db.collection('users').doc(currUser.uid).get().then(doc => {
-            console.log('hello 1')
-            db.collection('users').doc(currUser.uid).update({
-                times: timesInfoList,
-                tags: timeTags
-            }).then(() => {
-                console.log('saved data')
-            })
+    db.collection('users').doc(currUser.uid).get().then(doc => {
+        console.log(doc.data().times, timesInfoList)
+    })
+    db.collection('users').doc(currUser.uid).get().then(doc => {
+        console.log('hello 1')
+        db.collection('users').doc(currUser.uid).update({
+            times: timesInfoList,
+            tags: timeTags
+        }).then(() => {
+            console.log('saved data')
+            isPending = false;
         })
-    }
+    })
 }

@@ -734,3 +734,13 @@ function calcTimespanSelect() {
 }
 // calcTimespanSelect()
 
+// Alert user upon leaving page while timer is running. 
+window.onbeforeunload = function(e) {
+    // If the time has a value in it, or there is a pending promise, a popup will appear before page unload. 
+    if (document.getElementById('time').innerText != "0:00:00.00") {
+        return "Do you want to leave without submitting your time?"
+    }
+    if (isPending) {
+        return "Data is still saving, try again."
+    }
+}
