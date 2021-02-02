@@ -125,6 +125,7 @@ const saveUserData = () => {
     // Re-update the times distribution graph
     updateTagsList();
     drawTagDistributionGraph();
+    drawTimeTrendsGraph(currSelectedTimespanId)
 
     isPending = true;
     // Save user's changed array data to firebase backend

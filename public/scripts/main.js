@@ -493,7 +493,7 @@ const closeTagModal = (id) => {
 
 
 
-let currSelectedTimespanId = 'month-btn';
+let currSelectedTimespanId = 'today-btn';
 const timespanSelect = () => {
     $('.time-span-select-button').click(function() {
         if (currSelectedTimespanId != this.id) {
@@ -504,6 +504,7 @@ const timespanSelect = () => {
             currSelectedTimespanId = this.id;
             calcTimespanSelect()
             drawTagDistributionGraph()
+            drawTimeTrendsGraph(currSelectedTimespanId)
         }
     })
 }
