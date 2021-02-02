@@ -25,6 +25,7 @@ function onWindowLoad() {
     calcTimespanSelect();
     
     // Draw initial tagDistributionGraph.
+    drawTimeTrendsGraph(currSelectedTimespanId);
     drawTagDistributionGraph();
 }
 
@@ -492,7 +493,7 @@ const closeTagModal = (id) => {
 
 
 
-let currSelectedTimespanId = 'today-btn';
+let currSelectedTimespanId = 'month-btn';
 const timespanSelect = () => {
     $('.time-span-select-button').click(function() {
         if (currSelectedTimespanId != this.id) {
@@ -519,10 +520,11 @@ function calcTimespanSelect() {
     let modTimesArr = [];
     let d = new Date;
     if (currSelectedTimespanId == 'today-btn') {
-        let month = d.getUTCMonth() + 1;
-        let day = d.getUTCDate();
-        let year = d.getUTCFullYear();
+        let month = d.getMonth() + 1;
+        let day = d.getDate();
+        let year = d.getFullYear();
         let dateCur = month + "/" + day + "/" + year;
+        console.log(dateCur)
         timesInfoList.forEach((obj, idx) => {
             if (dateCur == timesInfoList[idx].date) {
                 modTimesArr.push(timesInfoList[idx])
@@ -530,9 +532,9 @@ function calcTimespanSelect() {
         })
     } else if (currSelectedTimespanId == 'yesterday-btn') {
         d.setDate(d.getDate() - 1);
-        let month = d.getUTCMonth() + 1;
-        let day = d.getUTCDate();
-        let year = d.getUTCFullYear();
+        let month = d.getMonth() + 1;
+        let day = d.getDate();
+        let year = d.getFullYear();
         let dateYesterday = month + "/" + day + "/" + year;
         timesInfoList.forEach((obj, idx) => {
             if (dateYesterday == timesInfoList[idx].date) {
@@ -544,9 +546,9 @@ function calcTimespanSelect() {
         for (let i = 0; i <= d.getDay(); i++) {
             const tempDate = new Date;
             tempDate.setDate(tempDate.getDate() - i);
-            let month = tempDate.getUTCMonth() + 1;
-            let day = tempDate.getUTCDate();
-            let year = tempDate.getUTCFullYear();
+            let month = tempDate.getMonth() + 1;
+            let day = tempDate.getDate();
+            let year = tempDate.getFullYear();
             let dateTemp = month + "/" + day + "/" + year;
             timesInfoList.forEach((obj, idx) => {
                 if (dateTemp == timesInfoList[idx].date) {
@@ -558,10 +560,11 @@ function calcTimespanSelect() {
         for (let i = 1; i <= d.getDate(); i++) {
             const tempDate = new Date;
             tempDate.setDate(tempDate.getDate() - i + 1);
-            let month = tempDate.getUTCMonth() + 1;
-            let day = tempDate.getUTCDate();
-            let year = tempDate.getUTCFullYear();
+            let month = tempDate.getMonth() + 1;
+            let day = tempDate.getDate();
+            let year = tempDate.getFullYear();
             let dateTemp = month + "/" + day + "/" + year;
+            console.log(dateTemp)
             timesInfoList.forEach((obj, idx) => {
                 if (dateTemp == timesInfoList[idx].date) {
                     modTimesArr.push(timesInfoList[idx])
@@ -575,9 +578,9 @@ function calcTimespanSelect() {
         for (let i = 1; i <= dayOfYear; i++) {
             const tempDate = new Date;
             tempDate.setDate(tempDate.getDate() - i + 1);
-            let month = tempDate.getUTCMonth() + 1;
-            let day = tempDate.getUTCDate();
-            let year = tempDate.getUTCFullYear();
+            let month = tempDate.getMonth() + 1;
+            let day = tempDate.getDate();
+            let year = tempDate.getFullYear();
             let dateTemp = month + "/" + day + "/" + year;
             timesInfoList.forEach((obj, idx) => {
                 if (dateTemp == timesInfoList[idx].date) {

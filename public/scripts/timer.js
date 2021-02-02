@@ -72,9 +72,9 @@ function submit() {
 
         // Set time date
         const d = new Date;
-        let month = d.getUTCMonth() + 1;
-        let day = d.getUTCDate();
-        let year = d.getUTCFullYear();
+        let month = d.getMonth() + 1;
+        let day = d.getDate();
+        let year = d.getFullYear();
         
         let dateCur = month + "/" + day + "/" + year;
 

@@ -813,6 +813,7 @@ table th, table td {
 
 
 /* !Footer */
+/* #region Footer */
 .footer {
     background: #111111;
     width: 100%;
@@ -849,6 +850,7 @@ table th, table td {
     text-decoration: none;
     color: rgb(180, 180, 180);
 }
+/* #endregion */
 
 
 
@@ -856,17 +858,28 @@ table th, table td {
 
 .my-charts {
     position: relative;
-    width: 60%;
+    width: 100%;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 } 
 .chart {
+    background: white;
+    border-radius: 10px;
     height: 350px; 
     width: 350px;
+    margin: 0px 15px;
 }
 
+@media screen and (max-width: 768px) {
+    .my-charts {
+        flex-direction: column;
+    }
+    .chart {
+        margin-bottom: 25 px;
+    }
+}
 
 
 

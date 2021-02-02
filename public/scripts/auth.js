@@ -49,7 +49,6 @@ auth.onAuthStateChanged(user => {
                     console.log('count is 0')
                     setupUI(user);
                 }
-                console.log(count)
                 count++;
             })
         })
@@ -121,6 +120,7 @@ const saveUserData = () => {
     // Update tags list
     calcTimespanSelect();
     // Resort the times table elements and updates the time table
+    calcTimespanSelect();
     sortTimeTable(currSortedRowName);
     // Re-update the times distribution graph
     updateTagsList();
