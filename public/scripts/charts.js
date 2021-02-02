@@ -62,7 +62,7 @@ function drawTagDistributionGraph() {
                 }
             },
             title: {
-                text: "Tag Time Distribution",
+                text: "Tag Distribution Chart",
                 display: true
             },
             legend: {
@@ -310,8 +310,12 @@ function drawTimeTrendsGraph(timespan) {
                     }
                 }]
             },
+            title: {
+                text: "Time Trends Chart",
+                display: true
+            },
             legend: {
-                // display: false
+                display: false
             },
             tooltips: {
                 callbacks: {
