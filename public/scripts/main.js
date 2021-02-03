@@ -265,6 +265,11 @@ const toggleNavModal = () => {
         console.log(currModalId)
         navModalBlur.style.display = "block"
         document.getElementById(currModalId).style.display = "block"
+
+        // Focus on first input
+        if (document.getElementById(currModalId).querySelectorAll('input')[0]) { // If the modal has an input
+            document.getElementById(currModalId).querySelectorAll('input')[0].focus()
+        } 
     })
     // Background nav modal blur event listener
     navModalBlur.addEventListener('click', () => {
@@ -291,6 +296,7 @@ const toggleCreateTagModal = () => {
     $('#new-tag-btn').click(() => {
         tagModalBlur.style.display = 'block'
         tagModal.style.display = 'block'
+        document.getElementById('tag-input-text').focus();
     })
     tagModalBlur.addEventListener('click', () => {
         closeTagModal('new-tag-btn-modal');
