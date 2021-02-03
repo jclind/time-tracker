@@ -266,9 +266,8 @@ const toggleNavModal = () => {
         navModalBlur.style.display = "block"
         document.getElementById(currModalId).style.display = "block"
 
-        // Focus on first input
         if (document.getElementById(currModalId).querySelectorAll('input')[0]) { // If the modal has an input
-            document.getElementById(currModalId).querySelectorAll('input')[0].focus()
+            document.getElementById(currModalId).querySelectorAll('input')[0].focus() // Focus on first input
         } 
     })
     // Background nav modal blur event listener

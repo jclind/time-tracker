@@ -69,11 +69,10 @@ signupForm.addEventListener('submit', (e) => {
 
     // Sign up user
     auth.createUserWithEmailAndPassword(email, password).then(cred => {
-        let timesArr = [];
         // Initialize name, times array, and tags array into the current signed up user's db
         return db.collection('users').doc(cred.user.uid).set({
             name: signupForm['signup-name'].value,
-            times: timesArr,
+            times: timesInfoList,
             tags: [{name: 'main', color: 'red'}]
         });
     }).then(() => {
@@ -122,17 +121,38 @@ const saveUserData = () => {
     drawTagDistributionGraph();
     drawTimeTrendsGraph(currSelectedTimespanId)
 
-    isPending = true;
     // Save user's changed array data to firebase backend
     let currUser = firebase.auth().currentUser;
-    db.collection('users').doc(currUser.uid).get().then(doc => {
-    })
-    db.collection('users').doc(currUser.uid).get().then(doc => {
-        db.collection('users').doc(currUser.uid).update({
-            times: timesInfoList,
-            tags: timeTags
-        }).then(() => {
-            isPending = false;
+    if (currUser != null) { // If user is logged in
+        isPending = true;
+        db.collection('users').doc(currUser.uid).get().then(doc => {
         })
-    })
+        db.collection('users').doc(currUser.uid).get().then(doc => {
+            db.collection('users').doc(currUser.uid).update({
+                times: timesInfoList,
+                tags: timeTags
+            }).then(() => {
+                isPending = false;
+            })
+        })
+    } else { // If user is not logged in
+        // Toggle save data alert for non logged users
+        $('.save-data-alert').removeClass("hide");
+        $('.save-data-alert').addClass("show");
+        $('.save-data-alert').addClass("showAlert");
+
+
+        // Add Event listener for save data alert close button
+        $('.close-save-data-alert').click(() => {
+            // Hide save data alert
+            $('.save-data-alert').removeClass("show");
+            $('.save-data-alert').addClass("hide");
+        })
+
+        // Close alert popup after 5 seconds automatically
+        setTimeout(() => {
+            $('.save-data-alert').removeClass("show");
+            $('.save-data-alert').addClass("hide");
+        }, 5000)
+    }
 }
