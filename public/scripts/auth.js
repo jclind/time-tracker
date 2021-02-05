@@ -17,6 +17,10 @@ const setupUI = (user) => {
                         <h6>Name</h6>
                         <div class="account-modal-name">${doc.data().name}</div>
                     </div>
+                    <div class="account-modal-name-container account-info-item">
+                        <h6>Total Recorded Time</h6>
+                        <div class="account-modal-name">${findArrTime(timesInfoList)}</div>
+                    </div>
                 </div>
             `;
             accountDetails.innerHTML = accountHTML;

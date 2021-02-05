@@ -98,6 +98,16 @@ const objEqual = (o1, o2) => {
 }
 
 
+// Creates array of times for time trends y-axis labels.
+const calcChartTimeDistribution = (num) => {
+    console.log(num)
+    let arr = [(num * 1.1 / 60000).toFixed(2)];
+    for (let i = 0; i <= 1; i++) {
+        arr.push(arr[i] / 2)
+    }
+    arr.push(0)
+    return arr
+}
 
 
 

@@ -1,5 +1,4 @@
 // !Tag Distribution Graph Functions
-
 let tagDistributionGraph;
 function drawTagDistributionGraph(timespan) {
     let tagLabels = [], tagData = [], tagColors = [];
@@ -90,7 +89,9 @@ function drawTagDistributionGraph(timespan) {
                 display: legendDisplay,
                 position: 'bottom',
                 labels: {
-                    fontColor: 'black'
+                    fontColor: 'black',
+                    usePointStyle: true,
+                    
                 },
                 fullWidth: true,
             },
@@ -298,7 +299,27 @@ function drawTimeTrendsGraph(timespan) {
         dataset.reverse();
         labels.reverse();
     }
-    let datasetLabel;
+
+    let datasetLabel
+
+    // Control the dataset y-axis labels
+    let maxDataset = Math.max(...dataset)
+    let maxDatasetInc;
+    if (maxDataset < 600000) {
+        maxDataset = 600000
+        maxDatasetInc = (maxDataset / 3)
+        console.log(maxDatasetInc / 60000, maxDataset)
+    } else if (maxDataset < 3000000) {
+        maxDataset = Math.round(maxDataset * 1.1 / 10000) * 10000
+        maxDatasetInc = (maxDataset / 3).toFixed(0)
+        console.log("am I getting to this palcE?", maxDataset, maxDatasetInc)
+    } else {
+        maxDataset = Math.round(maxDataset * 1.3 / 100000) * 100000
+        maxDatasetInc = (maxDataset / 3).toFixed(0)
+    }
+    // let maxDataset = (Math.max(...dataset) * 1.2 / 1000).toFixed(0) * 1000
+
+    
     // Get total time for current timespan 
     let totalTimespanTime = `Total Time: <strong>${msToString(dataset.reduce((sum, currNum) => sum + currNum))}</strong>`
     document.querySelector('.chart .total-time').innerHTML = totalTimespanTime;
@@ -321,12 +342,19 @@ function drawTimeTrendsGraph(timespan) {
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero: true,
                         callback: function(label, index, labels) {
-                                return ((label / 60000 / 10).toFixed(0)) * 10 + ' min'
+                            if (maxDataset <= 120000) {
+                                return (label / 60000).toFixed(1) + " min";
+                            } else if (maxDataset <= 3000000) {
+                                return (label / 60000).toFixed(0) + " min"
+                            }
+                            return Math.round(label / 60000 / 10) * 10 + " min";
                         },
                         autoSkip: true,
+                        min: 0,
+                        max: maxDataset,
                         maxTicksLimit: 5,
+                        stepSize: maxDatasetInc,
                     }
                 }],
                 xAxes: [{
