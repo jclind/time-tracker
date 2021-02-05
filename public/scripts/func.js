@@ -26,6 +26,15 @@ const findElapsedTime = (index, arr) => {
     return {hours: totH, minutes: totM, seconds: totS, milliseconds: totMs};
 }
 
+// Returns total time of all time objects in given array.
+const findArrTime = (arr) => {
+    if (arr.length != 0) {
+        let test = msToString(arr.reduce((totTime, currVal) => totTime + stringToMS(currVal.time), 0));
+        return test
+    }
+    return msToString(0);
+}
+
 
 
 

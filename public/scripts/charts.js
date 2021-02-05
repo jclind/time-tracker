@@ -77,8 +77,14 @@ function drawTagDistributionGraph(timespan) {
                 }
             },
             title: {
-                text: chartTitle,
-                display: true
+                text: [chartTitle],
+                display: true,
+                padding: 20,
+                align: 'start',
+                textAlign: 'left',
+                fontSize: 16,
+                fontColor: 'black',
+                lineHeight: 1.5,
             },
             legend: {
                 display: legendDisplay,
@@ -292,8 +298,11 @@ function drawTimeTrendsGraph(timespan) {
         dataset.reverse();
         labels.reverse();
     }
-    let datasetLabel = 'Hello There'
-
+    let datasetLabel;
+    // Get total time for current timespan 
+    let totalTimespanTime = `Total Time: <strong>${msToString(dataset.reduce((sum, currNum) => sum + currNum))}</strong>`
+    document.querySelector('.chart .total-time').innerHTML = totalTimespanTime;
+    
     if (timeTrendsGraph) {
         timeTrendsGraph.destroy()
     }
@@ -304,7 +313,7 @@ function drawTimeTrendsGraph(timespan) {
             datasets: [{
                 label: datasetLabel,
                 data: dataset,
-                backgroundColor: '#006400'
+                backgroundColor: '#287928'
             }]
         },
         options: {
@@ -332,8 +341,22 @@ function drawTimeTrendsGraph(timespan) {
                 }]
             },
             title: {
-                text: chartTitle,
-                display: true
+                text: [chartTitle],
+                display: true,
+                padding: 50,
+                align: 'start',
+                textAlign: 'left',
+                fontSize: 16,
+                fontColor: 'black',
+                lineHeight: 1.5,
+            },
+            layout: {
+                padding: {
+                    top: -30
+                },
+            },
+            subtitle: {
+                text: 'Subtitle'
             },
             legend: {
                 display: false
