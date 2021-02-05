@@ -10,6 +10,8 @@ tasks to complete:
     - Optimize modal functions (combine show and hide modal functions)
     - New js scripts for chart and other independent things?
     - Add day, yesterday, week, month, year, and all time about time table for sorting times (will also effect graphs)
+    - Add chart titles (by week, by day... etc)
+    - Catch login errors
 
 completed tasks: 
     - Add localStorage for arrays and add any necessary functionality. 

@@ -78,6 +78,11 @@ signupForm.addEventListener('submit', (e) => {
     }).then(() => {
         // Close signup modal
         closeNavModal('signup-modal');
+        signupForm.querySelector('.auth-error').style.display = 'none';
+        signupForm.querySelector('.auth-error').innerHTML = ''  
+    }).catch(err => {
+        signupForm.querySelector('.auth-error').style.display = 'block';
+        signupForm.querySelector('.auth-error').innerHTML = err.message
     });
 });
 
@@ -102,6 +107,11 @@ loginForm.addEventListener('submit', (e) => {
     auth.signInWithEmailAndPassword(email, password).then(cred => {
         // Close the login modal and reset the form
         closeNavModal('login-modal');
+        loginForm.querySelector('.auth-error').style.display = 'none';
+        loginForm.querySelector('.auth-error').innerHTML = ''
+    }).catch(err => {
+        loginForm.querySelector('.auth-error').style.display = 'block';
+        loginForm.querySelector('.auth-error').innerHTML = err.message
     });
 });
 

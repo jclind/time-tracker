@@ -226,6 +226,14 @@ html, body, .body-wrapper {
     border: 1px solid rgb(252, 161, 43);
     border-bottom: 1px solid rgb(209, 118, 0);
 }
+
+.auth-error {
+    display: none;
+    color: red;
+    text-align: center;
+    padding-top: 5px;
+    background: white;
+}
 /* #endregion */
 /* #endregion */
 
