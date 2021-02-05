@@ -54,10 +54,8 @@ const stringToMS = (obj) => {
 function msToString(ms) {
     let hours = 0, minutes = 0, seconds = 0
     if (ms >= 3600000) {
-        console.log(ms)
         hours = Math.floor(ms / 3600000)
         ms = ms % 3600000
-        console.log(hours, ms)
     }
     if (ms >= 60000) {
         minutes = Math.floor(ms / 60000)
@@ -95,18 +93,6 @@ const objEqual = (o1, o2) => {
         return false;
     }
     return true;
-}
-
-
-// Creates array of times for time trends y-axis labels.
-const calcChartTimeDistribution = (num) => {
-    console.log(num)
-    let arr = [(num * 1.1 / 60000).toFixed(2)];
-    for (let i = 0; i <= 1; i++) {
-        arr.push(arr[i] / 2)
-    }
-    arr.push(0)
-    return arr
 }
 
 

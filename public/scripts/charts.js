@@ -308,11 +308,9 @@ function drawTimeTrendsGraph(timespan) {
     if (maxDataset < 600000) {
         maxDataset = 600000
         maxDatasetInc = (maxDataset / 3)
-        console.log(maxDatasetInc / 60000, maxDataset)
     } else if (maxDataset < 3000000) {
         maxDataset = Math.round(maxDataset * 1.1 / 10000) * 10000
         maxDatasetInc = (maxDataset / 3).toFixed(0)
-        console.log("am I getting to this palcE?", maxDataset, maxDatasetInc)
     } else {
         maxDataset = Math.round(maxDataset * 1.3 / 100000) * 100000
         maxDatasetInc = (maxDataset / 3).toFixed(0)

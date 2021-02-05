@@ -592,20 +592,33 @@ input:focus::placeholder {
     visibility: visible;
 }
 .dropdown-item {
+    position: relative;
     color: black;
-    margin-top: 4px;
+    margin-top: 2px;
     background: white;
     width: 100%;
     padding: 5px;
     border-radius: 4px;
     border: 1px solid darkgray;
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
+    align-items: center;
 }
 .dropdown-item-name {
+    color: black;
     padding: 2px 5px 0px 0px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.dropdown-item-color {
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    margin-right: 10px;
 }
 .delete-tag {
+    position: absolute;
+    right: 5px;
     color: gray;
     font-size: 20px;
     transform: rotate(45deg);

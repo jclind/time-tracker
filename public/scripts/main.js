@@ -20,7 +20,6 @@ function onWindowLoad() {
     currentTimesArray = timesInfoList
     
     updateTagsList();
-    console.log('this should have worked man')
     sortTimeTable(currSortedRowName);
     calcTimespanSelect();
     
@@ -105,6 +104,7 @@ function updateTagsList() {
         } else {
             dropdownEls.innerHTML += `
             <div class="dropdown-item" onclick='selectTag(${tag})'>
+                <div class="dropdown-item-color" style="background: ${timeTags[tag].color};"></div>
                 <div class="dropdown-item-name">${timeTags[tag].name}</div>
                 <div class="delete-tag" onclick='deleteTag(${tag}, event)'>+</div>
             </div>
@@ -262,7 +262,6 @@ const toggleNavModal = () => {
     $('.toggle-nav-modal').click(function () {
         currModalId = this.id + "-modal"
         // Toggle navModalBlur to block on modal button click
-        console.log(currModalId)
         navModalBlur.style.display = "block"
         document.getElementById(currModalId).style.display = "block"
 
@@ -328,7 +327,6 @@ function createTag() {
         
         let tagName = document.getElementById('tag-input-text').value;
         let tagColor = selectedTagColor;
-        console.log(selectedTagColor)
 
         let tempTagObj = {name: tagName, color: tagColor}
         timeTags.push(tempTagObj)
@@ -453,7 +451,6 @@ function changeTag() {
             let tempName = document.querySelector('#change-tag-modal-name-input-field').value;
             timesInfoList[tempTimesArrIndex].name = tempName;
             timesInfoList[tempTimesArrIndex].timeTag = timeTags[selectedChangeModalTagIndex]
-            console.log(tempTimesArrIndex)
             closeTagModal('change-tag-modal')
             saveUserData();
         }
@@ -531,7 +528,6 @@ function calcTimespanSelect() {
         let day = d.getDate();
         let year = d.getFullYear();
         let dateCur = month + "/" + day + "/" + year;
-        console.log(dateCur)
         timesInfoList.forEach((obj, idx) => {
             if (dateCur == timesInfoList[idx].date) {
                 modTimesArr.push(timesInfoList[idx])
@@ -571,7 +567,6 @@ function calcTimespanSelect() {
             let day = tempDate.getDate();
             let year = tempDate.getFullYear();
             let dateTemp = month + "/" + day + "/" + year;
-            console.log(dateTemp)
             timesInfoList.forEach((obj, idx) => {
                 if (dateTemp == timesInfoList[idx].date) {
                     modTimesArr.push(timesInfoList[idx])
