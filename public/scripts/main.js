@@ -332,6 +332,7 @@ function createTag() {
 
         let tempTagObj = {name: tagName, color: tagColor}
         timeTags.push(tempTagObj)
+        selectTag(timeTags.length - 1)
         closeTagModal('new-tag-btn-modal');
         saveUserData();
     }
