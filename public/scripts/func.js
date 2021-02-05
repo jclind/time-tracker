@@ -99,10 +99,6 @@ const objEqual = (o1, o2) => {
 
 
 
-
-
-
-
 // Remove possible second scroll bar
 $('html').css('overflow-x', 'initial');
 
@@ -110,4 +106,3 @@ $('html').css('overflow-x', 'initial');
 
 // Change footer year to current year.
 document.getElementById('copyright').innerHTML = `©${new Date().getFullYear()} Jesse Lind`;
-

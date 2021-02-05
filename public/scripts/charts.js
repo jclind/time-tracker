@@ -1,8 +1,9 @@
 // !Tag Distribution Graph Functions
 
 let tagDistributionGraph;
-function drawTagDistributionGraph() {
+function drawTagDistributionGraph(timespan) {
     let tagLabels = [], tagData = [], tagColors = [];
+    let chartTitle;
 
     // Get Tag information for the tag distribution graph
     if (currentTimesArray.length != 0) {
@@ -28,6 +29,20 @@ function drawTagDistributionGraph() {
         tagColors = ['Gray'];
     }
 
+    // Change chart title based on the current time span selected
+    if (timespan == 'today-btn') {
+        chartTitle = 'Tag Distribution From Today'
+    } else if (timespan == 'yesterday-btn') {
+        chartTitle = 'Tag Distribution From Yesterday'
+    } else if (timespan == 'week-btn') {
+        chartTitle = 'Tag Distribution From This Week'
+    } else if (timespan == 'month-btn') {
+        chartTitle = 'Tag Distribution From This Month'
+    } else if (timespan == 'year-btn') {
+        chartTitle = 'Tag Distribution From This Year'
+    } else if (timespan == 'all-time-btn') {
+        chartTitle = 'Tag Distributions By All Time'
+    }
 
     const ctxTagDis = document.getElementById('tag-distribution').getContext('2d');
     let borderWidth, legendDisplay, dataLabelsDisplay;
@@ -62,7 +77,7 @@ function drawTagDistributionGraph() {
                 }
             },
             title: {
-                text: "Tag Distribution Chart",
+                text: chartTitle,
                 display: true
             },
             legend: {
@@ -137,7 +152,9 @@ function drawTimeTrendsGraph(timespan) {
     const ctxTimeTrends = document.getElementById('time-trends').getContext('2d');
     let labels = [], dataset = [];
     let monthToolTipLabels = [];
+    let chartTitle;
     if (timespan == 'today-btn' || timespan == 'yesterday-btn') {
+        chartTitle = 'Time Trends For Current Week'
         labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         
         // Calculates the amount of time tracked in the last week by days. Starts on Sunday.
@@ -158,6 +175,7 @@ function drawTimeTrendsGraph(timespan) {
             dataset.push(tempTotalTime)
         }
     } else if (timespan == 'week-btn') {
+        chartTitle = 'Time Trends For Last 7 Weeks'
         // Get labels for the week timespan and dataset numbers.
         let d = new Date();
         let tempWeek;
@@ -195,6 +213,7 @@ function drawTimeTrendsGraph(timespan) {
         labels.reverse()
         dataset.reverse()
     } else if (timespan == 'month-btn') {
+        chartTitle = 'Time Trends For Current Month By Day'
         let d = new Date();
         let lastDay = new Date(d.getFullYear(), d.getMonth() + 1, 0)
         for (let i = lastDay.getDate(); i >= 1; i--) {
@@ -222,6 +241,7 @@ function drawTimeTrendsGraph(timespan) {
         dataset.reverse();
         labels.reverse();
     } else if (timespan == 'year-btn') {
+        chartTitle = 'Time Trends For Current Year By Month'
         labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         let d = new Date();
         let tempMonth;
@@ -242,6 +262,7 @@ function drawTimeTrendsGraph(timespan) {
             dataset.push(tempTotalTime)
         }
     } else if (timespan == 'all-time-btn') {
+        chartTitle = 'Time Trends For Past 5 Years'
         let d = new Date();
         let temp;
         for (let i = 0; i < 5; i++) {
@@ -311,7 +332,7 @@ function drawTimeTrendsGraph(timespan) {
                 }]
             },
             title: {
-                text: "Time Trends Chart",
+                text: chartTitle,
                 display: true
             },
             legend: {

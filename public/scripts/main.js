@@ -26,7 +26,7 @@ function onWindowLoad() {
     
     // Draw initial tagDistributionGraph.
     drawTimeTrendsGraph(currSelectedTimespanId);
-    drawTagDistributionGraph();
+    drawTagDistributionGraph(currSelectedTimespanId);
 }
 
 
@@ -508,7 +508,7 @@ const timespanSelect = () => {
             document.getElementById(currSelectedTimespanId).style.background = "rgb(15, 15, 15)"
             currSelectedTimespanId = this.id;
             calcTimespanSelect()
-            drawTagDistributionGraph()
+            drawTagDistributionGraph(currSelectedTimespanId)
             drawTimeTrendsGraph(currSelectedTimespanId)
         }
     })

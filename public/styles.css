@@ -752,6 +752,7 @@ table th, table td {
     font-size: 15px;
     margin: 0px 10px;
     font-weight: bold;
+    text-decoration: underline;
 }
 .table-edit-button {
     color: rgb(252, 161, 43);

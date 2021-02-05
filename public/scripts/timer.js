@@ -162,3 +162,19 @@ const timerButtonControls = () => {
     }
 }
 timerButtonControls()
+
+
+// Start/Stop timer on space bar press.
+document.body.onkeyup = function(e){
+    // Check if space bar is pressed and the document's body is the focused element (Not any other inputs)
+    if(e.keyCode == 32 && document.activeElement === document.body) {
+        startStop()
+    }
+    
+}
+window.onkeydown = function(e) { 
+    if (document.activeElement === document.body) {
+        return !(e.keyCode == 32); 
+    }
+};
+

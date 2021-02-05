@@ -119,7 +119,7 @@ loginForm.addEventListener('submit', (e) => {
 
 // Save data function
 let isPending = false;
-const saveUserData = () => {
+const saveUserData = () => {                                                                                                                                                                                                                                          
     // Update necessary webpage elements
     // Update tags list
     calcTimespanSelect();
@@ -128,7 +128,7 @@ const saveUserData = () => {
     sortTimeTable(currSortedRowName);
     // Re-update the times distribution graph
     updateTagsList();
-    drawTagDistributionGraph();
+    drawTagDistributionGraph(currSelectedTimespanId);
     drawTimeTrendsGraph(currSelectedTimespanId)
 
     // Save user's changed array data to firebase backend
