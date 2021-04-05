@@ -1,10 +1,21 @@
 // JS for timer element of time-tracker
 
+let currStartingTime = null;
+let currFinishedTime = null;
+
 const startStop = () => {
     var startStopElText = document.getElementById('start-stop-btn').innerText;
-
+    
+    
     // If the timer is not runing. 
     if (startStopElText === 'Start'){
+        if (document.getElementById('time').innerText == '0:00:00.00') {
+            let currentdate = new Date()
+            currStartingTime = currentdate.getHours() + ":"  
+            + currentdate.getMinutes() + ":" 
+            + currentdate.getSeconds()
+            console.log(currStartingTime)
+        }
         // change clear button to be grayed out when the timer is going
         document.getElementById('clear-btn').style.background = 'rgb(58, 58, 58)';
         document.getElementById('clear-btn').style.color = 'gray';
@@ -16,6 +27,7 @@ const startStop = () => {
         document.getElementById('start-stop-btn').innerText = 'Stop';
 
         let st = Date.now() - elapsedTime;
+
         let intervalIndex = 0;
         timer = setInterval(() => {
             let currT = Date.now();
@@ -35,6 +47,14 @@ const startStop = () => {
             document.getElementById('website-title').innerText = h + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
         }, 10);
     } else {
+        // Set curr finished time equal to current time
+        if (document.getElementById('time').innerText != '0:00:00.00') {
+            let currentdate = new Date()
+            currFinishedTime = currentdate.getHours() + ":"  
+                    + currentdate.getMinutes() + ":" 
+                    + currentdate.getSeconds()
+            console.log(currFinishedTime)
+        }
         // change clear button back to orange when timer stops
         document.getElementById('clear-btn').style.background = 'rgb(252, 161, 43)';
         document.getElementById('clear-btn').style.color = 'black';
@@ -91,9 +111,19 @@ function submit() {
 
         // Set time's tag to the first element in the timeTags array
         let tagCur = timeTags[0];
+        
 
         // Push name, time, date, and total time to object and push that to timesInfoList array
-        let temp = {name: timeName, time: timeCur, date: dateCur, totalTime: totTime, timeTag: tagCur};
+        let temp = {
+            name: timeName, 
+            time: timeCur, 
+            date: dateCur, 
+            totalTime: totTime, 
+            timeTag: tagCur, 
+            startTime: currStartingTime, 
+            finishTime: currFinishedTime
+        };
+
         timesInfoList.push(temp);
 
         // Save timesInfoList to localstroage, update the html list, and clear the timer on submit of time.
