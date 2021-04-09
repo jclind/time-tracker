@@ -1,0 +1,35 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    background: gray !important;
+}
+
+.time-items-container {
+    width: 90vw;
+    max-width: 400px;
+    background: white;
+}
+.time-items-container .item {
+    height: 50px;
+    border-radius: 10px;
+    background: rgb(212, 212, 212);
+}
+.time-items-container .item .time-container .time {
+    font-family: Courier, monospace;
+    font-size: 25px;
+    font-weight: bolder;
+    letter-spacing: -2px !important;
+}
+
+.time-items-container .item .tag-icon {
+    color: white;
+    padding: 0;
+    margin: 0;
+    background: rgba(255, 0, 0, 0.5);
+    height: fit-content;
+    padding: 2px;
+    border-radius: 5px;
+}
+.time-items-container .item .tag-icon .tag-text {
+    font-size: 11px;
+}

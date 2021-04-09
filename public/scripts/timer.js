@@ -11,9 +11,9 @@ const startStop = () => {
     if (startStopElText === 'Start'){
         if (document.getElementById('time').innerText == '0:00:00.00') {
             let currentdate = new Date()
-            currStartingTime = currentdate.getHours() + ":"  
-            + currentdate.getMinutes() + ":" 
-            + currentdate.getSeconds()
+            currStartingTime = currentdate.getHours() + 
+            ":" + (currentdate.getMinutes() < 10 ? "0" + currentdate.getMinutes() : currentdate.getMinutes()) + 
+            ":" + (currentdate.getSeconds() < 10 ? "0" + currentdate.getSeconds() : currentdate.getSeconds())
             console.log(currStartingTime)
         }
         // change clear button to be grayed out when the timer is going
@@ -50,9 +50,9 @@ const startStop = () => {
         // Set curr finished time equal to current time
         if (document.getElementById('time').innerText != '0:00:00.00') {
             let currentdate = new Date()
-            currFinishedTime = currentdate.getHours() + ":"  
-                    + currentdate.getMinutes() + ":" 
-                    + currentdate.getSeconds()
+            currFinishedTime = currentdate.getHours() + 
+            ":" + (currentdate.getMinutes() < 10 ? "0" + currentdate.getMinutes() : currentdate.getMinutes()) + 
+            ":" + (currentdate.getSeconds() < 10 ? "0" + currentdate.getSeconds() : currentdate.getSeconds())
             console.log(currFinishedTime)
         }
         // change clear button back to orange when timer stops
