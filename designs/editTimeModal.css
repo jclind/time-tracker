@@ -1,0 +1,114 @@
+#editTimeModal .modal-content {
+    width: 80%;
+    background: #393e46;
+    color: #eeeeee;
+}
+#editTimeModal .modal-content .modal-title {
+    font-weight: bold;
+}
+
+#editTimeModal .modal-body label {
+    color: #00adb5;
+    font-size: 14px;
+}
+
+#editTimeModal .modal-body input {
+    height: 40px;
+    border: 0;
+    outline: none;
+    border-radius: 5px;
+    background: #515a69;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#editTimeModal .modal-body .change-tag .tag-item {
+    border-bottom: 1px solid gray;
+}
+
+#editTimeModal .modal-body .change-tag .tag-item .tag-color {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+}
+#editTimeModal .modal-body .change-tag .tag-item .tag-name {
+    font-size: 16px;
+}
+#editTimeModal .modal-body .change-tag button {
+    color: #eeeeee;
+    font-size: 16px;
+    background: #3c4249;
+}
+
+#editTimeModal .modal-body .change-description .description-text {
+    background: #515a69;
+    border-radius: 5px;
+    border: 0 !important;
+    outline: none !important;
+    color: #eeeeee;
+    font-size: 16px;
+}
+#editTimeModal .modal-body .change-description .description-text::placeholder {
+    color: #b4b4b4;
+}
+
+#editTimeModal .modal-body .modal-btns button {
+    color: #e4e4e4;
+    font-size: 12px;
+    font-weight: bold;
+    height: 40px;
+    width: 70px;
+    margin: 15px 15px 5px 15px;
+}
+
+#editTimeModal .modal-body .modal-btns #submitEditModalBtn {
+    color: #eeeeee;
+    background: #93329e;
+}
+
+/* Input animation */
+#editTimeModal .modal-body .input-border,
+#editTimeModal .modal-body .textarea-border {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    pointer-events: none;
+    border-radius: 5px;
+}
+#editTimeModal .modal-body .input-border {
+    height: 40px;
+    padding: 1px 2px;
+}
+#editTimeModal .modal-body .textarea-border {
+    height: 154px;
+    padding: 5px 10px;
+}
+
+#editTimeModal .modal-body .input-border::before,
+#editTimeModal .modal-body .textarea-border::before {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    height: 100%;
+    width: 0%;
+    border-radius: 5px;
+    left: 0;
+    bottom: 0;
+    border-bottom: 0px solid #93329e;
+    transition: width 0.8s ease;
+    pointer-events: none;
+}
+#editTimeModal .modal-body .input-border::before {
+    padding: 1px 2px;
+}
+#editTimeModal .modal-body .textarea-border::before {
+    padding: 5px 10px;
+}
+
+#editTimeModal .modal-body input:focus ~ .input-border::before,
+#editTimeModal .modal-body textarea:focus ~ .textarea-border::before {
+    width: 100%;
+    border-width: 2.5px;
+    transition: width 0.8s ease;
+}
