@@ -1,0 +1,45 @@
+:root {
+    --main-background-color: #222831;
+    --primary-text: #eeeeee;
+    --secondary-text: rgb(167, 167, 167);
+    --time-font-family: Courier, monospace;
+    --input-background: #474e5a;
+    --primary-blue: #00adb5;
+}
+
+body {
+    background: var(--main-background-color);
+}
+
+#timerComponent .timer {
+    font-family: var(--time-font-family);
+    color: var(--primary-text);
+    font-weight: bolder;
+    font-size: 60px;
+    letter-spacing: -2px;
+}
+
+#timerComponent .time-info-container .time-tag-btn {
+    color: var(--secondary-text);
+    font-size: 16px;
+    background: #242b33;
+    border-radius: 5px;
+}
+
+#timerComponent .time-btns {
+    margin-top: 100px;
+}
+#timerComponent .time-btns button {
+    color: var(--primary-text);
+    border-radius: 20px;
+    font-size: 25px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: 'Open Sans', sans-serif;
+}
+#timerComponent .time-btns .start-stop-btn {
+    /* background: var(--primary-blue); */
+    width: 200px;
+    height: 50px;
+    border: 1px solid var(--primary-blue);
+}
