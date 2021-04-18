@@ -1,5 +1,5 @@
 #timerComponent .time-info-container .time-description-container {
-    width: 70%;
+    width: 80%;
     max-width: 450px;
     padding-top: 20px;
 }
@@ -28,6 +28,7 @@
     font-size: 14px;
     left: 5px;
     top: 35px;
+    font-weight: bold;
     transform: translateY(-50%);
     transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
 }

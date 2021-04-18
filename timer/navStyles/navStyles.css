@@ -1,0 +1,130 @@
+nav {
+    color: var(--primary-text);
+    background: var(--nav-background-color);
+    border-bottom: 1px solid var(--primary-blue);
+    font-family: var(--title-font-family);
+    z-index: 10;
+}
+
+nav .logo {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    min-height: 8vh;
+}
+nav .logo h4 {
+    font-weight: bold;
+    font-size: 20px;
+}
+nav .nav-links {
+    width: 40%;
+}
+nav .nav-links li {
+    list-style: none;
+}
+nav .nav-links span {
+    color: var(--secondary-text);
+    letter-spacing: 2px;
+    font-size: 14px;
+}
+
+nav .burger {
+    margin-left: 50px;
+    display: none;
+}
+
+nav .burger div {
+    background: var(--primary-text);
+    width: 25px;
+    height: 3px;
+    margin: 5px;
+    transition: all 0.5s ease;
+}
+
+@media screen and (max-width: 1024px) {
+    nav .nav-links {
+        width: 50%;
+    }
+}
+@media screen and (max-width: 768px) {
+    body,
+    html {
+        position: relative;
+        overflow-x: hidden;
+    }
+
+    nav .nav-links {
+        position: absolute;
+        top: 8vh;
+        right: 0;
+        height: 100vh;
+        background: var(--nav-background-color);
+        border-top: 1px solid var(--primary-blue);
+        z-index: 10;
+        width: 50%;
+        margin: 0;
+        padding: 0;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+    }
+    nav .nav-links li {
+        opacity: 0;
+    }
+    nav .burger {
+        display: block;
+    }
+}
+
+.nav-active {
+    transform: translate(0%) !important;
+}
+
+@keyframes navLinkFade {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+.toggle .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+.toggle .line2 {
+    opacity: 0;
+}
+.toggle .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+nav .nav-slider-background {
+    position: absolute;
+    top: calc(8vh + 1px);
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(0, 0, 0, 0.6);
+    opacity: 0;
+    z-index: 9;
+    transition: opacity 0.5s linear;
+    display: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
