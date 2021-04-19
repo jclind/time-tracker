@@ -12,6 +12,11 @@
     font-weight: bold;
     outline: none !important;
 }
+#timerComponent .time-btns .submit-btn:active,
+#timerComponent .time-btns .submit-btn:focus {
+    outline: 5px !important;
+    border: 0 !important;
+}
 
 #timerComponent .time-btns .start-stop-btn {
     height: 50px;

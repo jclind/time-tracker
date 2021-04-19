@@ -7,20 +7,20 @@ const updateTimeTable = timesArray => {
             <div class="card time-item mb-3">
                 <div
                     class="card-header time-item-header d-flex justify-content-between align-items-center position-relative"
-                    id="${timesArray.key}"
                 >
                     <div class="d-flex flex-column mb-3">
                         <div class="time-title ml-4">
-                            ${timesArray.name}
+                            ${el.name}
                         </div>
                         <div
                             class="time-container d-flex justify-content-around align-items-center mr-3 mb-1"
                         >
                             <div class="time-text mx-4">${formatTime(
-                                timesArray.time
+                                el.time
                             )}</div>
                             <div
                                 class="tag-icon d-flex align-items-center px-2"
+                                style="background: ${el.tag.color}"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +28,6 @@ const updateTimeTable = timesArray => {
                                     height="12"
                                     fill="currentColor"
                                     class="bi bi-tag-fill"
-                                    style="background: ${timesArray.tag.name}"
                                     viewBox="0 0 16 16"
                                 >
                                     <path
@@ -36,14 +35,14 @@ const updateTimeTable = timesArray => {
                                     />
                                 </svg>
                                 <span class="ml-1 tag-text">${
-                                    timesArray.tag.name
+                                    el.tag.name
                                 }</span>
                             </div>
                         </div>
                     </div>
                     <div class="item-time-date px-2">
                         <span class="date">${formatTimeItemDate(
-                            timesArray.date
+                            el.date
                         )}</span><br />
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -61,17 +60,17 @@ const updateTimeTable = timesArray => {
                             />
                         </svg>
                         <span class="time">${formatTimeItemTimeSegment(
-                            timesArray.startTime,
-                            timesArray.finishTime
+                            el.startTime,
+                            el.finishTime
                         )}</span>
                     </div>
                     <button
                         class="btn btn-link collapse-btn p-0"
                         type="button"
                         data-toggle="collapse"
-                        data-target="#collapseOne"
+                        data-target="#${el.key}"
                         aria-expanded="true"
-                        aria-controls="collapseOne"
+                        aria-controls="${el.key}"
                     >
                         <span style="font-size: 30px" class="d-block">
                             <svg
@@ -88,17 +87,15 @@ const updateTimeTable = timesArray => {
                             </svg>
                         </span>
                     </button>
-                    <!-- </h2> -->
                 </div>
                 <div
-                    id="collapseOne"
-                    class="collapse show"
-                    aria-labelledby="headingOne"
-                    data-parent="#accordionExample"
+                    id="${el.key}"
+                    class="collapse"
+                    data-parent="#timeTableAccordian"
                 >
                     <div class="card-body inner-time-item">
                         <h1 class="time-title text-center">
-                            Time Tracker Revision
+                            ${el.name}
                         </h1>
                         <div class="underline"></div>
                         <div
@@ -106,13 +103,16 @@ const updateTimeTable = timesArray => {
                         >
                             <div class="mx-5 time-stat">
                                 <label class="p-0 m-0">Date:</label>
-                                <div>4/12/2021</div>
+                                <div>${el.date.getMonth()}/${el.date.getDate()}/${el.date.getYear()}</div>
                             </div>
                             <div class="mx-5 time-stat">
                                 <label class="p-0 m-0"
                                     >Time Segment:</label
                                 >
-                                <div>2:51pm-5:02pm</div>
+                                <div>${formatTimeItemTimeSegment(
+                                    el.startTime,
+                                    el.finishTime
+                                )}</div>
                             </div>
                         </div>
                         <div class="time-description">
@@ -120,17 +120,7 @@ const updateTimeTable = timesArray => {
                                 >Description:</label
                             >
                             <p class="p-1">
-                                Lorem ipsum, dolor sit amet consectetur
-                                adipisicing elit. Dolorem est alias enim
-                                vero, quidem aspernatur ea, eaque
-                                consequuntur laborum vitae illum
-                                quisquam quis eligendi aperiam, nostrum
-                                eos neque tempora perferendis?
-                                Consequatur, vitae, debitis tenetur
-                                dolorem itaque a quas mollitia atque
-                                provident doloribus, nostrum esse.
-                                Aliquid quia temporibus minima corrupti
-                                suscipit.
+                                ${el.description}
                             </p>
                         </div>
                         <div
@@ -184,19 +174,19 @@ const formatTimeItemDate = date => {
     }
 }
 
-const formatTimeItemTimeSegment = (startTime, endTime) => {
+const formatTimeItemTimeSegment = (startTime, finishTime) => {
     let startHours = startTime.getHours()
     let startMinutes = startTime.getMinutes()
     let startAMPM = startHours >= 12 ? 'pm' : 'am'
     startHours = startHours % 12
-    startHours = startHours ? hours : 12 // The hour '0' shuold be set to '12'
+    startHours = startHours ? startHours : 12 // The hour '0' shuold be set to '12'
     startMinutes = startMinutes < 10 ? '0' + startMinutes : startMinutes // Format minutes if less than 10
 
     let finishHours = finishTime.getHours()
     let finishMinutes = finishTime.getMinutes()
     let finishAMPM = startHours >= 12 ? 'pm' : 'am'
     finishHours = finishHours % 12
-    finishHours = finishHours ? hours : 12 // The hour '0' shuold be set to '12'
+    finishHours = finishHours ? finishHours : 12 // The hour '0' shuold be set to '12'
     finishMinutes = finishMinutes < 10 ? '0' + finishMinutes : finishMinutes // Format minutes if less than 10
 
     return `${startHours}:${startMinutes}${startAMPM}-${finishHours}:${finishMinutes}${finishAMPM}`
