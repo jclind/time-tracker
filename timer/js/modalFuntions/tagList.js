@@ -10,6 +10,7 @@ activeTagBtn.addEventListener('click', () => {
     $('#tagListModal').modal('show')
 
     setActiveOrEdit = 'active'
+    updateModalTagList(timeTags, false)
 })
 
 // Set edited tag
@@ -18,6 +19,7 @@ editTagBtn.addEventListener('click', () => {
     $('#tagListModal').modal('show')
 
     setActiveOrEdit = 'edit'
+    updateModalTagList(timeTags, false)
 })
 
 const tagListModalSearchInput = document.getElementById(
@@ -71,7 +73,6 @@ const updateModalTagList = (tags, isBtn, inputValue) => {
 
         // If the current tag is the euqal tag, add the check to the tag.
         if (item.name === activeTag.name) {
-            console.log(item.name, activeTag.name)
             activeTagHTML = `
                 <div class="selected-tag">
                     <svg
@@ -191,8 +192,6 @@ $('#tagListModal').on('shown.bs.modal', () => {
     // Disable Scrolling when model opens
     document.body.style.overflowY = 'hidden'
     document.body.style.height = '92vh'
-
-    updateModalTagList(timeTags, false)
 })
 // When Modal Closes
 $('#tagListModal').on('hidden.bs.modal', () => {
