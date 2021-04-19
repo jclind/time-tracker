@@ -900,7 +900,18 @@
             id="timeItemsContainer"
         >
             <h1 class="time-items-title pb-4">Past Times</h1>
-            <div class="time-items-container d-block flex-column">
+            <div
+                class="sort-by-date-btns d-flex justify-content-center m-auto"
+                id="sortByDateBtns"
+            >
+                <button class="btn active-sort-btn" id="todayBtn">Today</button>
+                <button class="btn" id="yesterdayBtn">Yesterday</button>
+                <button class="btn" id="weekBtn">Week</button>
+                <button class="btn" id="monthBtn">Month</button>
+                <button class="btn" id="yearBtn">Year</button>
+                <button class="btn" id="allTimeBtn">All Time</button>
+            </div>
+            <div class="time-items-container d-block flex-column p-1">
                 <div class="accordion" id="timeTableAccordian"></div>
             </div>
         </section>
@@ -931,6 +942,8 @@
         <script src="js/timerFunctions/timerButtons.js"></script>
         <script src="js/timerFunctions/timerInfo.js"></script>
         <script src="js/timerFunctions/timerSubmit.js"></script>
+
+        <script src="js/timeTableFunctions/sortByDate.js"></script>
 
         <!-- Modals -->
         <script src="js/modalFuntions/tagList.js"></script>

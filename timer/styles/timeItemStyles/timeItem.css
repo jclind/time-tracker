@@ -24,6 +24,33 @@
     font-weight: bold;
 }
 
+#timeItemsContainer .sort-by-date-btns {
+    width: 95%;
+}
+#timeItemsContainer .sort-by-date-btns button {
+    padding: 3px 10px;
+    font-size: 14px;
+    color: var(--secondary-text);
+    border-bottom: 1px solid var(--primary-text);
+}
+#timeItemsContainer .sort-by-date-btns button:active,
+#timeItemsContainer .sort-by-date-btns button:focus {
+    outline: none !important;
+    box-shadow: none;
+}
+#timeItemsContainer .sort-by-date-btns button:hover {
+    border-bottom: 2px solid var(--primary-text);
+    color: var(--primary-text);
+}
+#timeItemsContainer .active-sort-btn {
+    outline: none !important;
+    box-shadow: none;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    color: var(--primary-blue) !important;
+    border-bottom: 3px solid var(--primary-blue) !important;
+}
+
 .time-item {
     border-radius: 10px !important;
     background: #393e46 !important;
