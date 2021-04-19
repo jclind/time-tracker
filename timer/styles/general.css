@@ -18,27 +18,10 @@
 body {
     background: var(--main-background-color);
 }
-body.modal-open {
-    overflow: hidden;
-}
 
-#timerComponent {
-    height: 70vh;
-    min-height: 600px;
-}
-
-#timerComponent .timer {
-    font-family: var(--time-font-family);
-    color: var(--primary-text);
-    font-weight: bolder;
-    font-size: 75px;
-    letter-spacing: -2px;
-    margin: 40px 0px 20px 0px;
-}
-
-#timerComponent .time-info-container .time-tag-btn {
-    color: var(--secondary-text);
-    font-size: 16px;
-    background: #242b33;
-    border-radius: 5px;
+.inp {
+    outline: none !important;
+    border: none !important;
+    background: var(--input-background);
+    border-radius: 3px;
 }

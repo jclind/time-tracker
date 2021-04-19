@@ -1,16 +1,23 @@
 const tagListModal = document.getElementById('tagListModal')
 
-$('#tagListModal').on('shown.bs.modal', () => {
-    // Disable Scrolling when model opens
-    document.body.style.overflowY = 'hidden'
-    document.body.style.height = '92vh'
+// setActiveOrEdit will hold the information for weather or not selecting a tag should
+// be set as the new active tag, or just to edit a specific old time.
+let setActiveOrEdit = undefined
 
-    updateModalTagList(timeTags, false)
+// Set active tag
+const activeTagBtn = document.getElementById('activeTagBtn')
+activeTagBtn.addEventListener('click', () => {
+    $('#tagListModal').modal('show')
+
+    setActiveOrEdit = 'active'
 })
-// Enable Scrolling when modal closes
-$('#tagListModal').on('hidden.bs.modal', () => {
-    document.body.style.overflowY = 'visible'
-    document.body.style.height = '100%'
+
+// Set edited tag
+const editTagBtn = document.getElementById('editTagBtn')
+editTagBtn.addEventListener('click', () => {
+    $('#tagListModal').modal('show')
+
+    setActiveOrEdit = 'edit'
 })
 
 const tagListModalSearchInput = document.getElementById(
@@ -37,13 +44,24 @@ const tagListModalSearch = inputValue => {
     }
 }
 
+// Takes array of tags, boolean for if there should be a create new tag btn,
+// and the input value of the search input
 const updateModalTagList = (tags, isBtn, inputValue) => {
     const modalTagList = document.getElementById('modalTagList')
     // Get the active tag from the timer info tag selector btn text
     const activeTag = timeTags.find(tag => {
-        return (tag.name = document.getElementById(
-            'timeTagSelectionBtnName'
-        ).innerText)
+        if (setActiveOrEdit === 'active') {
+            return (
+                tag.name ==
+                document.getElementById('activeTimeTagSelectionBtnName')
+                    .innerText
+            )
+        } else {
+            return (
+                tag.name ==
+                document.getElementById('editTimeTagSelectionBtnName').innerText
+            )
+        }
     })
 
     modalTagList.innerHTML = ''
@@ -53,6 +71,7 @@ const updateModalTagList = (tags, isBtn, inputValue) => {
 
         // If the current tag is the euqal tag, add the check to the tag.
         if (item.name === activeTag.name) {
+            console.log(item.name, activeTag.name)
             activeTagHTML = `
                 <div class="selected-tag">
                     <svg
@@ -98,8 +117,18 @@ const updateModalTagList = (tags, isBtn, inputValue) => {
     // If the inputValue is unique from any other tag in the array, then show the create btn array.
     if (isBtn) {
         modalTagList.innerHTML += `
-            <button class="btn mt-5 py-2 text-left" id="createNewTagBtn">Create new tag <strong>${inputValue}</strong></button>
+            <button class="btn mt-5 py-2 text-left" 
+                id="createNewTagBtn" 
+            >Create new tag <strong>${inputValue}</strong>
+            </button>
         `
+
+        // Add event listener to the button
+        const createNewTagBtn = document.getElementById('createNewTagBtn')
+        createNewTagBtn.addEventListener('click', () => {
+            $('#createTagModal').modal('show')
+            document.getElementById('createNewTagTitleInput').value = inputValue
+        })
     }
 
     // get array of all tag elements shown in modal and add event listener to each one
@@ -108,28 +137,72 @@ const updateModalTagList = (tags, isBtn, inputValue) => {
         el.addEventListener('click', () => {
             // set clicked tag as active
             let newActiveTagName = el.dataset.tagName
-            selectActiveTag(newActiveTagName)
-            $('#tagListModal').modal('hide')
+            selectTag(newActiveTagName)
         })
     })
 }
 
-const selectActiveTag = inputTagName => {
-    const timeTagSelectionBtnName = document.getElementById(
-        'timeTagSelectionBtnName'
-    )
-    const timeTagSelecitonBtnColor = document.getElementById(
-        'timeTagSelecitonBtnColor'
-    )
+const selectTag = inputTagName => {
+    if (setActiveOrEdit === 'active') {
+        selectActiveTag(inputTagName)
+    } else if (setActiveOrEdit === 'edit') {
+        selectEditTag(inputTagName)
+    } else {
+        console.log('Error selecting setActiveOrEdit function')
+    }
 
+    if ($('#tagListModal').is(':visible')) {
+        $('#tagListModal').modal('hide')
+    }
+}
+
+// Controls selecting the active tag for upcoming times
+const selectActiveTag = inputTagName => {
+    const activeTimeTagSelectionBtnName = document.getElementById(
+        'activeTimeTagSelectionBtnName'
+    )
+    const activeTimeTagSelectionBtnColor = document.getElementById(
+        'activeTimeTagSelectionBtnColor'
+    )
     let newActiveTag = timeTags.find(tag => tag.name === inputTagName)
 
     // Set name and color of active tag
-    timeTagSelectionBtnName.innerText = newActiveTag.name
+    activeTimeTagSelectionBtnName.innerText = newActiveTag.name
     // !! FIX COLOR OPERATION
-    timeTagSelecitonBtnColor.style.color = newActiveTag.color
+    activeTimeTagSelectionBtnColor.style.color = newActiveTag.color
+}
+// Controls selecting the tag for previous times, editing them.
+const selectEditTag = inputTagName => {
+    const editTimeTagSelectionBtnName = document.getElementById(
+        'editTimeTagSelectionBtnName'
+    )
+    const editTimeTagSelectionBtnColor = document.getElementById(
+        'editTimeTagSelectionBtnColor'
+    )
+    let newActiveTag = timeTags.find(tag => tag.name === inputTagName)
+
+    // Set name and color of active tag
+    editTimeTagSelectionBtnName.innerText = newActiveTag.name
+    editTimeTagSelectionBtnColor.style.color = newActiveTag.color
 }
 
+// When Modal Opens
+$('#tagListModal').on('shown.bs.modal', () => {
+    // Disable Scrolling when model opens
+    document.body.style.overflowY = 'hidden'
+    document.body.style.height = '92vh'
+
+    updateModalTagList(timeTags, false)
+})
+// When Modal Closes
+$('#tagListModal').on('hidden.bs.modal', () => {
+    // Enable Scrolling when modal closes
+    document.body.style.overflowY = 'visible'
+    document.body.style.height = '100%'
+
+    // Clear input
+    tagListModalSearchInput.value = ''
+})
 // Remove Touch Scrolling functionality from modal element.
 document.querySelector('#tagListModal').ontouchmove = function (event) {
     event.preventDefault()

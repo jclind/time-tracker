@@ -1,5 +1,7 @@
 #tagListModal .modal-content {
     width: 80%;
+    max-height: 80vh;
+    overflow-y: scroll;
     background: linear-gradient(
         45deg,
         #323d50,
