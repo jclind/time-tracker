@@ -35,7 +35,7 @@ const submitTime = (time, startTime, finishTime) => {
     timeNameInput.value = ''
     descriptionInput.value = ''
     clearTime()
-    // updateTimeTable(timesInfoList)
+    updateTimeTable(timesInfoList)
 }
 
 const submitTimeBtn = document.getElementById('submitTimeBtn')

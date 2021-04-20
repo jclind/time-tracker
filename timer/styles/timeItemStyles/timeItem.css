@@ -27,6 +27,7 @@
 .time-item {
     border-radius: 10px !important;
     background: #393e46 !important;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 8px 0px;
 }
 
 .time-item-header {
@@ -119,4 +120,27 @@
     height: 35px;
     width: 70px;
     margin: 15px 15px 5px 15px;
+}
+
+#timeItemsContainer .no-times {
+    height: 160px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 8px 0px;
+}
+#timeItemsContainer .no-times .data-icon {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    border: 2px solid var(--primary-blue);
+}
+#timeItemsContainer .no-times i {
+    color: var(--primary-blue);
+    font-size: 30px;
+}
+#timeItemsContainer .no-times h1 {
+    color: var(--primary-text);
+}
+#timeItemsContainer .no-times span {
+    font-size: 16px;
+    color: var(--secondary-text);
 }
