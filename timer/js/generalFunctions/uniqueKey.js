@@ -1,5 +1,5 @@
 const generateKey = () => {
-    let key = ''
+    let key = 'KEY'
     let possible =
         'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 

@@ -1,4 +1,56 @@
-timesInfoList = []
+timesInfoList = [
+    {
+        name: 'Bingus',
+        time: 10370,
+        date: '2021-04-20T01:55:43.795Z',
+        tag: { name: 'main', color: 'red' },
+        startTime: '2021-04-20T01:55:43.795Z',
+        finishTime: '2021-04-20T01:55:54.620Z',
+        description: 'Hello there, how are you doing?',
+        key: 'KEYNf6awvJbgbtbzMi6L5Sl',
+    },
+    {
+        name: 'Yo',
+        time: 710,
+        date: '2021-04-20T01:56:05.982Z',
+        tag: { name: 'main', color: 'red' },
+        startTime: '2021-04-20T01:56:05.982Z',
+        finishTime: '2021-04-20T01:56:06.696Z',
+        description:
+            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, necessitatibus? Fuga dicta iure incidunt maiores?\nLorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, necessitatibus? Fuga dicta iure incidunt maiores?\nLorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, necessitatibus? Fuga dicta iure incidunt maiores?\nLorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, necessitatibus? Fuga dicta iure incidunt maiores?',
+        key: 'KEYj145MKepel1UV7tCtVzC',
+    },
+    {
+        name: 'asdf',
+        time: 2250,
+        date: '2021-04-20T01:56:07.659Z',
+        tag: { name: 'main', color: 'red' },
+        startTime: '2021-04-20T01:56:07.659Z',
+        finishTime: '2021-04-20T01:56:09.921Z',
+        description: '',
+        key: 'KEYu5wUwrQ4uRqP9iQPXL6w',
+    },
+    {
+        name: 'main',
+        time: 1531,
+        date: '2021-04-20T01:56:11.050Z',
+        tag: { name: 'main', color: 'red' },
+        startTime: '2021-04-20T01:56:11.050Z',
+        finishTime: '2021-04-20T01:56:12.584Z',
+        description: '',
+        key: 'KEYZdpZGaXW4YyVk10ibZjN',
+    },
+    {
+        name: 'main',
+        time: 301,
+        date: '2021-04-20T01:56:13.500Z',
+        tag: { name: 'main', color: 'red' },
+        startTime: '2021-04-20T01:56:13.500Z',
+        finishTime: '2021-04-20T01:56:13.803Z',
+        description: '',
+        key: 'KEYEdJXj79P1gvMZtdXhHzm',
+    },
+]
 // !!! FIX COLORS TO BE HEX COLORS INSTEAD OF COLOR NAMES
 let timeTags = [
     { name: 'main', color: 'red' },

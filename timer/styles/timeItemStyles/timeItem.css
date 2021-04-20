@@ -28,8 +28,8 @@
     width: 95%;
 }
 #timeItemsContainer .sort-by-date-btns button {
-    padding: 3px 10px;
-    font-size: 14px;
+    padding: 3px 8px;
+    font-size: 15px;
     color: var(--secondary-text);
     border-bottom: 1px solid var(--primary-text);
 }
@@ -45,7 +45,6 @@
 #timeItemsContainer .active-sort-btn {
     outline: none !important;
     box-shadow: none;
-    font-size: 14px !important;
     font-weight: bold !important;
     color: var(--primary-blue) !important;
     border-bottom: 3px solid var(--primary-blue) !important;

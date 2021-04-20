@@ -3,6 +3,15 @@ const updateTimeTable = timesArray => {
     timeTableAccordian.innerHTML = ''
 
     timesArray.forEach(el => {
+        let time = el.time,
+            name = el.name,
+            date = new Date(el.date),
+            tag = el.tag,
+            startTime = new Date(el.startTime),
+            finishTime = new Date(el.finishTime),
+            description = el.description,
+            key = el.key
+
         timeTableAccordian.innerHTML += `
             <div class="card time-item mb-3">
                 <div
@@ -10,17 +19,17 @@ const updateTimeTable = timesArray => {
                 >
                     <div class="d-flex flex-column mb-3">
                         <div class="time-title ml-4">
-                            ${el.name}
+                            ${name}
                         </div>
                         <div
                             class="time-container d-flex justify-content-around align-items-center mr-3 mb-1"
                         >
                             <div class="time-text mx-4">${formatTime(
-                                el.time
+                                time
                             )}</div>
                             <div
                                 class="tag-icon d-flex align-items-center px-2"
-                                style="background: ${el.tag.color}"
+                                style="background: ${tag.color}"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -34,15 +43,13 @@ const updateTimeTable = timesArray => {
                                         d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
                                     />
                                 </svg>
-                                <span class="ml-1 tag-text">${
-                                    el.tag.name
-                                }</span>
+                                <span class="ml-1 tag-text">${tag.name}</span>
                             </div>
                         </div>
                     </div>
                     <div class="item-time-date px-2">
                         <span class="date">${formatTimeItemDate(
-                            el.date
+                            date
                         )}</span><br />
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -60,17 +67,16 @@ const updateTimeTable = timesArray => {
                             />
                         </svg>
                         <span class="time">${formatTimeItemTimeSegment(
-                            el.startTime,
-                            el.finishTime
+                            startTime,
+                            finishTime
                         )}</span>
                     </div>
                     <button
                         class="btn btn-link collapse-btn p-0"
                         type="button"
                         data-toggle="collapse"
-                        data-target="#${el.key}"
-                        aria-expanded="true"
-                        aria-controls="${el.key}"
+                        data-target="#${key}"
+                        aria-controls="${key}"
                     >
                         <span style="font-size: 30px" class="d-block">
                             <svg
@@ -89,13 +95,13 @@ const updateTimeTable = timesArray => {
                     </button>
                 </div>
                 <div
-                    id="${el.key}"
+                    id="${key}"
                     class="collapse"
                     data-parent="#timeTableAccordian"
                 >
                     <div class="card-body inner-time-item">
                         <h1 class="time-title text-center">
-                            ${el.name}
+                            ${name}
                         </h1>
                         <div class="underline"></div>
                         <div
@@ -103,15 +109,15 @@ const updateTimeTable = timesArray => {
                         >
                             <div class="mx-5 time-stat">
                                 <label class="p-0 m-0">Date:</label>
-                                <div>${el.date.getMonth()}/${el.date.getDate()}/${el.date.getYear()}</div>
+                                <div>${date.getMonth()}/${date.getDate()}/${date.getYear()}</div>
                             </div>
                             <div class="mx-5 time-stat">
                                 <label class="p-0 m-0"
                                     >Time Segment:</label
                                 >
                                 <div>${formatTimeItemTimeSegment(
-                                    el.startTime,
-                                    el.finishTime
+                                    startTime,
+                                    finishTime
                                 )}</div>
                             </div>
                         </div>
@@ -120,7 +126,7 @@ const updateTimeTable = timesArray => {
                                 >Description:</label
                             >
                             <p class="p-1">
-                                ${el.description}
+                                ${description}
                             </p>
                         </div>
                         <div
