@@ -1,7 +1,7 @@
 const updateTimeTable = timesArray => {
     const timeTableAccordian = document.getElementById('timeTableAccordian')
     timeTableAccordian.innerHTML = ''
-
+    console.log(timesArray)
     timesArray.forEach(el => {
         let time = el.time,
             name = el.name,
@@ -109,7 +109,7 @@ const updateTimeTable = timesArray => {
                         >
                             <div class="mx-5 time-stat">
                                 <label class="p-0 m-0">Date:</label>
-                                <div>${date.getMonth()}/${date.getDate()}/${date.getYear()}</div>
+                                <div>${date.getMonth()}/${date.getDate()}/${date.getFullYear()}</div>
                             </div>
                             <div class="mx-5 time-stat">
                                 <label class="p-0 m-0"
@@ -156,7 +156,7 @@ const updateTimeTable = timesArray => {
 const formatTimeItemDate = date => {
     let timeDay = date.getDate()
     let timeMonth = date.getMonth()
-    let timeYear = date.getYear()
+    let timeYear = date.getFullYear()
 
     let currDate = new Date()
     let yesterday = new Date(currDate)
@@ -166,13 +166,13 @@ const formatTimeItemDate = date => {
     if (
         timeDay === currDate.getDate() &&
         timeMonth === currDate.getMonth() &&
-        timeYear === currDate.getYear()
+        timeYear === currDate.getFullYear()
     ) {
         return 'Today'
     } else if (
         timeDay === yesterday.getDate() &&
         timeMonth === yesterday.getMonth() &&
-        timeYear === yesterday.getYear()
+        timeYear === yesterday.getFullYear()
     ) {
         return 'Yesterday'
     } else {
