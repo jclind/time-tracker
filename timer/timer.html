@@ -933,6 +933,7 @@
                     <label for="" class="mr-auto">Sort by:</label>
                     <div
                         class="sort-by-order d-flex flex-row align-items-center m-auto position-relative px-4"
+                        id="activePropertyFilter"
                     >
                         <div class="active-filter">Date</div>
                         <i
@@ -940,9 +941,10 @@
                         ></i>
                     </div>
                     <div
-                        class="sort-by-order-dropdown-box d-flex flex-column justify-content-center align-items-center position-absolute py-2"
+                        class="sort-by-order-dropdown-box d-none flex-column justify-content-center align-items-center position-absolute py-2"
+                        id="properyDropdownBox"
                     >
-                        <div class="dropdown-selection pl-2 my-2">Tag</div>
+                        <div class="dropdown-selection pl-2 my-2" >Tag</div>
                         <div class="dropdown-dividor pl-2"></div>
                         <div class="dropdown-selection pl-2 my-2">Time</div>
                     </div>
@@ -980,7 +982,8 @@
         <script src="js/timerFunctions/timerInfo.js"></script>
         <script src="js/timerFunctions/timerSubmit.js"></script>
 
-        <script src="js/timeTableFunctions/sortByDate.js"></script>
+        <script src="js/timeTableFunctions/sortByTimePeriod.js"></script>
+        <script src="js/timeTableFunctions/sortByProperty.js"></script>
 
         <!-- Modals -->
         <script src="js/modalFuntions/tagList.js"></script>

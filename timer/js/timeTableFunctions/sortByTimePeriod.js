@@ -19,12 +19,12 @@ const selectActiveDate = btnID => {
         currBtn.classList.add('active-sort-btn')
         // Set activeDate equal to the clicked button's text (Today, yesterday, etc...)
         activeDate = currBtn.innerText
-        updateTimeTable(sortByDate())
+        updateTimeTable(sortByTimePeriod())
     }
 }
 
 // Calls different sorting functions based on what the value of activeDate is.
-const sortByDate = () => {
+const sortByTimePeriod = () => {
     let filteredArr
     if (activeDate === 'Today') filteredArr = sortByToday()
     else if (activeDate === 'Yesterday') filteredArr = sortByYesterday()
