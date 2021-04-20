@@ -1,4 +1,5 @@
 const activePropertyEl = document.getElementById('activePropertyFilter')
+const activePropertyElText = activePropertyEl.querySelector('.active-filter')
 const activePropertyElIcon = document.querySelector(
     '#sortByOrderDropdown .sort-by-order .dropdown-icon'
 )
@@ -21,12 +22,13 @@ propertyDropdownEls.forEach(el =>
 
 const selectNewActiveProperty = newEl => {
     let newProp = newEl.innerText
-    let oldProp = activePropertyEl.querySelector('.active-filter').innerText
+    let oldProp = activePropertyElText.innerText
 
     newEl.innerText = oldProp
-    activePropertyEl.querySelector('.active-filter').innerText = newProp
+    activePropertyElText.innerText = newProp
 
     closePropertyDropdownBox()
+    updateTimeTable(timesInfoList)
 }
 
 const togglePropertyDropdownBox = () => {
@@ -54,6 +56,44 @@ const closePropertyDropdownBox = () => {
     // Hide dropdown box
     properyDropdownBox.classList.remove('d-flex')
     properyDropdownBox.classList.add('d-none')
+}
+
+const sortByProperty = arr => {
+    let sortedArr
+    let activeProperty = activePropertyElText.innerText
+
+    if (activeProperty === 'Date') sortedArr = sortByDate(arr)
+    else if (activeProperty === 'Time') sortedArr = sortByTime(arr)
+    else if (activeProperty === 'Tag') sortedArr = sortByTag(arr)
+    else if (activeProperty === 'Name') sortedArr = sortByName(arr)
+
+    return sortedArr
+}
+
+const sortByDate = arr => {
+    let sortedArr = [...arr]
+    sortedArr.sort((a, b) => {
+        return new Date(b.date) - new Date(a.date)
+    })
+    return sortedArr
+}
+const sortByTime = arr => {
+    let sortedArr = [...arr]
+    sortedArr.sort((a, b) => {
+        return b.time - a.time
+    })
+    return sortedArr
+}
+const sortByTag = arr => {
+    let sortedArr = [...arr]
+    sortedArr.sort((a, b) => a.tag.name.localeCompare(b.tag.name))
+
+    return sortedArr
+}
+const sortByName = arr => {
+    let sortedArr = [...arr]
+    sortedArr.sort((a, b) => a.name.localeCompare(b.name))
+    return sortedArr
 }
 
 // Close dropdown box if you click outside of the element

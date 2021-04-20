@@ -19,45 +19,45 @@ const selectActiveDate = btnID => {
         currBtn.classList.add('active-sort-btn')
         // Set activeDate equal to the clicked button's text (Today, yesterday, etc...)
         activeDate = currBtn.innerText
-        updateTimeTable(sortByTimePeriod())
+        updateTimeTable(timesInfoList)
     }
 }
 
 // Calls different sorting functions based on what the value of activeDate is.
-const sortByTimePeriod = () => {
+const sortByTimePeriod = arr => {
     let filteredArr
-    if (activeDate === 'Today') filteredArr = sortByToday()
-    else if (activeDate === 'Yesterday') filteredArr = sortByYesterday()
-    else if (activeDate === 'Week') filteredArr = sortByWeek()
-    else if (activeDate === 'Month') filteredArr = sortByMonth()
-    else if (activeDate === 'Year') filteredArr = sortByYear()
-    else filteredArr = timesInfoList
+    if (activeDate === 'Today') filteredArr = sortByToday(arr)
+    else if (activeDate === 'Yesterday') filteredArr = sortByYesterday(arr)
+    else if (activeDate === 'Week') filteredArr = sortByWeek(arr)
+    else if (activeDate === 'Month') filteredArr = sortByMonth(arr)
+    else if (activeDate === 'Year') filteredArr = sortByYear(arr)
+    else filteredArr = arr
 
     return filteredArr
 }
 
-const sortByToday = () => {
+const sortByToday = arr => {
     let date = new Date()
 
-    let filteredArr = timesInfoList.filter(time => {
+    let filteredArr = arr.filter(time => {
         timeDate = new Date(time.date)
         return areEqualDates(date, timeDate)
     })
 
     return filteredArr
 }
-const sortByYesterday = () => {
+const sortByYesterday = arr => {
     let date = new Date()
     date.setDate(date.getDate() - 1)
 
-    let filteredArr = timesInfoList.filter(time => {
+    let filteredArr = arr.filter(time => {
         timeDate = new Date(time.date)
         return areEqualDates(date, timeDate)
     })
 
     return filteredArr
 }
-const sortByWeek = () => {
+const sortByWeek = arr => {
     let filteredArr = []
     let curr = new Date()
 
@@ -70,7 +70,7 @@ const sortByWeek = () => {
         let date = new Date()
         date.setDate(date.getDate() - i)
 
-        currDateArr = timesInfoList.filter(time => {
+        currDateArr = arr.filter(time => {
             timeDate = new Date(time.date)
             return areEqualDates(date, timeDate)
         })
@@ -79,7 +79,7 @@ const sortByWeek = () => {
 
     return filteredArr
 }
-const sortByMonth = () => {
+const sortByMonth = arr => {
     let filteredArr = []
     let curr = new Date()
     let currDay = curr.getDate()
@@ -88,7 +88,7 @@ const sortByMonth = () => {
         let date = new Date()
         date.setDate(date.getDate() - i)
 
-        let currDateArr = timesInfoList.filter(time => {
+        let currDateArr = arr.filter(time => {
             let timeDate = new Date(time.date)
 
             return areEqualDates(date, timeDate)
@@ -98,7 +98,7 @@ const sortByMonth = () => {
 
     return filteredArr
 }
-const sortByYear = () => {
+const sortByYear = arr => {
     let filteredArr = []
 
     dayOfYear = date =>
@@ -111,7 +111,7 @@ const sortByYear = () => {
         let date = new Date()
         date.setDate(date.getDate() - i)
 
-        currDateArr = timesInfoList.filter(time => {
+        currDateArr = arr.filter(time => {
             let timeDate = new Date(time.date)
 
             return areEqualDates(date, timeDate)

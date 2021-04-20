@@ -1,8 +1,10 @@
 const updateTimeTable = timesArray => {
+    // set filteredArr equal to timesArray first sortedByPriod and then by property
+    let filteredArr = sortByProperty(sortByTimePeriod(timesInfoList))
+
     const timeTableAccordian = document.getElementById('timeTableAccordian')
     timeTableAccordian.innerHTML = ''
-    console.log(timesArray)
-    timesArray.forEach(el => {
+    filteredArr.forEach(el => {
         let time = el.time,
             name = el.name,
             date = new Date(el.date),
