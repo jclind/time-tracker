@@ -1,5 +1,7 @@
 #sortByOrderDropdown {
     width: 50%;
+    /* margin: 15px auto; */
+    margin: 5px 45px 20px 0px;
 }
 
 #sortByOrderDropdown label {
@@ -44,4 +46,17 @@
     height: 1px;
     width: 90%;
     background: var(--secondary-text);
+}
+
+#sortByOrderDropdown .reverse-btn {
+    background: var(--input-background);
+    box-shadow: var(--main-background-color) 0px 5px 15px;
+    width: 30px;
+    height: 100%;
+    right: -45px;
+}
+#sortByOrderDropdown .reverse-btn i {
+    color: var(--primary-blue);
+    font-size: 18px;
+    font-weight: 100;
 }

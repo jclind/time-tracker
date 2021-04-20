@@ -67,6 +67,14 @@ const sortByProperty = arr => {
     else if (activeProperty === 'Tag') sortedArr = sortByTag(arr)
     else if (activeProperty === 'Name') sortedArr = sortByName(arr)
 
+    // if the reverseSortBtn is down, return a reversed array
+    if (
+        reverseSortBtn
+            .querySelector('.reverse-btn-icon')
+            .classList.contains('fa-long-arrow-down')
+    ) {
+        return sortedArr.reverse()
+    }
     return sortedArr
 }
 
@@ -95,6 +103,38 @@ const sortByName = arr => {
     sortedArr.sort((a, b) => a.name.localeCompare(b.name))
     return sortedArr
 }
+
+// Add event listener to the reverse sort button
+const reverseSortBtn = document.querySelector(
+    '#sortByOrderDropdown .reverse-btn'
+)
+reverseSortBtn.addEventListener('click', event => {
+    // Stop Propagation for reverse sorting button so that dropdown doesn't get toggled
+    event.stopPropagation()
+
+    if (
+        reverseSortBtn
+            .querySelector('.reverse-btn-icon')
+            .classList.contains('fa-long-arrow-up')
+    ) {
+        // Flip arrow in reverseSortBtn
+        reverseSortBtn
+            .querySelector('.reverse-btn-icon')
+            .classList.remove('fa-long-arrow-up')
+        reverseSortBtn
+            .querySelector('.reverse-btn-icon')
+            .classList.add('fa-long-arrow-down')
+    } else {
+        // Flip arrow in reverseSortBtn
+        reverseSortBtn
+            .querySelector('.reverse-btn-icon')
+            .classList.remove('fa-long-arrow-down')
+        reverseSortBtn
+            .querySelector('.reverse-btn-icon')
+            .classList.add('fa-long-arrow-up')
+    }
+    updateTimeTable(timesInfoList)
+})
 
 // Close dropdown box if you click outside of the element
 $(window).click(function () {
