@@ -142,8 +142,7 @@ const updateTimeTable = timesArray => {
                                 <button
                                     class="btn btn-secondary"
                                     style="background: #00adb5"
-                                    data-toggle="modal"
-                                    data-target="#editTimeModal"
+                                    onclick="showEditTimeModal('${key}')"
                                 >
                                     Edit
                                 </button>

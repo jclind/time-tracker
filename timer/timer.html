@@ -114,6 +114,7 @@
                             <input
                                 type="text"
                                 class="change-title-input text-center"
+                                id="modalEditTitleInput"
                                 value="Time Tracker Revision"
                                 onClick="this.setSelectionRange(0, this.value.length)"
                             />
@@ -127,6 +128,7 @@
                             <input
                                 type="text"
                                 class="text-center"
+                                id="modalEditTimeInput"
                                 value="00:51:00.00"
                                 onClick="this.setSelectionRange(0, this.value.length)"
                             />
@@ -139,7 +141,7 @@
                             <label>Edit Description:</label>
                             <textarea
                                 name=""
-                                id=""
+                                id="modalEditDescriptionInput"
                                 class="description-text py-2 px-3"
                                 cols="30"
                                 rows="6"
@@ -161,7 +163,7 @@
                                 class="done-btn btn btn-block mx-3"
                                 id="submitEditModalBtn"
                             >
-                                Done
+                                Edit
                             </button>
                         </div>
                     </div>
@@ -801,16 +803,17 @@
                             fill="currentColor"
                             class="bi bi-tag-fill"
                             viewBox="0 0 16 16"
-                            style="color: red"
+                            style="color: none"
                             id="activeTimeTagSelectionBtnColor"
                         >
                             <path
                                 d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
                             />
                         </svg>
-                        <span class="mx-2" id="activeTimeTagSelectionBtnName"
-                            >main</span
-                        >
+                        <span
+                            class="mx-2"
+                            id="activeTimeTagSelectionBtnName"
+                        ></span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="12"

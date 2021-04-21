@@ -1,4 +1,35 @@
-// !! ADD FUNCTIONALITY
+const showEditTimeModal = key => {
+    $('#editTimeModal').modal('show')
+
+    const tagNameEl = document.getElementById('editTimeTagSelectionBtnName')
+    const tagColorEl = document.getElementById('editTimeTagSelectionBtnColor')
+    const nameInput = document.getElementById('modalEditTitleInput')
+    const timeInput = document.getElementById('modalEditTimeInput')
+    const descriptionInput = document.getElementById(
+        'modalEditDescriptionInput'
+    )
+
+    // Get selected time element index from timesInfoList with key
+    let timeIdx = timesInfoList.findIndex(time => time.key === key)
+    let timeObj = timesInfoList[timeIdx]
+
+    tagNameEl.innerText = timeObj.tag.name
+    tagColorEl.style.color = timeObj.tag.color
+    nameInput.value = timeObj.name
+    timeInput.value = formatTime(timeObj.time)
+    descriptionInput.value = timeObj.description
+
+    // On Edit button click
+    $('#submitEditModalBtn').on('click', () => {
+        if (tagNameEl.innerText !== timeObj.tag.name) {
+            timeObj.tag = timeTags.find(tag => tag.name === tagNameEl.innerText)
+        }
+
+        if (descriptionInput.value !== timeObj.description) {
+            timeObj.description = descriptionInput.value
+        }
+    })
+}
 
 // When Modal Opens
 $('#editTimeModal').on('shown.bs.modal', () => {
