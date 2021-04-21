@@ -155,6 +155,14 @@ const updateTimeTable = timesArray => {
                 </div>
             `
         })
+        timeTableAccordian.innerHTML += `
+            <div class="total-filtered-time d-block pt-4 text-left">
+                <label>Total Time:</label> <br>
+                <span class="text-center">${formatTime(
+                    calcTotalTime(filteredArr)
+                )}</span>
+            </div>
+        `
     } else {
         timeTableAccordian.innerHTML = `
         <div class="no-times d-flex justify-content-center flex-column align-items-center mx-auto mt-4">
@@ -216,5 +224,5 @@ const formatTimeItemTimeSegment = (startTime, finishTime) => {
 }
 
 const calcTotalTime = arr => {
-    return arr.reduce((acc, curr) => acc + curr.time)
+    return arr.reduce((acc, curr) => acc + curr.time, 0)
 }
