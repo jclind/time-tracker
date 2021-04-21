@@ -1,7 +1,6 @@
 const updateTimeTable = timesArray => {
     const timeTableAccordian = document.getElementById('timeTableAccordian')
-
-    if (sortByDate([...timesArray]).length !== 0) {
+    if (sortByTimePeriod(timesArray).length !== 0) {
         // set filteredArr equal to timesArray first sortedByPriod and then by property
         let filteredArr = sortByProperty(sortByTimePeriod(timesInfoList))
 
@@ -106,9 +105,11 @@ const updateTimeTable = timesArray => {
                         data-parent="#timeTableAccordian"
                     >
                         <div class="card-body inner-time-item">
-                            <h1 class="time-title text-center">
-                                ${name}
-                            </h1>
+                            <div class="time-title text-center my-2">
+                                <h1 class="d-inline" onclick="editTimeTitleFromTable('${key}')" contenteditable="true">
+                                    ${name}
+                                </h1>
+                            </div>
                             <div class="underline"></div>
                             <div
                                 class="time-stats-container container d-flex justify-content-around flex-row mt-3"

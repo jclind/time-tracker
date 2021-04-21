@@ -90,9 +90,10 @@
     color: rgb(146, 146, 146);
 }
 
-.time-items-container .inner-time-item .time-title {
+.time-items-container .inner-time-item .time-title h1 {
     color: #eeeeee;
     font-size: 20px;
+    padding: 3px 15px;
 }
 .time-items-container .inner-time-item .underline {
     height: 3px;

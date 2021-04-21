@@ -90,6 +90,27 @@ timesInfoList = [
         description: 'YOoooooooOO',
         key: 'KEYtjPsW3nrATaDEZ1ZXIPB',
     },
+    {
+        name: 'Time Tracker, working on general fixes.',
+        time: 42620,
+        date: '2021-04-21T14:22:29.685Z',
+        tag: { name: 'Work', color: '#3d3d90' },
+        startTime: '2021-04-21T14:22:29.685Z',
+        finishTime: '2021-04-21T14:23:12.313Z',
+        description:
+            'Working on firebase connection so that user authorization can be setup',
+        key: 'KEYU36Ah7JjCE8xS3xv2ooD',
+    },
+    {
+        name: 'Workout',
+        time: 6980,
+        date: '2021-04-21T14:23:14.924Z',
+        tag: { name: 'Work', color: '#3d3d90' },
+        startTime: '2021-04-21T14:23:14.924Z',
+        finishTime: '2021-04-21T14:23:21.911Z',
+        description: '',
+        key: 'KEY5tNzz9nZlIByQWtRu4wi',
+    },
 ]
 
 let timeTags = [
