@@ -51,7 +51,7 @@
     <body class="position-relative">
         <!-- Modals  -->
         <div
-            class="modal overflow-hidden"
+            class="modal show overflow-hidden"
             id="editTimeModal"
             tabindex="-1"
             role="dialog"
@@ -70,7 +70,14 @@
                     <div class="modal-body">
                         <div class="change-tag d-flex justify-content-center">
                             <button
-                                class="btn mb-2 d-flex justify-content-center flex-row align-items-center"
+                                class="
+                                    btn
+                                    mb-2
+                                    d-flex
+                                    justify-content-center
+                                    flex-row
+                                    align-items-center
+                                "
                                 id="editTagBtn"
                             >
                                 <svg
@@ -108,7 +115,13 @@
                         </div>
                         <!-- End .change-tag -->
                         <div
-                            class="change-title d-flex flex-column mb-5 position-relative"
+                            class="
+                                change-title
+                                d-flex
+                                flex-column
+                                mb-5
+                                position-relative
+                            "
                         >
                             <label>Edit Title:</label>
                             <input
@@ -122,21 +135,83 @@
                         </div>
                         <!-- End .change-title -->
                         <div
-                            class="change-time d-flex flex-column mt-2 mb-5 position-relative"
+                            class="
+                                change-time
+                                d-flex
+                                flex-column
+                                mt-2
+                                mb-5
+                                position-relative
+                            "
                         >
                             <label>Edit Time:</label>
-                            <input
+                            <div
                                 type="text"
-                                class="text-center"
+                                class="d-flex flex-row justify-content-around"
                                 id="modalEditTimeInput"
                                 value="00:51:00.00"
-                                onClick="this.setSelectionRange(0, this.value.length)"
-                            />
+                            >
+                                <div
+                                    class="
+                                        hours
+                                        time-cont
+                                        d-flex
+                                        flex-column
+                                        justify-content-left
+                                    "
+                                >
+                                    <label for="">h</label>
+                                    <input type="number" placeholder="00" />
+                                </div>
+                                <div
+                                    class="
+                                        minutes
+                                        time-cont
+                                        d-flex
+                                        flex-column
+                                        justify-content-left
+                                    "
+                                >
+                                    <label for="">m</label>
+                                    <input type="number" placeholder="00" />
+                                </div>
+                                <div
+                                    class="
+                                        seconds
+                                        time-cont
+                                        d-flex
+                                        flex-column
+                                        justify-content-left
+                                    "
+                                >
+                                    <label for="">s</label>
+                                    <input type="number" placeholder="00" />
+                                </div>
+                                <div
+                                    class="
+                                        milliseconds
+                                        time-cont
+                                        d-flex
+                                        flex-column
+                                        justify-content-left
+                                    "
+                                >
+                                    <label for="">ms</label>
+                                    <input type="number" placeholder="00" />
+                                </div>
+                            </div>
                             <span class="input-border"></span>
                         </div>
                         <!-- End .change-time -->
                         <div
-                            class="change-description d-flex flex-column mt-2 mb-2 position-relative"
+                            class="
+                                change-description
+                                d-flex
+                                flex-column
+                                mt-2
+                                mb-2
+                                position-relative
+                            "
                         >
                             <label>Edit Description:</label>
                             <textarea
@@ -221,7 +296,14 @@
             style="background: rgba(0, 0, 0, 0.6)"
         >
             <div
-                class="modal-dialog d-flex justify-content-center text-center mt-5 pt-5"
+                class="
+                    modal-dialog
+                    d-flex
+                    justify-content-center
+                    text-center
+                    mt-5
+                    pt-5
+                "
                 role="document"
             >
                 <div class="modal-content">
@@ -245,10 +327,23 @@
                         ></h3>
                         <div class="color-select-container mt-3">
                             <div
-                                class="color-row d-flex justify-content-around flex-row mb-5 pt-3"
+                                class="
+                                    color-row
+                                    d-flex
+                                    justify-content-around
+                                    flex-row
+                                    mb-5
+                                    pt-3
+                                "
                             >
                                 <div
-                                    class="color d-flex align-items-center px-0 position-relative"
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
                                     data-tag-color="#fd483f"
                                 >
                                     <svg
@@ -263,7 +358,11 @@
                                         <circle cx="8" cy="8" r="8" />
                                     </svg>
                                     <span
-                                        class="position-absolute d-none color-select"
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
                                         ><svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="30"
@@ -279,7 +378,13 @@
                                     </span>
                                 </div>
                                 <div
-                                    class="color d-flex align-items-center px-0 position-relative"
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
                                     data-tag-color="#fd889a"
                                 >
                                     <svg
@@ -294,7 +399,11 @@
                                         <circle cx="8" cy="8" r="8" />
                                     </svg>
                                     <span
-                                        class="position-absolute d-none color-select"
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
                                         ><svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="30"
@@ -310,7 +419,13 @@
                                     </span>
                                 </div>
                                 <div
-                                    class="color d-flex align-items-center px-0 position-relative"
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
                                     data-tag-color="#694214"
                                 >
                                     <svg
@@ -325,7 +440,11 @@
                                         <circle cx="8" cy="8" r="8" />
                                     </svg>
                                     <span
-                                        class="position-absolute d-none color-select"
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
                                         ><svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="30"
@@ -341,7 +460,13 @@
                                     </span>
                                 </div>
                                 <div
-                                    class="color d-flex align-items-center px-0 position-relative"
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
                                     data-tag-color="#b36b0e"
                                 >
                                     <svg
@@ -356,7 +481,11 @@
                                         <circle cx="8" cy="8" r="8" />
                                     </svg>
                                     <span
-                                        class="position-absolute d-none color-select"
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
                                         ><svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="30"
@@ -372,7 +501,13 @@
                                     </span>
                                 </div>
                                 <div
-                                    class="color d-flex align-items-center px-0 position-relative"
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
                                     data-tag-color="#fca12b"
                                 >
                                     <svg
@@ -387,7 +522,11 @@
                                         <circle cx="8" cy="8" r="8" />
                                     </svg>
                                     <span
-                                        class="position-absolute d-none color-select"
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
                                         ><svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="30"
@@ -404,10 +543,22 @@
                                 </div>
                             </div>
                             <div
-                                class="color-row d-flex justify-content-around flex-row mb-5"
+                                class="
+                                    color-row
+                                    d-flex
+                                    justify-content-around
+                                    flex-row
+                                    mb-5
+                                "
                             >
                                 <div
-                                    class="color d-flex align-items-center px-0 position-relative"
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
                                     data-tag-color="#f5df4f"
                                 >
                                     <svg
@@ -422,7 +573,11 @@
                                         <circle cx="8" cy="8" r="8" />
                                     </svg>
                                     <span
-                                        class="position-absolute d-none color-select"
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
                                         ><svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="30"
@@ -438,7 +593,13 @@
                                     </span>
                                 </div>
                                 <div
-                                    class="color d-flex align-items-center px-0 position-relative"
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
                                     data-tag-color="#90c900"
                                 >
                                     <svg
@@ -453,7 +614,11 @@
                                         <circle cx="8" cy="8" r="8" />
                                     </svg>
                                     <span
-                                        class="position-absolute d-none color-select"
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
                                         ><svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="30"
@@ -469,7 +634,13 @@
                                     </span>
                                 </div>
                                 <div
-                                    class="color d-flex align-items-center px-0 position-relative"
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
                                     data-tag-color="#0a724f"
                                 >
                                     <svg
@@ -484,7 +655,11 @@
                                         <circle cx="8" cy="8" r="8" />
                                     </svg>
                                     <span
-                                        class="position-absolute d-none color-select"
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
                                         ><svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="30"
@@ -500,7 +675,13 @@
                                     </span>
                                 </div>
                                 <div
-                                    class="color d-flex align-items-center px-0 position-relative"
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
                                     data-tag-color="#00bb7d"
                                 >
                                     <svg
@@ -515,7 +696,11 @@
                                         <circle cx="8" cy="8" r="8" />
                                     </svg>
                                     <span
-                                        class="position-absolute d-none color-select"
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
                                         ><svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="30"
@@ -531,7 +716,13 @@
                                     </span>
                                 </div>
                                 <div
-                                    class="color d-flex align-items-center px-0 position-relative"
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
                                     data-tag-color="#aaf0d1"
                                 >
                                     <svg
@@ -546,7 +737,11 @@
                                         <circle cx="8" cy="8" r="8" />
                                     </svg>
                                     <span
-                                        class="position-absolute d-none color-select"
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
                                         ><svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="30"
@@ -563,10 +758,21 @@
                                 </div>
                             </div>
                             <div
-                                class="color-row d-flex justify-content-around flex-row"
+                                class="
+                                    color-row
+                                    d-flex
+                                    justify-content-around
+                                    flex-row
+                                "
                             >
                                 <div
-                                    class="color d-flex align-items-center px-0 position-relative"
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
                                     data-tag-color="#7cc3db"
                                 >
                                     <svg
@@ -581,7 +787,11 @@
                                         <circle cx="8" cy="8" r="8" />
                                     </svg>
                                     <span
-                                        class="position-absolute d-none color-select"
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
                                         ><svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="30"
@@ -597,7 +807,13 @@
                                     </span>
                                 </div>
                                 <div
-                                    class="color d-flex align-items-center px-0 position-relative"
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
                                     data-tag-color="#4949f5"
                                 >
                                     <svg
@@ -612,7 +828,11 @@
                                         <circle cx="8" cy="8" r="8" />
                                     </svg>
                                     <span
-                                        class="position-absolute d-none color-select"
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
                                         ><svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="30"
@@ -628,7 +848,13 @@
                                     </span>
                                 </div>
                                 <div
-                                    class="color d-flex align-items-center px-0 position-relative"
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
                                     data-tag-color="#3d3d90"
                                 >
                                     <svg
@@ -643,7 +869,11 @@
                                         <circle cx="8" cy="8" r="8" />
                                     </svg>
                                     <span
-                                        class="position-absolute d-none color-select"
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
                                         ><svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="30"
@@ -659,7 +889,13 @@
                                     </span>
                                 </div>
                                 <div
-                                    class="color d-flex align-items-center px-0 position-relative"
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
                                     data-tag-color="#d37bd3"
                                 >
                                     <svg
@@ -674,7 +910,11 @@
                                         <circle cx="8" cy="8" r="8" />
                                     </svg>
                                     <span
-                                        class="position-absolute d-none color-select"
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
                                         ><svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="30"
@@ -690,7 +930,13 @@
                                     </span>
                                 </div>
                                 <div
-                                    class="color d-flex align-items-center px-0 position-relative"
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
                                     data-tag-color="#926adb"
                                 >
                                     <svg
@@ -705,7 +951,11 @@
                                         <circle cx="8" cy="8" r="8" />
                                     </svg>
                                     <span
-                                        class="position-absolute d-none color-select"
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
                                         ><svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="30"
@@ -724,7 +974,13 @@
                         </div>
 
                         <div
-                            class="create-tag-btns-container mt-5 pt-4 d-flex justify-content-center"
+                            class="
+                                create-tag-btns-container
+                                mt-5
+                                pt-4
+                                d-flex
+                                justify-content-center
+                            "
                         >
                             <button class="btn btn-dark cancel-btn mx-3">
                                 Cancel
@@ -749,28 +1005,57 @@
                 <h4>TIME TRaCKER</h4>
             </div>
             <ul
-                class="nav-links d-flex justify-content-around flex-column flex-sm-row align-items-center"
+                class="
+                    nav-links
+                    d-flex
+                    justify-content-around
+                    flex-column flex-sm-row
+                    align-items-center
+                "
             >
                 <li
-                    class="toggle-nav-modal d-flex justify-content-center align-items-center logged-out"
+                    class="
+                        toggle-nav-modal
+                        d-flex
+                        justify-content-center
+                        align-items-center
+                        logged-out
+                    "
                     id="login"
                 >
                     <span>Login</span>
                 </li>
                 <li
-                    class="toggle-nav-modal d-flex justify-content-center align-items-center logged-out"
+                    class="
+                        toggle-nav-modal
+                        d-flex
+                        justify-content-center
+                        align-items-center
+                        logged-out
+                    "
                     id="signup"
                 >
                     <span>Signup</span>
                 </li>
                 <li
-                    class="logged-in d-flex justify-content-center align-items-center"
+                    class="
+                        logged-in
+                        d-flex
+                        justify-content-center
+                        align-items-center
+                    "
                     id="logout"
                 >
                     <span>Logout</span>
                 </li>
                 <li
-                    class="toggle-nav-modal logged-in d-flex justify-content-center align-items-center"
+                    class="
+                        toggle-nav-modal
+                        logged-in
+                        d-flex
+                        justify-content-center
+                        align-items-center
+                    "
                     id="account"
                 >
                     <span>Account</span>
@@ -784,16 +1069,34 @@
             </div>
         </nav>
         <section
-            class="timer-component d-flex flex-column justify-content-start text-center"
+            class="
+                timer-component
+                d-flex
+                flex-column
+                justify-content-start
+                text-center
+            "
             id="timerComponent"
         >
             <div class="timer" id="time">00:00.00</div>
             <div class="time-info-container">
                 <div
-                    class="time-tag-btn-container mb-2 d-flex justify-content-center align-items-center"
+                    class="
+                        time-tag-btn-container
+                        mb-2
+                        d-flex
+                        justify-content-center
+                        align-items-center
+                    "
                 >
                     <button
-                        class="time-tag-btn btn d-flex justify-content-center align-items-center"
+                        class="
+                            time-tag-btn
+                            btn
+                            d-flex
+                            justify-content-center
+                            align-items-center
+                        "
                         id="activeTagBtn"
                     >
                         <svg
@@ -829,7 +1132,14 @@
                     </button>
                 </div>
                 <label
-                    class="time-title d-flex position-relative flex-column mx-auto mb-2"
+                    class="
+                        time-title
+                        d-flex
+                        position-relative
+                        flex-column
+                        mx-auto
+                        mb-2
+                    "
                 >
                     <input
                         type="text"
@@ -865,7 +1175,15 @@
                     </button>
                 </label>
                 <label
-                    class="time-description-container d-flex flex-column-reverse mx-auto my-4 text-left position-relative"
+                    class="
+                        time-description-container
+                        d-flex
+                        flex-column-reverse
+                        mx-auto
+                        my-4
+                        text-left
+                        position-relative
+                    "
                 >
                     <textarea
                         name="time description"
@@ -876,14 +1194,25 @@
                         required
                     ></textarea>
                     <span
-                        class="textarea-placeholder content-name position-absolute"
+                        class="
+                            textarea-placeholder
+                            content-name
+                            position-absolute
+                        "
                         >Enter Time Description</span
                     >
                     <span class="textarea-border position-absolute"></span>
                 </label>
             </div>
             <div
-                class="time-btns d-flex flex-row align-items-center buttons-state-1 position-relative"
+                class="
+                    time-btns
+                    d-flex
+                    flex-row
+                    align-items-center
+                    buttons-state-1
+                    position-relative
+                "
                 id="timeButtonsContainer"
             >
                 <!-- FIX MY LOGIC!!! -->
@@ -912,16 +1241,33 @@
         </section>
         <div class="gradient-divider"></div>
         <section
-            class="d-flex flex-column justify-content-center align-items-center pb-5"
+            class="
+                d-flex
+                flex-column
+                justify-content-center
+                align-items-center
+                pb-5
+            "
             id="timeItemsContainer"
         >
             <h1 class="time-items-title pb-4">Past Times</h1>
 
             <div
-                class="sorting-methods d-flex flex-column justify-content-center"
+                class="
+                    sorting-methods
+                    d-flex
+                    flex-column
+                    justify-content-center
+                "
             >
                 <div
-                    class="sort-by-date-btns d-flex justify-content-center m-auto pb-4"
+                    class="
+                        sort-by-date-btns
+                        d-flex
+                        justify-content-center
+                        m-auto
+                        pb-4
+                    "
                     id="sortByDateBtns"
                 >
                     <button class="btn active-sort-btn" id="todayBtn">
@@ -934,26 +1280,60 @@
                     <button class="btn" id="allTimeBtn">All Time</button>
                 </div>
                 <div
-                    class="d-flex flex-column align-items-center justify-content-center align-self-center position-relative"
+                    class="
+                        d-flex
+                        flex-column
+                        align-items-center
+                        justify-content-center
+                        align-self-center
+                        position-relative
+                    "
                     id="sortByOrderDropdown"
                 >
                     <label for="" class="mr-auto">Sort by:</label>
                     <div
-                        class="sort-by-order d-flex flex-row align-items-center m-auto position-relative px-4"
+                        class="
+                            sort-by-order
+                            d-flex
+                            flex-row
+                            align-items-center
+                            m-auto
+                            position-relative
+                            px-4
+                        "
                         id="activePropertyFilter"
                     >
                         <div class="active-filter">Date</div>
                         <i
-                            class="fa fa-angle-up dropdown-icon position-absolute"
+                            class="
+                                fa fa-angle-up
+                                dropdown-icon
+                                position-absolute
+                            "
                         ></i>
                         <button
-                            class="reverse-btn btn d-flex justify-content-center align-items-center position-absolute"
+                            class="
+                                reverse-btn
+                                btn
+                                d-flex
+                                justify-content-center
+                                align-items-center
+                                position-absolute
+                            "
                         >
                             <i class="fa fa-long-arrow-up reverse-btn-icon"></i>
                         </button>
                     </div>
                     <div
-                        class="sort-by-order-dropdown-box d-none flex-column justify-content-center align-items-center position-absolute py-2"
+                        class="
+                            sort-by-order-dropdown-box
+                            d-none
+                            flex-column
+                            justify-content-center
+                            align-items-center
+                            position-absolute
+                            py-2
+                        "
                         id="properyDropdownBox"
                     >
                         <div class="dropdown-selection pl-2 my-2">Tag</div>
@@ -1004,6 +1384,7 @@
         <script src="js/modalFuntions/tagList.js"></script>
         <script src="js/modalFuntions/createTag.js"></script>
         <script src="js/modalFuntions/editTime.js"></script>
+        <script src="js/modalFuntions/editTimeInput.js"></script>
         <script>
             updateTimeTable(timesInfoList)
         </script>
