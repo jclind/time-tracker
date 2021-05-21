@@ -87,8 +87,59 @@ editMillisecondInp.addEventListener('keyup', function (event) {
 const editTimeModalTimeInput = time => {
     let [h, m, s, ms] = msToTimeObjFormat(time)
 
+    // Set the hour input placeholder to the current time object's hour value
+    if (h === 0) {
+        h = '0' + h
+    }
     editHourInp.placeholder = h
+    editHourInp.value = ''
+    // Set the minute input placeholder to the current time object's hour value
+    if (m < 10) {
+        m = '0' + m
+    }
     editMinuteInp.placeholder = m
+    editMinuteInp.value = ''
+    // Set the second input placeholder to the current time object's hour value
+    if (s < 10) {
+        s = '0' + s
+    }
     editSecondInp.placeholder = s
+    editSecondInp.value = ''
+    // Set the millisecond input placeholder to the current time object's hour value
+    if (ms < 10) {
+        ms = '0' + ms
+    }
     editMillisecondInp.placeholder = ms
+    editMillisecondInp.value = ''
+}
+
+const editTimeModalInputIsChanged = time => {
+    let h, m, s, ms
+    // If there is no value in the hour input, set h = to the placeholder
+    if (editHourInp.value != '') {
+        h = Number(editHourInp.value)
+    } else {
+        h = Number(editHourInp.placeholder)
+    }
+    if (editMinuteInp.value != '') {
+        m = Number(editMinuteInp.value)
+    } else {
+        m = Number(editMinuteInp.placeholder)
+    }
+    if (editSecondInp.value != '') {
+        s = Number(editSecondInp.value)
+    } else {
+        s = Number(editSecondInp.placeholder)
+    }
+    if (editMillisecondInp.value != '') {
+        ms = Number(editMillisecondInp.value) * 10
+    } else {
+        ms = Number(editMillisecondInp.placeholder) * 10
+    }
+
+    let currTime = timeObjToMSFormat([h, m, s, ms])
+    if (currTime === time) {
+        return undefined
+    }
+    return currTime
 }

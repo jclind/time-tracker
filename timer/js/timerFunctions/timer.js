@@ -93,6 +93,17 @@ const msToTimeObjFormat = time => {
     ms = Math.floor(tempTime / 10)
     return [h, m, s, ms]
 }
+const timeObjToMSFormat = timeObj => {
+    let [h, m, s, ms] = timeObj
+    let totMS = 0
+
+    totMS += h * 3600000
+    totMS += m * 60000
+    totMS += s * 1000
+    totMS += ms
+
+    return totMS
+}
 
 // Format milliseconds into a standard timer format time
 const formatTime = time => {
