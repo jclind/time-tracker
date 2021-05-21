@@ -69,30 +69,34 @@ const clearTime = () => {
     controlTimerButtons(timerIsRunning, elapsedTime)
 }
 
-// Format milliseconds into a standard timer format time
-const formatTime = time => {
+const msToTimeObjFormat = time => {
     let tempTime = time
-    let hours = 0,
-        minutes = 0,
-        seconds = 0,
-        milliseconds = 0
+    let h = 0,
+        m = 0,
+        s = 0,
+        ms = 0
 
     // Calculate hours, minutes, seconds, and milliseconds from tempTime in milliseconds
     if (tempTime >= 3600000) {
-        hours = Math.floor(tempTime / 3600000)
+        h = Math.floor(tempTime / 3600000)
         tempTime = tempTime % 3600000
     }
     if (tempTime >= 60000) {
-        minutes = Math.floor(tempTime / 60000)
+        m = Math.floor(tempTime / 60000)
         tempTime = tempTime % 60000
     }
     if (tempTime >= 1000) {
-        seconds = Math.floor(tempTime / 1000)
+        s = Math.floor(tempTime / 1000)
         tempTime = tempTime % 1000
     }
     // Divide by 10 and floor to keep milliseconds at only 2 digets
-    milliseconds = Math.floor(tempTime / 10)
+    ms = Math.floor(tempTime / 10)
+    return [h, m, s, ms]
+}
 
+// Format milliseconds into a standard timer format time
+const formatTime = time => {
+    let [hours, minutes, seconds, milliseconds] = msToTimeObjFormat(time)
     if (hours == 0) {
         return (
             (minutes < 10 ? '0' + minutes : minutes) +

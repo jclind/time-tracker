@@ -4,7 +4,6 @@ const showEditTimeModal = key => {
     const tagNameEl = document.getElementById('editTimeTagSelectionBtnName')
     const tagColorEl = document.getElementById('editTimeTagSelectionBtnColor')
     const nameInput = document.getElementById('modalEditTitleInput')
-    const timeInput = document.getElementById('modalEditTimeInput')
     const descriptionInput = document.getElementById(
         'modalEditDescriptionInput'
     )
@@ -13,10 +12,14 @@ const showEditTimeModal = key => {
     let timeIdx = timesInfoList.findIndex(time => time.key === key)
     let timeObj = timesInfoList[timeIdx]
 
+    // Edit time tag selector
     tagNameEl.innerText = timeObj.tag.name
     tagColorEl.style.color = timeObj.tag.color
+    // Edit time name input
     nameInput.value = timeObj.name
-    timeInput.value = formatTime(timeObj.time)
+    // Edit time change time inputs
+    editTimeModalTimeInput(timeObj.time)
+    // Edit time description
     descriptionInput.value = timeObj.description
 
     // On Edit button click
