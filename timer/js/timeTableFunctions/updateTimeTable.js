@@ -15,6 +15,10 @@ const updateTimeTable = timesArray => {
                 description = el.description,
                 key = el.key
 
+            console.log(name.length)
+            let modName =
+                name.length >= 30 ? name.substring(0, 27).trim() + '...' : name
+
             timeTableAccordian.innerHTML += `
                 <div class="card time-item mb-3">
                     <div
@@ -22,7 +26,7 @@ const updateTimeTable = timesArray => {
                     >
                         <div class="d-flex flex-column mb-3">
                             <div class="time-title ml-4">
-                                ${name}
+                                ${modName}
                             </div>
                             <div
                                 class="time-container d-flex justify-content-around align-items-center mr-3 mb-1"
