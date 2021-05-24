@@ -16,7 +16,8 @@ nav .logo h4 {
     font-size: 20px;
 }
 nav .nav-links {
-    width: 40%;
+    width: 25%;
+    margin-left: 100px;
 }
 nav .nav-links li {
     list-style: none;
@@ -39,7 +40,11 @@ nav .burger div {
     margin: 5px;
     transition: all 0.5s ease;
 }
-
+@media screen and (max-width: 1500px) {
+    nav .nav-links {
+        width: 35%;
+    }
+}
 @media screen and (max-width: 1024px) {
     nav .nav-links {
         width: 50%;
@@ -68,6 +73,7 @@ nav .burger div {
     }
     nav .nav-links li {
         opacity: 0;
+        margin: 80px 0px;
     }
     nav .burger {
         display: block;

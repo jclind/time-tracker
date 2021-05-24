@@ -1,0 +1,58 @@
+#signupModal .modal-dialog {
+    width: 350px;
+}
+#signupModal .modal-content {
+    border-radius: 5px;
+    margin-bottom: 150px;
+}
+#signupModal .modal-content .modal-header {
+    border-top: 4px solid var(--primary-blue);
+    border-bottom: none;
+}
+#signupModal .modal-header h4 {
+    font-family: var(--title-font-family) !important;
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+#signupModal .modal-body {
+    border: none;
+}
+#signupModal .modal-body form .login-icon {
+    left: 20px;
+    font-size: 16px;
+    height: 100%;
+    color: var(--primary-blue);
+}
+#signupModal .modal-body form input {
+    width: 95%;
+    height: 40px;
+    font-size: 16px;
+    line-height: 1;
+    outline: none;
+    border: none;
+    border: 1px solid #c7c7cd;
+    border-radius: 5px;
+}
+#signupModal .modal-body form input::placeholder {
+    position: relative !important;
+    font-size: 16px;
+    vertical-align: bottom;
+}
+
+#signupModal .login-btn {
+    width: 90%;
+    background: var(--primary-blue);
+    margin: 0 auto;
+    color: var(--primary-text);
+    font-family: var(--title-font-family) !important;
+    font-size: 20px;
+    border-radius: 8px !important;
+}
+#signupModal .have-account-btn {
+    font-size: 13px;
+    text-decoration: underline;
+    margin: 0 auto;
+}

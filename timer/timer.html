@@ -61,7 +61,7 @@
         <!-- Modals  -->
         <!-- Login Modal -->
         <div
-            class="modal show d-flex align-items-center justify-content-center"
+            class="modal"
             id="loginModal"
             tabindex="-1"
             role="dialog"
@@ -69,7 +69,7 @@
             aria-hidden="true"
         >
             <div
-                class="modal-dialog d-flex justify-content-center pb-5"
+                class="modal-dialog pb-5 modal-dialog-centered m-auto"
                 role="document"
             >
                 <div class="modal-content">
@@ -83,21 +83,71 @@
                         </button>
                     </div>
                     <div class="modal-body p-2">
-                        <form action="submit" class="w-100 d-flex flex-column justify-content-center">
-                            <div class="email w-100 d-flex justify-content-center position-relative mb-4">
+                        <form action="submit" class="w-100 d-flex flex-column justify-content-center" id="loginForm">
+                            <div class="email w-100 d-flex justify-content-center position-relative mb-4 mt-2">
                                 <div class="login-icon position-absolute d-flex align-items-center">
                                     <i class="fa fa-user"></i>
                                 </div>
-                                <input type="email" placeholder="Email" class="py-3 pl-5">
+                                <input type="email" placeholder="Email" name="email" class="py-4 pl-5" id="loginEmail" required>
                             </div>
-                            <div class="password w-100 d-flex justify-content-center position-relative mb-4">
+                            <div class="password w-100 d-flex justify-content-center position-relative mb-4 mt-2">
                                 <div class="login-icon position-absolute d-flex align-items-center">
                                     <i class="fa fa-lock"></i>
                                 </div>
-                                <input type="password" placeholder="Password" class="py-3 pl-5">
+                                <input type="password" placeholder="Password" name="password" class="py-3 pl-5" id="loginPassword" required>
                             </div>
-                            <button type="submit" class="login-btn btn mt-2">LOGIN</button>
-                            <button type="buttom" class="forgot-login-btn btn my-2 text-muted">Forgot Login?</button>
+                            <button type="submit" class="login-btn btn mt-4">LOGIN</button>
+                            <button type="buttom" class="forgot-login-btn btn my-2 text-muted d-block">Forgot Login?</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Signup Modal -->
+        <div
+            class="modal"
+            id="signupModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="signupModalLabel"
+            aria-hidden="true"
+        >
+            <div
+                class="modal-dialog pb-5 modal-dialog-centered m-auto"
+                role="document"
+            >
+                <div class="modal-content">
+                    <div class="modal-header pt-4">
+                        <h4
+                            class="modal-title text-center w-100"
+                            id="signupModalLabel"
+                        >
+                            Signup
+                        </h4>
+                        </button>
+                    </div>
+                    <div class="modal-body p-2">
+                        <form action="submit" class="w-100 d-flex flex-column justify-content-center" id="signupForm">
+                            <div class="name w-100 d-flex justify-content-center position-relative mb-4 mt-2">
+                                <div class="login-icon position-absolute d-flex align-items-center">
+                                    <i class="fa fa-user"></i>
+                                </div>
+                                <input type="text" placeholder="Name" name="name" class="py-4 pl-5" id="signupName" required>
+                            </div>
+                            <div class="email w-100 d-flex justify-content-center position-relative mb-4 mt-2">
+                                <div class="login-icon position-absolute d-flex align-items-center">
+                                    <i class="fa fa-user"></i>
+                                </div>
+                                <input type="email" placeholder="Email" name="email" class="py-4 pl-5" id="signupEmail" required>
+                            </div>
+                            <div class="password w-100 d-flex justify-content-center position-relative mb-4 mt-2">
+                                <div class="login-icon position-absolute d-flex align-items-center">
+                                    <i class="fa fa-lock"></i>
+                                </div>
+                                <input type="password" placeholder="Password" name="password" class="py-3 pl-5" id="signupPassword" required>
+                            </div>
+                            <button type="submit" class="login-btn btn mt-4">LOGIN</button>
+                            <button type="buttom" class="have-account-btn btn my-2 text-muted d-block">Already Have An Account?</button>
                         </form>
                     </div>
                 </div>
@@ -1080,15 +1130,15 @@
                 class="
                     nav-links
                     d-flex
-                    justify-content-around
                     flex-column flex-sm-row
+                    justify-content-sm-around
                     align-items-center
                 "
             >
                 <li
                     class="
                         toggle-nav-modal
-                        d-flex
+                        d-none
                         justify-content-center
                         align-items-center
                         logged-out
@@ -1102,11 +1152,13 @@
                 <li
                     class="
                         toggle-nav-modal
-                        d-flex
+                        d-none
                         justify-content-center
                         align-items-center
                         logged-out
                     "
+                    data-toggle="modal"
+                    data-target="#signupModal"
                     id="signup"
                 >
                     <span>Signup</span>
@@ -1114,7 +1166,7 @@
                 <li
                     class="
                         logged-in
-                        d-flex
+                        d-none
                         justify-content-center
                         align-items-center
                     "
@@ -1126,7 +1178,7 @@
                     class="
                         toggle-nav-modal
                         logged-in
-                        d-flex
+                        d-none
                         justify-content-center
                         align-items-center
                     "
@@ -1467,7 +1519,7 @@
             // Update firestore settings
             db.settings({ timestampsInSnapshots: true })
         </script>
-
+        <script src="js/backend/auth.js"></script>
         <script src="js/data.js"></script>
         <script src="js/generalFunctions/uniqueKey.js"></script>
         <script src="js/navFunctions/navAnimations.js"></script>

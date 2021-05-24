@@ -1,12 +1,12 @@
 #loginModal .modal-dialog {
     width: 350px;
-    margin-bottom: 150px;
 }
 #loginModal .modal-content {
     border-radius: 5px;
+    margin-bottom: 150px;
 }
 #loginModal .modal-content .modal-header {
-    border-top: 3px solid var(--primary-blue);
+    border-top: 4px solid var(--primary-blue);
     border-bottom: none;
 }
 #loginModal .modal-header h4 {
@@ -52,7 +52,6 @@
     border-radius: 8px !important;
 }
 #loginModal .forgot-login-btn {
-    width: 30%;
     font-size: 13px;
     text-decoration: underline;
     margin: 0 auto;
