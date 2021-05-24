@@ -43,6 +43,15 @@
             rel="stylesheet"
             href="styles/timeItemStyles/timeFilterBtns.css"
         />
+        <link rel="stylesheet" href="styles/modalStyles/authModals/login.css" />
+        <link
+            rel="stylesheet"
+            href="styles/modalStyles/authModals/signup.css"
+        />
+        <link
+            rel="stylesheet"
+            href="styles/modalStyles/authModals/account.css"
+        />
         <link rel="stylesheet" href="styles/modalStyles/editTimeModal.css" />
         <link rel="stylesheet" href="styles/modalStyles/tagListModal.css" />
         <link rel="stylesheet" href="styles/modalStyles/createTagModal.css" />
@@ -50,6 +59,51 @@
     </head>
     <body class="position-relative">
         <!-- Modals  -->
+        <!-- Login Modal -->
+        <div
+            class="modal show d-flex align-items-center justify-content-center"
+            id="loginModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="loginModalLabel"
+            aria-hidden="true"
+        >
+            <div
+                class="modal-dialog d-flex justify-content-center pb-5"
+                role="document"
+            >
+                <div class="modal-content">
+                    <div class="modal-header pt-4">
+                        <h4
+                            class="modal-title text-center w-100"
+                            id="loginModalLabel"
+                        >
+                            Login
+                        </h4>
+                        </button>
+                    </div>
+                    <div class="modal-body p-2">
+                        <form action="submit" class="w-100 d-flex flex-column justify-content-center">
+                            <div class="email w-100 d-flex justify-content-center position-relative mb-4">
+                                <div class="login-icon position-absolute d-flex align-items-center">
+                                    <i class="fa fa-user"></i>
+                                </div>
+                                <input type="email" placeholder="Email" class="py-3 pl-5">
+                            </div>
+                            <div class="password w-100 d-flex justify-content-center position-relative mb-4">
+                                <div class="login-icon position-absolute d-flex align-items-center">
+                                    <i class="fa fa-lock"></i>
+                                </div>
+                                <input type="password" placeholder="Password" class="py-3 pl-5">
+                            </div>
+                            <button type="submit" class="login-btn btn mt-2">LOGIN</button>
+                            <button type="buttom" class="forgot-login-btn btn my-2 text-muted">Forgot Login?</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Edit Time Elements Modal -->
         <div
             class="modal overflow-hidden"
             id="editTimeModal"
@@ -266,6 +320,7 @@
         </div>
         <!-- End #editTimeModal -->
 
+        <!-- List Of Tags Modal -->
         <div
             class="modal"
             id="tagListModal"
@@ -303,6 +358,7 @@
         </div>
         <!-- End #tagListModal -->
 
+        <!-- Create New Tag Modal -->
         <div
             class="modal"
             id="createTagModal"
@@ -1037,6 +1093,8 @@
                         align-items-center
                         logged-out
                     "
+                    data-toggle="modal"
+                    data-target="#loginModal"
                     id="login"
                 >
                     <span>Login</span>
@@ -1380,6 +1438,35 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"
         ></script>
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-firestore.js"></script>
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>
+        <script>
+            // Your web app's Firebase configuration
+            // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+            var firebaseConfig = {
+                apiKey: 'AIzaSyDTUdMxy5joPqkNuI1KQXxT5LB9PdxxtFc',
+                authDomain: 'time-tracker-da566.firebaseapp.com',
+                projectId: 'time-tracker-da566',
+                appId: '1:598125685448:web:8bd96aa7e4725d5dc8d3fd',
+                measurementId: 'G-G0MG6559NQ',
+            }
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig)
+            firebase.analytics()
+
+            // Make auth and firestore refernces
+            const auth = firebase.auth()
+            const db = firebase.firestore()
+
+            // Update firestore settings
+            db.settings({ timestampsInSnapshots: true })
+        </script>
 
         <script src="js/data.js"></script>
         <script src="js/generalFunctions/uniqueKey.js"></script>

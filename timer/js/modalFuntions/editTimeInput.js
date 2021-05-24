@@ -1,3 +1,6 @@
+// !! FIXME: Need a way to go back to former time inputs and for editing inputs when there
+// !! are already values, currently skips over when tab is pressed.
+
 const editHourInp = document.querySelector('#modalEditTimeInput .hours input')
 const editMinuteInp = document.querySelector(
     '#modalEditTimeInput .minutes input'
