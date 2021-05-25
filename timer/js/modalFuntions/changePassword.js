@@ -41,20 +41,21 @@ changePasswordModalBtn.addEventListener('click', () => {
         )
         user.reauthenticateWithCredential(credential)
             .then(() => {
-                // If the current password matches the new password
+                // If the new passwords do not match
                 if (newPassword.value !== newPasswordVerified.value) {
+                    showPasswordsDontMatchAlert()
+                    newPassword.style.border = '2px solid #dc3545'
+                    newPasswordVerified.style.border = '2px solid #dc3545'
+                    console.log('Password not matching')
+                    // If the current password matches the new password
+                } else if (currentPassword.value === newPassword.value) {
                     showMatchingCurrentAndNewPasswordsAlert()
                     currentPassword.style.border = '2px solid #dc3545'
                     newPassword.style.border = '2px solid #dc3545'
                     newPasswordVerified.style.border = '2px solid #dc3545'
                     console.log('Password matches')
-                    // If the new passwords do not match
-                } else if (currentPassword.value === newPassword.value) {
-                    showPasswordsDontMatchAlert()
-                    newPassword.style.border = '2px solid #dc3545'
-                    newPasswordVerified.style.border = '2px solid #dc3545'
-                    console.log('Password not matching')
-                } else if (currentPassword.value.length < 8) {
+                    // If the new password length is less than 8 characters
+                } else if (newPassword.value.length < 8) {
                     showPasswordNotLongEnoughAlert()
                     newPassword.style.border = '2px solid #dc3545'
                     newPasswordVerified.style.border = '2px solid #dc3545'
