@@ -82,3 +82,16 @@ changePasswordModalBtn.addEventListener('click', () => {
             })
     }
 })
+
+const showPasswordBtns = document.querySelectorAll('#accountModal .eye')
+showPasswordBtns.forEach(el =>
+    el.addEventListener('click', function () {
+        this.querySelector('.hide-password').classList.toggle('d-none')
+        this.querySelector('.show-password').classList.toggle('d-none')
+        if (this.querySelector('.hide-password').classList.contains('d-none')) {
+            this.parentElement.querySelector('input').type = 'password'
+        } else {
+            this.parentElement.querySelector('input').type = 'text'
+        }
+    })
+)
