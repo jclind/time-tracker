@@ -58,6 +58,16 @@
         <title id="websiteTitle">Timer</title>
     </head>
     <body class="position-relative">
+        <!-- Alerts -->
+        <!-- Change Password Alert -->
+        <div class="change-password-message mt-3" id="changePasswordAlert">
+            <span><strong>Success!</strong> Password Changed.</span>
+            <div class="close-btn">
+                <i class="fa fa-times"></i>
+            </div>
+        </div>
+
+
         <!-- Modals  -->
         <!-- Login Modal -->
         <div
@@ -86,7 +96,7 @@
                         <form action="submit" class="w-100 d-flex flex-column justify-content-center" id="loginForm">
                             <div class="email w-100 d-flex justify-content-center position-relative mb-4 mt-2">
                                 <div class="login-icon position-absolute d-flex align-items-center">
-                                    <i class="fa fa-user"></i>
+                                    <i class="fa fa-paper-plane"></i>
                                 </div>
                                 <input type="email" placeholder="Email" name="email" class="py-4 pl-5" id="loginEmail" required>
                             </div>
@@ -136,7 +146,7 @@
                             </div>
                             <div class="email w-100 d-flex justify-content-center position-relative mb-4 mt-2">
                                 <div class="login-icon position-absolute d-flex align-items-center">
-                                    <i class="fa fa-user"></i>
+                                    <i class="fa fa-paper-plane"></i>
                                 </div>
                                 <input type="email" placeholder="Email" name="email" class="py-4 pl-5" id="signupEmail" required>
                             </div>
@@ -149,6 +159,69 @@
                             <button type="submit" class="login-btn btn mt-4">LOGIN</button>
                             <button type="buttom" class="have-account-btn btn my-2 text-muted d-block">Already Have An Account?</button>
                         </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Account Details/Settings Modal -->
+        <div
+            class="modal"
+            id="accountModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="accountModalLabel"
+            aria-hidden="true"
+        >
+            <div
+                class="modal-dialog pb-5 modal-dialog-centered m-auto"
+                role="document"
+            >
+                <div class="modal-content">
+                    <div class="modal-header pt-4">
+                        <h4
+                            class="modal-title text-center w-100"
+                            id="accountModalLabel"
+                        >
+                            Account Details / Settings
+                        </h4>
+                        </button>
+                    </div>
+                    <div class="modal-body w-100">
+                        <div class="personal-information mb-5">
+                            <h4 class="m-0 p-0">Personal Information</h4>
+                            <p class="text-muted">View and modify your personal information</p>
+
+                            <div class="name d-flex flex-column mt-4">
+                                <label for="" class="m-0 p-0">Name</label>
+                                <input type="text" class="">
+                            </div>
+                            <div class="email d-flex flex-column mt-4">
+                                <label for="" class="m-0 p-0">Email</label>
+                                <input type="email" class="">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="security mt-5">
+                            <h4 class="m-0 p-0">Security</h4>
+                            <p class="text-muted">Change your password</p>
+
+                            <form class="password-inputs d-none">
+                                <div class="name d-flex flex-column mt-4">
+                                    <label for="" class="m-0 p-0">Current Password</label>
+                                    <input type="password" class="current-password" required>
+                                </div>
+                                <div class="name d-flex flex-column mt-2">
+                                    <label for="" class="m-0 p-0">New Password</label>
+                                    <input type="password" class="new-password" required>
+                                </div>
+                                <div class="name d-flex flex-column mt-2 mb-4">
+                                    <label for="" class="m-0 p-0">Verify New Password</label>
+                                    <input type="password" class="new-password-verified" required>
+                                </div>
+                            </form>
+
+                            <button class="change-password-btn btn mt-3">Change Password</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1182,6 +1255,8 @@
                         justify-content-center
                         align-items-center
                     "
+                    data-toggle="modal"
+                    data-target="#accountModal"
                     id="account"
                 >
                     <span>Account</span>
@@ -1536,6 +1611,7 @@
         <script src="js/timeTableFunctions/editTimeItem.js"></script>
 
         <!-- Modals -->
+        <script src="js/modalFuntions/changePassword.js"></script>
         <script src="js/modalFuntions/tagList.js"></script>
         <script src="js/modalFuntions/createTag.js"></script>
         <script src="js/modalFuntions/editTime.js"></script>

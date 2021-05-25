@@ -35,11 +35,6 @@ const setupUI = user => {
 
 // Listen for auth status changes
 auth.onAuthStateChanged(user => {
-    if (user) {
-        console.log('User logged in: ', user)
-    } else {
-        console.log('User logged out')
-    }
     setupUI(user)
 })
 
