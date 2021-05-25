@@ -3,6 +3,7 @@ const loggedInLinks = document.querySelectorAll('.logged-in')
 
 const setupUI = user => {
     if (user) {
+        // User Logs in
         // Show logged in links and hide logged out links
         loggedInLinks.forEach(item => {
             if (item.classList.contains('d-none')) {
@@ -16,7 +17,23 @@ const setupUI = user => {
                 item.classList.add('d-none')
             }
         })
+
+        // Add data to account modal
+        const accountModalNameInput = document.getElementById(
+            'accountModalNameInput'
+        )
+        const accountModalEmailInput = document.getElementById(
+            'accountModalEmailInput'
+        )
+        db.collection('users')
+            .doc(user.uid)
+            .get()
+            .then(doc => {
+                accountModalNameInput.value = doc.data().name
+            })
+        accountModalEmailInput.value = user.email
     } else {
+        // User Logs out
         // Show logged out links and hide logged in links
         loggedInLinks.forEach(item => {
             if (item.classList.contains('d-flex')) {
@@ -30,6 +47,8 @@ const setupUI = user => {
                 item.classList.add('d-flex')
             }
         })
+        accountModalNameInput.value = 'No User Signed In'
+        accountModalEmailInput.value = 'No User Signed In'
     }
 }
 
@@ -48,11 +67,17 @@ signupForm.addEventListener('submit', e => {
     const password = signupForm['signupPassword'].value
 
     // Sign user up
-    auth.createUserWithEmailAndPassword(email, password).then(cred => {
-        const modal = document.querySelector('#signupModal')
-        $(modal).modal('hide')
-        signupForm.reset()
-    })
+    auth.createUserWithEmailAndPassword(email, password)
+        .then(cred => {
+            return db.collection('users').doc(cred.user.uid).set({
+                name: name,
+            })
+        })
+        .then(() => {
+            const modal = document.querySelector('#signupModal')
+            $(modal).modal('hide')
+            signupForm.reset()
+        })
 })
 
 // Signin method
