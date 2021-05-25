@@ -4,49 +4,81 @@ const changePasswordModalBtn = document.querySelector(
 const changePasswordModalForm = document.querySelector(
     '#accountModal .password-inputs'
 )
+const currentPassword = document.querySelector(
+    '#accountModal .current-password'
+)
+const newPassword = document.querySelector('#accountModal .new-password')
+const newPasswordVerified = document.querySelector(
+    '#accountModal .new-password-verified'
+)
+
+// Add focus and selection to each input when focused on
+currentPassword.addEventListener('focus', () => {
+    currentPassword.select()
+})
+newPassword.addEventListener('focus', () => {
+    newPassword.select()
+})
+newPasswordVerified.addEventListener('focus', () => {
+    newPasswordVerified.select()
+})
+
 changePasswordModalBtn.addEventListener('click', () => {
+    // Set all input border's back to normal
+    currentPassword.style.border = '1px solid #4f5763'
+    newPassword.style.border = '1px solid #4f5763'
+    newPasswordVerified.style.border = '1px solid #4f5763'
+
+    // If the password inputs are hidden, show the form when the change password button is clicked
     if (changePasswordModalForm.classList.contains('d-none')) {
         changePasswordModalForm.classList.remove('d-none')
         changePasswordModalForm.classList.add('d-block')
     } else {
-        const currentPassword = document.querySelector(
-            '#accountModal .current-password'
-        ).value
-        const newPassword = document.querySelector(
-            '#accountModal .new-password'
-        ).value
-        const newPasswordVerified = document.querySelector(
-            '#accountModal .new-password-verified'
-        ).value
-        if (currentPassword === newPassword) {
-            console.log('New Password must be different from old password')
-        } else if (newPassword !== newPasswordVerified) {
-            console.log('New passwords must match!')
-        } else {
-            const user = auth.currentUser
-            const credential = firebase.auth.EmailAuthProvider.credential(
-                user.email,
-                currentPassword
-            )
-            user.reauthenticateWithCredential(credential).then(() => {
-                auth.currentUser.updatePassword(newPassword).then(() => {
-                    console.log('Password Changed!')
-                    changePasswordModalForm.classList.remove('d-block')
-                    changePasswordModalForm.classList.add('d-none')
+        const user = auth.currentUser
+        const credential = firebase.auth.EmailAuthProvider.credential(
+            user.email,
+            currentPassword.value
+        )
+        user.reauthenticateWithCredential(credential)
+            .then(() => {
+                // If the current password matches the new password
+                if (newPassword.value !== newPasswordVerified.value) {
+                    showMatchingCurrentAndNewPasswordsAlert()
+                    currentPassword.style.border = '2px solid #dc3545'
+                    newPassword.style.border = '2px solid #dc3545'
+                    newPasswordVerified.style.border = '2px solid #dc3545'
+                    console.log('Password matches')
+                    // If the new passwords do not match
+                } else if (currentPassword.value === newPassword.value) {
+                    showPasswordsDontMatchAlert()
+                    newPassword.style.border = '2px solid #dc3545'
+                    newPasswordVerified.style.border = '2px solid #dc3545'
+                    console.log('Password not matching')
+                } else if (currentPassword.value.length < 8) {
+                    showPasswordNotLongEnoughAlert()
+                    newPassword.style.border = '2px solid #dc3545'
+                    newPasswordVerified.style.border = '2px solid #dc3545'
+                    console.log('Password not long enough')
+                } else {
+                    auth.currentUser
+                        .updatePassword(newPassword.value)
+                        .then(() => {
+                            console.log('Password Changed!')
+                            changePasswordModalForm.classList.remove('d-block')
+                            changePasswordModalForm.classList.add('d-none')
 
-                    changePasswordModalForm.reset()
-                    showChangePasswordAlert()
-                })
+                            changePasswordModalForm.reset()
+                            showChangePasswordAlert()
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
+                }
             })
-        }
+            .catch(err => {
+                showIncorrectPasswordAlert()
+                currentPassword.style.border = '2px solid #dc3545'
+                console.log('Password not correct')
+            })
     }
 })
-
-const showChangePasswordAlert = () => {
-    const alert = document.querySelector('#changePasswordAlert')
-
-    alert.classList.remove('hide')
-    setTimeout(() => {
-        alert.classList.add('hide')
-    }, 6000)
-}

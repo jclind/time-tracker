@@ -25,3 +25,19 @@ body {
     background: var(--input-background);
     border-radius: 3px;
 }
+
+/* Alerts */
+#changePasswordAlert,
+#incorrectPasswordAlert,
+#passwordsDontMatchAlert,
+#matchingCurrentAndNewPasswordsAlert,
+#passwordNotLongEnoughAlert {
+    position: fixed;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+    padding: 10px 0px;
+    font-size: 16px;
+    opacity: 1;
+    z-index: 10000 !important;
+}

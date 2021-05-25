@@ -66,7 +66,34 @@
                 <button type="button" class="btn-close btn" data-dismiss="alert" aria-label="Close"><i class="fa fa-times" style="font-size: 16px;"></i></button>
             </div>
         </div>
-
+        <!-- Incorrect Password Alert -->
+        <div class="alert alert-danger alert-dismissible fade hide" role="alert" id="incorrectPasswordAlert">
+            <div class="container w-100 h-100 d-flex justify-content-around">
+                <span><strong>Error!</strong> Your password was incorrect.</span>
+                <button type="button" class="btn-close btn" data-dismiss="alert" aria-label="Close"><i class="fa fa-times" style="font-size: 16px;"></i></button>
+            </div>
+        </div>
+        <!-- Password Not Long Enough -->
+        <div class="alert alert-danger alert-dismissible fade hide" role="alert" id="passwordNotLongEnoughAlert">
+            <div class="container w-100 h-100 d-flex justify-content-around">
+                <span><strong>Error!</strong> Password must be 8 or more characters long.</span>
+                <button type="button" class="btn-close btn" data-dismiss="alert" aria-label="Close"><i class="fa fa-times" style="font-size: 16px;"></i></button>
+            </div>
+        </div>
+        <!-- Unmatching New Passwords Alert -->
+        <div class="alert alert-danger alert-dismissible fade hide" role="alert" id="passwordsDontMatchAlert">
+            <div class="container w-100 h-100 d-flex justify-content-around">
+                <span><strong>Error!</strong> New passwords don't match.</span>
+                <button type="button" class="btn-close btn" data-dismiss="alert" aria-label="Close"><i class="fa fa-times" style="font-size: 16px;"></i></button>
+            </div>
+        </div>
+        <!-- Current And New Passwords Matching Alert -->
+        <div class="alert alert-danger alert-dismissible fade hide" role="alert" id="matchingCurrentAndNewPasswordsAlert">
+            <div class="container w-100 h-100 d-flex justify-content-around">
+                <span><strong>Error!</strong> New password must be the same as your old password. </span>
+                <button type="button" class="btn-close btn" data-dismiss="alert" aria-label="Close"><i class="fa fa-times" style="font-size: 16px;"></i></button>
+            </div>
+        </div>
 
         <!-- Modals  -->
         <!-- Login Modal -->
@@ -1598,6 +1625,8 @@
         <script src="js/data.js"></script>
         <script src="js/generalFunctions/uniqueKey.js"></script>
         <script src="js/navFunctions/navAnimations.js"></script>
+
+        <script src="js/generalFunctions/alerts.js"></script>
 
         <script src="js/timeTableFunctions/updateTimeTable.js"></script>
 
