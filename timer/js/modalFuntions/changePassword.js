@@ -35,8 +35,18 @@ changePasswordModalBtn.addEventListener('click', () => {
                     changePasswordModalForm.classList.add('d-none')
 
                     changePasswordModalForm.reset()
+                    showChangePasswordAlert()
                 })
             })
         }
     }
 })
+
+const showChangePasswordAlert = () => {
+    const alert = document.querySelector('#changePasswordAlert')
+
+    alert.classList.remove('hide')
+    setTimeout(() => {
+        alert.classList.add('hide')
+    }, 6000)
+}

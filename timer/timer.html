@@ -60,10 +60,10 @@
     <body class="position-relative">
         <!-- Alerts -->
         <!-- Change Password Alert -->
-        <div class="change-password-message mt-3" id="changePasswordAlert">
-            <span><strong>Success!</strong> Password Changed.</span>
-            <div class="close-btn">
-                <i class="fa fa-times"></i>
+        <div class="alert alert-success alert-dismissible fade hide" role="alert" id="changePasswordAlert">
+            <div class="container w-100 h-100 d-flex justify-content-around">
+                <span><strong>Success!</strong> Your password has been changed.</span>
+                <button type="button" class="btn-close btn" data-dismiss="alert" aria-label="Close"><i class="fa fa-times" style="font-size: 16px;"></i></button>
             </div>
         </div>
 
@@ -1612,6 +1612,7 @@
 
         <!-- Modals -->
         <script src="js/modalFuntions/changePassword.js"></script>
+        <script src="js/modalFuntions/accountModal.js"></script>
         <script src="js/modalFuntions/tagList.js"></script>
         <script src="js/modalFuntions/createTag.js"></script>
         <script src="js/modalFuntions/editTime.js"></script>
