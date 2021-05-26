@@ -1,9 +1,9 @@
 // !!Write
 const saveUserData = () => {
     let currUser = firebase.auth().currentUser
+    updateTimeTable(timesInfoList)
     if (currUser) {
         console.log('data saved')
-        updateTimeTable(timesInfoList)
         db.collection('users')
             .doc(currUser.uid)
             .get()
@@ -14,6 +14,6 @@ const saveUserData = () => {
                 })
             })
     } else {
-        console.log('not logged in!')
+        showLoginToSaveDataAlert()
     }
 }

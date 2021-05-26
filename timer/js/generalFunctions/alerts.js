@@ -58,3 +58,28 @@ const showPasswordNotLongEnoughAlert = () => {
         }, 6000)
     }
 }
+
+const loginAlertBtn = document.querySelector(
+    '#loginToSaveDataAlert .login-alert-btn'
+)
+loginAlertBtn.addEventListener('click', () => {
+    $('#loginModal').modal('show')
+})
+const signupAlertBtn = document.querySelector(
+    '#loginToSaveDataAlert .signup-alert-btn'
+)
+signupAlertBtn.addEventListener('click', () => {
+    $('#signupModal').modal('show ')
+})
+const showLoginToSaveDataAlert = () => {
+    const alert = document.querySelector('#loginToSaveDataAlert')
+
+    // To ensure that the interval is not called more than once at a time, first check if the alert is hidden
+    if (alert.classList.contains('hide')) {
+        alert.classList.remove('hide')
+        console.log('yooo3')
+        setTimeout(() => {
+            alert.classList.add('hide')
+        }, 6000)
+    }
+}
