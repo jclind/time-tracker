@@ -17,7 +17,7 @@ const navSlide = () => {
         if (nav.classList.contains('nav-active')) {
             // Control background fadeIn animation
             navSlideBackground.style.display = 'block'
-            navSlideBackground.style.animation = `fadeIn 0.5s ease`
+            navSlideBackground.style.animation = `fadeIn 0.3s ease`
             navSlideBackground.style.opacity = '1'
 
             // Remove Touch Scrolling functionality from nav element.
@@ -26,7 +26,7 @@ const navSlide = () => {
             }
         } else {
             // Control background fadeOut animation
-            navSlideBackground.style.animation = 'fadeOut 0.5s ease'
+            navSlideBackground.style.animation = 'fadeOut 0.3s ease'
             navSlideBackground.style.opacity = '0'
             navSlideBackground.style.display = 'none'
         }
@@ -36,8 +36,8 @@ const navSlide = () => {
             if (link.style.animation) {
                 link.style.animation = ''
             } else {
-                link.style.animation = `navLinkFade 0.5s ease forwards ${
-                    index / 7 + 0.3
+                link.style.animation = `navLinkFade 0.3s ease forwards ${
+                    index / 7
                 }s`
             }
             // Add EventListener to background to close nav-bar

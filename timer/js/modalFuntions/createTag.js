@@ -67,6 +67,7 @@ createTagBtn.addEventListener('click', () => {
         }
         timeTags.push(newTag)
         selectTag(newTag.name)
+        saveUserData()
         $('#createTagModal').modal('hide')
     }
 })

@@ -1,4 +1,4 @@
-const submitTime = (time, startTime, finishTime) => {
+const submitTime = (time, currStartingTime, currFinishedTime) => {
     // Get Tag
     const tag = timeTags.find(tag => {
         let tempTagName = document.getElementById(
@@ -18,14 +18,13 @@ const submitTime = (time, startTime, finishTime) => {
     // Get Description
     const descriptionInput = document.getElementById('timeDescriptionInput')
     const description = descriptionInput.value.trim()
-
     let tempObj = {
         name: timeName,
         time: time,
-        date: startTime,
+        date: currStartingTime.toString(),
         tag: tag,
-        startTime: startTime,
-        finishTime: finishTime,
+        startTime: currStartingTime.toString(),
+        finishTime: currFinishedTime.toString(),
         description: description,
         key: generateKey(),
     }
@@ -35,7 +34,7 @@ const submitTime = (time, startTime, finishTime) => {
     timeNameInput.value = ''
     descriptionInput.value = ''
     clearTime()
-    updateTimeTable(timesInfoList)
+    saveUserData()
 }
 
 const submitTimeBtn = document.getElementById('submitTimeBtn')

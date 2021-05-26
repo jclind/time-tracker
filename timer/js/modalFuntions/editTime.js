@@ -59,7 +59,7 @@ const showEditTimeModal = key => {
         }
 
         $('#editTimeModal').modal('hide')
-        updateTimeTable(timesInfoList)
+        saveUserData()
         $('#submitEditModalBtn').off('click')
     })
 }

@@ -34,6 +34,7 @@ const startStop = () => {
 
         // Let startTime equal the current date minues how much time is already on the timer (if any)
         let startTime = Date.now() - elapsedTime
+        console.log(startTime)
 
         timer = setInterval(() => {
             let currTime = Date.now()
