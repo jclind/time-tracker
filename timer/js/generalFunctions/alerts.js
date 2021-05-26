@@ -69,7 +69,7 @@ const signupAlertBtn = document.querySelector(
     '#loginToSaveDataAlert .signup-alert-btn'
 )
 signupAlertBtn.addEventListener('click', () => {
-    $('#signupModal').modal('show ')
+    $('#signupModal').modal('show')
 })
 const showLoginToSaveDataAlert = () => {
     const alert = document.querySelector('#loginToSaveDataAlert')

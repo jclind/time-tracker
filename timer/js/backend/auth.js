@@ -3,6 +3,7 @@ const loggedInLinks = document.querySelectorAll('.logged-in')
 
 const setupUI = user => {
     if (user) {
+        console.log('state change')
         // User Logs in
         // Show logged in links and hide logged out links
         loggedInLinks.forEach(item => {
@@ -17,25 +18,84 @@ const setupUI = user => {
                 item.classList.add('d-none')
             }
         })
-        console.log(user)
-        db.collection('users')
-            .doc(user.uid)
-            .get()
-            .then(doc => {
-                timesInfoList = doc.data().timesInfoList
-                timeTags = doc.data().timeTags
+        if (timesInfoList.length <= 0) {
+            db.collection('users')
+                .doc(user.uid)
+                .get()
+                .then(doc => {
+                    timesInfoList = doc.data().timesInfoList
+                    timeTags = doc.data().timeTags
 
-                // Add data to account modal
-                const accountModalNameInput = document.getElementById(
-                    'accountModalNameInput'
-                )
-                const accountModalEmailInput = document.getElementById(
-                    'accountModalEmailInput'
-                )
-                accountModalEmailInput.value = user.email
-                accountModalNameInput.value = doc.data().name
-                updateTimeTable(timesInfoList)
+                    // Add data to account modal
+                    const accountModalNameInput = document.getElementById(
+                        'accountModalNameInput'
+                    )
+                    const accountModalEmailInput = document.getElementById(
+                        'accountModalEmailInput'
+                    )
+                    accountModalEmailInput.value = user.email
+                    accountModalNameInput.value = doc.data().name
+                    updateTimeTable(timesInfoList)
+                })
+        } else {
+            let unsavedTimes = [...timesInfoList]
+            // Show save times prompt modal
+            $('#saveTimesPromptModal').modal('show')
+
+            const discardBtn = document.querySelector(
+                '#saveTimesPromptModal .discard-btn'
+            )
+            const saveBtn = document.querySelector(
+                '#saveTimesPromptModal .save-btn'
+            )
+            // On discardBtn click, just save timesInfoList and discard times recorded when not logged in
+            discardBtn.addEventListener('click', () => {
+                db.collection('users')
+                    .doc(user.uid)
+                    .get()
+                    .then(doc => {
+                        timesInfoList = doc.data().timesInfoList
+                        timeTags = doc.data().timeTags
+
+                        // Add data to account modal
+                        const accountModalNameInput = document.getElementById(
+                            'accountModalNameInput'
+                        )
+                        const accountModalEmailInput = document.getElementById(
+                            'accountModalEmailInput'
+                        )
+                        accountModalEmailInput.value = user.email
+                        accountModalNameInput.value = doc.data().name
+                        updateTimeTable(timesInfoList)
+                        $('#saveTimesPromptModal').modal('hide')
+                    })
             })
+            // On saveBtn click, concat the times recorded when not logged in onto the timesInfoList array
+            saveBtn.addEventListener('click', () => {
+                db.collection('users')
+                    .doc(user.uid)
+                    .get()
+                    .then(doc => {
+                        timesInfoList = doc.data().timesInfoList
+                        timeTags = doc.data().timeTags
+                        timesInfoList = timesInfoList.concat(unsavedTimes)
+                        saveUserData()
+
+                        // Add data to account modal
+                        const accountModalNameInput = document.getElementById(
+                            'accountModalNameInput'
+                        )
+                        const accountModalEmailInput = document.getElementById(
+                            'accountModalEmailInput'
+                        )
+                        accountModalEmailInput.value = user.email
+                        accountModalNameInput.value = doc.data().name
+                        console.log('this is a test')
+
+                        $('#saveTimesPromptModal').modal('hide')
+                    })
+            })
+        }
     } else {
         // User Logs out
 
@@ -91,23 +151,14 @@ signupForm.addEventListener('submit', e => {
     const email = signupForm['signupEmail'].value
     const password = signupForm['signupPassword'].value
 
-    let userTimesArr = []
-    let userTagsArr = []
-    // Control user data recorded when not logged in or signed up
-    if (timesInfoList.length != 0) {
-        userTimesArr = [...timesInfoList]
-    }
-    if (timeTags.length != 0) {
-        userTagsArr = [...timeTags]
-    }
-
     // Sign user up
     auth.createUserWithEmailAndPassword(email, password)
         .then(cred => {
+            console.log('signed up')
             return db.collection('users').doc(cred.user.uid).set({
                 name: name,
-                timesInfoList: userTimesArr,
-                timeTags: userTagsArr,
+                timesInfoList: [],
+                timeTags: timeTags,
             })
         })
         .then(() => {
@@ -117,7 +168,7 @@ signupForm.addEventListener('submit', e => {
         })
 })
 
-// Signin method
+// Loggin method
 const loginForm = document.querySelector('#loginForm')
 loginForm.addEventListener('submit', e => {
     e.preventDefault()

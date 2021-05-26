@@ -55,6 +55,7 @@
         <link rel="stylesheet" href="styles/modalStyles/editTimeModal.css" />
         <link rel="stylesheet" href="styles/modalStyles/tagListModal.css" />
         <link rel="stylesheet" href="styles/modalStyles/createTagModal.css" />
+        <link rel="stylesheet" href="styles/modalStyles/saveTimesPromptModal.css">
         <title id="websiteTitle">Timer</title>
     </head>
     <body class="position-relative">
@@ -277,6 +278,39 @@
                 </div>
             </div>
         </div>
+
+        <!-- Save times array to user data on login (if there is any times they recorded without being logged in) -->
+        <div
+            class="modal"
+            id="saveTimesPromptModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="saveTimesPromptModalLabel"
+            aria-hidden="true"
+        >
+            <div
+                class="modal-dialog pb-5 modal-dialog-centered m-auto"
+                role="document"
+            >
+                <div class="modal-content">
+                    <div class="modal-header text-center d-flex flex-column">
+                        <h4
+                            class="modal-title w-100"
+                            id="saveTimesPromptModalLabel"
+                        >
+                            Save Times?
+                        </h4>
+                        <p class="w-100 pt-2">Do you want to save the times you recorded when logged out into your account's data?</p>
+                        </button>
+                    </div>
+                    <div class="modal-body w-100 d-flex flex-row justify-content-center pt-4 pb-5">
+                        <button class="btn discard-btn mx-4">Discard</button>
+                        <button class="btn save-btn mx-4">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Edit Time Elements Modal -->
         <div
             class="modal overflow-hidden"
