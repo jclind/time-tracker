@@ -4,9 +4,7 @@ const editTimeTitleFromTable = key => {
     )
     const originalValue = timeTitleEl.innerText
 
-    console.log(originalValue)
     let timesInfoListElIdx = timesInfoList.findIndex(time => time.key === key)
-    console.log(timesInfoListElIdx)
 
     // Prevent enter key from creating newline
     $(timeTitleEl).keypress(function (e) {

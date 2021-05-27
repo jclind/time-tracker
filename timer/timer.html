@@ -56,6 +56,7 @@
         <link rel="stylesheet" href="styles/modalStyles/tagListModal.css" />
         <link rel="stylesheet" href="styles/modalStyles/createTagModal.css" />
         <link rel="stylesheet" href="styles/modalStyles/saveTimesPromptModal.css">
+        <link rel="stylesheet" href="styles/modalStyles/deleteTimePrompt.css">
         <title id="websiteTitle">Timer</title>
     </head>
     <body class="position-relative">
@@ -312,7 +313,39 @@
                 </div>
             </div>
         </div>
-
+        <!-- Are you sure you want to delete modal popup -->
+        <div
+            class="modal"
+            id="deleteTimePromptModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="deleteTimePromptModalLabel"
+            aria-hidden="true"
+            data-keyboard="false" 
+            data-backdrop="static"
+        >
+            <div
+                class="modal-dialog pb-5 modal-dialog-centered m-auto"
+                role="document"
+            >
+                <div class="modal-content">
+                    <div class="modal-header text-center d-flex flex-column">
+                        <h4
+                            class="modal-title w-100"
+                            id="deleteTimePromptModalLabel"
+                        >
+                            Delete This Time?
+                        </h4>
+                        <p class="w-100 pt-2">You will not be able to recover it.</p>
+                        </button>
+                    </div>
+                    <div class="modal-body w-100 d-flex flex-row justify-content-center pt-4 pb-5">
+                        <button class="btn cancel-btn btn-secondary mx-4">Cancel</button>
+                        <button class="btn delete-btn mx-4">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Edit Time Elements Modal -->
         <div
             class="modal overflow-hidden"
@@ -1700,6 +1733,7 @@
         <script src="js/timeTableFunctions/sortByTimePeriod.js"></script>
         <script src="js/timeTableFunctions/sortByProperty.js"></script>
         <script src="js/timeTableFunctions/editTimeItem.js"></script>
+        <script src="js/timeTableFunctions/deleteTimeItem.js"></script>
 
         <!-- Modals -->
         <script src="js/modalFuntions/changePassword.js"></script>

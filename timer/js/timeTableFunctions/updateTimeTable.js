@@ -150,7 +150,7 @@ const updateTimeTable = timesArray => {
                                 >
                                     Edit
                                 </button>
-                                <button class="btn btn-danger">
+                                <button class="btn btn-danger" onclick="deleteTimeItem('${key}')">
                                     Delete
                                 </button>
                             </div>
