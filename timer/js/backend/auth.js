@@ -6,22 +6,39 @@ const setupUI = user => {
         const lastTimesInfoEl = timesInfoList[timesInfoList.length - 1]
         // Check if timeTags is empty before using accessing it's data
         if (timeTags.length === 0) {
-            timeTags.push({ name: 'Main', color: '#fd483f' })
+            timeTags.push({
+                name: 'Main',
+                color: '#fd483f',
+                key: generateKey(),
+            })
         }
+        console.log()
         // If timesInfoList isn't empty, change tag button name to last submitted tag name
         if (timesInfoList.length > 0) {
+            let lastTimesInfoTag = timeTags.find(
+                el => el.key === lastTimesInfoEl.tagKey
+            )
+            // Set active tag name
             document.getElementById('activeTimeTagSelectionBtnName').innerText =
-                lastTimesInfoEl.tag.name
+                lastTimesInfoTag.name
+            // Set active tag color
             document.getElementById(
                 'activeTimeTagSelectionBtnColor'
-            ).style.color = lastTimesInfoEl.tag.color
+            ).style.color = lastTimesInfoTag.color
+            // Set active tag key
+            document.getElementById('activeTagBtn').dataset.tagKey =
+                lastTimesInfoTag.key
         } else {
             // Set active tag to the first tag in the timeTags array
             document.getElementById('activeTimeTagSelectionBtnName').innerText =
                 timeTags[0].name
+            // Set active tag color
             document.getElementById(
                 'activeTimeTagSelectionBtnColor'
             ).style.color = timeTags[0].color
+            // Set active tag key
+            document.getElementById('activeTagBtn').dataset.tagKey =
+                timeTags[0].key
         }
     }
 
@@ -199,12 +216,12 @@ logout.addEventListener('click', e => {
     auth.signOut().then(() => {
         timesInfoList = []
         timeTags = [
-            { name: 'Main', color: '#fd483f' },
-            { name: 'School', color: '#f5df4f' },
-            { name: 'Work', color: '#3d3d90' },
-            { name: 'Exersice', color: '#b36b0e' },
-            { name: 'Chores', color: '#694214' },
-            { name: 'Projects', color: '#0a724f' },
+            { name: 'Main', color: '#fd483f', key: generateKey() },
+            { name: 'School', color: '#f5df4f', key: generateKey() },
+            { name: 'Work', color: '#3d3d90', key: generateKey() },
+            { name: 'Exersice', color: '#b36b0e', key: generateKey() },
+            { name: 'Chores', color: '#694214', key: generateKey() },
+            { name: 'Projects', color: '#0a724f', key: generateKey() },
         ]
         updateTimeTable(timesInfoList)
     })

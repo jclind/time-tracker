@@ -23,3 +23,29 @@
     color: var(--primary-blue) !important;
     border-bottom: 3px solid var(--primary-blue) !important;
 }
+
+@media screen and (max-width: 424px) {
+    #timeItemsContainer .sort-by-date-btns button {
+        font-size: 14px;
+    }
+}
+@media screen and (max-width: 400px) {
+    #timeItemsContainer .sort-by-date-btns button {
+        font-size: 13px;
+    }
+}
+@media screen and (max-width: 380px) {
+    #timeItemsContainer .sort-by-date-btns button {
+        font-size: 12px;
+    }
+}
+@media screen and (max-width: 360px) {
+    #timeItemsContainer .sort-by-date-btns button {
+        font-size: 11px;
+    }
+}
+@media screen and (max-width: 340px) {
+    #timeItemsContainer .sort-by-date-btns button {
+        padding: 3px 4px;
+    }
+}

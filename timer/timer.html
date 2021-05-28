@@ -375,6 +375,7 @@
                                     flex-row
                                     align-items-center
                                 "
+                                data-tag-key=""
                                 id="editTagBtn"
                             >
                                 <svg
@@ -622,25 +623,750 @@
                 role="document"
             >
                 <div class="modal-content">
-                    <div class="modal-title">
-                        <h2 class="modal-title">Create Tag</h2>
+                    <div class="modal-title mx-0 w-100">
+                        <h2 class="text-center mx-auto mt-3 mb-4 mx-0">Create Tag</h2>
                     </div>
                     <div class="modal-body">
                         <h3
                             class="input-error-text mb-3"
                             id="createTagInputError"
                         ></h3>
-                        <input
-                            type="text"
-                            class="modal-name inp text-center"
-                            id="createNewTagTitleInput"
-                            value="Main"
-                        />
+                        <div class="name-input d-flex flex-column justify-content-start mx-auto">
+                            <label for="">
+                                Tag Name:
+                            </label>
+                            <input
+                                type="text"
+                                class="modal-name inp text-center"
+                                id="createNewTagTitleInput"
+                                value="Main"
+                            />
+                        </div>
                         <h3
                             class="color-select-error-text mt-4 pt-2"
                             id="createTagColorSelectError"
                         ></h3>
-                        <div class="color-select-container mt-3">
+
+                        <label for="" class="mt-3" style="width: 95%;">Tag Color:</label>
+                        <div class="color-select-container">
+                            <div
+                                class="
+                                    color-row
+                                    d-flex
+                                    justify-content-around
+                                    flex-row
+                                    mb-5
+                                    pt-3
+                                "
+                            >
+                                <div
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
+                                    data-tag-color="#fd483f"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="35"
+                                        height="35"
+                                        fill="currentColor"
+                                        class="bi bi-circle-fill"
+                                        viewBox="0 0 16 16"
+                                        style="color: #fd483f"
+                                    >
+                                        <circle cx="8" cy="8" r="8" />
+                                    </svg>
+                                    <span
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
+                                        ><svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="30"
+                                            height="30"
+                                            fill="currentColor"
+                                            class="bi bi-check h-100 w-100"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"
+                                            />
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
+                                    data-tag-color="#fd889a"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="35"
+                                        height="35"
+                                        fill="currentColor"
+                                        class="bi bi-circle-fill"
+                                        viewBox="0 0 16 16"
+                                        style="color: #fd889a"
+                                    >
+                                        <circle cx="8" cy="8" r="8" />
+                                    </svg>
+                                    <span
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
+                                        ><svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="30"
+                                            height="30"
+                                            fill="currentColor"
+                                            class="bi bi-check h-100 w-100"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"
+                                            />
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
+                                    data-tag-color="#694214"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="35"
+                                        height="35"
+                                        fill="currentColor"
+                                        class="bi bi-circle-fill"
+                                        viewBox="0 0 16 16"
+                                        style="color: #694214"
+                                    >
+                                        <circle cx="8" cy="8" r="8" />
+                                    </svg>
+                                    <span
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
+                                        ><svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="30"
+                                            height="30"
+                                            fill="currentColor"
+                                            class="bi bi-check h-100 w-100"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"
+                                            />
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
+                                    data-tag-color="#b36b0e"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="35"
+                                        height="35"
+                                        fill="currentColor"
+                                        class="bi bi-circle-fill"
+                                        viewBox="0 0 16 16"
+                                        style="color: #b36b0e"
+                                    >
+                                        <circle cx="8" cy="8" r="8" />
+                                    </svg>
+                                    <span
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
+                                        ><svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="30"
+                                            height="30"
+                                            fill="currentColor"
+                                            class="bi bi-check h-100 w-100"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"
+                                            />
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
+                                    data-tag-color="#fca12b"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="35"
+                                        height="35"
+                                        fill="currentColor"
+                                        class="bi bi-circle-fill"
+                                        viewBox="0 0 16 16"
+                                        style="color: #fca12b"
+                                    >
+                                        <circle cx="8" cy="8" r="8" />
+                                    </svg>
+                                    <span
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
+                                        ><svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="30"
+                                            height="30"
+                                            fill="currentColor"
+                                            class="bi bi-check h-100 w-100"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"
+                                            />
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+                            <div
+                                class="
+                                    color-row
+                                    d-flex
+                                    justify-content-around
+                                    flex-row
+                                    mb-5
+                                "
+                            >
+                                <div
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
+                                    data-tag-color="#f5df4f"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="35"
+                                        height="35"
+                                        fill="currentColor"
+                                        class="bi bi-circle-fill"
+                                        viewBox="0 0 16 16"
+                                        style="color: #f5df4f"
+                                    >
+                                        <circle cx="8" cy="8" r="8" />
+                                    </svg>
+                                    <span
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
+                                        ><svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="30"
+                                            height="30"
+                                            fill="currentColor"
+                                            class="bi bi-check h-100 w-100"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"
+                                            />
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
+                                    data-tag-color="#90c900"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="35"
+                                        height="35"
+                                        fill="currentColor"
+                                        class="bi bi-circle-fill"
+                                        viewBox="0 0 16 16"
+                                        style="color: #90c900"
+                                    >
+                                        <circle cx="8" cy="8" r="8" />
+                                    </svg>
+                                    <span
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
+                                        ><svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="30"
+                                            height="30"
+                                            fill="currentColor"
+                                            class="bi bi-check h-100 w-100"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"
+                                            />
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
+                                    data-tag-color="#0a724f"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="35"
+                                        height="35"
+                                        fill="currentColor"
+                                        class="bi bi-circle-fill"
+                                        viewBox="0 0 16 16"
+                                        style="color: #0a724f"
+                                    >
+                                        <circle cx="8" cy="8" r="8" />
+                                    </svg>
+                                    <span
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
+                                        ><svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="30"
+                                            height="30"
+                                            fill="currentColor"
+                                            class="bi bi-check h-100 w-100"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"
+                                            />
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
+                                    data-tag-color="#00bb7d"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="35"
+                                        height="35"
+                                        fill="currentColor"
+                                        class="bi bi-circle-fill"
+                                        viewBox="0 0 16 16"
+                                        style="color: #00bb7d"
+                                    >
+                                        <circle cx="8" cy="8" r="8" />
+                                    </svg>
+                                    <span
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
+                                        ><svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="30"
+                                            height="30"
+                                            fill="currentColor"
+                                            class="bi bi-check h-100 w-100"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"
+                                            />
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
+                                    data-tag-color="#aaf0d1"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="35"
+                                        height="35"
+                                        fill="currentColor"
+                                        class="bi bi-circle-fill"
+                                        viewBox="0 0 16 16"
+                                        style="color: #aaf0d1"
+                                    >
+                                        <circle cx="8" cy="8" r="8" />
+                                    </svg>
+                                    <span
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
+                                        ><svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="30"
+                                            height="30"
+                                            fill="currentColor"
+                                            class="bi bi-check h-100 w-100"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"
+                                            />
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+                            <div
+                                class="
+                                    color-row
+                                    d-flex
+                                    justify-content-around
+                                    flex-row
+                                "
+                            >
+                                <div
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
+                                    data-tag-color="#7cc3db"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="35"
+                                        height="35"
+                                        fill="currentColor"
+                                        class="bi bi-circle-fill"
+                                        viewBox="0 0 16 16"
+                                        style="color: #7cc3db"
+                                    >
+                                        <circle cx="8" cy="8" r="8" />
+                                    </svg>
+                                    <span
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
+                                        ><svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="30"
+                                            height="30"
+                                            fill="currentColor"
+                                            class="bi bi-check h-100 w-100"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"
+                                            />
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
+                                    data-tag-color="#4949f5"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="35"
+                                        height="35"
+                                        fill="currentColor"
+                                        class="bi bi-circle-fill"
+                                        viewBox="0 0 16 16"
+                                        style="color: #4949f5"
+                                    >
+                                        <circle cx="8" cy="8" r="8" />
+                                    </svg>
+                                    <span
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
+                                        ><svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="30"
+                                            height="30"
+                                            fill="currentColor"
+                                            class="bi bi-check h-100 w-100"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"
+                                            />
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
+                                    data-tag-color="#3d3d90"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="35"
+                                        height="35"
+                                        fill="currentColor"
+                                        class="bi bi-circle-fill"
+                                        viewBox="0 0 16 16"
+                                        style="color: #3d3d90"
+                                    >
+                                        <circle cx="8" cy="8" r="8" />
+                                    </svg>
+                                    <span
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
+                                        ><svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="30"
+                                            height="30"
+                                            fill="currentColor"
+                                            class="bi bi-check h-100 w-100"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"
+                                            />
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
+                                    data-tag-color="#d37bd3"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="35"
+                                        height="35"
+                                        fill="currentColor"
+                                        class="bi bi-circle-fill"
+                                        viewBox="0 0 16 16"
+                                        style="color: #d37bd3"
+                                    >
+                                        <circle cx="8" cy="8" r="8" />
+                                    </svg>
+                                    <span
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
+                                        ><svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="30"
+                                            height="30"
+                                            fill="currentColor"
+                                            class="bi bi-check h-100 w-100"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"
+                                            />
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div
+                                    class="
+                                        color
+                                        d-flex
+                                        align-items-center
+                                        px-0
+                                        position-relative
+                                    "
+                                    data-tag-color="#926adb"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="35"
+                                        height="35"
+                                        fill="currentColor"
+                                        class="bi bi-circle-fill"
+                                        viewBox="0 0 16 16"
+                                        style="color: #926adb"
+                                    >
+                                        <circle cx="8" cy="8" r="8" />
+                                    </svg>
+                                    <span
+                                        class="
+                                            position-absolute
+                                            d-none
+                                            color-select
+                                        "
+                                        ><svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="30"
+                                            height="30"
+                                            fill="currentColor"
+                                            class="bi bi-check h-100 w-100"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"
+                                            />
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="
+                                create-tag-btns-container
+                                mt-5
+                                pt-4
+                                d-flex
+                                justify-content-center
+                            "
+                        >
+                            <button class="btn btn-dark cancel-btn mx-3">
+                                Cancel
+                            </button>
+                            <button
+                                class="btn create-new-tag-btn mx-3 disabled"
+                                id="createNewTagBtn"
+                            >
+                                Create
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- End .modal-content -->
+            </div>
+            <!-- End .modal-dialog -->
+        </div>
+        <!-- End #createTagModal -->
+        <!-- Edit Tag Modal -->
+        <div
+            class="modal"
+            id="editTagModal"
+            tabindex="-1"
+            role="dialog"
+            aria-hidden="true"
+            style="background: rgba(0, 0, 0, 0.6)"
+        >
+            <div
+                class="
+                    modal-dialog
+                    d-flex
+                    justify-content-center
+                    text-center
+                    mt-5
+                    pt-5
+                "
+                role="document"
+            >
+                <div class="modal-content px-0">
+                    <div class="modal-title mx-0 w-100">
+                        <h2 class="text-center mx-auto mt-3 mb-4 mx-0">Edit Tag</h2>
+                    </div>
+                    <div class="modal-body px-4">
+                        <h3
+                            class="input-error-text mb-3"
+                            id="editTagInputError"
+                        ></h3>
+                        <div class="name-input d-flex flex-column justify-content-start mx-auto">
+                            <label for="">
+                                Tag Name:
+                            </label>
+                            <input
+                                type="text"
+                                class="modal-name inp text-center"
+                                id="editTagTitleInput"
+                                value="Main"
+                            />
+                        </div>
+                        <h3
+                            class="color-select-error-text mt-4 pt-2"
+                            id="editTagColorSelectError"
+                        ></h3>
+                        <label for="" class="mt-3" style="width: 95%;">Tag Color:</label>
+                        <div class="color-select-container">
                             <div
                                 class="
                                     color-row
@@ -1297,14 +2023,13 @@
                                 justify-content-center
                             "
                         >
-                            <button class="btn btn-dark cancel-btn mx-3">
+                            <button class="btn btn-secondary cancel-btn mx-3">
                                 Cancel
                             </button>
                             <button
-                                class="btn create-new-tag-btn mx-3 disabled"
-                                id="createNewTagBtn"
+                                class="btn edit-btn mx-3"
                             >
-                                Create
+                                Edit
                             </button>
                         </div>
                     </div>
@@ -1358,17 +2083,6 @@
                 </li>
                 <li
                     class="
-                        logged-in
-                        d-none
-                        justify-content-center
-                        align-items-center
-                    "
-                    id="logout"
-                >
-                    <span>Logout</span>
-                </li>
-                <li
-                    class="
                         toggle-nav-modal
                         logged-in
                         d-none
@@ -1380,6 +2094,17 @@
                     id="account"
                 >
                     <span>Account</span>
+                </li>
+                <li
+                    class="
+                        logged-in
+                        d-none
+                        justify-content-center
+                        align-items-center
+                    "
+                    id="logout"
+                >
+                    <span>Logout</span>
                 </li>
             </ul>
             <div class="nav-slider-background nav-slider-fade"></div>
@@ -1418,6 +2143,7 @@
                             justify-content-center
                             align-items-center
                         "
+                        data-tag-key=""
                         id="activeTagBtn"
                     >
                         <svg
@@ -1742,5 +2468,6 @@
         <script src="js/modalFuntions/createTag.js"></script>
         <script src="js/modalFuntions/editTime.js"></script>
         <script src="js/modalFuntions/editTimeInput.js"></script>
+        <script src="js/modalFuntions/editTag.js"></script>
     </body>
 </html>

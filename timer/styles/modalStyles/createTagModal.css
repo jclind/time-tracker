@@ -1,40 +1,61 @@
-#createTagModal .modal-content {
+#createTagModal .modal-content,
+#editTagModal .modal-content {
+    border-top: 3px solid var(--primary-blue);
     padding: 10px;
     width: 80%;
-    background: #393e46;
+    background: var(--secondary-background-color);
     color: var(--primary-text);
 }
 
-#createTagModal .modal-title {
+#createTagModal .modal-title,
+#editTagModal .modal-title {
+    border-bottom: 1px solid var(--primary-text);
+}
+#createTagModal .modal-title h2,
+#editTagModal .modal-title h2 {
+    font-size: 22px;
     font-weight: bold;
-    padding-bottom: 5px;
 }
 
-#createTagModal .modal-name {
+#createTagModal .name-input,
+#editTagModal .name-input {
+    width: 95%;
+}
+#createTagModal label,
+#editTagModal label {
+    color: var(--primary-blue) !important;
+    font-size: 12px;
+    text-align: left !important;
+}
+#createTagModal .modal-name,
+#editTagModal .modal-name {
+    width: 100%;
+    font-size: 18px;
     height: 30px;
-    width: 80%;
-    font-size: 20px;
 }
 
-#createTagModal .color-select-container {
+#createTagModal .color-select-container,
+#editTagModal .color-select-container {
     width: 100%;
 }
-#createTagModal .color-select-container .color {
+#createTagModal .color-select-container .color,
+#editTagModal .color-select-container .color {
     background: #393e46;
-    /* margin: 0; */
-    /* padding: 0; */
 }
 
-#createTagModal .color-select-container .color {
+#createTagModal .color-select-container .color,
+#editTagModal .color-select-container .color {
     box-sizing: border-box;
     border: 1px solid #393e46;
     border-radius: 50%;
 }
-#createTagModal .color-select-container .color:hover {
+#createTagModal .color-select-container .color:hover,
+#editTagModal .color-select-container .color:hover {
     border: 1px solid var(--primary-blue);
     cursor: pointer;
 }
-#createTagModal .color-select-container .color-select {
+#createTagModal .color-select-container .color-select,
+#editTagModal .color-select-container .color-select {
     color: var(--main-background-color);
     left: 0;
     right: 0;
@@ -44,7 +65,8 @@
     height: 100%;
 }
 
-#createTagModal .create-tag-btns-container button {
+#createTagModal .create-tag-btns-container button,
+#editTagModal .create-tag-btns-container button {
     color: var(--secondary-text);
     font-size: 12px;
     font-weight: bold;
@@ -52,13 +74,26 @@
     width: 70px;
 }
 
-#createTagModal .create-tag-btns-container .create-new-tag-btn {
+#createTagModal .create-tag-btns-container .create-new-tag-btn,
+#editTagModal .create-tag-btns-container .create-new-tag-btn {
     color: white;
     background: var(--primary-blue);
 }
 
+#editTagModal .cancel-btn {
+    color: var(--primary-text) !important;
+    cursor: pointer;
+}
+#editTagModal .edit-btn {
+    background: var(--primary-blue);
+    color: white !important;
+    cursor: pointer;
+}
+
 #createTagModal .input-error-text,
-#createTagModal .color-select-error-text {
+#createTagModal .color-select-error-text,
+#editTagModal .input-error-text,
+#editTagModal .color-select-error-text {
     color: var(--danger);
     font-weight: bold;
 }

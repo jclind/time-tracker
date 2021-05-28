@@ -32,6 +32,7 @@
     width: 100%;
 }
 #tagListModal .modal-body .tag-item {
+    padding: 0px 5px;
     border-bottom: 1px solid var(--primary-text);
 }
 #tagListModal .modal-body .tag-item span {
@@ -39,9 +40,31 @@
     font-weight: bold;
 }
 
-#tagListModal .modal-body .tag-item .selected-tag {
-    position: absolute;
-    right: 15px;
+#tagListModal .selected-tag-name {
+    color: var(--primary-blue);
+    font-weight: bold;
+}
+#tagListModal .selected-tag {
+    border-bottom: 2px solid var(--primary-blue) !important;
+}
+
+#tagListModal .tag-btns {
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+#tagListModal .tag-btns button {
+    font-size: 12px;
+    font-weight: bold;
+    height: 20px;
+    padding: 0 5px !important;
+    text-decoration: underline;
+}
+#tagListModal .tag-btns .edit-btn {
+    color: var(--primary-text);
+}
+#tagListModal .tag-btns .delete-btn {
+    color: var(--danger);
 }
 
 #createNewTagBtn {

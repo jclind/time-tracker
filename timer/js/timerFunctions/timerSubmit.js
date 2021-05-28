@@ -1,10 +1,8 @@
 const submitTime = (time, currStartingTime, currFinishedTime) => {
     // Get Tag
     const tag = timeTags.find(tag => {
-        let tempTagName = document.getElementById(
-            'activeTimeTagSelectionBtnName'
-        ).innerText
-        return tag.name === tempTagName
+        let tempTagKey = document.getElementById('activeTagBtn').dataset.tagKey
+        return tag.key === tempTagKey
     })
 
     // Get Name
@@ -22,7 +20,7 @@ const submitTime = (time, currStartingTime, currFinishedTime) => {
         name: timeName,
         time: time,
         date: currStartingTime.toString(),
-        tag: tag,
+        tagKey: tag.key,
         startTime: currStartingTime.toString(),
         finishTime: currFinishedTime.toString(),
         description: description,

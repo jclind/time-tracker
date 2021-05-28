@@ -70,30 +70,12 @@ const updateModalTagList = (tags, isBtn, inputValue) => {
 
     tags.forEach(item => {
         let activeTagHTML = ''
-
         // If the current tag is the euqal tag, add the check to the tag.
+        console.log(item.name, activeTag)
         if (item.name === activeTag.name) {
-            activeTagHTML = `
-                <div class="selected-tag">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="23"
-                        height="23"
-                        fill="currentColor"
-                        class="bi bi-check"
-                        viewBox="0 0 16 16"
-                    >
-                        <path
-                            d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"
-                        />
-                    </svg>
-                </div>
-            `
-        }
-
-        modalTagList.innerHTML += `
+            modalTagList.innerHTML += `
             <div
-                class="tag-item py-3 d-flex align-items-center"
+                class="tag-item py-3 d-flex align-items-center selected-tag position-relative"
                 data-tag-name="${item.name}"
             >
                 <svg
@@ -109,10 +91,40 @@ const updateModalTagList = (tags, isBtn, inputValue) => {
                         d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
                     />
                 </svg>
-                <span class="ml-3">${item.name}</span>
-                ${activeTagHTML}
+                <span class="ml-3 selected-tag-name">${item.name}</span>
+                <div class="tag-btns position-absolute">
+                    <button class="btn edit-btn mr-2" style="color: #00adb5;" onclick="editTagModal(event, '${item.name}')">Edit</button>
+                    <button class="btn delete-btn">Delete</button>
+                </div>
             </div>
             `
+        } else {
+            modalTagList.innerHTML += `
+                <div
+                    class="tag-item py-3 d-flex align-items-center position-relative"
+                    data-tag-name="${item.name}" 
+                >
+                    <svg 
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        fill="currentColor"
+                        class="bi bi-tag-fill"
+                        viewBox="0 0 16 16"
+                        style="color: ${item.color}"
+                    >
+                        <path
+                            d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+                        />
+                    </svg>
+                    <span class="ml-3">${item.name}</span>
+                    <div class="tag-btns position-absolute">
+                        <button class="btn edit-btn mr-2" onclick="editTagModal(event, '${item.name}')">Edit</button>
+                        <button class="btn delete-btn">Delete</button>
+                    </div>
+                </div>
+                `
+        }
     })
 
     // If the inputValue is unique from any other tag in the array, then show the create btn array.
@@ -167,10 +179,10 @@ const selectActiveTag = inputTagName => {
     )
     let newActiveTag = timeTags.find(tag => tag.name === inputTagName)
 
-    // Set name and color of active tag
+    // Set name, color and key of active tag
     activeTimeTagSelectionBtnName.innerText = newActiveTag.name
-    // !! FIX COLOR OPERATION
     activeTimeTagSelectionBtnColor.style.color = newActiveTag.color
+    document.getElementById('activeTagBtn').dataset.tagKey = newActiveTag.key
 }
 // Controls selecting the tag for previous times, editing them.
 const selectEditTag = inputTagName => {
@@ -185,6 +197,7 @@ const selectEditTag = inputTagName => {
     // Set name and color of active tag
     editTimeTagSelectionBtnName.innerText = newActiveTag.name
     editTimeTagSelectionBtnColor.style.color = newActiveTag.color
+    document.getElementById('editTagBtn').dataset.tagKey = newActiveTag.key
 }
 
 // When Modal Opens

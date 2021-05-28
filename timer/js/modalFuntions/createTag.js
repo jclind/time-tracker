@@ -17,6 +17,9 @@ colorSelectors.forEach(el => {
         if (colorCheck.classList.contains('d-none')) {
             colorCheck.classList.remove('d-none')
         }
+        if (createTagBtn.classList.contains('disabled')) {
+            createTagBtn.classList.remove('disabled')
+        }
     })
 })
 
@@ -64,6 +67,7 @@ createTagBtn.addEventListener('click', () => {
         const newTag = {
             name: createNewTagTitleInput.value,
             color: selectedColor,
+            key: generateKey(),
         }
         timeTags.push(newTag)
         selectTag(newTag.name)
@@ -83,6 +87,9 @@ $('#createTagModal').on('hidden.bs.modal', () => {
     // Enable Scrolling when modal closes
     document.body.style.overflowY = 'visible'
     document.body.style.height = '100%'
+    if (!createTagBtn.classList.contains('disabled')) {
+        createTagBtn.classList.add('disabled')
+    }
 
     // Clear error inputs
     createTagInputError.innerText = ''

@@ -9,12 +9,12 @@ const updateTimeTable = timesArray => {
             let time = el.time,
                 name = el.name,
                 date = new Date(el.date),
-                tag = el.tag,
+                tagKey = el.tagKey,
+                tag = timeTags.find(el => el.key === tagKey),
                 startTime = new Date(el.startTime),
                 finishTime = new Date(el.finishTime),
                 description = el.description,
                 key = el.key
-
             console.log(name.length)
             let modName =
                 name.length >= 30 ? name.substring(0, 27).trim() + '...' : name

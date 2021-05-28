@@ -1,6 +1,12 @@
-const showEditTimeModal = key => {
+const showEditTimeModal = timeKey => {
     $('#editTimeModal').modal('show')
 
+    // Get selected time element index from timesInfoList with timeKey
+    let timeIdx = timesInfoList.findIndex(time => time.key === timeKey)
+    let timeObj = timesInfoList[timeIdx]
+
+    const tagKey = timeObj.tagKey
+    const tagEl = timeTags.find(el => el.key === tagKey)
     const tagNameEl = document.getElementById('editTimeTagSelectionBtnName')
     const tagColorEl = document.getElementById('editTimeTagSelectionBtnColor')
     const nameInput = document.getElementById('modalEditTitleInput')
@@ -8,13 +14,10 @@ const showEditTimeModal = key => {
         'modalEditDescriptionInput'
     )
 
-    // Get selected time element index from timesInfoList with key
-    let timeIdx = timesInfoList.findIndex(time => time.key === key)
-    let timeObj = timesInfoList[timeIdx]
-
     // Edit time tag selector
-    tagNameEl.innerText = timeObj.tag.name
-    tagColorEl.style.color = timeObj.tag.color
+    tagNameEl.innerText = tagEl.name
+    tagColorEl.style.color = tagEl.color
+    document.getElementById('editTagBtn').dataset.tagKey = tagKey
     // Edit time name input
     nameInput.value = timeObj.name
     // Edit time change time inputs, call the editTimeModalTimeInput to format and change each input placeholder value
@@ -27,19 +30,18 @@ const showEditTimeModal = key => {
     // On Edit button click
     $('#submitEditModalBtn').on('click', () => {
         // submitEditModal(timeObj)
-        let currTimeIdx = timesInfoList.findIndex(time => time.key === key)
+        let currTimeIdx = timesInfoList.findIndex(time => time.key === timeKey)
         let currTimeObj = timesInfoList[currTimeIdx]
 
         console.log(currTimeObj)
         // if isChanged is set to true, data will be saved
         let isChanged = false
 
-        // If tag name doesn't match the original time title, then it will be updated.
-        if (tagNameEl.innerText !== currTimeObj.tag.name) {
+        // If tag keyname doesn't match the original time key, then it will be updated.
+        if (document.getElementById('editTagBtn').dataset.tagKey !== tagKey) {
             // Search through tag's array and switch the old tag with the new tag in the timeObj
-            currTimeObj.tag = timeTags.find(
-                tag => tag.name === tagNameEl.innerText
-            )
+            currTimeObj.tagKey =
+                document.getElementById('editTagBtn').dataset.tagKey
             isChanged = true
         }
 
