@@ -54,14 +54,12 @@ const updateModalTagList = (tags, isBtn, inputValue) => {
     const activeTag = timeTags.find(tag => {
         if (setActiveOrEdit === 'active') {
             return (
-                tag.name ==
-                document.getElementById('activeTimeTagSelectionBtnName')
-                    .innerText
+                tag.key ==
+                document.getElementById('activeTagBtn').dataset.tagKey
             )
         } else {
             return (
-                tag.name ==
-                document.getElementById('editTimeTagSelectionBtnName').innerText
+                tag.name == document.getElementById('editTagBtn').dataset.tagKey
             )
         }
     })
@@ -93,7 +91,7 @@ const updateModalTagList = (tags, isBtn, inputValue) => {
                 </svg>
                 <span class="ml-3 selected-tag-name">${item.name}</span>
                 <div class="tag-btns position-absolute">
-                    <button class="btn edit-btn mr-2" style="color: #00adb5;" onclick="editTagModal(event, '${item.name}')">Edit</button>
+                    <button class="btn edit-btn mr-2" style="color: #00adb5;" onclick="editTagModal(event, '${item.key}')">Edit</button>
                     <button class="btn delete-btn">Delete</button>
                 </div>
             </div>
@@ -119,7 +117,7 @@ const updateModalTagList = (tags, isBtn, inputValue) => {
                     </svg>
                     <span class="ml-3">${item.name}</span>
                     <div class="tag-btns position-absolute">
-                        <button class="btn edit-btn mr-2" onclick="editTagModal(event, '${item.name}')">Edit</button>
+                        <button class="btn edit-btn mr-2" onclick="editTagModal(event, '${item.key}')">Edit</button>
                         <button class="btn delete-btn">Delete</button>
                     </div>
                 </div>
