@@ -92,7 +92,7 @@ const updateModalTagList = (tags, isBtn, inputValue) => {
                 <span class="ml-3 selected-tag-name">${item.name}</span>
                 <div class="tag-btns position-absolute">
                     <button class="btn edit-btn mr-2" style="color: #00adb5;" onclick="editTagModal(event, '${item.key}')">Edit</button>
-                    <button class="btn delete-btn">Delete</button>
+                    <button class="btn delete-btn" onclick="deleteTag(event, '${item.key}')">Delete</button>
                 </div>
             </div>
             `
@@ -118,7 +118,7 @@ const updateModalTagList = (tags, isBtn, inputValue) => {
                     <span class="ml-3">${item.name}</span>
                     <div class="tag-btns position-absolute">
                         <button class="btn edit-btn mr-2" onclick="editTagModal(event, '${item.key}')">Edit</button>
-                        <button class="btn delete-btn">Delete</button>
+                        <button class="btn delete-btn" onclick="deleteTag(event, '${item.key}')">Delete</button>
                     </div>
                 </div>
                 `

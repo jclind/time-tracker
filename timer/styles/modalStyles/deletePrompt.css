@@ -1,4 +1,5 @@
-#deleteTimePromptModal .modal-content {
+#deleteTimePromptModal .modal-content,
+#deleteTagPromptModal .modal-content {
     margin: 0 auto;
     width: 90%;
     max-width: 400px;
@@ -6,12 +7,14 @@
     border-radius: 5px;
     margin-bottom: 150px;
 }
-#deleteTimePromptModal .modal-content .modal-header {
+#deleteTimePromptModal .modal-content .modal-header,
+#deleteTagPromptModal .modal-content .modal-header {
     border-top: 4px solid var(--primary-blue);
     border-bottom: none;
     color: var(--primary-text);
 }
-#deleteTimePromptModal .modal-content h4 {
+#deleteTimePromptModal .modal-content h4,
+#deleteTagPromptModal .modal-content h4 {
     font-family: var(--title-font-family) !important;
     font-size: 24px;
     line-height: 1.5;
@@ -19,14 +22,17 @@
     padding: 0;
     margin: 0;
 }
-#deleteTimePromptModal .modal-content p {
+#deleteTimePromptModal .modal-content p,
+#deleteTagPromptModal .modal-content p {
     font-size: 13px;
     font-weight: bold;
     color: var(--secondary-text);
 }
 
 #deleteTimePromptModal .cancel-btn,
-#deleteTimePromptModal .delete-btn {
+#deleteTimePromptModal .delete-btn,
+#deleteTagPromptModal .cancel-btn,
+#deleteTagPromptModal .delete-btn {
     height: 35px;
     width: 50%;
     max-width: 100px;
@@ -34,12 +40,15 @@
     font-weight: bold;
     border-radius: 5px;
 }
-#deleteTimePromptModal .delete-btn {
+#deleteTimePromptModal .delete-btn,
+#deleteTagPromptModal .delete-btn {
     background: var(--danger);
     color: var(--primary-text);
 }
 #deleteTimePromptModal .cancel-btn:hover,
-#deleteTimePromptModal .delete-btn:hover {
+#deleteTimePromptModal .delete-btn:hover,
+#deleteTagPromptModal .cancel-btn:hover,
+#deleteTagPromptModal .delete-btn:hover {
     color: white;
     filter: brightness(85%);
 }

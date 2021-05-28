@@ -1,5 +1,5 @@
 const editTagColorSelectors = document.querySelectorAll('#editTagModal .color')
-function editTagModal(event, tagKey) {
+const editTagModal = (event, tagKey) => {
     event.stopPropagation()
     console.log(tagKey)
     let tagEl = timeTags.find(el => el.key === tagKey)

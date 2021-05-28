@@ -56,7 +56,7 @@
         <link rel="stylesheet" href="styles/modalStyles/tagListModal.css" />
         <link rel="stylesheet" href="styles/modalStyles/createTagModal.css" />
         <link rel="stylesheet" href="styles/modalStyles/saveTimesPromptModal.css">
-        <link rel="stylesheet" href="styles/modalStyles/deleteTimePrompt.css">
+        <link rel="stylesheet" href="styles/modalStyles/deletePrompt.css">
         <title id="websiteTitle">Timer</title>
     </head>
     <body class="position-relative">
@@ -346,6 +346,7 @@
                 </div>
             </div>
         </div>
+        
         <!-- Edit Time Elements Modal -->
         <div
             class="modal overflow-hidden"
@@ -2039,6 +2040,40 @@
             <!-- End .modal-dialog -->
         </div>
         <!-- End #createTagModal -->
+        <!-- Delete Tag Prompt Modal -->
+        <div
+            class="modal"
+            id="deleteTagPromptModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="deleteTagPromptModalLabel"
+            aria-hidden="true"
+            data-keyboard="false" 
+            data-backdrop="static"
+            style="background: rgba(0, 0, 0, 0.6)"
+        >
+            <div
+                class="modal-dialog pb-5 modal-dialog-centered m-auto"
+                role="document"
+            >
+                <div class="modal-content">
+                    <div class="modal-header text-center d-flex flex-column">
+                        <h4
+                            class="modal-title w-100"
+                            id="deleteTagPromptModalLabel"
+                        >
+                            Delete This Tag?
+                        </h4>
+                        <p class="w-100 pt-2">You will not be able to recover it.</p>
+                        </button>
+                    </div>
+                    <div class="modal-body w-100 d-flex flex-row justify-content-center pt-4 pb-5">
+                        <button class="btn cancel-btn btn-secondary mx-4">Cancel</button>
+                        <button class="btn delete-btn mx-4">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <nav class="d-flex justify-content-around align-items-center">
             <div class="logo d-flex justify-content-center align-items-center">
@@ -2469,5 +2504,6 @@
         <script src="js/modalFuntions/editTime.js"></script>
         <script src="js/modalFuntions/editTimeInput.js"></script>
         <script src="js/modalFuntions/editTag.js"></script>
+        <script src="js/modalFuntions/deleteTag.js"></script>t
     </body>
 </html>
