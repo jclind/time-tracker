@@ -54,15 +54,15 @@ const showPasswordNotLongEnoughAlert = () => {
         }, 6000)
     }
 }
-const showDataNotSavedAlertAlert = () => {
-    const alert = document.querySelector('#dataNotSavedAlert')
+const showChangesSavedAlert = () => {
+    const alert = document.querySelector('#changesSavedAlert')
 
     // To ensure that the interval is not called more than once at a time, first check if the alert is hidden
     if (alert.classList.contains('hide')) {
         alert.classList.remove('hide')
         setTimeout(() => {
             alert.classList.add('hide')
-        }, 6000)
+        }, 2000)
     }
 }
 
@@ -87,6 +87,6 @@ const showLoginToSaveDataAlert = () => {
         console.log('yooo3')
         setTimeout(() => {
             alert.classList.add('hide')
-        }, 6000)
+        }, 15000)
     }
 }

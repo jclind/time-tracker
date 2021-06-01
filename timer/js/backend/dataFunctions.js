@@ -1,5 +1,6 @@
-// !!Write
+let isPending = false
 const saveUserData = () => {
+    isPending = true
     let currUser = firebase.auth().currentUser
     updateTimeTable(timesInfoList)
     if (currUser) {
@@ -8,13 +9,19 @@ const saveUserData = () => {
             .doc(currUser.uid)
             .get()
             .then(doc => {
-                db.collection('users').doc(currUser.uid).update({
-                    timesInfoList: timesInfoList,
-                    timeTags: timeTags,
-                })
+                db.collection('users')
+                    .doc(currUser.uid)
+                    .update({
+                        timesInfoList: timesInfoList,
+                        timeTags: timeTags,
+                    })
+                    .then(() => {
+                        isPending = false
+                    })
             })
     } else {
         showLoginToSaveDataAlert()
+        isPending = false
     }
 }
 
@@ -31,7 +38,7 @@ window.onload = function (event) {
 
         timerIsRunning = userTimeArr[0].timerIsRunning
         // if (userTimeArr[0].timerIsRunning === true) {
-        console.log('why am I here?')(timerIsRunning)
+        startStop(timerIsRunning)
         // }
         localStorage.removeItem('userTime')
     }
@@ -55,6 +62,11 @@ window.onunload = window.onbeforeunload = function (event) {
         ]
         localStorage.setItem('userTime', JSON.stringify(userTimeArr))
     } else if (!timerIsRunning && elapsedTime !== 0) {
-        return 'Dude, are you sure you want to leave? Think of the kittens!'
+        return ''
+    } else if (isPending) {
+        console.log(
+            'Data is still being saved, data will be lost if you refresh!'
+        )
+        return 'Data is still being saved, data will be lost if you refresh!'
     }
 }
