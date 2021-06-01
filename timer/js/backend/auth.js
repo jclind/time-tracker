@@ -90,6 +90,7 @@ const setupUI = user => {
                 })
         } else {
             let unsavedTimes = [...timesInfoList]
+            let unsavedTags = [...timeTags]
             // Show save times prompt modal
             $('#saveTimesPromptModal').modal('show')
 
@@ -130,6 +131,37 @@ const setupUI = user => {
                     .then(doc => {
                         timesInfoList = doc.data().timesInfoList
                         timeTags = doc.data().timeTags
+
+                        // Search through array of unsaved times and check if each tag exists in the user's existing timeTags array
+                        unsavedTimes.forEach((time, idx) => {
+                            // If tag does not exist in timeTags
+                            if (
+                                timeTags.find(el => el.key === time.tagKey) ===
+                                undefined
+                            ) {
+                                // Get reference to the tag associated with the current unsaved time
+                                let currTimeTag = unsavedTags.find(
+                                    el => el.key === time.tagKey
+                                )
+                                // If there is another tag with this name,
+                                let updatedTag
+                                if (
+                                    timeTags.filter(el => {
+                                        if (el.name === currTimeTag.name) {
+                                            updatedTag = el.tag
+                                            return true
+                                        }
+                                    }).length > 0
+                                ) {
+                                    // Set the unsaved time element's key to the corresponding tag key from timeTags
+                                    unsavedTags[idx].tagKey = updatedTag
+                                } else {
+                                    // Push new unsaved tag to the user's timeTags array
+                                    timeTags.push(currTimeTag)
+                                }
+                            }
+                        })
+                        // Add unsaved times into user's timesInfoList array
                         timesInfoList = timesInfoList.concat(unsavedTimes)
                         saveUserData()
 

@@ -16,7 +16,6 @@ const showIncorrectPasswordAlert = () => {
     // To ensure that the interval is not called more than once at a time, first check if the alert is hidden
     if (alert.classList.contains('hide')) {
         alert.classList.remove('hide')
-        console.log('yooo')
         setTimeout(() => {
             alert.classList.add('hide')
         }, 6000)
@@ -28,7 +27,6 @@ const showPasswordsDontMatchAlert = () => {
     // To ensure that the interval is not called more than once at a time, first check if the alert is hidden
     if (alert.classList.contains('hide')) {
         alert.classList.remove('hide')
-        console.log('yooo3')
         setTimeout(() => {
             alert.classList.add('hide')
         }, 6000)
@@ -40,7 +38,6 @@ const showMatchingCurrentAndNewPasswordsAlert = () => {
     // To ensure that the interval is not called more than once at a time, first check if the alert is hidden
     if (alert.classList.contains('hide')) {
         alert.classList.remove('hide')
-        console.log('yooo3')
         setTimeout(() => {
             alert.classList.add('hide')
         }, 6000)
@@ -52,7 +49,17 @@ const showPasswordNotLongEnoughAlert = () => {
     // To ensure that the interval is not called more than once at a time, first check if the alert is hidden
     if (alert.classList.contains('hide')) {
         alert.classList.remove('hide')
-        console.log('yooo3')
+        setTimeout(() => {
+            alert.classList.add('hide')
+        }, 6000)
+    }
+}
+const showDataNotSavedAlertAlert = () => {
+    const alert = document.querySelector('#dataNotSavedAlert')
+
+    // To ensure that the interval is not called more than once at a time, first check if the alert is hidden
+    if (alert.classList.contains('hide')) {
+        alert.classList.remove('hide')
         setTimeout(() => {
             alert.classList.add('hide')
         }, 6000)

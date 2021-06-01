@@ -15,7 +15,8 @@ let currStartingTime = null
 let currFinishedTime = null
 
 // Control functionality and loop of the timer element
-const startStop = () => {
+const startStop = isRunning => {
+    console.trace()
     // Get time element that holds the actual counting time
     let timeEl = document.getElementById('time')
 
@@ -23,15 +24,15 @@ const startStop = () => {
     let startStopElText = document.getElementById('startStopBtn').innerText
 
     // If the timer is not runing.
-    if (startStopElText === 'START') {
+    if (isRunning) {
         // Set timerIsRunning to true when the interval starts running the timer
         timerIsRunning = true
 
         // If the timer is at 0, then set the 'currStartingTime' to the current date/time
-        if (timeEl.innerText == '00:00.00') {
+        if (elapsedTime === 0) {
             currStartingTime = new Date()
+            console.log(currStartingTime, 'bungis')
         }
-
         // Let startTime equal the current date minues how much time is already on the timer (if any)
         let startTime = Date.now() - elapsedTime
         console.log(startTime)

@@ -63,7 +63,7 @@ const controlTimerButtons = (isRunning, elapsedTime) => {
 // START STOP BUTTON
 // Decalare and addeventlistener to start/stop btn
 const startStopBtn = document.getElementById('startStopBtn')
-startStopBtn.addEventListener('click', startStop) // Calls startStop function from timer.js
+startStopBtn.addEventListener('click', () => startStop(!timerIsRunning)) // Calls startStop function from timer.js
 
 // CLAER BUTTON
 // Decalare and addeventlistener to clearTimeBtn

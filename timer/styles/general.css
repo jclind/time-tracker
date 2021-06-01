@@ -32,7 +32,8 @@ body {
 #passwordsDontMatchAlert,
 #matchingCurrentAndNewPasswordsAlert,
 #passwordNotLongEnoughAlert,
-#loginToSaveDataAlert {
+#loginToSaveDataAlert,
+#dataNotSavedAlert {
     position: fixed;
     right: 0px;
     left: 0px;
