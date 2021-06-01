@@ -62,7 +62,7 @@ const showChangesSavedAlert = () => {
         alert.classList.remove('hide')
         setTimeout(() => {
             alert.classList.add('hide')
-        }, 2000)
+        }, 3000)
     }
 }
 

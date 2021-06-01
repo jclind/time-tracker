@@ -22,3 +22,14 @@ body.modal-open {
     background: #242b33;
     border-radius: 5px;
 }
+
+@media screen and (max-width: 360px) {
+    #timerComponent .timer {
+        font-size: 65px;
+    }
+}
+@media screen and (max-width: 310px) {
+    #timerComponent .timer {
+        font-size: 55px;
+    }
+}

@@ -61,7 +61,10 @@ const showEditTimeModal = timeKey => {
         }
 
         $('#editTimeModal').modal('hide')
-        saveUserData()
+        if (isChanged) {
+            saveUserData()
+        }
+        showChangesSavedAlert()
         $('#submitEditModalBtn').off('click')
     })
 }

@@ -62,8 +62,10 @@ window.onunload = window.onbeforeunload = function (event) {
         ]
         localStorage.setItem('userTime', JSON.stringify(userTimeArr))
     } else if (!timerIsRunning && elapsedTime !== 0) {
+        // If there is a value stored in the timer
         return ''
     } else if (isPending) {
+        // If there is data being saved, alert user
         console.log(
             'Data is still being saved, data will be lost if you refresh!'
         )
