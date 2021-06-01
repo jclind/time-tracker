@@ -7,13 +7,21 @@ const deleteTag = (event, tagKey) => {
     console.log(timeTags.find(el => el.key === tagKey))
 
     function deleteTag() {
+        // Get the active tag key from the activeTagBtn element dataset
+        const activeTagKey = activeTagBtn.dataset.tagKey
         // Remove given tag from timeTags array
         let tagIdx = timeTags.findIndex(el => el.key === tagKey)
+        let selectedTagKey = activeTagBtn.dataset.tagKey
         timeTags.splice(tagIdx, 1)
+
+        if (activeTagKey === selectedTagKey) {
+            console.log('In if statement')
+            selectActiveTag(timeTags[0].key)
+        }
         // Search through timesInfoList for any times with selected tag to be deleted and replace them with the first tag in the tag list
         timesInfoList.forEach((el, index) => {
             if (el.tagKey === tagKey) {
-                timesInfoList[index].tagKey === timeTags[0].key
+                timesInfoList[index].tagKey = timeTags[0].key
             }
         })
         updateModalTagList(timeTags)

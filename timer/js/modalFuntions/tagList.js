@@ -59,10 +59,11 @@ const updateModalTagList = (tags, isBtn, inputValue) => {
             )
         } else {
             return (
-                tag.name == document.getElementById('editTagBtn').dataset.tagKey
+                tag.key == document.getElementById('editTagBtn').dataset.tagKey
             )
         }
     })
+    console.log(activeTag)
 
     modalTagList.innerHTML = ''
 
@@ -74,7 +75,7 @@ const updateModalTagList = (tags, isBtn, inputValue) => {
             modalTagList.innerHTML += `
             <div
                 class="tag-item py-3 d-flex align-items-center selected-tag position-relative"
-                data-tag-name="${item.name}"
+                data-tag-key="${item.key}"
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -100,7 +101,7 @@ const updateModalTagList = (tags, isBtn, inputValue) => {
             modalTagList.innerHTML += `
                 <div
                     class="tag-item py-3 d-flex align-items-center position-relative"
-                    data-tag-name="${item.name}" 
+                    data-tag-key="${item.key}" 
                 >
                     <svg 
                         xmlns="http://www.w3.org/2000/svg"
@@ -147,17 +148,17 @@ const updateModalTagList = (tags, isBtn, inputValue) => {
     modalItems.forEach(el => {
         el.addEventListener('click', () => {
             // set clicked tag as active
-            let newActiveTagName = el.dataset.tagName
-            selectTag(newActiveTagName)
+            let newActiveTagKey = el.dataset.tagKey
+            selectTag(newActiveTagKey)
         })
     })
 }
 
-const selectTag = inputTagName => {
+const selectTag = inputTagKey => {
     if (setActiveOrEdit === 'active') {
-        selectActiveTag(inputTagName)
+        selectActiveTag(inputTagKey)
     } else if (setActiveOrEdit === 'edit') {
-        selectEditTag(inputTagName)
+        selectEditTag(inputTagKey)
     } else {
         console.log('Error selecting setActiveOrEdit function')
     }
@@ -168,14 +169,14 @@ const selectTag = inputTagName => {
 }
 
 // Controls selecting the active tag for upcoming times
-const selectActiveTag = inputTagName => {
+const selectActiveTag = inputTagKey => {
     const activeTimeTagSelectionBtnName = document.getElementById(
         'activeTimeTagSelectionBtnName'
     )
     const activeTimeTagSelectionBtnColor = document.getElementById(
         'activeTimeTagSelectionBtnColor'
     )
-    let newActiveTag = timeTags.find(tag => tag.name === inputTagName)
+    let newActiveTag = timeTags.find(tag => tag.key === inputTagKey)
 
     // Set name, color and key of active tag
     activeTimeTagSelectionBtnName.innerText = newActiveTag.name
@@ -183,14 +184,14 @@ const selectActiveTag = inputTagName => {
     document.getElementById('activeTagBtn').dataset.tagKey = newActiveTag.key
 }
 // Controls selecting the tag for previous times, editing them.
-const selectEditTag = inputTagName => {
+const selectEditTag = inputTagKey => {
     const editTimeTagSelectionBtnName = document.getElementById(
         'editTimeTagSelectionBtnName'
     )
     const editTimeTagSelectionBtnColor = document.getElementById(
         'editTimeTagSelectionBtnColor'
     )
-    let newActiveTag = timeTags.find(tag => tag.name === inputTagName)
+    let newActiveTag = timeTags.find(tag => tag.key === inputTagKey)
 
     // Set name and color of active tag
     editTimeTagSelectionBtnName.innerText = newActiveTag.name

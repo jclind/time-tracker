@@ -15,10 +15,20 @@ const setupUI = user => {
         console.log()
         // If timesInfoList isn't empty, change tag button name to last submitted tag name
         if (timesInfoList.length > 0) {
+            console.log(lastTimesInfoEl.tagKey)
+            timeTags.forEach(el => console.log(el.key))
             let lastTimesInfoTag = timeTags.find(
                 el => el.key === lastTimesInfoEl.tagKey
             )
+            // If there is
+            if (lastTimesInfoTag === undefined) {
+                lastTimesInfoTag = timeTags[0]
+
+                lastTimesInfoEl.tagKey = timeTags[0].key
+                saveUserData()
+            }
             // Set active tag name
+            console.log(lastTimesInfoTag)
             document.getElementById('activeTimeTagSelectionBtnName').innerText =
                 lastTimesInfoTag.name
             // Set active tag color

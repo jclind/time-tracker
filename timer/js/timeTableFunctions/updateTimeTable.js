@@ -15,7 +15,6 @@ const updateTimeTable = timesArray => {
                 finishTime = new Date(el.finishTime),
                 description = el.description,
                 key = el.key
-            console.log(name.length)
             let modName =
                 name.length >= 30 ? name.substring(0, 27).trim() + '...' : name
 

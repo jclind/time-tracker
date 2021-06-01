@@ -70,7 +70,7 @@ createTagBtn.addEventListener('click', () => {
             key: generateKey(),
         }
         timeTags.push(newTag)
-        selectTag(newTag.name)
+        selectTag(newTag.key)
         saveUserData()
         $('#createTagModal').modal('hide')
     }
