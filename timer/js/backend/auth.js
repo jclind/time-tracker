@@ -87,6 +87,10 @@ const setupUI = user => {
                     accountModalNameInput.value = doc.data().name
                     setActiveTag()
                     updateTimeTable(timesInfoList)
+                    // If the tag list modal is open, update the tags when user's data is loaded
+                    if ($('#tagListModal').is(':visible')) {
+                        updateModalTagList(timeTags)
+                    }
                 })
         } else {
             let unsavedTimes = [...timesInfoList]
@@ -120,6 +124,10 @@ const setupUI = user => {
                         accountModalNameInput.value = doc.data().name
                         setActiveTag()
                         updateTimeTable(timesInfoList)
+                        // If the tag list modal is open, update the tags when user's data is loaded
+                        if ($('#tagListModal').is(':visible')) {
+                            updateModalTagList(timeTags)
+                        }
                         $('#saveTimesPromptModal').modal('hide')
                     })
             })
@@ -164,6 +172,10 @@ const setupUI = user => {
                         // Add unsaved times into user's timesInfoList array
                         timesInfoList = timesInfoList.concat(unsavedTimes)
                         saveUserData()
+                        // If the tag list modal is open, update the tags when user's data is loaded
+                        if ($('#tagListModal').is(':visible')) {
+                            updateModalTagList(timeTags)
+                        }
 
                         // Add data to account modal
                         const accountModalNameInput = document.getElementById(
@@ -268,3 +280,47 @@ logout.addEventListener('click', e => {
         updateTimeTable(timesInfoList)
     })
 })
+
+// Forgot password
+const forgotPasswordBtn = document.querySelectorAll('.forgot-password-btn')
+// show reset password prompt modal
+forgotPasswordBtn.forEach(el =>
+    el.addEventListener('click', () => {
+        $('#forgotPasswordEmailPromptModal').modal('show')
+        const resetPasswordBtn = document.querySelector(
+            '#forgotPasswordEmailPromptModal .reset-password-btn'
+        )
+        let actionCodeSettings = {
+            // After password reset, the user will be give the ability to go back
+            // to this page.
+            url: 'https://time-tracker-da566.web.app/',
+            handleCodeInApp: false,
+        }
+        resetPasswordBtn.addEventListener('click', e => {
+            e.preventDefault()
+            const userEmail = document.querySelector(
+                '#forgotPasswordEmailInput'
+            ).value
+            auth.sendPasswordResetEmail(userEmail, actionCodeSettings)
+                .then(() => {
+                    console.log('email sent')
+                    const passwordResetForm = document.querySelector(
+                        '#forgotPasswordEmailPromptModal form'
+                    )
+                    passwordResetForm.reset()
+                    $('#forgotPasswordEmailPromptModal').modal('hide')
+                    $('#loginModal').modal('hide')
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+            // auth.sendPasswordResetEmail(userEmail)
+            //     .then(() => {
+            //         console.log('email sent')
+            //     })
+            //     .catch(err => {
+            //         console.log(err)
+            //     })
+        })
+    })
+)

@@ -8,7 +8,8 @@ tasks to complete:
 -   add keyboard shortcuts
 -   add forgot password
 -   add footer
--   don't allow set active tag button to be pressed until data is loaded
+<!-- -   don't allow set active tag button to be pressed until data is loaded -->
 -   time table tags are too big and take up too much space.
 -   fix editing time in the edit time modal.
 -   optimize css for desktop and smaller mobile.
+-   redesign the login and signup forms

@@ -53,13 +53,21 @@ const updateModalTagList = (tags, isBtn, inputValue) => {
     // Get the active tag from the timer info tag selector btn text
     const activeTag = timeTags.find(tag => {
         if (setActiveOrEdit === 'active') {
-            return (
-                tag.key ==
-                document.getElementById('activeTagBtn').dataset.tagKey
-            )
+            // Get reference to active Tag Btn for dataset tag data
+            const activeTagBtn = document.getElementById('activeTagBtn')
+            // If there is no value in the dataset of the active tag btn,
+            // set the dataset key to the first timeTags tag key
+            if (
+                activeTagBtn.dataset.tagKey.length === 0 ||
+                activeTagBtn.dataset.tagKey == null
+            ) {
+                selectActiveTag(timeTags[0].key)
+            }
+            // Return tag with same key as the activeTagBtn dataset tag key
+            return tag.key === activeTagBtn.dataset.tagKey
         } else {
             return (
-                tag.key == document.getElementById('editTagBtn').dataset.tagKey
+                tag.key === document.getElementById('editTagBtn').dataset.tagKey
             )
         }
     })
@@ -181,7 +189,9 @@ const selectActiveTag = inputTagKey => {
     // Set name, color and key of active tag
     activeTimeTagSelectionBtnName.innerText = newActiveTag.name
     activeTimeTagSelectionBtnColor.style.color = newActiveTag.color
+    console.log(document.getElementById('activeTagBtn').dataset.tagKey)
     document.getElementById('activeTagBtn').dataset.tagKey = newActiveTag.key
+    console.log(document.getElementById('activeTagBtn').dataset.tagKey)
 }
 // Controls selecting the tag for previous times, editing them.
 const selectEditTag = inputTagKey => {
