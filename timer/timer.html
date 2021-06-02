@@ -58,6 +58,7 @@
         <link rel="stylesheet" href="styles/modalStyles/saveTimesPromptModal.css">
         <link rel="stylesheet" href="styles/modalStyles/deletePrompt.css">
         <link rel="stylesheet" href="styles/modalStyles/authModals/forgotPassword.css">
+        <link rel="stylesheet" href="styles/footer.css">
         <title id="websiteTitle">Timer</title>
     </head>
     <body class="position-relative">
@@ -2474,6 +2475,19 @@
                 <div class="accordion" id="timeTableAccordian"></div>
             </div>
         </section>
+        <footer class="d-flex flex-column justify-content-center align-items-center px-3">
+            <div class="footer-links">
+                <a href="https://github.com/jclind" class="github mx-3"><i class="fa fa-github"></i></a>
+                <a href="https://www.instagram.com/jclind02/" class="instagram mx-3"><i class="fa fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/jesseclind/" class="linkedin mx-3"><i class="fa fa-linkedin-square"></i></a>
+            </div>
+            <div class="support-contact-links my-3">
+                <a href="" class="email p-3"><span>Email</span></a>
+                <span>&#8226;</span>
+                <a href="https://www.buymeacoffee.com/jesseclind" class="support p-3"><span>Support</span></a>
+            </div>
+            <div class="footer-copyright"></div>
+        </footer>
 
         <script
             src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -2524,7 +2538,6 @@
         <script src="js/data.js"></script>
         <script src="js/generalFunctions/uniqueKey.js"></script>
         <script src="js/navFunctions/navAnimations.js"></script>
-        <script src="js/onReadyFunctions.js"></script>
 
         <script src="js/generalFunctions/alerts.js"></script>
 
@@ -2548,6 +2561,9 @@
         <script src="js/modalFuntions/editTime.js"></script>
         <script src="js/modalFuntions/editTimeInput.js"></script>
         <script src="js/modalFuntions/editTag.js"></script>
-        <script src="js/modalFuntions/deleteTag.js"></script>t
+        <script src="js/modalFuntions/deleteTag.js"></script>
+        <script>
+            document.querySelector('.footer-copyright').innerHTML = `@${(new Date).getFullYear()} Jesse Lind`
+        </script>
     </body>
 </html>

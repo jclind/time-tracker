@@ -6,7 +6,7 @@ tasks to complete:
 
 -   stop browser from closing when data is being saved or there is unsaved data
 -   add keyboard shortcuts
--   add forgot password
+<!-- -   add forgot password -->
 -   add footer
 <!-- -   don't allow set active tag button to be pressed until data is loaded -->
 -   time table tags are too big and take up too much space.
