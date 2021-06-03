@@ -506,11 +506,15 @@
                                 >
                                     <label for="">h</label>
                                     <input
-                                        type="number"
+                                        type="text"
+                                        class="text-center"
                                         inputmode="numeric"
                                         placeholder="00"
+                                        maxlength="4"
+                                        onkeypress="return isNumberKey(event)"
                                     />
                                 </div>
+                                <span>:</span>
                                 <div
                                     class="
                                         minutes
@@ -522,11 +526,15 @@
                                 >
                                     <label for="">m</label>
                                     <input
-                                        type="number"
+                                        type="text"
+                                        class="text-center d-flex justify-content-center"
                                         inputmode="numeric"
                                         placeholder="00"
+                                        maxlength="2"
+                                        onkeypress="return isNumberKey(event)"
                                     />
                                 </div>
+                                <span>:</span>
                                 <div
                                     class="
                                         seconds
@@ -538,11 +546,15 @@
                                 >
                                     <label for="">s</label>
                                     <input
-                                        type="number"
+                                        type="text"
+                                        class="text-center"
                                         inputmode="numeric"
                                         placeholder="00"
+                                        maxlength="2"
+                                        onkeypress="return isNumberKey(event)"
                                     />
                                 </div>
+                                <span>.</span>
                                 <div
                                     class="
                                         milliseconds
@@ -554,9 +566,12 @@
                                 >
                                     <label for="">ms</label>
                                     <input
-                                        type="number"
+                                        type="text"
+                                        class="text-center"
                                         inputmode="numeric"
                                         placeholder="00"
+                                        maxlength="2"
+                                        onkeypress="return isNumberKey(event)"
                                     />
                                 </div>
                             </div>

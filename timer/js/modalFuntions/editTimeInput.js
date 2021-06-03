@@ -17,75 +17,232 @@ document.querySelector('#modalEditTimeInput').addEventListener('click', () => {
     editHourInp.select()
 })
 
-// Control hour input selection and time input
-editHourInp.onblur = () => {
-    if (editHourInp.value.length === 0) {
-        editHourInp.value = editHourInp.placeholder
-    }
-    editMinuteInp.select()
-    editMinuteInp.focus()
-}
-editHourInp.addEventListener('keyup', function (event) {
-    if (event.keyCode === 13) {
-        editHourInp.blur()
-    }
+editHourInp.addEventListener('click', event => {
+    event.stopPropagation()
 })
-// Control minute input selection and time input
-editMinuteInp.onblur = () => {
-    if (editMinuteInp.value.length === 0) {
-        editMinuteInp.value = editMinuteInp.placeholder
-    } else if (editMinuteInp.value.length === 1) {
+editMinuteInp.addEventListener('click', event => {
+    event.stopPropagation()
+})
+editSecondInp.addEventListener('click', event => {
+    event.stopPropagation()
+})
+editMillisecondInp.addEventListener('click', event => {
+    event.stopPropagation()
+})
+
+$(editHourInp).bind('input', function () {
+    let $this = $(this)
+    console.log($this.next('div input'))
+    setTimeout(function () {
+        console.log($this.val().length)
+        if ($this.val().length >= parseInt($this.attr('maxlength'), 10)) {
+            editMinuteInp.focus()
+            editMinuteInp.select()
+        }
+    }, 0)
+})
+$(editMinuteInp).bind('input', function () {
+    let $this = $(this)
+    console.log($this.next('div input'))
+    setTimeout(function () {
+        console.log($this.val().length)
+        if ($this.val().length >= parseInt($this.attr('maxlength'), 10)) {
+            editSecondInp.focus()
+            editSecondInp.select()
+        }
+    }, 0)
+})
+$(editMinuteInp).on('blur', function () {
+    let $this = $(this)
+    console.log($this.val().length)
+    if ($this.val().length === 1) {
         editMinuteInp.value = '0' + editMinuteInp.value
     }
-    editSecondInp.select()
-    editSecondInp.focus()
-}
-editMinuteInp.addEventListener('keyup', function (event) {
-    if (event.keyCode === 13) {
-        editMinuteInp.blur()
-    }
-    console.log(editMinuteInp.value.length)
-    if (editMinuteInp.value.length >= 2) {
-        editMinuteInp.blur()
-    }
 })
-// Control second input selection and time input
-editSecondInp.onblur = () => {
-    if (editSecondInp.value.length === 0) {
-        editSecondInp.value = editSecondInp.placeholder
-    } else if (editSecondInp.value.length === 1) {
+$(editSecondInp).bind('input', function () {
+    let $this = $(this)
+    console.log($this.next('div input'))
+    setTimeout(function () {
+        console.log($this.val().length)
+        if ($this.val().length >= parseInt($this.attr('maxlength'), 10)) {
+            editMillisecondInp.focus()
+            editMillisecondInp.select()
+        }
+    }, 0)
+})
+$(editSecondInp).on('blur', function () {
+    let $this = $(this)
+    console.log($this.val().length)
+    if ($this.val().length === 1) {
         editSecondInp.value = '0' + editSecondInp.value
     }
-    editMillisecondInp.select()
-    editMillisecondInp.focus()
-}
-editSecondInp.addEventListener('keyup', function (event) {
-    if (event.keyCode === 13) {
-        editSecondInp.blur()
-    }
-    console.log(editSecondInp.value.length)
-    if (editSecondInp.value.length >= 2) {
-        editSecondInp.blur()
-    }
 })
-// Control second input selection and time input
-editMillisecondInp.onblur = () => {
-    if (editMillisecondInp.value.length === 0) {
-        editMillisecondInp.value = editMillisecondInp.placeholder
-    } else if (editMillisecondInp.value.length === 1) {
+
+$(editMillisecondInp).bind('input', function () {
+    let $this = $(this)
+    console.log($this.next('div input'))
+    setTimeout(function () {
+        console.log($this.val().length)
+        if ($this.val().length >= parseInt($this.attr('maxlength'), 10)) {
+            document.querySelector('#modalEditDescriptionInput').focus()
+        }
+    }, 0)
+})
+$(editMillisecondInp).on('blur', function () {
+    let $this = $(this)
+    console.log($this.val().length)
+    if ($this.val().length === 1) {
         editMillisecondInp.value = '0' + editMillisecondInp.value
     }
-    document.getElementById('modalEditDescriptionInput').select()
-}
-editMillisecondInp.addEventListener('keyup', function (event) {
-    if (event.keyCode === 13) {
-        editMillisecondInp.blur()
-    }
-    console.log(editMillisecondInp.value.length)
-    if (editMillisecondInp.value.length >= 2) {
-        editMillisecondInp.blur()
-    }
 })
+
+// editMinuteInp.addEventListener('keydown', event => {
+//     if (event.keyCode == 9 || event.keyCode == 13) {
+//         console.log('editMinute keydown')
+//         event.preventDefault()
+//     }
+// })
+// editMinuteInp.addEventListener('keyup', event => {
+//     if (event.keyCode == 9 || event.keyCode == 13) {
+//         console.log('editMinute keyup tab/enter')
+//         event.preventDefault()
+//         editSecondInp.select()
+//         editSecondInp.focus()
+//     } else {
+//         console.log('editMinute keyup number/letter')
+//         if (editMinuteInp.value.length >= 2) {
+//             console.log('EditMinute value >= 2')
+//             if (isFinite(event.key)) {
+//                 console.log('EditMinute value is a number')
+//                 editSecondInp.select()
+//                 editSecondInp.focus()
+//             }
+//         }
+//     }
+// })
+
+// editSecondInp.addEventListener('keydown', event => {
+//     if (event.keyCode == 9 || event.keyCode == 13) {
+//         console.log('editSecond keydown')
+//         event.preventDefault()
+//     }
+// })
+// editSecondInp.addEventListener('keyup', event => {
+//     if (event.keyCode == 9 || event.keyCode == 13) {
+//         console.log('editSecond keyup tab/enter')
+//         event.preventDefault()
+//         editMillisecondInp.select()
+//         editMillisecondInp.focus()
+//     } else {
+//         console.log('EditSecond keyup number/letter')
+//         if (editSecondInp.value.length >= 2) {
+//             console.log('EditSecond value >= 2')
+//             if (isFinite(event.key)) {
+//                 console.log('EditSecond value is a number')
+//                 editMillisecondInp.select()
+//                 editMillisecondInp.focus()
+//             }
+//         }
+//     }
+// })
+
+// editHourInp.addEventListener('keydown', event => {
+//     if (event.keyCode == 9 || event.keyCode == 13) {
+//         console.log('tab/enter was pressed in Hour')
+//         event.preventDefault()
+//         editMinuteInp.select()
+//         editMinuteInp.focus()
+//     }
+// })
+// editMinuteInp.addEventListener('keydown', event => {
+//     if (event.keyCode == 9 || event.keyCode == 13) {
+//         console.log('tab/enter was pressed in Minute')
+//         event.preventDefault()
+//         editSecondInp.select()
+//         editSecondInp.focus()
+//     } else {
+//         console.log(editMinuteInp.value.length)
+//         if (event.keyCode != 9 && event.keyCode != 13) {
+//             if (editMinuteInp.value.length >= 1) {
+//                 console.log('Was the point reached?')
+//                 if (isFinite(event.key)) {
+//                     console.log('How about this point?')
+//                     editMinuteInp.blur()
+//                     editSecondInp.select()
+//                     editSecondInp.focus()
+//                 }
+//             }
+//         }
+//     }
+// })
+// editMinuteInp.addEventListener('keypress', event => {})
+
+// editSecondInp.addEventListener('keydown', event => {
+//     if (event.keyCode == 9 || event.keyCode == 13) {
+//         console.log('tab/enter was pressed in Second')
+//         event.preventDefault()
+//         editMillisecondInp.select()
+//         editMillisecondInp.focus()
+//     }
+// })
+// editSecondInp.addEventListener('keypress', event => {
+//     console.log(event.keyCode)
+//     if (event.keyCode != 9 && event.keyCode != 13) {
+//         if (editSecondInp.value.length >= 2) {
+//             if (editSecondInp.value.length > 2) {
+//                 editSecondInp.value = editSecondInp.value.substring(0, 2)
+//             }
+//             if (isFinite(event.key)) {
+//                 editMillisecondInp.select()
+//                 editMillisecondInp.focus()
+//             }
+//         }
+//     } else {
+//         event.preventDefault()
+//     }
+// })
+
+// editMillisecondInp.addEventListener('keydown', event => {
+//     if (event.keyCode == 9 || event.keyCode == 13) {
+//         console.log('tab/enter was pressed in Millisecond')
+//         event.preventDefault()
+//         document.querySelector('#modalEditDescriptionInput').select()
+//     }
+// })
+// editMillisecondInp.addEventListener('keypress', event => {
+//     if (event.keyCode != 9 && event.keyCode != 13) {
+//         if (editMillisecondInp.value.length >= 2) {
+//             if (editMillisecondInp.value.length > 2) {
+//                 editMillisecondInp.value = editMillisecondInp.value.substring(
+//                     0,
+//                     2
+//                 )
+//             }
+//             if (isFinite(event.key)) {
+//                 document.querySelector('#modalEditDescriptionInput').select()
+//             }
+//         }
+//     } else {
+//         event.preventDefault()
+//     }
+// })
+
+const isNumberKey = e => {
+    if (e.which != 8 && isNaN(String.fromCharCode(e.which))) {
+        return false
+    }
+    return true
+    // console.log('I here')
+    // if (
+    //     (e.keyCode >= 48 && e.keyCode <= 57) ||
+    //     (e.keyCode >= 96 && e.keyCode <= 105)
+    // ) {
+    //     console.log('true')
+    //     return true
+    // }
+    // console.log('false')
+    // return false
+}
 
 const editTimeModalTimeInput = time => {
     let [h, m, s, ms] = msToTimeObjFormat(time)
