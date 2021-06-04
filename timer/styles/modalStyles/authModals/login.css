@@ -65,3 +65,9 @@
     margin: 0 auto;
     color: var(--secondary-text);
 }
+
+#loginModal .login-modal-error {
+    font-size: 13px;
+    color: var(--danger);
+    font-weight: bolder;
+}

@@ -18,6 +18,50 @@ const showIncorrectPasswordAlert = () => {
         alert.classList.remove('hide')
         setTimeout(() => {
             alert.classList.add('hide')
+        }, 3000)
+    }
+}
+const showUserNotFoundAlert = () => {
+    const alert = document.querySelector('#userNotFoundAlert')
+
+    // To ensure that the interval is not called more than once at a time, first check if the alert is hidden
+    if (alert.classList.contains('hide')) {
+        alert.classList.remove('hide')
+        setTimeout(() => {
+            alert.classList.add('hide')
+        }, 3000)
+    }
+}
+const showNetworkProblemsAlert = () => {
+    const alert = document.querySelector('#networkProblemsAlert')
+
+    // To ensure that the interval is not called more than once at a time, first check if the alert is hidden
+    if (alert.classList.contains('hide')) {
+        alert.classList.remove('hide')
+        setTimeout(() => {
+            alert.classList.add('hide')
+        }, 2000)
+    }
+}
+const showBackOnlineAlert = () => {
+    const alert = document.querySelector('#backOnlineAlert')
+
+    // To ensure that the interval is not called more than once at a time, first check if the alert is hidden
+    if (alert.classList.contains('hide')) {
+        alert.classList.remove('hide')
+        setTimeout(() => {
+            alert.classList.add('hide')
+        }, 2000)
+    }
+}
+const showSomethingWentWrongAlert = () => {
+    const alert = document.querySelector('#somethingWentWrongAlert')
+
+    // To ensure that the interval is not called more than once at a time, first check if the alert is hidden
+    if (alert.classList.contains('hide')) {
+        alert.classList.remove('hide')
+        setTimeout(() => {
+            alert.classList.add('hide')
         }, 6000)
     }
 }

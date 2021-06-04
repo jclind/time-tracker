@@ -246,7 +246,7 @@ signupForm.addEventListener('submit', e => {
         })
 })
 
-// Loggin method
+// Login method
 const loginForm = document.querySelector('#loginForm')
 loginForm.addEventListener('submit', e => {
     e.preventDefault()
@@ -255,12 +255,39 @@ loginForm.addEventListener('submit', e => {
     const email = loginForm['loginEmail'].value
     const password = loginForm['loginPassword'].value
 
-    auth.signInWithEmailAndPassword(email, password).then(cred => {
-        // Close login modal and reset form
-        const modal = document.querySelector('#loginModal')
-        $(modal).modal('hide')
-        loginForm.reset()
-    })
+    const modal = document.querySelector('#loginModal')
+    auth.signInWithEmailAndPassword(email, password)
+        .then(cred => {
+            // Close login modal and reset form
+            $(modal).modal('hide')
+            loginForm.reset()
+        })
+        .catch(err => {
+            const emailInp = document.querySelector('#loginEmail')
+            const passwordInp = document.querySelector('#loginPassword')
+            if (err.code === 'auth/network-request-failed') {
+                showNetworkProblemsAlert()
+            } else if (err.code === 'auth/user-not-found') {
+                showUserNotFoundAlert()
+                emailInp.style.border = '2px solid #dc3545'
+                emailInp.addEventListener('keypress', function () {
+                    this.style.border = 'none'
+                })
+            } else if (err.code === 'auth/wrong-password') {
+                passwordInp.style.border = '2px solid #dc3545'
+                passwordInp.addEventListener('keypress', function () {
+                    this.style.border = 'none'
+                })
+                showIncorrectPasswordAlert()
+            } else {
+                console.log('something went wrong')
+                showSomethingWentWrongAlert()
+            }
+            $(modal).on('hidden.bs.modal', function () {
+                emailInp.style.border = 'none'
+                passwordInp.style.border = 'none'
+            })
+        })
 })
 
 // Logout method
@@ -314,13 +341,6 @@ forgotPasswordBtn.forEach(el =>
                 .catch(err => {
                     console.log(err)
                 })
-            // auth.sendPasswordResetEmail(userEmail)
-            //     .then(() => {
-            //         console.log('email sent')
-            //     })
-            //     .catch(err => {
-            //         console.log(err)
-            //     })
         })
     })
 )

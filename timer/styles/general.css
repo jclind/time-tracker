@@ -34,7 +34,10 @@ body {
 #passwordNotLongEnoughAlert,
 #loginToSaveDataAlert,
 #dataNotSavedAlert,
-#changesSavedAlert {
+#changesSavedAlert,
+#userNotFoundAlert,
+#networkProblemsAlert,
+#somethingWentWrongAlert {
     position: fixed;
     right: 0px;
     left: 0px;

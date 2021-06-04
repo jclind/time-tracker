@@ -77,6 +77,13 @@
                 <button type="button" class="btn-close btn" data-dismiss="alert" aria-label="Close"><i class="fa fa-times" style="font-size: 16px;"></i></button>
             </div>
         </div>
+        <!-- Incorrect Password or Email Alert -->
+        <div class="alert alert-danger alert-dismissible fade hide" role="alert" id="userNotFoundAlert">
+            <div class="container w-100 h-100 d-flex justify-content-around">
+                <span><strong>Error!</strong> User not found, try a different email.</span>
+                <button type="button" class="btn-close btn" data-dismiss="alert" aria-label="Close"><i class="fa fa-times" style="font-size: 16px;"></i></button>
+            </div>
+        </div>
         <!-- Password Not Long Enough -->
         <div class="alert alert-danger alert-dismissible fade hide" role="alert" id="passwordNotLongEnoughAlert">
             <div class="container w-100 h-100 d-flex justify-content-around">
@@ -118,7 +125,20 @@
             </div>
             </div>
         </div>
-
+        <!-- Network problems alert -->
+        <div class="alert alert-danger alert-dismissible fade hide" role="alert" id="networkProblemsAlert">
+            <div class="container w-100 h-100 d-flex justify-content-around">
+                <span><strong>Error!</strong> You seem to be offline, please refresh and try again.</span>
+                <button type="button" class="btn-close btn" data-dismiss="alert" aria-label="Close"><i class="fa fa-times" style="font-size: 16px;"></i></button>
+            </div>
+        </div>
+        <!-- Something went wrong alert -->
+        <div class="alert alert-danger alert-dismissible fade hide" role="alert" id="somethingWentWrongAlert">
+            <div class="container w-100 h-100 d-flex justify-content-around">
+                <span><strong>Error!</strong> Something went wrong, refresh and try again.</span>
+                <button type="button" class="btn-close btn" data-dismiss="alert" aria-label="Close"><i class="fa fa-times" style="font-size: 16px;"></i></button>
+            </div>
+        </div>
         <!-- Modals  -->
         <!-- Login Modal -->
         <div
