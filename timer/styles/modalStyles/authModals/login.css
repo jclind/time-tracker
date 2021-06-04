@@ -1,17 +1,21 @@
 #loginModal .modal-dialog {
-    width: 350px;
+    max-width: 350px;
+    width: 95%;
 }
 #loginModal .modal-content {
+    background: var(--secondary-background-color);
     border-radius: 5px;
     margin-bottom: 150px;
 }
 #loginModal .modal-content .modal-header {
     border-top: 4px solid var(--primary-blue);
     border-bottom: none;
+    color: var(--primary-text);
+    padding: 15px 15px 10px 15px !important;
 }
 #loginModal .modal-header h4 {
     font-family: var(--title-font-family) !important;
-    font-size: 20px;
+    font-size: 24px;
     line-height: 1.5;
     font-weight: bold;
     text-transform: uppercase;
@@ -33,12 +37,15 @@
     line-height: 1;
     outline: none;
     border: none;
-    border: 1px solid #c7c7cd;
     border-radius: 5px;
+    padding-left: 35px;
+    color: var(--primary-text);
+    background: var(--input-background);
 }
 #loginModal .modal-body form input::placeholder {
     position: relative !important;
     font-size: 16px;
+    color: var(--secondary-text);
     vertical-align: bottom;
 }
 
@@ -50,9 +57,11 @@
     font-family: var(--title-font-family) !important;
     font-size: 20px;
     border-radius: 8px !important;
+    font-weight: bolder;
 }
 #loginModal .forgot-login-btn {
     font-size: 13px;
     text-decoration: underline;
     margin: 0 auto;
+    color: var(--secondary-text);
 }

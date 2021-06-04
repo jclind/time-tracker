@@ -32,9 +32,8 @@ editMillisecondInp.addEventListener('click', event => {
 
 $(editHourInp).bind('input', function () {
     let $this = $(this)
-    console.log($this.next('div input'))
     setTimeout(function () {
-        console.log($this.val().length)
+        // If the length of the hour input is greater or equal to the maxlength attribute of the input, focus the next input
         if ($this.val().length >= parseInt($this.attr('maxlength'), 10)) {
             editMinuteInp.focus()
             editMinuteInp.select()
@@ -43,9 +42,8 @@ $(editHourInp).bind('input', function () {
 })
 $(editMinuteInp).bind('input', function () {
     let $this = $(this)
-    console.log($this.next('div input'))
     setTimeout(function () {
-        console.log($this.val().length)
+        // If the length of the hour input is greater or equal to the maxlength attribute of the input, focus the next input
         if ($this.val().length >= parseInt($this.attr('maxlength'), 10)) {
             editSecondInp.focus()
             editSecondInp.select()
@@ -54,16 +52,14 @@ $(editMinuteInp).bind('input', function () {
 })
 $(editMinuteInp).on('blur', function () {
     let $this = $(this)
-    console.log($this.val().length)
     if ($this.val().length === 1) {
         editMinuteInp.value = '0' + editMinuteInp.value
     }
 })
 $(editSecondInp).bind('input', function () {
     let $this = $(this)
-    console.log($this.next('div input'))
     setTimeout(function () {
-        console.log($this.val().length)
+        // If the length of the hour input is greater or equal to the maxlength attribute of the input, focus the next input
         if ($this.val().length >= parseInt($this.attr('maxlength'), 10)) {
             editMillisecondInp.focus()
             editMillisecondInp.select()
@@ -72,7 +68,6 @@ $(editSecondInp).bind('input', function () {
 })
 $(editSecondInp).on('blur', function () {
     let $this = $(this)
-    console.log($this.val().length)
     if ($this.val().length === 1) {
         editSecondInp.value = '0' + editSecondInp.value
     }
@@ -80,9 +75,8 @@ $(editSecondInp).on('blur', function () {
 
 $(editMillisecondInp).bind('input', function () {
     let $this = $(this)
-    console.log($this.next('div input'))
     setTimeout(function () {
-        console.log($this.val().length)
+        // If the length of the hour input is greater or equal to the maxlength attribute of the input, focus the next input
         if ($this.val().length >= parseInt($this.attr('maxlength'), 10)) {
             document.querySelector('#modalEditDescriptionInput').focus()
         }
@@ -90,7 +84,6 @@ $(editMillisecondInp).bind('input', function () {
 })
 $(editMillisecondInp).on('blur', function () {
     let $this = $(this)
-    console.log($this.val().length)
     if ($this.val().length === 1) {
         editMillisecondInp.value = '0' + editMillisecondInp.value
     }
