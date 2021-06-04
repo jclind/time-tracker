@@ -361,7 +361,18 @@ const forgotPasswordBtn = document.querySelectorAll('.forgot-password-btn')
 // show reset password prompt modal
 forgotPasswordBtn.forEach(el =>
     el.addEventListener('click', () => {
+        // Show forgotPasswordModal and hide login modal
         $('#forgotPasswordEmailPromptModal').modal('show')
+        $('#loginModal').modal('hide')
+
+        // On backToSigninBtn click, forgotPasswordModal is hidden and login modal is shown again
+        const backToSigninBtn = document.querySelector(
+            '#forgotPasswordEmailPromptModal .back-to-signin-btn'
+        )
+        backToSigninBtn.addEventListener('click', () => {
+            $('#loginModal').modal('show')
+            $('#forgotPasswordEmailPromptModal').modal('hide')
+        })
         const resetPasswordBtn = document.querySelector(
             '#forgotPasswordEmailPromptModal .reset-password-btn'
         )
