@@ -56,13 +56,32 @@ const showBackOnlineAlert = () => {
 }
 const showSomethingWentWrongAlert = () => {
     const alert = document.querySelector('#somethingWentWrongAlert')
-
     // To ensure that the interval is not called more than once at a time, first check if the alert is hidden
     if (alert.classList.contains('hide')) {
         alert.classList.remove('hide')
         setTimeout(() => {
             alert.classList.add('hide')
-        }, 6000)
+        }, 3000)
+    }
+}
+const showEmailAlreadyInUseAlert = () => {
+    const alert = document.querySelector('#emailAlreadyInUseAlert')
+    // Add event listener to the login btn to hide signup modal and show login modal
+    document
+        .querySelector('#emailAlreadyInUseAlert .alert-login-btn')
+        .addEventListener('click', () => {
+            $('#loginModal').modal('show')
+            $('#signupModal').modal('hide')
+            alert.classList.add('hide')
+        })
+    // To ensure that the interval is not called more than once at a time, first check if the alert is hidden
+    if (alert.classList.contains('hide')) {
+        alert.classList.remove('hide')
+        setTimeout(() => {
+            if (!alert.classList.contains('hide')) {
+                alert.classList.add('hide')
+            }
+        }, 4000)
     }
 }
 const showPasswordsDontMatchAlert = () => {

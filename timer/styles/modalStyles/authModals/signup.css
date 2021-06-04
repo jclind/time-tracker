@@ -10,11 +10,19 @@
     border-top: 4px solid var(--primary-blue);
     border-bottom: none;
     color: var(--primary-text);
-    padding: 15px 15px 10px 15px !important;
+    padding: 15px 15px 0px 15px !important;
+}
+#signupModal .modal-content .modal-header p {
+    font-size: 12px;
+    color: var(--secondary-text);
+}
+#signupModal .modal-content .modal-header p span {
+    font-size: 12px;
+    color: var(--primary-blue);
 }
 #signupModal .modal-header h4 {
     font-family: var(--title-font-family) !important;
-    font-size: 24px;
+    font-size: 25px;
     line-height: 1.5;
     font-weight: bold;
     text-transform: uppercase;
@@ -39,8 +47,27 @@
     border-radius: 5px;
     padding-left: 35px;
     color: var(--primary-text);
-    background: var(--input-background);
+    background: var(--input-background) !important;
 }
+
+#signupModal .modal-body form input:-webkit-autofill,
+#signupModal .modal-body form input:-webkit-autofill:hover,
+#signupModal .modal-body form input:-webkit-autofill:focus,
+#signupModal .modal-body form textarea:-webkit-autofill,
+#signupModal .modal-body form textarea:-webkit-autofill:hover,
+#signupModal .modal-body form textarea:-webkit-autofill:focus,
+#signupModal .modal-body form select:-webkit-autofill,
+#signupModal .modal-body form select:-webkit-autofill:hover,
+#signupModal .modal-body form select:-webkit-autofill:focus {
+    border: none;
+    -webkit-text-fill-color: var(--primary-text);
+    -webkit-box-shadow: 0 0 0px 1000px var(--input-background) inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+/* #signupModal .modal-body form input:-webkit-autofill,
+#signupModal .modal-body form input:autofill {
+    background: red;
+} */
 #signupModal .modal-body form input::placeholder {
     position: relative !important;
     font-size: 16px;

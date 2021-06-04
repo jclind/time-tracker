@@ -139,6 +139,14 @@
                 <button type="button" class="btn-close btn" data-dismiss="alert" aria-label="Close"><i class="fa fa-times" style="font-size: 16px;"></i></button>
             </div>
         </div>
+        <!-- Email already in use -->
+        <div class="alert alert-danger alert-dismissible fade hide" role="alert" id="emailAlreadyInUseAlert">
+            <div class="container w-100 h-100 d-flex justify-content-around">
+                <span><strong>Error!</strong> Email is already in use, <span class="alert-login-btn"><strong style="text-decoration: underline;">login</strong></span>?</span>
+                <button type="button" class="btn-close btn" data-dismiss="alert" aria-label="Close"><i class="fa fa-times" style="font-size: 16px;"></i></button>
+            </div>
+        </div>
+
         <!-- Modals  -->
         <!-- Login Modal -->
         <div
@@ -154,13 +162,14 @@
                 role="document"
             >
                 <div class="modal-content">
-                    <div class="modal-header pt-4">
+                    <div class="modal-header pt-4 d-flex flex-column">
                         <h4
                             class="modal-title text-center w-100"
                             id="loginModalLabel"
                         >
                             Login
                         </h4>
+                        <p class="text-center w-100 mt-1">New to Time Tracker? <span class="signup-btn"><strong style="text-decoration: underline;">Sign Up</strong></span> now!</p>
                     </div>
                     <div class="modal-body p-2">
                         <form action="submit" class="w-100 d-flex flex-column justify-content-center" id="loginForm">
@@ -233,17 +242,17 @@
                 role="document"
             >
                 <div class="modal-content">
-                    <div class="modal-header pt-4">
+                    <div class="modal-header pt-4 d-flex flex-column">
                         <h4
                             class="modal-title text-center w-100"
                             id="signupModalLabel"
                         >
                             Create Account
                         </h4>
-                        </button>
+                        <p class="text-center w-100 mt-1">Already have an account? <span class="have-account-btn"><strong style="text-decoration: underline;">Login</strong></span></p>
                     </div>
                     <div class="modal-body p-2">
-                        <form action="submit" class="w-100 d-flex flex-column justify-content-center" id="signupForm">
+                        <form action="submit" class="w-100 d-flex flex-column justify-content-center mb-4" id="signupForm">
                             <div class="name w-100 d-flex justify-content-center position-relative mb-4 mt-2">
                                 <div class="login-icon position-absolute d-flex align-items-center">
                                     <i class="fa fa-user"></i>
@@ -263,7 +272,6 @@
                                 <input type="password" placeholder="Password" name="password" class="py-3" id="signupPassword" required>
                             </div>
                             <button type="submit" class="login-btn btn mt-4">Sign Up</button>
-                            <button type="buttom" class="have-account-btn btn my-2 d-block">Already Have An Account?</button>
                         </form>
                     </div>
                 </div>

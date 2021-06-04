@@ -229,21 +229,61 @@ signupForm.addEventListener('submit', e => {
     const email = signupForm['signupEmail'].value
     const password = signupForm['signupPassword'].value
 
+    const modal = document.querySelector('#signupModal')
     // Sign user up
     auth.createUserWithEmailAndPassword(email, password)
         .then(cred => {
             console.log('signed up')
-            return db.collection('users').doc(cred.user.uid).set({
-                name: name,
-                timesInfoList: [],
-                timeTags: timeTags,
+            return db
+                .collection('users')
+                .doc(cred.user.uid)
+                .set({
+                    name: name,
+                    timesInfoList: [],
+                    timeTags: timeTags,
+                })
+                .then(() => {
+                    $(modal).modal('hide')
+                    signupForm.reset()
+                })
+        })
+        .catch(err => {
+            const emailInp = document.querySelector('#signupEmail')
+            const passwordInp = document.querySelector('#signupPassword')
+
+            if (err.code === 'auth/network-request-failed') {
+                showNetworkProblemsAlert()
+            } else if (err.code === 'auth/email-already-in-use') {
+                emailInp.style.border = '2px solid #dc3545'
+                emailInp.addEventListener('keypress', function () {
+                    this.style.border = 'none'
+                })
+                showEmailAlreadyInUseAlert()
+            } else if (err.code === 'auth/weak-password') {
+                passwordInp.style.border = '2px solid #dc3545'
+                passwordInp.addEventListener('keypress', function () {
+                    this.style.border = 'none'
+                })
+                showPasswordNotLongEnoughAlert()
+            } else {
+                showSomethingWentWrongAlert()
+                console.log(err)
+            }
+            $(modal).on('hidden.bs.modal', function () {
+                emailInp.style.border = 'none'
+                passwordInp.style.border = 'none'
             })
         })
-        .then(() => {
-            const modal = document.querySelector('#signupModal')
-            $(modal).modal('hide')
-            signupForm.reset()
-        })
+})
+const alreadyHaveAccountBtn = document.querySelector(
+    '#signupModal .have-account-btn'
+)
+alreadyHaveAccountBtn.addEventListener('click', () => {
+    $('#loginModal').modal('show')
+    $('#signupModal').modal('hide')
+})
+$('#signupModal').on('hidden.bs.modal', function () {
+    signupForm.reset()
 })
 
 // Login method
@@ -288,6 +328,14 @@ loginForm.addEventListener('submit', e => {
                 passwordInp.style.border = 'none'
             })
         })
+})
+const loginNewSignUpBtn = document.querySelector('#loginModal .signup-btn')
+loginNewSignUpBtn.addEventListener('click', () => {
+    $('#signupModal').modal('show')
+    $('#loginModal').modal('hide')
+})
+$('#loginModal').on('hidden.bs.modal', function () {
+    loginForm.reset()
 })
 
 // Logout method

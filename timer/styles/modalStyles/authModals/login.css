@@ -11,11 +11,19 @@
     border-top: 4px solid var(--primary-blue);
     border-bottom: none;
     color: var(--primary-text);
-    padding: 15px 15px 10px 15px !important;
+    padding: 15px 15px 0px 15px !important;
+}
+#loginModal .modal-content .modal-header p {
+    font-size: 12px;
+    color: var(--secondary-text);
+}
+#loginModal .modal-content .modal-header p span {
+    font-size: 12px;
+    color: var(--primary-blue);
 }
 #loginModal .modal-header h4 {
     font-family: var(--title-font-family) !important;
-    font-size: 24px;
+    font-size: 25px;
     line-height: 1.5;
     font-weight: bold;
     text-transform: uppercase;
