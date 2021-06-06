@@ -45,25 +45,28 @@ createTagBtn.addEventListener('click', () => {
     let isErr = false
 
     if (createNewTagTitleInput.value.trim() === '') {
-        createTagInputError.innerText = 'Please Enter Valid Name.'
-
-        isErr = true
+        showTagNameMustNotBeEmptyAlert()
+        createNewTagTitleInput.style.border = '2px solid #dc3545'
+        createNewTagTitleInput.addEventListener('keypress', function () {
+            this.style.border = 'none'
+        })
     } else if (
         timeTags.find(el => el.name === createNewTagTitleInput.value.trim()) !=
         undefined
     ) {
-        createTagInputError.innerText = 'Tag Name Already In Use.'
-
-        isErr = true
-    }
-
-    if (selectedColor === undefined) {
+        showTagNameAlreadyTakenAlert()
+        createNewTagTitleInput.style.border = '2px solid #dc3545'
+        createNewTagTitleInput.addEventListener('keypress', function () {
+            this.style.border = 'none'
+        })
+    } else if (createNewTagTitleInput.value.length > 25) {
+        createNewTagTitleInput.style.border = '2px solid #dc3545'
+        createNewTagTitleInput.addEventListener('keypress', function () {
+            this.style.border = 'none'
+        })
+    } else if (selectedColor === undefined) {
         createTagColorSelectError.innerText = 'Please Select A Tag Color'
-
-        isErr = true
-    }
-
-    if (!isErr) {
+    } else {
         const newTag = {
             name: createNewTagTitleInput.value,
             color: selectedColor,

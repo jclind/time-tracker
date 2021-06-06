@@ -26,19 +26,13 @@ body {
     border-radius: 3px;
 }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-textarea:-webkit-autofill,
-textarea:-webkit-autofill:hover,
-textarea:-webkit-autofill:focus,
-select:-webkit-autofill,
-select:-webkit-autofill:hover,
-select:-webkit-autofill:focus {
-    border: 1px solid green;
-    -webkit-text-fill-color: green;
-    -webkit-box-shadow: 0 0 0px 1000px #000 inset;
-    transition: background-color 5000s ease-in-out 0s;
+.alerts-container {
+    z-index: 100 !important;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
 }
 
 /* Alerts */
@@ -53,13 +47,17 @@ select:-webkit-autofill:focus {
 #userNotFoundAlert,
 #networkProblemsAlert,
 #somethingWentWrongAlert,
-#emailAlreadyInUseAlert {
-    position: fixed;
+#emailAlreadyInUseAlert,
+#tagNameMustNotBeEmptyAlert,
+#tagNameAlreadyTakenAlert,
+#functionalAlert {
     right: 0px;
     left: 0px;
     bottom: 0px;
     padding: 10px 0px;
+    margin-bottom: 5px !important;
     font-size: 16px;
+    width: 100%;
     opacity: 1;
     z-index: 10000 !important;
 }
