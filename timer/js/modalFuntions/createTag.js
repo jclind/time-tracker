@@ -62,7 +62,7 @@ createTagBtn.addEventListener('click', () => {
         createNewTagTitleInput.addEventListener('keypress', function () {
             this.style.border = 'none'
         })
-        showAlert('danger', 'Tag name must be less than 25 characters')
+        showAlert('danger', 'Tag name must be less than 26 characters')
     } else if (selectedColor === undefined) {
         createNewTagColorInput.style.border = '2px solid #dc3545'
         createNewTagColorInput.addEventListener('click', function () {

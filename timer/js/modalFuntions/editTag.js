@@ -40,12 +40,25 @@ const editTagModal = (event, tagKey) => {
         $('#editTagModal').modal('hide')
     }
     function editTag() {
-        if (tagEl.name !== nameInput.value || tagEl.color !== selectedColor) {
-            tagEl.name = nameInput.value
-            tagEl.color = selectedColor
-            console.log(timeTags)
-            updateModalTagList(timeTags)
-            saveUserData()
+        if (nameInput.value.trim() === '') {
+            showAlert('danger', 'Tag name cannot be empty.')
+        } else if (nameInput.value.trim().length > 25) {
+            showAlert(
+                'danger',
+                'Tag name must be less than 26 characters long.'
+            )
+        } else if (timeTags.find(el => el.name === nameInput.value.trim())) {
+            showAlert('danger', 'Tag name already exists.')
+        } else {
+            if (
+                tagEl.name !== nameInput.value ||
+                tagEl.color !== selectedColor
+            ) {
+                tagEl.name = nameInput.value.trim()
+                tagEl.color = selectedColor
+                updateModalTagList(timeTags)
+                saveUserData()
+            }
             showAlert('success', 'Your changes have been saved.')
             // Clost Modal
             $('#editTagModal').modal('hide')

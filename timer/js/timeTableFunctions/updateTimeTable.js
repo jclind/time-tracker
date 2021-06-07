@@ -15,40 +15,38 @@ const updateTimeTable = timesArray => {
                 finishTime = new Date(el.finishTime),
                 description = el.description,
                 key = el.key
-            let modName =
-                name.length >= 30 ? name.substring(0, 27).trim() + '...' : name
 
             timeTableAccordian.innerHTML += `
-                <div class="card time-item mb-3">
+                <div class="card time-item mb-4">
                     <div
                         class="card-header time-item-header d-flex justify-content-between align-items-center position-relative"
                     >
                         <div class="d-flex flex-column mb-3">
-                            <div class="time-title ml-4">
-                                ${modName}
+                            <div class="time-title">
+                                ${name}
                             </div>
                             <div
-                                class="time-container d-flex justify-content-around align-items-center mr-3 mb-1"
+                                class="time-container d-flex flex-grow-1 justify-content-around align-items-center mr-3 mb-1"
                             >
-                                <div class="time-text mx-4">${formatTime(
-                                    time
-                                )}</div>
+                                <div class="time-text">${formatTime(time)}</div>
                                 <div
                                     class="tag-icon d-flex align-items-center px-2"
                                     style="background: ${tag.color}"
                                 >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="12"
-                                        height="12"
-                                        fill="currentColor"
-                                        class="bi bi-tag-fill"
-                                        viewBox="0 0 16 16"
-                                    >
-                                        <path
-                                            d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
-                                        />
-                                    </svg>
+                                    <div>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="12"
+                                            height="12"
+                                            fill="currentColor"
+                                            class="bi bi-tag-fill"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path
+                                                d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+                                            />
+                                        </svg>
+                                    </div>
                                     <span class="ml-1 tag-text">${
                                         tag.name
                                     }</span>

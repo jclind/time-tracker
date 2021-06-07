@@ -37,21 +37,29 @@
     padding: 0 !important;
 }
 .time-item-header .time-title {
+    max-width: 500px;
+    width: 100%;
     color: rgb(139, 139, 139);
     font-size: 15px;
-    /* max-width: 60%; */
+    margin-left: 20px !important;
     overflow: hidden;
-    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
 .time-item-header .time-text {
     color: #eeeeee;
     font-family: Courier, monospace;
     font-size: 30px !important;
+    margin: 0px 20px;
     font-weight: bolder;
     letter-spacing: -2px !important;
 }
 
 .time-item-header .tag-icon {
+    max-width: 120px;
+    width: 100%;
     color: white;
     padding: 0;
     margin: 0;
@@ -59,6 +67,14 @@
     padding: 2px;
     border-radius: 5px;
     font-size: 13px;
+}
+.time-item-header .tag-icon .tag-text {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
 
 .item-time-date {
@@ -159,4 +175,52 @@
 #timeItemsContainer .no-times span {
     font-size: 16px;
     color: var(--secondary-text);
+}
+
+@media screen and (max-width: 400px) {
+    .time-item-header .time-text {
+        margin: 0px 10px;
+        font-size: 29px !important;
+    }
+    .time-item-header .time-title {
+        margin-left: 10px !important;
+    }
+    .time-items-container {
+        width: 95vw;
+    }
+}
+@media screen and (max-width: 375px) {
+    .time-item-header .time-text {
+        font-size: 28px !important;
+    }
+    .time-item-header .tag-icon {
+        padding: 2px;
+    }
+    .time-item-header .tag-icon .tag-text {
+        font-size: 11px;
+        font-weight: bold;
+        -webkit-line-clamp: 2;
+    }
+}
+@media screen and (max-width: 350px) {
+    .time-item-header .time-text {
+        margin: 0px 10px 0px 5px;
+        font-size: 27px !important;
+    }
+    .time-item-header .time-title {
+        margin-left: 5px !important;
+    }
+}
+@media screen and (max-width: 330px) {
+    .time-item-header .time-text {
+        font-size: 25px !important;
+    }
+    .item-time-date {
+        font-size: 10px;
+    }
+}
+@media screen and (max-width: 300px) {
+    .time-item-header .time-text {
+        font-size: 22px !important;
+    }
 }
