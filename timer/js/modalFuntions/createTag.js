@@ -1,4 +1,10 @@
 let colorSelectors = document.querySelectorAll('#createTagModal .color')
+
+const createNewTagTitleInput = document.getElementById('createNewTagTitleInput')
+const createNewTagColorInput = document.querySelector(
+    '#createTagModal .color-select-container'
+)
+const createTagBtn = document.getElementById('createNewTagBtn')
 // Add event listeners to each color seleciton circle
 let selectedColor = undefined
 colorSelectors.forEach(el => {
@@ -33,14 +39,6 @@ const clearSelectTagColorCheck = () => {
     })
 }
 
-const createNewTagTitleInput = document.getElementById('createNewTagTitleInput')
-
-const createTagInputError = document.getElementById('createTagInputError')
-const createTagColorSelectError = document.getElementById(
-    'createTagColorSelectError'
-)
-const createTagBtn = document.getElementById('createNewTagBtn')
-
 createTagBtn.addEventListener('click', () => {
     let isErr = false
 
@@ -64,8 +62,13 @@ createTagBtn.addEventListener('click', () => {
         createNewTagTitleInput.addEventListener('keypress', function () {
             this.style.border = 'none'
         })
+        showAlert('danger', 'Tag name must be less than 25 characters')
     } else if (selectedColor === undefined) {
-        createTagColorSelectError.innerText = 'Please Select A Tag Color'
+        createNewTagColorInput.style.border = '2px solid #dc3545'
+        createNewTagColorInput.addEventListener('click', function () {
+            this.style.border = 'none'
+        })
+        showAlert('danger', 'Color must be selected to create tag.')
     } else {
         const newTag = {
             name: createNewTagTitleInput.value,
@@ -75,6 +78,7 @@ createTagBtn.addEventListener('click', () => {
         timeTags.push(newTag)
         selectTag(newTag.key)
         saveUserData()
+        showAlert('success', 'Tag created.')
         $('#createTagModal').modal('hide')
     }
 })
@@ -93,6 +97,8 @@ $('#createTagModal').on('hidden.bs.modal', () => {
     if (!createTagBtn.classList.contains('disabled')) {
         createTagBtn.classList.add('disabled')
     }
+
+    selectedColor = undefined
 
     // Clear error inputs
     createTagInputError.innerText = ''
