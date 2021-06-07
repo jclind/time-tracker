@@ -1,42 +1,67 @@
 // Hide all modals but the login modal
-function showLoginModalFromAlert() {
+function showLoginModalFromAlert(id) {
     $('.modal').modal('hide')
     $('#loginModal').modal('show')
 
     // If the alert is still open, close it
+    $('#' + id).slideUp(300, function () {
+        $('#' + id).remove()
+    })
 }
 // Hide all modals but the signup modal
-function showSignupModalFromAlert() {
+function showSignupModalFromAlert(id) {
     $('.modal').modal('hide')
     $('#signupModal').modal('show')
+
+    // If the alert is still open, close it
+    $('#' + id).slideUp(300, function () {
+        $('#' + id).remove()
+    })
 }
+// Remove alert from the alertContainer from id param
 function removeAlert(id) {
-    console.log(id)
     $('#' + id).slideUp(300, function () {
         $('#' + id).remove()
     })
 }
 
 /**
- * Dynamically adds and removes alerts to the alert container element
- * @param {string} type The type of alert that will be shown on the webpage
+ *
+ * @param {string} type The alert-type which determines the theme of the alert
  * @param {string} message The text that will be displayed as the alert message
  * @param {number} time The amount of time (in milliseconds) that the alert will be shown for
+ * @param {boolean} isLoginBtn Weather or not there should be a login btn in the alert
+ * @param {boolean} isSignupBtn Weather or not there should be a signup btn in the alert
  */
-
-const showAlert = (type, message, isLoginBtn, isSignupBtn, time) => {
+const showAlert = (type, message, time, isLoginBtn, isSignupBtn) => {
     // Reference container where alerts will be added and removed
     const alertContainer = document.querySelector('.alerts-container')
 
     // Get a random unique key for the id of the current alert so that it can later be removed from the html
     let currAlertId = generateKey()
 
+    // If isLoginBtn and isSignupBtn are true, then both buttons will be displayed in the alert
     if (isLoginBtn && isSignupBtn) {
-        message += ` <span class="alert-login-btn" onclick="showLoginModalFromAlert(${currAlertId})">
-            <strong style="text-decoration: underline;">Login</strong>
+        message += ` 
+            <span class="alert-login-btn" onclick="showLoginModalFromAlert('${currAlertId}')">
+                <strong style="text-decoration: underline;">Login</strong>
             </span> 
             or 
-            <span style="text-decoration: underline;" class="signup-alert-btn" onclick="showSignupModalFromAlert(${currAlertId})"><strong>Sign Up</strong></span>.
+            <span style="text-decoration: underline;" class="signup-alert-btn" onclick="showSignupModalFromAlert('${currAlertId}')"><strong>Sign Up</strong></span>.
+        `
+        // If isLoginBtn is true then the login btn will be displayed in the alert
+    } else if (isLoginBtn) {
+        message += ` 
+            <span class="alert-login-btn" onclick="showLoginModalFromAlert('${currAlertId}')">
+                <strong style="text-decoration: underline;">Login</strong>.
+            </span>
+        `
+        // If isSignupBtn is true then the signup btn will be displayed in the alert
+    } else if (isSignupBtn) {
+        message += ` 
+            <span style="text-decoration: underline;" class="signup-alert-btn" onclick="showSignupModalFromAlert('${currAlertId}')">
+                <strong>Sign Up</strong>.
+            </span>
         `
     }
     console.log(currAlertId)
