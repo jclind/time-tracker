@@ -20,7 +20,7 @@ const saveUserData = () => {
                     })
             })
     } else {
-        showLoginToSaveDataAlert()
+        showAlert('warning', 'To save your data,', true, true, 10000)
         isPending = false
     }
 }

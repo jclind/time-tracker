@@ -29,11 +29,11 @@ function removeAlert(id) {
  *
  * @param {string} type The alert-type which determines the theme of the alert
  * @param {string} message The text that will be displayed as the alert message
- * @param {number} time The amount of time (in milliseconds) that the alert will be shown for
  * @param {boolean} isLoginBtn Weather or not there should be a login btn in the alert
  * @param {boolean} isSignupBtn Weather or not there should be a signup btn in the alert
+ * @param {number} time The amount of time (in milliseconds) that the alert will be shown for
  */
-const showAlert = (type, message, time, isLoginBtn, isSignupBtn) => {
+const showAlert = (type, message, isLoginBtn, isSignupBtn, time) => {
     // Reference container where alerts will be added and removed
     const alertContainer = document.querySelector('.alerts-container')
 

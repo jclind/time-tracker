@@ -43,23 +43,28 @@ changePasswordModalBtn.addEventListener('click', () => {
             .then(() => {
                 // If the new passwords do not match
                 if (newPassword.value !== newPasswordVerified.value) {
-                    showPasswordsDontMatchAlert()
                     newPassword.style.border = '2px solid #dc3545'
                     newPasswordVerified.style.border = '2px solid #dc3545'
-                    console.log('Password not matching')
+                    showAlert('danger', "New passwords don't match.")
+
                     // If the current password matches the new password
                 } else if (currentPassword.value === newPassword.value) {
-                    showMatchingCurrentAndNewPasswordsAlert()
                     currentPassword.style.border = '2px solid #dc3545'
                     newPassword.style.border = '2px solid #dc3545'
                     newPasswordVerified.style.border = '2px solid #dc3545'
-                    console.log('Password matches')
+                    showAlert(
+                        'danger',
+                        'New password cannot be the same as your old password.'
+                    )
+
                     // If the new password length is less than 8 characters
                 } else if (newPassword.value.length < 8) {
-                    showPasswordNotLongEnoughAlert()
                     newPassword.style.border = '2px solid #dc3545'
                     newPasswordVerified.style.border = '2px solid #dc3545'
-                    console.log('Password not long enough')
+                    showAlert(
+                        'danger',
+                        'New password must be 8 or more characters long.'
+                    )
                 } else {
                     auth.currentUser
                         .updatePassword(newPassword.value)
@@ -69,7 +74,10 @@ changePasswordModalBtn.addEventListener('click', () => {
                             changePasswordModalForm.classList.add('d-none')
 
                             changePasswordModalForm.reset()
-                            showChangePasswordAlert()
+                            showAlert(
+                                'success',
+                                'Your password has been changed.'
+                            )
                         })
                         .catch(err => {
                             console.log(err)
@@ -77,9 +85,9 @@ changePasswordModalBtn.addEventListener('click', () => {
                 }
             })
             .catch(err => {
-                showIncorrectPasswordAlert()
                 currentPassword.style.border = '2px solid #dc3545'
                 console.log('Password not correct')
+                showAlert('danger', 'Incorrect password.')
             })
     }
 })

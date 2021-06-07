@@ -252,21 +252,30 @@ signupForm.addEventListener('submit', e => {
             const passwordInp = document.querySelector('#signupPassword')
 
             if (err.code === 'auth/network-request-failed') {
-                showNetworkProblemsAlert()
+                showAlert(
+                    'danger',
+                    'You seem to be offline, please refresh and try again.'
+                )
             } else if (err.code === 'auth/email-already-in-use') {
                 emailInp.style.border = '2px solid #dc3545'
                 emailInp.addEventListener('keypress', function () {
                     this.style.border = 'none'
                 })
-                showEmailAlreadyInUseAlert()
+                showAlert('danger', 'Email is already in use,', true)
             } else if (err.code === 'auth/weak-password') {
                 passwordInp.style.border = '2px solid #dc3545'
                 passwordInp.addEventListener('keypress', function () {
                     this.style.border = 'none'
                 })
-                showPasswordNotLongEnoughAlert()
+                showAlert(
+                    'danger',
+                    'Password must be 8 or more characters long.'
+                )
             } else {
-                showSomethingWentWrongAlert()
+                showAlert(
+                    'danger',
+                    'Something went wrong, refresh and try again.'
+                )
                 console.log(err)
             }
             $(modal).on('hidden.bs.modal', function () {
@@ -306,22 +315,28 @@ loginForm.addEventListener('submit', e => {
             const emailInp = document.querySelector('#loginEmail')
             const passwordInp = document.querySelector('#loginPassword')
             if (err.code === 'auth/network-request-failed') {
-                showNetworkProblemsAlert()
+                showAlert(
+                    'danger',
+                    'You seem to be offline, please refresh and try again.'
+                )
             } else if (err.code === 'auth/user-not-found') {
-                showUserNotFoundAlert()
                 emailInp.style.border = '2px solid #dc3545'
                 emailInp.addEventListener('keypress', function () {
                     this.style.border = 'none'
                 })
+                showAlert('danger', 'User not found, try a different email.')
             } else if (err.code === 'auth/wrong-password') {
                 passwordInp.style.border = '2px solid #dc3545'
                 passwordInp.addEventListener('keypress', function () {
                     this.style.border = 'none'
                 })
-                showIncorrectPasswordAlert()
+                showAlert('danger', 'Incorrect Password.')
             } else {
                 console.log('something went wrong')
-                showSomethingWentWrongAlert()
+                showAlert(
+                    'danger',
+                    'Something went wrong, refresh and try again.'
+                )
             }
             $(modal).on('hidden.bs.modal', function () {
                 emailInp.style.border = 'none'

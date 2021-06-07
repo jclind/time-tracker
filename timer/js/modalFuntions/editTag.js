@@ -46,7 +46,7 @@ const editTagModal = (event, tagKey) => {
             console.log(timeTags)
             updateModalTagList(timeTags)
             saveUserData()
-            showChangesSavedAlert()
+            showAlert('success', 'Your changes have been saved.')
             // Clost Modal
             $('#editTagModal').modal('hide')
         }

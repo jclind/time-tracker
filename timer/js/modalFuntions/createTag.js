@@ -45,7 +45,7 @@ createTagBtn.addEventListener('click', () => {
     let isErr = false
 
     if (createNewTagTitleInput.value.trim() === '') {
-        showTagNameMustNotBeEmptyAlert()
+        showAlert('danger', 'Tag name must not be empty')
         createNewTagTitleInput.style.border = '2px solid #dc3545'
         createNewTagTitleInput.addEventListener('keypress', function () {
             this.style.border = 'none'
@@ -54,7 +54,7 @@ createTagBtn.addEventListener('click', () => {
         timeTags.find(el => el.name === createNewTagTitleInput.value.trim()) !=
         undefined
     ) {
-        showTagNameAlreadyTakenAlert()
+        showAlert('danger', 'Tag name is alreaddy in use.')
         createNewTagTitleInput.style.border = '2px solid #dc3545'
         createNewTagTitleInput.addEventListener('keypress', function () {
             this.style.border = 'none'

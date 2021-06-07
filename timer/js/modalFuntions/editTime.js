@@ -64,7 +64,7 @@ const showEditTimeModal = timeKey => {
         if (isChanged) {
             saveUserData()
         }
-        showChangesSavedAlert()
+        showAlert('success', 'Your changes have been saved.')
         $('#submitEditModalBtn').off('click')
     })
 }
