@@ -36,21 +36,7 @@ body {
 }
 
 /* Alerts */
-#changePasswordAlert,
-#incorrectPasswordAlert,
-#passwordsDontMatchAlert,
-#matchingCurrentAndNewPasswordsAlert,
-#passwordNotLongEnoughAlert,
-#loginToSaveDataAlert,
-#dataNotSavedAlert,
-#changesSavedAlert,
-#userNotFoundAlert,
-#networkProblemsAlert,
-#somethingWentWrongAlert,
-#emailAlreadyInUseAlert,
-#tagNameMustNotBeEmptyAlert,
-#tagNameAlreadyTakenAlert,
-#functionalAlert {
+.alerts-container .alert {
     right: 0px;
     left: 0px;
     bottom: 0px;

@@ -1,215 +1,48 @@
 const showAlert = (type, message, time) => {
-    const alert = document.querySelector('#functionalAlert')
-    const alertMessage = alert.querySelector('.message')
-    // Add type of alert class to the alert element
-    alert.classList.add(`alert-${type}`)
+    // Reference container where alerts will be added and removed
+    const alertContainer = document.querySelector('.alerts-container')
 
+    // Get a random unique key for the id of the current alert so that it can later be removed from the html
+    let currAlertId = generateKey()
     if (type == 'success') {
-        alertMessage.innerHTML = `
-            <strong>Success!</strong> ${message}.
+        // Show Success message if type === success
+        alertContainer.innerHTML += `
+        <div class="alert alert-${type} alert-dismissible fade in" role="alert" id="${currAlertId}">
+            <div class="container w-100 h-100 d-flex justify-content-around">
+                <span class="message flex-grow-1"><strong>Success!</strong> ${message}.</span>
+                <button type="button" class="btn-close btn" onclick="() => {$('#' + ${currAlertId}).remove()}"><i class="fa fa-times" style="font-size: 16px;"></i></button>
+            </div>
+        </div>
         `
     } else if (type == 'danger') {
-        alertMessage.innerHTML = `
-            <strong>Error!</strong> ${message}.
+        // Show error message if type === danger
+        alertContainer.innerHTML += `
+        <div class="alert alert-${type} alert-dismissible fade in" role="alert" id="${currAlertId}">
+            <div class="container w-100 h-100 d-flex justify-content-around">
+                <span class="message flex-grow-1"><strong>Error!</strong> ${message}.</span>
+                <button type="button" class="btn-close btn" onclick="() => {$('#' + ${currAlertId}).remove()}"><i class="fa fa-times" style="font-size: 16px;"></i></button>
+            </div>
+        </div>
         `
     } else {
-        alertMessage.innerHTML = `${message}.`
+        // Else just show the message
+        alertContainer.innerHTML += `
+        <div class="alert alert-${type} alert-dismissible fade in" role="alert" id="functionalAlert${idx}">
+                <div class="container w-100 h-100 d-flex justify-content-around">
+                    <span class="message flex-grow-1">${message}.</span>
+                    <button type="button" class="btn-close btn" onclick="() => {$('#' + ${currAlertId}).remove()}"><i class="fa fa-times" style="font-size: 16px;"></i></button>
+                </div>
+            </div>
+    `
     }
 
-    // To ensure that the interval is not called more than once at a time, first check if the alert is hidden
-    if (alert.classList.contains('hide')) {
-        alert.classList.remove('hide')
-        setTimeout(() => {
-            // alert.classList.add('hide')
-            alert.slideUp(500, function () {
-                $(alert).remove()
-            })
-        }, 3000)
+    if (time == null) {
+        time = 3000
     }
-    // $(alert).on('close.bs.alert', function (e) {
-    //     // stop Bootstrap animation
-    //     e.stopPropagation()
 
-    //     // Use my own animation
-    //     $(this).closest('.alert').animate({
-    //         height: 'toggle',
-    //         opacity: 'toggle',
-    //     })
-    // })
+    setTimeout(() => {
+        $('#' + currAlertId).slideUp(300, function () {
+            $('#' + currAlertId).remove()
+        })
+    }, time)
 }
-
-// const showChangePasswordAlert = () => {
-//     const alert = document.querySelector('#changePasswordAlert')
-
-//     // To ensure that the interval is not called more than once at a time, first check if the alert is hidden
-//     if (alert.classList.contains('hide')) {
-//         alert.classList.remove('hide')
-//         setTimeout(() => {
-//             alert.classList.add('hide')
-//         }, 6000)
-//     }
-// }
-
-// const showIncorrectPasswordAlert = () => {
-//     const alert = document.querySelector('#incorrectPasswordAlert')
-
-//     // To ensure that the interval is not called more than once at a time, first check if the alert is hidden
-//     if (alert.classList.contains('hide')) {
-//         alert.classList.remove('hide')
-//         setTimeout(() => {
-//             alert.classList.add('hide')
-//         }, 3000)
-//     }
-// }
-// const showUserNotFoundAlert = () => {
-//     const alert = document.querySelector('#userNotFoundAlert')
-
-//     // To ensure that the interval is not called more than once at a time, first check if the alert is hidden
-//     if (alert.classList.contains('hide')) {
-//         alert.classList.remove('hide')
-//         setTimeout(() => {
-//             alert.classList.add('hide')
-//         }, 3000)
-//     }
-// }
-// const showNetworkProblemsAlert = () => {
-//     const alert = document.querySelector('#networkProblemsAlert')
-
-//     // To ensure that the interval is not called more than once at a time, first check if the alert is hidden
-//     if (alert.classList.contains('hide')) {
-//         alert.classList.remove('hide')
-//         setTimeout(() => {
-//             alert.classList.add('hide')
-//         }, 2000)
-//     }
-// }
-// const showBackOnlineAlert = () => {
-//     const alert = document.querySelector('#backOnlineAlert')
-
-//     // To ensure that the interval is not called more than once at a time, first check if the alert is hidden
-//     if (alert.classList.contains('hide')) {
-//         alert.classList.remove('hide')
-//         setTimeout(() => {
-//             alert.classList.add('hide')
-//         }, 2000)
-//     }
-// }
-// const showSomethingWentWrongAlert = () => {
-//     const alert = document.querySelector('#somethingWentWrongAlert')
-//     // To ensure that the interval is not called more than once at a time, first check if the alert is hidden
-//     if (alert.classList.contains('hide')) {
-//         alert.classList.remove('hide')
-//         setTimeout(() => {
-//             alert.classList.add('hide')
-//         }, 3000)
-//     }
-// }
-// const showTagNameMustNotBeEmptyAlert = () => {
-//     const alert = document.querySelector('#tagNameMustNotBeEmptyAlert')
-//     // To ensure that the interval is not called more than once at a time, first check if the alert is hidden
-//     if (alert.classList.contains('hide')) {
-//         alert.classList.remove('hide')
-//         setTimeout(() => {
-//             alert.classList.add('hide')
-//         }, 3000)
-//     }
-// }
-// const showTagNameAlreadyTakenAlert = () => {
-//     const alert = document.querySelector('#tagNameAlreadyTakenAlert')
-//     // To ensure that the interval is not called more than once at a time, first check if the alert is hidden
-//     if (alert.classList.contains('hide')) {
-//         alert.classList.remove('hide')
-//         setTimeout(() => {
-//             alert.classList.add('hide')
-//         }, 3000)
-//     }
-// }
-// const showEmailAlreadyInUseAlert = () => {
-//     const alert = document.querySelector('#emailAlreadyInUseAlert')
-//     // Add event listener to the login btn to hide signup modal and show login modal
-//     document
-//         .querySelector('#emailAlreadyInUseAlert .alert-login-btn')
-//         .addEventListener('click', () => {
-//             $('#loginModal').modal('show')
-//             $('#signupModal').modal('hide')
-//             alert.classList.add('hide')
-//         })
-//     // To ensure that the interval is not called more than once at a time, first check if the alert is hidden
-//     if (alert.classList.contains('hide')) {
-//         alert.classList.remove('hide')
-//         setTimeout(() => {
-//             if (!alert.classList.contains('hide')) {
-//                 alert.classList.add('hide')
-//             }
-//         }, 4000)
-//     }
-// }
-// const showPasswordsDontMatchAlert = () => {
-//     const alert = document.querySelector('#passwordsDontMatchAlert')
-
-//     // To ensure that the interval is not called more than once at a time, first check if the alert is hidden
-//     if (alert.classList.contains('hide')) {
-//         alert.classList.remove('hide')
-//         setTimeout(() => {
-//             alert.classList.add('hide')
-//         }, 6000)
-//     }
-// }
-// const showMatchingCurrentAndNewPasswordsAlert = () => {
-//     const alert = document.querySelector('#matchingCurrentAndNewPasswordsAlert')
-
-//     // To ensure that the interval is not called more than once at a time, first check if the alert is hidden
-//     if (alert.classList.contains('hide')) {
-//         alert.classList.remove('hide')
-//         setTimeout(() => {
-//             alert.classList.add('hide')
-//         }, 6000)
-//     }
-// }
-// const showPasswordNotLongEnoughAlert = () => {
-//     const alert = document.querySelector('#passwordNotLongEnoughAlert')
-
-//     // To ensure that the interval is not called more than once at a time, first check if the alert is hidden
-//     if (alert.classList.contains('hide')) {
-//         alert.classList.remove('hide')
-//         setTimeout(() => {
-//             alert.classList.add('hide')
-//         }, 6000)
-//     }
-// }
-// const showChangesSavedAlert = () => {
-//     const alert = document.querySelector('#changesSavedAlert')
-
-//     // To ensure that the interval is not called more than once at a time, first check if the alert is hidden
-//     if (alert.classList.contains('hide')) {
-//         alert.classList.remove('hide')
-//         setTimeout(() => {
-//             alert.classList.add('hide')
-//         }, 3000)
-//     }
-// }
-
-// const loginAlertBtn = document.querySelector(
-//     '#loginToSaveDataAlert .login-alert-btn'
-// )
-// loginAlertBtn.addEventListener('click', () => {
-//     $('#loginModal').modal('show')
-// })
-// const signupAlertBtn = document.querySelector(
-//     '#loginToSaveDataAlert .signup-alert-btn'
-// )
-// signupAlertBtn.addEventListener('click', () => {
-//     $('#signupModal').modal('show')
-// })
-// const showLoginToSaveDataAlert = () => {
-//     const alert = document.querySelector('#loginToSaveDataAlert')
-
-//     // To ensure that the interval is not called more than once at a time, first check if the alert is hidden
-//     if (alert.classList.contains('hide')) {
-//         alert.classList.remove('hide')
-//         console.log('yooo3')
-//         setTimeout(() => {
-//             alert.classList.add('hide')
-//         }, 15000)
-//     }
-// }
