@@ -17,7 +17,7 @@ const updateTimeTable = timesArray => {
                 key = el.key
 
             timeTableAccordian.innerHTML += `
-                <div class="card time-item mb-4">
+                <div class="card time-item mb-3">
                     <div
                         class="card-header time-item-header d-flex justify-content-between align-items-center position-relative"
                     >
@@ -106,20 +106,20 @@ const updateTimeTable = timesArray => {
                         data-parent="#timeTableAccordian"
                     >
                         <div class="card-body inner-time-item">
-                            <div class="time-title text-center my-2">
-                                <h1 class="d-inline" onclick="editTimeTitleFromTable('${key}')" contenteditable="true">
+                            <div class="time-title d-flex justify-content-center my-2">
+                                <h1 class="text-center" onclick="editTimeTitleFromTable('${key}')" contenteditable="true">
                                     ${name}
                                 </h1>
                             </div>
                             <div class="underline"></div>
                             <div
-                                class="time-stats-container container d-flex justify-content-around flex-row mt-3"
+                                class="time-stats-container container d-flex justify-content-around mb-4 mt-5 p-0"
                             >
-                                <div class="mx-5 time-stat">
+                                <div class="time-stat">
                                     <label class="p-0 m-0">Date:</label>
                                     <div>${date.getMonth()}/${date.getDate()}/${date.getFullYear()}</div>
                                 </div>
-                                <div class="mx-5 time-stat">
+                                <div class="time-stat">
                                     <label class="p-0 m-0"
                                         >Time Segment:</label
                                     >
