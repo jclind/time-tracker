@@ -3,7 +3,6 @@ body.modal-open {
 }
 
 #timerComponent {
-    height: 70vh;
     min-height: 600px;
 }
 
