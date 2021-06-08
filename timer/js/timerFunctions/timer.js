@@ -16,7 +16,6 @@ let currFinishedTime = null
 
 // Control functionality and loop of the timer element
 const startStop = isRunning => {
-    console.trace()
     // Get time element that holds the actual counting time
     let timeEl = document.getElementById('time')
 
@@ -128,3 +127,17 @@ const formatTime = time => {
         )
     }
 }
+
+document.addEventListener('keypress', function (event) {
+    if (event.keyCode == 32) {
+        if (
+            !$('input').is(':focus') &&
+            !$('textarea').is(':focus') &&
+            document.activeElement == document.body
+        ) {
+            event.preventDefault()
+            startStop(!timerIsRunning)
+            console.log('here')
+        }
+    }
+})

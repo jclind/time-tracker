@@ -27,12 +27,11 @@ const deleteTag = (event, tagKey) => {
             updateModalTagList(timeTags)
             saveUserData()
             showAlert('success', 'Tag has been deleted.')
-
-            // Close modal
-            $('#deleteTagPromptModal').modal('hide')
         } else {
             showAlert('danger', 'Must have at least one tag.')
         }
+        // Close modal
+        $('#deleteTagPromptModal').modal('hide')
     }
     function closeModal() {
         // Close modal
@@ -54,7 +53,7 @@ const deleteTag = (event, tagKey) => {
     // When Modal Closes
     $('#deleteTagPromptModal').on('hidden.bs.modal', () => {
         // Remove Event Listeners from cancel and delete buttons
-        deleteBtn.removeEventListener('click', deleteTag)
+        deleteBtn.removeEventListener('click', removeTag)
         cancelBtn.removeEventListener('click', closeModal)
     })
 }
