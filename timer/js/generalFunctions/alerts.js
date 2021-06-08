@@ -88,7 +88,7 @@ const showAlert = (type, message, isLoginBtn, isSignupBtn, time) => {
     } else {
         // Else just show the message
         alertContainer.innerHTML += `
-        <div class="alert alert-${type} alert-dismissible fade in" role="alert" id="functionalAlert${idx}">
+        <div class="alert alert-${type} alert-dismissible fade in" role="alert" id="${currAlertId}">
                 <div class="container w-100 h-100 d-flex justify-content-around">
                     <span class="message flex-grow-1">${message}</span>
                     <button type="button" class="btn-close btn" onclick="removeAlert('${currAlertId}')"><i class="fa fa-times" style="font-size: 16px;"></i></button>

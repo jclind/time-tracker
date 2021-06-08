@@ -78,9 +78,16 @@ createTagBtn.addEventListener('click', () => {
         timeTags.push(newTag)
         selectTag(newTag.key)
         saveUserData()
-        showAlert('success', 'Tag created.')
         $('#createTagModal').modal('hide')
+        showAlert('success', 'Tag created.')
     }
+})
+
+const createTagModalCancelBtn = document.querySelector(
+    '#createTagModal .cancel-btn'
+)
+createTagModalCancelBtn.addEventListener('click', () => {
+    $('#createTagModal').modal('hide')
 })
 
 // When Modal Opens

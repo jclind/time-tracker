@@ -1,6 +1,6 @@
 #editTimeModal .modal-content {
-    max-width: 350px;
-    width: 95%;
+    max-width: 400px;
+    width: 98%;
     background: #393e46;
     color: var(--primary-text);
 }

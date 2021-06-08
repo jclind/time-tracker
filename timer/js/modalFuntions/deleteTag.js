@@ -4,31 +4,35 @@ const deleteTag = (event, tagKey) => {
     // Show deleteTagPrompt modal
     $('#deleteTagPromptModal').modal('show')
 
-    console.log(timeTags.find(el => el.key === tagKey))
+    function removeTag() {
+        // If there's more than one tag, then it will be deleted
+        // If there is only one tag, prevent user from deleting it
+        if (timeTags.length > 1) {
+            // Get the active tag key from the activeTagBtn element dataset
+            const activeTagKey = activeTagBtn.dataset.tagKey
+            // Remove given tag from timeTags array
+            let tagIdx = timeTags.findIndex(el => el.key === tagKey)
+            let selectedTagKey = activeTagBtn.dataset.tagKey
+            timeTags.splice(tagIdx, 1)
 
-    function deleteTag() {
-        // Get the active tag key from the activeTagBtn element dataset
-        const activeTagKey = activeTagBtn.dataset.tagKey
-        // Remove given tag from timeTags array
-        let tagIdx = timeTags.findIndex(el => el.key === tagKey)
-        let selectedTagKey = activeTagBtn.dataset.tagKey
-        timeTags.splice(tagIdx, 1)
-
-        if (activeTagKey === selectedTagKey) {
-            console.log('In if statement')
-            selectActiveTag(timeTags[0].key)
-        }
-        // Search through timesInfoList for any times with selected tag to be deleted and replace them with the first tag in the tag list
-        timesInfoList.forEach((el, index) => {
-            if (el.tagKey === tagKey) {
-                timesInfoList[index].tagKey = timeTags[0].key
+            if (activeTagKey === selectedTagKey) {
+                selectActiveTag(timeTags[0].key)
             }
-        })
-        updateModalTagList(timeTags)
-        saveUserData()
+            // Search through timesInfoList for any times with selected tag to be deleted and replace them with the first tag in the tag list
+            timesInfoList.forEach((el, index) => {
+                if (el.tagKey === tagKey) {
+                    timesInfoList[index].tagKey = timeTags[0].key
+                }
+            })
+            updateModalTagList(timeTags)
+            saveUserData()
+            showAlert('success', 'Tag has been deleted.')
 
-        // Close modal
-        $('#deleteTagPromptModal').modal('hide')
+            // Close modal
+            $('#deleteTagPromptModal').modal('hide')
+        } else {
+            showAlert('danger', 'Must have at least one tag.')
+        }
     }
     function closeModal() {
         // Close modal
@@ -44,7 +48,7 @@ const deleteTag = (event, tagKey) => {
     const cancelBtn = document.querySelector(
         '#deleteTagPromptModal .cancel-btn'
     )
-    deleteBtn.addEventListener('click', deleteTag)
+    deleteBtn.addEventListener('click', removeTag)
     cancelBtn.addEventListener('click', closeModal)
 
     // When Modal Closes

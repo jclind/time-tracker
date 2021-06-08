@@ -229,6 +229,6 @@ $('#tagListModal').on('hidden.bs.modal', () => {
     tagListModalSearchInput.value = ''
 })
 // Remove Touch Scrolling functionality from modal element.
-document.querySelector('#tagListModal').ontouchmove = function (event) {
-    event.preventDefault()
-}
+// document.querySelector('#tagListModal').ontouchmove = function (event) {
+//     event.preventDefault()
+// }

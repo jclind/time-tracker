@@ -1,5 +1,5 @@
 #tagListModal .modal-content {
-    max-width: 350px;
+    max-width: 400px;
     width: 95%;
     max-height: 80vh;
     overflow-y: scroll;
@@ -9,9 +9,13 @@
         var(--secondary-background-color)
     );
     color: var(--primary-text);
-    padding: 5px;
 }
-
+#tagListModal .modal-header {
+    border-top: 4px solid var(--primary-blue);
+}
+#tagListModal .modal-body {
+    padding: 15px;
+}
 #tagListModal .modal-content .modal-title {
     font-weight: bold;
 }
