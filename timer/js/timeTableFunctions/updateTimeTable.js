@@ -7,6 +7,7 @@ const updateTimeTable = timesArray => {
         timeTableAccordian.innerHTML = ''
         filteredArr.forEach(el => {
             let time = el.time,
+                formatedTime = formatTime(time),
                 name = el.name,
                 date = new Date(el.date),
                 tagKey = el.tagKey,
@@ -16,21 +17,31 @@ const updateTimeTable = timesArray => {
                 description = el.description,
                 key = el.key
 
+            let msIndex = formatedTime.indexOf('.')
+            if (msIndex >= 0) {
+                formatedTime =
+                    formatedTime.slice(0, msIndex) +
+                    '<span style="color: rgb(167, 167, 167)">' +
+                    formatedTime.slice(msIndex) +
+                    '</span>'
+            }
+            console.log(formatedTime.indexOf('.'))
             timeTableAccordian.innerHTML += `
                 <div class="card time-item mb-3">
                     <div
                         class="card-header time-item-header d-flex justify-content-between align-items-center position-relative"
                     >
-                        <div class="d-flex flex-column mb-3">
+                        <div class="d-flex flex-column mb-3 time-title-value-container">
                             <div class="time-title">
                                 ${name}
                             </div>
                             <div
-                                class="time-container d-flex flex-grow-1 justify-content-around align-items-center mr-3 mb-1"
+                                class="time-container d-flex flex-grow-1 justify-content-start align-items-center mr-3 mb-1"
                             >
-                                <div class="time-text">${formatTime(time)}</div>
+                                <div class="time-text">${formatedTime}</div>
                                 <div
-                                    class="tag-icon d-flex align-items-center px-2"
+                                    class="tag-icon d-flex align-items-center pr-2"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="HERE"
                                     style="background: ${tag.color}"
                                 >
                                     <div>
@@ -53,7 +64,7 @@ const updateTimeTable = timesArray => {
                                 </div>
                             </div>
                         </div>
-                        <div class="item-time-date px-2">
+                        <div class="item-time-date pl-2">
                             <span class="date">${formatTimeItemDate(
                                 date
                             )}</span><br />
