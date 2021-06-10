@@ -40,6 +40,12 @@ $(editHourInp).bind('input', function () {
         }
     }, 0)
 })
+$(editHourInp).on('blur', function () {
+    let $this = $(this)
+    if ($this.val().length === 1) {
+        editHourInp.value = '0' + editHourInp.value
+    }
+})
 $(editMinuteInp).bind('input', function () {
     let $this = $(this)
     setTimeout(function () {

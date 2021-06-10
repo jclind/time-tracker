@@ -38,11 +38,11 @@
 }
 .time-item-header .time-title {
     max-width: 500px;
-    width: 90%;
+    width: auto;
     color: rgb(139, 139, 139);
     font-size: 15px;
-    margin-left: 20px !important;
-    margin-bottom: 5px;
+    margin-left: 15px !important;
+    margin-top: 10px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -53,29 +53,37 @@
     color: #eeeeee;
     font-family: Courier, monospace;
     font-size: 30px !important;
-    margin: 0px 20px;
+    margin: 0px 15px;
     font-weight: bolder;
     letter-spacing: -2px !important;
 }
+.time-item-header .time-text span {
+    color: inherit;
+    font-family: inherit;
+    font-size: 22px;
+    font-weight: inherit;
+    letter-spacing: inherit;
+}
 
 .time-item-header .tag-icon {
-    max-width: 120px;
-    width: 100%;
+    max-width: 110px;
+    width: auto;
     color: white;
     padding: 0;
     margin: 0;
     height: fit-content;
-    padding: 2px;
+    padding: 2px 0px 2px 2px;
     border-radius: 5px;
     font-size: 13px;
 }
 .time-item-header .tag-icon .tag-text {
-    width: 100%;
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
+}
+
+.time-item-header .time-title-value-container {
+    width: 70%;
 }
 
 .item-time-date {
@@ -190,22 +198,28 @@
     }
     .time-item-header .time-title {
         margin-left: 10px !important;
+        margin-top: 10px;
+        margin-bottom: 0px;
     }
     .time-items-container {
         width: 95vw;
     }
 }
 @media screen and (max-width: 375px) {
+    .time-item-header .time-title {
+        margin-top: 10px;
+        margin-bottom: 0px;
+    }
     .time-item-header .time-text {
         font-size: 28px !important;
     }
     .time-item-header .tag-icon {
+        max-width: 100px;
         padding: 2px;
     }
     .time-item-header .tag-icon .tag-text {
         font-size: 11px;
         font-weight: bold;
-        -webkit-line-clamp: 2;
     }
 }
 @media screen and (max-width: 350px) {
@@ -215,6 +229,8 @@
     }
     .time-item-header .time-title {
         margin-left: 5px !important;
+        margin-top: 5px;
+        margin-bottom: 5px;
     }
 }
 @media screen and (max-width: 330px) {
