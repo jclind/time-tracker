@@ -1,9 +1,14 @@
-#editTimeModal .modal-content {
+#editTimeModal .modal-dialog {
     max-width: 400px;
-    width: 98%;
-    background: #393e46;
-    color: var(--primary-text);
+    width: 95%;
+    overflow-y: scroll;
 }
+#editTimeModal .modal-content {
+    color: var(--primary-text);
+    background: var(--secondary-background-color);
+    border-radius: 5px;
+}
+
 #editTimeModal .modal-content .modal-title {
     font-weight: bold;
 }

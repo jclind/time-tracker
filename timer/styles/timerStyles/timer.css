@@ -22,6 +22,12 @@ body.modal-open {
     border-radius: 5px;
 }
 
+@media screen and (min-width: 1200px) {
+    #timerComponent .timer {
+        padding-top: 20px;
+        font-size: 85px;
+    }
+}
 @media screen and (max-width: 360px) {
     #timerComponent .timer {
         font-size: 65px;

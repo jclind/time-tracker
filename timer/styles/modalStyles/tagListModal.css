@@ -1,15 +1,13 @@
-#tagListModal .modal-content {
+#tagListModal .modal-dialog {
     max-width: 400px;
     width: 95%;
-    max-height: 80vh;
-    overflow-y: scroll;
-    background: linear-gradient(
-        45deg,
-        #323d50,
-        var(--secondary-background-color)
-    );
-    color: var(--primary-text);
 }
+#tagListModal .modal-content {
+    color: var(--primary-text);
+    background: var(--secondary-background-color);
+    border-radius: 5px;
+}
+
 #tagListModal .modal-header {
     border-top: 4px solid var(--primary-blue);
 }

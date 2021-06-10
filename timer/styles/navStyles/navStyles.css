@@ -14,18 +14,22 @@ nav .logo {
 nav .logo h4 {
     font-weight: bold;
     font-size: 20px;
+    padding: 0;
+    margin: 0;
 }
 nav .nav-links {
     width: 25%;
-    margin-left: 100px;
+    flex-direction: row;
+    justify-content: space-around;
 }
 nav .nav-links li {
     list-style: none;
+    margin: 0px 15px;
 }
 nav .nav-links span {
     color: var(--secondary-text);
     letter-spacing: 2px;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 nav .burger {
@@ -50,7 +54,7 @@ nav .burger div {
         width: 50%;
     }
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 570px) {
     body,
     html {
         position: relative;
@@ -70,6 +74,8 @@ nav .burger div {
         padding: 0;
         transform: translateX(100%);
         transition: transform 0.3s ease-in;
+        flex-direction: column;
+        justify-content: start;
     }
     nav .nav-links li {
         opacity: 0;

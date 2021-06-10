@@ -14,6 +14,12 @@ let timerIsRunning = false
 let currStartingTime = null
 let currFinishedTime = null
 
+if (window.innerWidth >= 600) {
+    stopwatchEl.innerText = '0:00:00.00'
+} else {
+    stopwatchEl.innerText = '00:00.00'
+}
+
 // Control functionality and loop of the timer element
 const startStop = isRunning => {
     // Get time element that holds the actual counting time
@@ -109,8 +115,11 @@ const timeObjToMSFormat = timeObj => {
 // Format milliseconds into a standard timer format time
 const formatTime = time => {
     let [hours, minutes, seconds, milliseconds] = msToTimeObjFormat(time)
-    if (hours == 0) {
+
+    if (window.innerWidth >= 600) {
         return (
+            hours +
+            ':' +
             (minutes < 10 ? '0' + minutes : minutes) +
             ':' +
             (seconds < 10 ? '0' + seconds : seconds) +
@@ -118,15 +127,33 @@ const formatTime = time => {
             (milliseconds < 10 ? '0' + milliseconds : milliseconds)
         )
     } else {
-        return (
-            hours +
-            ':' +
-            (minutes < 10 ? '0' + minutes : minutes) +
-            ':' +
-            (seconds < 10 ? '0' + seconds : seconds)
-        )
+        if (hours == 0) {
+            return (
+                (minutes < 10 ? '0' + minutes : minutes) +
+                ':' +
+                (seconds < 10 ? '0' + seconds : seconds) +
+                '.' +
+                (milliseconds < 10 ? '0' + milliseconds : milliseconds)
+            )
+        } else {
+            return (
+                hours +
+                ':' +
+                (minutes < 10 ? '0' + minutes : minutes) +
+                ':' +
+                (seconds < 10 ? '0' + seconds : seconds)
+            )
+        }
     }
 }
+window.addEventListener('resize', function () {
+    updateTimeTable(timesInfoList)
+    if (window.innerWidth >= 600) {
+        stopwatchEl.innerText = '0:00:00.00'
+    } else {
+        stopwatchEl.innerText = '00:00.00'
+    }
+})
 
 document.addEventListener('keypress', function (event) {
     if (event.keyCode == 32) {

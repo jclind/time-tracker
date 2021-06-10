@@ -16,7 +16,7 @@ const updateTimeTable = timesArray => {
                 finishTime = new Date(el.finishTime),
                 description = el.description,
                 key = el.key
-
+            console.log('i')
             let msIndex = formatedTime.indexOf('.')
             if (msIndex >= 0) {
                 formatedTime =
@@ -25,7 +25,6 @@ const updateTimeTable = timesArray => {
                     formatedTime.slice(msIndex) +
                     '</span>'
             }
-            console.log(formatedTime.indexOf('.'))
             timeTableAccordian.innerHTML += `
                 <div class="card time-item mb-3">
                     <div
@@ -64,7 +63,7 @@ const updateTimeTable = timesArray => {
                                 </div>
                             </div>
                         </div>
-                        <div class="item-time-date pl-2">
+                        <div class="item-time-date">
                             <span class="date">${formatTimeItemDate(
                                 date
                             )}</span><br />

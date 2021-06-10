@@ -1,5 +1,5 @@
 .gradient-divider {
-    width: 100%;
+    width: 100vw;
     height: 120px;
     background: linear-gradient(
         0deg,
@@ -14,7 +14,7 @@
 .time-items-container {
     margin-top: 18px;
     width: 90vw;
-    max-width: 400px;
+    max-width: 700px;
 }
 
 #timeItemsContainer .time-items-title {
@@ -38,7 +38,7 @@
 }
 .time-item-header .time-title {
     max-width: 500px;
-    width: auto;
+    width: 80%;
     color: rgb(139, 139, 139);
     font-size: 15px;
     margin-left: 15px !important;
@@ -66,7 +66,7 @@
 }
 
 .time-item-header .tag-icon {
-    max-width: 110px;
+    max-width: 180px;
     width: auto;
     color: white;
     padding: 0;
@@ -90,6 +90,7 @@
     margin-bottom: 10px;
     color: #eeeeee;
     font-size: 12px;
+    padding: 0px 5px;
     letter-spacing: 0.5px;
     text-align: center;
 }
@@ -167,6 +168,11 @@
     font-weight: bold;
     color: var(--primary-text);
 }
+@media screen and (min-width: 1200px) {
+    #timeItemsContainer .total-filtered-time span {
+        font-size: 30px;
+    }
+}
 
 #timeItemsContainer .no-times {
     height: 160px;
@@ -191,7 +197,34 @@
     color: var(--secondary-text);
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 900px) {
+    .time-item-header .time-title {
+        margin-left: 20px !important;
+        margin-top: 10px;
+        font-size: 16px;
+    }
+    .time-item-header .time-text {
+        margin: 0px 20px;
+        font-size: 35px !important;
+        font-weight: bolder;
+    }
+    .time-item-header .tag-icon .tag-text {
+        font-size: 13px;
+    }
+    .time-item-header .item-time-date {
+        margin-right: 20px;
+        font-size: 13px;
+    }
+}
+@media screen and (max-width: 600px) {
+    .time-item-header .tag-icon {
+        max-width: 120px;
+    }
+    .item-time-date {
+        margin-right: 0px !important;
+    }
+}
+@media screen and (max-width: 500px) {
     .time-item-header .time-text {
         margin: 0px 10px;
         font-size: 29px !important;

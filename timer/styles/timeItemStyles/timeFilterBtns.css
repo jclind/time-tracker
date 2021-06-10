@@ -7,6 +7,12 @@
     color: var(--secondary-text);
     border-bottom: 1px solid var(--primary-text);
 }
+@media screen and (min-width: 600px) {
+    #timeItemsContainer .sort-by-date-btns button {
+        font-size: 18px;
+        padding: 5px 12px;
+    }
+}
 #timeItemsContainer .sort-by-date-btns button:active,
 #timeItemsContainer .sort-by-date-btns button:focus {
     outline: none !important;
