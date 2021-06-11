@@ -1,5 +1,6 @@
 #signupModal .modal-dialog {
-    width: 350px;
+    width: 95%;
+    max-width: 700px;
 }
 #signupModal .modal-content {
     background: var(--secondary-background-color);
@@ -32,13 +33,17 @@
     border: none;
 }
 #signupModal .modal-body form .login-icon {
-    left: 20px;
+    max-width: 600px;
+    width: 90%;
+    padding-left: 10px;
     font-size: 16px;
     height: 100%;
     color: var(--primary-blue);
+    pointer-events: none;
 }
 #signupModal .modal-body form input {
-    width: 95%;
+    max-width: 600px;
+    width: 90%;
     height: 40px;
     font-size: 16px;
     line-height: 1;
@@ -50,24 +55,6 @@
     background: var(--input-background) !important;
 }
 
-#signupModal .modal-body form input:-webkit-autofill,
-#signupModal .modal-body form input:-webkit-autofill:hover,
-#signupModal .modal-body form input:-webkit-autofill:focus,
-#signupModal .modal-body form textarea:-webkit-autofill,
-#signupModal .modal-body form textarea:-webkit-autofill:hover,
-#signupModal .modal-body form textarea:-webkit-autofill:focus,
-#signupModal .modal-body form select:-webkit-autofill,
-#signupModal .modal-body form select:-webkit-autofill:hover,
-#signupModal .modal-body form select:-webkit-autofill:focus {
-    border: none;
-    -webkit-text-fill-color: var(--primary-text);
-    -webkit-box-shadow: 0 0 0px 1000px var(--input-background) inset;
-    transition: background-color 5000s ease-in-out 0s;
-}
-/* #signupModal .modal-body form input:-webkit-autofill,
-#signupModal .modal-body form input:autofill {
-    background: red;
-} */
 #signupModal .modal-body form input::placeholder {
     position: relative !important;
     font-size: 16px;
@@ -76,6 +63,7 @@
 }
 
 #signupModal .login-btn {
+    max-width: 600px;
     width: 90%;
     background: var(--primary-blue);
     margin: 0 auto;

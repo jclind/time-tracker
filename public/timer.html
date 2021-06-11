@@ -58,6 +58,7 @@
         <link rel="stylesheet" href="styles/modalStyles/saveTimesPromptModal.css">
         <link rel="stylesheet" href="styles/modalStyles/deletePrompt.css">
         <link rel="stylesheet" href="styles/modalStyles/authModals/forgotPassword.css">
+        <link rel="stylesheet" href="styles/modalStyles/contact.css">
         <link rel="stylesheet" href="styles/footer.css">
         <title id="websiteTitle">Timer</title>
     </head>
@@ -104,8 +105,8 @@
                                 </div>
                                 <input type="password" placeholder="Password" name="password" class="py-3" id="loginPassword" required>
                             </div>
-                            <button type="submit" class="login-btn btn mt-4">LOGIN</button>
-                            <button type="button" class="forgot-login-btn btn my-2 d-block forgot-password-btn">Forgot Password?</button>
+                            <button type="submit" class="login-btn btn mt-5">LOGIN</button>
+                            <button type="button" class="forgot-login-btn btn mb-4 d-block forgot-password-btn">Forgot Password?</button>
                         </form>
                     </div>
                 </div>
@@ -174,7 +175,7 @@
                         <form action="submit" class="w-100 d-flex flex-column justify-content-center mb-4" id="signupForm">
                             <div class="name w-100 d-flex justify-content-center position-relative mb-4 mt-2">
                                 <div class="login-icon position-absolute d-flex align-items-center">
-                                    <i class="fa fa-user"></i>
+                                    <i class="fa fa-user text-left"></i>
                                 </div>
                                 <input type="text" placeholder="Name" name="name" class="py-4" id="signupName" required>
                             </div>
@@ -190,7 +191,7 @@
                                 </div>
                                 <input type="password" placeholder="Password" name="password" class="py-3" id="signupPassword" required>
                             </div>
-                            <button type="submit" class="login-btn btn mt-4">Sign Up</button>
+                            <button type="submit" class="login-btn btn mt-5 mb-4">Sign Up</button>
                         </form>
                     </div>
                 </div>
@@ -2085,6 +2086,80 @@
             </div>
         </div>
 
+        <!-- Contact form modal -->
+        <div
+            class="modal"
+            id="contactModal"
+            tabindex="-1"
+            role="dialog"s
+            aria-labelledby="contactModalLabel"
+            aria-hidden="true"
+        >
+            <div
+                class="modal-dialog pb-5 modal-dialog-centered m-auto"
+                role="document"
+            >
+            <div class="modal-content position-relative">
+                    <div class="close-modal position-absolute" onclick="$('#contactModal').modal('hide')">+</div>
+                    <div class="modal-header pt-4">
+                        <h4
+                            class="modal-title text-center"
+                            id="contactModalLabel"
+                        >
+                            Contact Me!
+                        </h4>
+                        </button>
+                    </div>
+                    <div class="modal-body w-100">
+                        <form class="justify-content-center container mb-5 p-0" action="https://formspree.io/f/mrgrzwar" method="post" id="contact-form">
+                            <div class="row justify-content-around">
+                                <div class="section p-0 mt-3"><span>1.</span> Full Name</div>
+                            </div>
+                            <div class="row justify-content-around">
+                                <label class="my-3 col-lg-6 p-0">
+                                    <div class="position-relative mr-lg-2" style="font-weight: normal;">
+                                        <input type="name" name="first-name" class="first-name pt-3" placeholder="First Name*" required/>
+                                        <span class="input-border w-100"></span>
+                                    </div>
+                                </label>
+                                <label class="my-3 col-lg-6 p-0"> 
+                                    <div class="position-relative ml-lg-2" style="font-weight: normal;">
+                                        <input type="name" name="last-name" class="last-name pt-3" placeholder="Last Name*" required/>
+                                        <span class="input-border"></span>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="row justify-content-around mt-5">
+                                <div class="section p-0 m-0"><span>2.</span> E-mail</div>
+                            </div>
+                            <div class="row">
+                                <label class="my-3 col-12 p-0">
+                                    <input type="email" name="email" class="email" placeholder="Email*" required/>
+                                    <span class="input-border"></span>
+                                </label>
+                            </div>
+                            <div class="row justify-content-around mt-5">
+                                <div class="section p-0 m-0"><span>3.</span> Message</div>
+                            </div>
+                            <div class="row">
+                                <label class="my-3 col-12 p-0">
+                                    <input type="text" name="subject" class="subject" autocomplete="off" placeholder="Subject*" required/>
+                                    <span class="input-border"></span>
+                                </label>
+                            </div>
+                            <div class="row">
+                                <label class="my-3 col-12 p-0">
+                                    <textarea name="message" class="form-control message w-100 shadow-none p-3" rows="5" placeholder="Message*" required></textarea>
+                                    <span class="input-border"></span>
+                                </label>
+                            </div>
+                            <button type="submit" class="btn submit-contact-form mt-5 d-block mx-auto">Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <nav class="d-flex justify-content-around align-items-center">
             <div class="logo d-flex justify-content-center align-items-center">
                 <h4>TIME TRACKER</h4>
@@ -2448,7 +2523,7 @@
                 <a href="https://www.linkedin.com/in/jesseclind/" target="_blank" class="linkedin mx-3"><i class="fa fa-linkedin-square"></i></a>
             </div>
             <div class="support-contact-links my-3">
-                <a href="" class="email p-3"><span>Email</span></a>
+                <span href="#" class="email p-3" onclick="$('#contactModal').modal('show')"><span>Contact</span></span>
                 <span>&#8226;</span>
                 <a href="https://www.buymeacoffee.com/jesseclind" target="_blank" class="support p-3"><span>Support</span></a>
             </div>
@@ -2498,35 +2573,35 @@
             // Update firestore settings
             db.settings({ timestampsInSnapshots: true })
         </script>
-        <script src="js/backend/auth.js"></script>
-        <script src="js/backend/dataFunctions.js"></script>
-        <script src="js/data.js"></script>
-        <script src="js/generalFunctions/uniqueKey.js"></script>
-        <script src="js/navFunctions/navAnimations.js"></script>
+        <script src="scripts/backend/auth.js"></script>
+        <script src="scripts/backend/dataFunctions.js"></script>
+        <script src="scripts/data.js"></script>
+        <script src="scripts/generalFunctions/uniqueKey.js"></script>
+        <script src="scripts/navFunctions/navAnimations.js"></script>
 
-        <script src="js/generalFunctions/alerts.js"></script>
+        <script src="scripts/generalFunctions/alerts.js"></script>
 
-        <script src="js/timeTableFunctions/updateTimeTable.js"></script>
+        <script src="scripts/timeTableFunctions/updateTimeTable.js"></script>
 
-        <script src="js/timerFunctions/timer.js"></script>
-        <script src="js/timerFunctions/timerButtons.js"></script>
-        <script src="js/timerFunctions/timerInfo.js"></script>
-        <script src="js/timerFunctions/timerSubmit.js"></script>
+        <script src="scripts/timerFunctions/timer.js"></script>
+        <script src="scripts/timerFunctions/timerButtons.js"></script>
+        <script src="scripts/timerFunctions/timerInfo.js"></script>
+        <script src="scripts/timerFunctions/timerSubmit.js"></script>
 
-        <script src="js/timeTableFunctions/sortByTimePeriod.js"></script>
-        <script src="js/timeTableFunctions/sortByProperty.js"></script>
-        <script src="js/timeTableFunctions/editTimeItem.js"></script>
-        <script src="js/timeTableFunctions/deleteTimeItem.js"></script>
+        <script src="scripts/timeTableFunctions/sortByTimePeriod.js"></script>
+        <script src="scripts/timeTableFunctions/sortByProperty.js"></script>
+        <script src="scripts/timeTableFunctions/editTimeItem.js"></script>
+        <script src="scripts/timeTableFunctions/deleteTimeItem.js"></script>
 
         <!-- Modals -->
-        <script src="js/modalFuntions/changePassword.js"></script>
-        <script src="js/modalFuntions/accountModal.js"></script>
-        <script src="js/modalFuntions/tagList.js"></script>
-        <script src="js/modalFuntions/createTag.js"></script>
-        <script src="js/modalFuntions/editTime.js"></script>
-        <script src="js/modalFuntions/editTimeInput.js"></script>
-        <script src="js/modalFuntions/editTag.js"></script>
-        <script src="js/modalFuntions/deleteTag.js"></script>
+        <script src="scripts/modalFuntions/changePassword.js"></script>
+        <script src="scripts/modalFuntions/accountModal.js"></script>
+        <script src="scripts/modalFuntions/tagList.js"></script>
+        <script src="scripts/modalFuntions/createTag.js"></script>
+        <script src="scripts/modalFuntions/editTime.js"></script>
+        <script src="scripts/modalFuntions/editTimeInput.js"></script>
+        <script src="scripts/modalFuntions/editTag.js"></script>
+        <script src="scripts/modalFuntions/deleteTag.js"></script>
         <script>
             document.querySelector('.footer-copyright').innerHTML = `@${(new Date).getFullYear()} Jesse Lind`
         </script>

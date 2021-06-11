@@ -1,7 +1,6 @@
 #editTimeModal .modal-dialog {
     max-width: 400px;
     width: 95%;
-    overflow-y: scroll;
 }
 #editTimeModal .modal-content {
     color: var(--primary-text);
