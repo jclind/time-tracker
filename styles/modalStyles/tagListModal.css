@@ -1,0 +1,118 @@
+#tagListModal .modal-dialog {
+    max-width: 400px;
+    width: 95%;
+}
+#tagListModal .modal-content {
+    max-height: 80vh;
+    overflow-y: scroll;
+    color: var(--primary-text);
+    background: var(--secondary-background-color);
+    border-radius: 5px;
+}
+#tagListModal .modal-content::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: var(--secondary-background-color);
+}
+
+#tagListModal .modal-content::-webkit-scrollbar {
+    width: 6px;
+    background-color: var(--secondary-background-color);
+}
+
+#tagListModal .modal-content::-webkit-scrollbar-thumb {
+    background: var(--nav-background-color);
+}
+
+#tagListModal .modal-header {
+    border-top: 4px solid var(--primary-blue);
+}
+#tagListModal .modal-body {
+    padding: 15px;
+}
+#tagListModal .modal-content .modal-title {
+    font-weight: bold;
+}
+
+#tagListModal .modal-body .search-input {
+    height: 30px;
+    width: 100%;
+    outline: none;
+    border: none;
+    font-size: 16px;
+    background: #474e5a;
+    padding: 5px;
+}
+#tagListModal .modal-body .search-input::placeholder {
+    color: var(--secondary-text);
+}
+
+#tagListModal .modal-body .tag-items {
+    width: 100%;
+}
+#tagListModal .modal-body .tag-item {
+    padding: 0px 5px;
+    border-bottom: 1px solid var(--primary-text);
+    overflow: hidden;
+}
+#tagListModal .modal-body .tag-item span {
+    margin-left: 15px !important;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#tagListModal .selected-tag-name {
+    color: var(--primary-blue);
+    font-weight: bold;
+}
+#tagListModal .selected-tag {
+    border-bottom: 2px solid var(--primary-blue) !important;
+}
+
+#tagListModal .tag-btns button {
+    font-size: 12px;
+    font-weight: bold;
+    height: 20px;
+    padding: 0 5px !important;
+    text-decoration: underline;
+}
+#tagListModal .tag-btns .edit-btn {
+    color: var(--primary-text);
+}
+#tagListModal .tag-btns .delete-btn {
+    color: var(--danger);
+}
+
+#createNewTagBtn {
+    background: var(--primary-blue);
+    border: none !important;
+    outline: none !important;
+    font-size: 16px;
+    color: var(--primary-text);
+}
+@media screen and (max-width: 350px) {
+    #tagListModal .modal-body .tag-item span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        margin-left: 10px !important;
+    }
+    #tagListModal .tag-btns button {
+        padding: 0px !important;
+    }
+}
+@media screen and (max-width: 300px) {
+    #tagListModal .modal-body .tag-item span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        font-size: 14px;
+        margin-left: 5px !important;
+    }
+    #tagListModal .tag-btns button {
+        padding: 0px !important;
+    }
+}

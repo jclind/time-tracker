@@ -1,0 +1,147 @@
+#timerComponent .time-info-container .time-description-container {
+    width: 80%;
+    max-width: 450px;
+    padding-top: 20px;
+}
+
+#timerComponent .time-info-container .time-description-container textarea {
+    width: 100%;
+    border: none;
+    border: 1px solid var(--primary-text);
+    border-radius: 3px;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: none;
+    outline: none;
+    font-size: 16px;
+    font-weight: normal;
+    color: var(--primary-text);
+}
+
+#timerComponent
+    .time-info-container
+    .time-description-container
+    .textarea-placeholder {
+    color: var(--secondary-text);
+    font-size: 14px;
+    left: 5px;
+    top: 35px;
+    font-weight: bold;
+    transform: translateY(-50%);
+    transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+}
+#timerComponent
+    .time-info-container
+    .time-description-container
+    textarea:valid
+    + .textarea-placeholder,
+#timerComponent
+    .time-info-container
+    .time-description-container
+    textarea:focus
+    + .textarea-placeholder {
+    top: 10px;
+    color: var(--primary-blue);
+    font-size: 12px;
+}
+
+#timerComponent
+    .time-info-container
+    .time-description-container
+    .textarea-border {
+    width: 100%;
+    height: calc(100% - 20px);
+    left: 0;
+    top: 20px;
+    border-radius: 3px;
+    pointer-events: none;
+}
+#timerComponent
+    .time-info-container
+    .time-description-container
+    .textarea-border::before,
+#timerComponent
+    .time-info-container
+    .time-description-container
+    .textarea-border::after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    transition: width 0.3s ease, height 0.2s ease;
+}
+
+#timerComponent
+    .time-info-container
+    .time-description-container
+    .textarea-border::before {
+    left: 0;
+    bottom: 0;
+    border-bottom: 0px solid var(--primary-blue);
+    border-right: 0px solid var(--primary-blue);
+}
+#timerComponent
+    .time-info-container
+    .time-description-container
+    .textarea-border::after {
+    right: 0;
+    top: 0;
+    border-top: 0px solid var(--primary-blue);
+    border-left: 0px solid var(--primary-blue);
+}
+
+#timerComponent
+    .time-info-container
+    .time-description-container
+    textarea:valid
+    ~ .textarea-border::before,
+#timerComponent
+    .time-info-container
+    .time-description-container
+    textarea:focus
+    ~ .textarea-border::before,
+#timerComponent
+    .time-info-container
+    .time-description-container
+    textarea:valid
+    ~ .textarea-border::after,
+#timerComponent
+    .time-info-container
+    .time-description-container
+    textarea:focus
+    ~ .textarea-border::after {
+    width: 100%;
+    height: 100%;
+    border-width: 3px;
+}
+
+#timerComponent
+    .time-info-container
+    .time-description-container
+    textarea:valid
+    ~ .textarea-border::before,
+#timerComponent
+    .time-info-container
+    .time-description-container
+    textarea:focus
+    ~ .textarea-border::before {
+    transition: width 0.3s ease, height 0.2s ease 0.3s;
+}
+
+#timerComponent
+    .time-info-container
+    .time-description-container
+    textarea:valid
+    ~ .textarea-border::after,
+#timerComponent
+    .time-info-container
+    .time-description-container
+    textarea:focus
+    ~ .textarea-border::after {
+    transition: border-width 0.3s ease 0.5s, width 0.3s ease 0.5s,
+        height 0.2s ease 0.8s;
+}
