@@ -1,0 +1,502 @@
+<head>
+    <title id="website-title">Stopwatch</title>
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+        rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap"
+        rel="stylesheet"
+    />
+    <!-- <link rel="stylesheet" type="text/css" href="/styles.css"> -->
+    <link rel="stylesheet" href="styles.css" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"
+    />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="body-wrapper">
+        <div class="modal-blur" id="nav-modal-blur"></div>
+        <div class="modal-blur" id="tag-modal-blur"></div>
+        <!-- Modal overlays -->
+
+        <!-- Navagation bar -->
+        <div class="nav-bar">
+            <div class="title"><h4>Time Tracker</h4></div>
+            <ul class="nav-links">
+                <li class="toggle-nav-modal logged-out" id="login">
+                    <span>Login</span>
+                </li>
+                <li class="toggle-nav-modal logged-out" id="signup">
+                    <span>Signup</span>
+                </li>
+                <li class="logged-in" id="logout"><span>Logout</span></li>
+                <li class="toggle-nav-modal logged-in" id="account">
+                    <span>Account</span>
+                </li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </div>
+        <hr style="padding: 0; margin: 0" />
+
+        <!-- Stopwatch element -->
+        <div id="stop-watch">
+            <div class="input-container">
+                <div class="title-input-container">
+                    <div class="title-input-text" id="title-input-text">
+                        Time Name:
+                    </div>
+                    <input
+                        type="text"
+                        class="title-input"
+                        id="title-input"
+                        placeholder="Enter Name"
+                    />
+                </div>
+                <div class="dropdown-input-container">
+                    <div class="dropdown-input-title">Select A Tag</div>
+                    <div class="dropdown-container">
+                        <div class="dropdown">
+                            <div class="dropdown-select">
+                                <span class="selected" id="selected-tag"></span>
+                                <i class="fa fa-caret-down"></i>
+                            </div>
+                            <div class="dropdown-list" id="dropdown-list"></div>
+                        </div>
+                        <div class="tag-btn-container">
+                            <button
+                                class="new-tag-btn toggle-create-tag-modal"
+                                id="new-tag-btn"
+                            >
+                                <i
+                                    class="fa fa-plus-square"
+                                    style="
+                                        font-size: 22px;
+                                        color: rgb(233, 231, 231);
+                                    "
+                                ></i>
+                            </button>
+                            <div class="tag-tooltip-text">Add A New Tag</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="time" id="time">0:00:00.00</div>
+            <button
+                class="start-stop-btn"
+                id="start-stop-btn"
+                onclick="startStop()"
+            >
+                Start
+            </button>
+            <button class="clear-btn" id="clear-btn">Clear</button>
+            <button class="submit-btn" id="submit-btn">Submit</button>
+        </div>
+
+        <!-- Sorting buttons -->
+        <div class="time-span-select">
+            <div class="time-span-select-button-container">
+                <button class="time-span-select-button" id="today-btn">
+                    Today
+                </button>
+                <div class="time-span-select-button-break"></div>
+                <button class="time-span-select-button" id="yesterday-btn">
+                    Yesterday
+                </button>
+                <div class="time-span-select-button-break"></div>
+                <button class="time-span-select-button" id="week-btn">
+                    Week
+                </button>
+                <div class="time-span-select-button-break"></div>
+                <button class="time-span-select-button" id="month-btn">
+                    Month
+                </button>
+                <div class="time-span-select-button-break"></div>
+                <button class="time-span-select-button" id="year-btn">
+                    Year
+                </button>
+                <div class="time-span-select-button-break"></div>
+                <button class="time-span-select-button" id="all-time-btn">
+                    All Time
+                </button>
+            </div>
+        </div>
+        <!-- Time table with list of time objects -->
+        <div>
+            <table id="time-table">
+                <thead>
+                    <tr>
+                        <th>
+                            <div
+                                class="time-table-title-cell"
+                                id="time-table-header-title"
+                                name="Title"
+                            >
+                                <span>Title</span>
+                                <i
+                                    class="fa fa-caret-up"
+                                    style="display: none"
+                                ></i>
+                            </div>
+                        </th>
+                        <th>
+                            <div
+                                class="time-table-title-cell"
+                                id="time-table-header-tag"
+                                name="Tag"
+                            >
+                                <span>Tag</span>
+                                <i
+                                    class="fa fa-caret-up"
+                                    style="display: none"
+                                ></i>
+                            </div>
+                        </th>
+                        <th>
+                            <div
+                                class="time-table-title-cell"
+                                id="time-table-header-time"
+                                name="Time"
+                            >
+                                <span>Time</span>
+                                <i
+                                    class="fa fa-caret-up"
+                                    style="display: none"
+                                ></i>
+                            </div>
+                        </th>
+                        <th>
+                            <div
+                                class="time-table-title-cell"
+                                id="time-table-header-date"
+                                name="Date"
+                            >
+                                <span>Date</span>
+                                <i
+                                    class="fa fa-caret-down"
+                                    style="display: none"
+                                ></i>
+                            </div>
+                        </th>
+                        <th>
+                            <div name="Total Time">
+                                <span>Total Time</span>
+                            </div>
+                        </th>
+                        <th>
+                            <div name="Options">
+                                <span>Options</span>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="time-table-body"></tbody>
+            </table>
+        </div>
+
+        <!-- Data doughnut time chart -->
+        <div class="my-charts">
+            <div class="chart">
+                <div class="total-time"></div>
+                <canvas id="time-trends" width="300" height="300"></canvas>
+            </div>
+            <div class="chart">
+                <canvas id="tag-distribution" width="300" height="300"></canvas>
+            </div>
+        </div>
+
+        <!-- Page Footer -->
+        <div class="footer">
+            <div class="footer-text">
+                <div class="copyright" id="copyright"></div>
+                <div class="footer-links">
+                    <a href="https://github.com/jclind" id="personal-github"
+                        >My Github</a
+                    >
+                    <a href="https://www.instagram.com/jclind02/" id="instagram"
+                        >My Instagram</a
+                    >
+                    <a
+                        href="https://github.com/jclind/time-tracker"
+                        id="page-github"
+                        >Page Repository</a
+                    >
+                </div>
+            </div>
+        </div>
+
+        <!-- Account nav bar modals -->
+        <div class="nav-modal account-modal modal" id="account-modal"></div>
+        <div class="nav-modal login-modal modal" id="login-modal">
+            <div class="login-title modal-title">Login To Your Account</div>
+            <form action="" id="login-form">
+                <input
+                    type="email"
+                    placeholder="Email"
+                    class="nav-modal-input"
+                    id="login-email"
+                    required
+                />
+                <input
+                    type="password"
+                    placeholder="Password"
+                    class="nav-modal-input"
+                    id="login-password"
+                    required
+                />
+                <input
+                    type="submit"
+                    class="nav-modal-button login-button"
+                    id="login-button"
+                    value="Login"
+                />
+                <div class="login-forgot-password">
+                    <span id="forgot-password-btn">Forgot Password?</span>
+                </div>
+                <p class="auth-error"></p>
+            </form>
+        </div>
+        <div class="nav-modal signup-modal modal" id="signup-modal">
+            <div class="signup-title modal-title">Create Account</div>
+            <form action="" id="signup-form">
+                <input
+                    type="text"
+                    placeholder="Name"
+                    class="nav-modal-input"
+                    id="signup-name"
+                    required
+                />
+                <input
+                    type="email"
+                    placeholder="Email"
+                    class="nav-modal-input"
+                    id="signup-email"
+                    required
+                />
+                <input
+                    type="password"
+                    placeholder="Password"
+                    class="nav-modal-input"
+                    id="signup-password"
+                    required
+                />
+                <input
+                    type="submit"
+                    class="nav-modal-button signup-button"
+                    id="signup-button"
+                    value="Sign Up"
+                />
+                <p class="auth-error"></p>
+            </form>
+        </div>
+
+        <!-- Tag create and change modals -->
+        <div class="new-tag-modal modal" id="new-tag-btn-modal">
+            <div class="modal-title">Create Tag</div>
+            <input
+                type="text"
+                id="tag-input-text"
+                class="tag-input-text"
+                autocomplete="off"
+                placeholder="Tag Name"
+            />
+            <div class="color-select-container" id="color-select-container">
+                <div
+                    id="#fd483f"
+                    data-tag-color="#fd483f"
+                    class="color-box"
+                    style="background: #fd483f"
+                    onClick="selectColor(this.id)"
+                ></div>
+                <div
+                    id="#fd889a"
+                    data-tag-color="#fd889a"
+                    class="color-box"
+                    style="background: #fd889a"
+                    onClick="selectColor(this.id)"
+                ></div>
+                <div
+                    id="#9A6324"
+                    data-tag-color="#9A6324"
+                    class="color-box"
+                    style="background: #9a6324"
+                    onClick="selectColor(this.id)"
+                ></div>
+                <div
+                    id="#fca12b"
+                    data-tag-color="#fca12b"
+                    class="color-box"
+                    style="background: #fca12b"
+                    onClick="selectColor(this.id)"
+                ></div>
+                <div
+                    id="#ffe119"
+                    data-tag-color="#ffe119"
+                    class="color-box"
+                    style="background: #ffe119"
+                    onClick="selectColor(this.id)"
+                ></div>
+                <div
+                    id="#bfef45"
+                    data-tag-color="#bfef45"
+                    class="color-box"
+                    style="background: #bfef45"
+                    onClick="selectColor(this.id)"
+                ></div>
+                <div
+                    id="#0a724f"
+                    data-tag-color="#0a724f"
+                    class="color-box"
+                    style="background: #0a724f"
+                    onClick="selectColor(this.id)"
+                ></div>
+                <div
+                    id="#AAF0D1"
+                    data-tag-color="#AAF0D1"
+                    class="color-box"
+                    style="background: #aaf0d1"
+                    onClick="selectColor(this.id)"
+                ></div>
+                <div
+                    id="#7cc3db"
+                    data-tag-color="#7cc3db"
+                    class="color-box"
+                    style="background: #7cc3db"
+                    onClick="selectColor(this.id)"
+                ></div>
+                <div
+                    id="#3D3D90"
+                    data-tag-color="#3D3D90"
+                    class="color-box"
+                    style="background: #3d3d90"
+                    onClick="selectColor(this.id)"
+                ></div>
+                <div
+                    id="#cc99cc"
+                    data-tag-color="#cc99cc"
+                    class="color-box"
+                    style="background: #cc99cc"
+                    onClick="selectColor(this.id)"
+                ></div>
+                <div
+                    id="#926adb"
+                    data-tag-color="#926adb"
+                    class="color-box"
+                    style="background: #926adb"
+                    onClick="selectColor(this.id)"
+                ></div>
+            </div>
+            <div class="tag-buttons">
+                <button class="cancel-tag-btn" id="cancel-create-tag-btn">
+                    Cancel
+                </button>
+                <button
+                    class="submit-tag-btn"
+                    id="submit-create-tag-btn"
+                    onclick="createTag()"
+                >
+                    Create
+                </button>
+            </div>
+        </div>
+        <div
+            class="change-tag-modal change-tag-modal-scrollbar modal"
+            id="change-tag-modal"
+            style="overflow-y: scroll"
+        >
+            <div class="modal-title">Change Modal</div>
+            <div class="change-tag-name">
+                <div class="change-tag-name-input">
+                    <span>Change Title</span>
+                    <input
+                        type="text"
+                        value="The Monkey"
+                        id="change-tag-modal-name-input-field"
+                    />
+                </div>
+            </div>
+            <div class="change-tag-modal-search">
+                <input
+                    type="text"
+                    placeholder="search-tags"
+                    id="change-tag-modal-search-input"
+                />
+            </div>
+            <div
+                class="change-tag-modal-tag-container"
+                id="change-tag-modal-tag-container"
+            ></div>
+            <div class="tag-buttons">
+                <button class="cancel-tag-btn" id="cancel-change-modal-btn">
+                    Cancel
+                </button>
+                <button
+                    class="submit-tag-btn"
+                    id="change-tag-modal-btn"
+                    onclick="changeTag()"
+                >
+                    Change
+                </button>
+            </div>
+        </div>
+
+        <div class="save-data-alert hide">
+            <span class="fa fa-exclamation-circle"></span>
+            <span class="msg">Login to save data!</span>
+            <span class="close-save-data-alert">
+                <span class="fa fa-times"></span>
+            </span>
+        </div>
+    </div>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-firestore.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: 'AIzaSyDTUdMxy5joPqkNuI1KQXxT5LB9PdxxtFc',
+            authDomain: 'time-tracker-da566.firebaseapp.com',
+            projectId: 'time-tracker-da566',
+            appId: '1:598125685448:web:8bd96aa7e4725d5dc8d3fd',
+            measurementId: 'G-G0MG6559NQ',
+        }
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig)
+        firebase.analytics()
+
+        // Make auth and firestore refernces
+        const auth = firebase.auth()
+        const db = firebase.firestore()
+
+        // Update firestore settings
+        db.settings({ timestampsInSnapshots: true })
+    </script>
+    <script src="scripts/charts.js"></script>
+    <script src="scripts/func.js"></script>
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/timer.js"></script>
+</body>
