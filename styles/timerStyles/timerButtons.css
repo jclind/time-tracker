@@ -1,0 +1,106 @@
+#timerComponent .time-btns {
+    max-width: 500px;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+#timerComponent .time-btns button {
+    color: var(--primary-text);
+    border-radius: 20px;
+    height: 55px;
+    font-size: 25px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: var(--title-font-family);
+    font-weight: bold;
+    outline: none !important;
+}
+#timerComponent .time-btns .submit-btn:active,
+#timerComponent .time-btns .submit-btn:focus {
+    outline: 5px !important;
+    border: 0 !important;
+}
+
+#timerComponent .time-btns .start-stop-btn {
+    height: 50px;
+    border: 1px solid var(--primary-blue);
+    transition: all 1s ease;
+}
+#timerComponent .time-btns .clear-btn {
+    border: 1px solid var(--danger);
+    color: var(--danger);
+    transition: all 0.5s ease;
+}
+#timerComponent .time-btns .submit-btn {
+    transition: all 0.5s ease;
+}
+
+@media screen and (max-width: 375px) {
+    #timerComponent .time-btns .clear-btn,
+    #timerComponent .time-btns .submit-btn {
+        font-size: 20px;
+    }
+}
+
+/* Add Classes for three cases: 
+1: Time not running at 0
+2: Time not running at !0
+3: Time running 
+*/
+.buttons-state-1,
+.buttons-state-3 {
+    justify-content: center;
+    padding: 0px;
+}
+.buttons-state-2 {
+    justify-content: space-around;
+}
+.buttons-state-2 buttons {
+    padding: 0px 15px;
+}
+
+/* State 1 */
+.buttons-state-1 .start-stop-btn {
+    color: var(--primary-text);
+    background: var(--primary-blue);
+    width: 60%;
+}
+.buttons-state-1 .clear-btn,
+.buttons-state-1 .submit-btn,
+.buttons-state-3 .clear-btn,
+.buttons-state-3 .submit-btn {
+    width: 0;
+    height: 0;
+    visibility: hidden;
+    opacity: 0;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* State 2 */
+
+.buttons-state-2 .start-stop-btn {
+    color: var(--primary-text);
+    background: var(--primary-blue);
+    width: 40%;
+}
+.buttons-state-2 .clear-btn,
+.buttons-state-2 .submit-btn {
+    width: 100%;
+    height: 55px;
+    visibility: visible;
+    opacity: 1;
+}
+.buttons-state-2 .clear-btn {
+    width: 30%;
+}
+.buttons-state-2 .submit-btn {
+    width: 20%;
+}
+
+/* State 3 */
+
+.buttons-state-3 .start-stop-btn {
+    width: 60%;
+    color: var(--primary-blue) !important;
+}
