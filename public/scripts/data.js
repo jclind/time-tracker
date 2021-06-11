@@ -1,3 +1,0 @@
-timesInfoList = []
-
-let timeTags = []
