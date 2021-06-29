@@ -47,8 +47,6 @@ const editTagModal = (event, tagKey) => {
                 'danger',
                 'Tag name must be less than 26 characters long.'
             )
-        } else if (timeTags.find(el => el.name === nameInput.value.trim())) {
-            showAlert('danger', 'Tag name already exists.')
         } else {
             if (
                 tagEl.name !== nameInput.value ||
