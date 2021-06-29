@@ -16,6 +16,7 @@ const submitTime = (time, currStartingTime, currFinishedTime) => {
     // Get Description
     const descriptionInput = document.getElementById('timeDescriptionInput')
     const description = descriptionInput.value.trim()
+    console.log(currStartingTime)
     let tempObj = {
         name: timeName,
         time: time,

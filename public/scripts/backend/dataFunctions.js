@@ -37,10 +37,10 @@ window.onload = function (event) {
             userTimeArr[0].description
 
         timerIsRunning = userTimeArr[0].timerIsRunning
-        // if (userTimeArr[0].timerIsRunning === true) {
         startStop(timerIsRunning)
-        // }
         localStorage.removeItem('userTime')
+    } else {
+        currStartingTime = null
     }
 }
 
@@ -54,7 +54,7 @@ window.onunload = window.onbeforeunload = function (event) {
             {
                 title: title,
                 description: description,
-                currSartingTime: currStartingTime,
+                currStartingTime: currStartingTime.toString(),
                 startTime: Date.now(),
                 elapsedTime: elapsedTime,
                 timerIsRunning: timerIsRunning,

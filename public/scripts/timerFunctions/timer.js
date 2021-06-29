@@ -11,7 +11,8 @@ let elapsedTime = 0
 
 let timerIsRunning = false
 
-let currStartingTime = null
+console.log('here now dog')
+let currStartingTime
 let currFinishedTime = null
 
 if (window.innerWidth >= 600) {
@@ -36,11 +37,9 @@ const startStop = isRunning => {
         // If the timer is at 0, then set the 'currStartingTime' to the current date/time
         if (elapsedTime === 0) {
             currStartingTime = new Date()
-            console.log(currStartingTime, 'bungis')
         }
         // Let startTime equal the current date minues how much time is already on the timer (if any)
         let startTime = Date.now() - elapsedTime
-        console.log(startTime)
 
         timer = setInterval(() => {
             let currTime = Date.now()
