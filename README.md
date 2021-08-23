@@ -17,13 +17,13 @@ Once this repository is cloned, to install, run:
 
 `npm install`
 
-To Start Server, run:
+To Start Server, Run:
 
 `npm start`
 
-To Visit App:
+To View App, Visit:
 
-[localhost:3000](localhost:3000)
+`localhost:3000`
 
 ### Reflection
 
