@@ -24,6 +24,8 @@ To View App, Visit:
 
 `localhost:3000`
 
+Web application hosted by netlify through automatic deploys from github.
+
 ## Dependencies
 
 - npm
@@ -38,4 +40,4 @@ The first design of the personal time tracker website was a bit clunky as it was
 
 Since this was my first real project with Firebase as a backend, my main challenge in this project was both firebase authentication, and storing/retrieving user data in the cloud. This led me to spend a while researching and studying the firebase documentation and other resources. But eventually I was knowledgeable in firebase to set up both the authentication and storing data in the Firestore Database.
 
-Overall, this project was a great way for me to gain real experience in creating web apps and setting up firebase database communication, and I find this app very useful in my daily work schedule
+Overall, this project was a great way for me to gain real experience in creating web apps and setting up firebase database communication, and I find this app very useful in my daily work schedule.
