@@ -3,10 +3,27 @@
 [Personal Time Tracker](https://personaltimetracker.netlify.app/) is an web application used for tracking different projects or areas of your life. Titles, descriptions, and colorful tags are used to organize and track your recorded times.
 
 ## Technologies
+
 - Jquery
 - Bootstrap
 - Firestore Database
 - Firebase Authentication
+
+## Installation and Running
+
+You will need [node](https://nodejs.org/en/) and [https://www.npmjs.com/](https://www.npmjs.com/) installed on your machine globally.
+
+Once this repository is cloned, to install, run:
+
+`npm install`
+
+To Start Server:
+
+`npm start`
+
+To Visit App:
+
+`localhost:3000`
 
 ### Reflection
 
