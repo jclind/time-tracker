@@ -1,6 +1,12 @@
 # Personal Time Tracker
 
-Personal Time Tracker is an web application used for tracking different projects or areas of your life. Titles, descriptions, and colorful tags are used to organize and track your recorded times.
+[Personal Time Tracker](https://personaltimetracker.netlify.app/) is an web application used for tracking different projects or areas of your life. Titles, descriptions, and colorful tags are used to organize and track your recorded times.
+
+## Technologies
+- Jquery
+- Bootstrap
+- Firestore Database
+- Firebase Authentication
 
 ### Reflection
 
